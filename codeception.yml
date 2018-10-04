@@ -1,0 +1,46 @@
+actor: Tester
+paths:
+    tests: tests
+    log: tests/_output
+    data: tests/_data
+    helpers: tests/_support
+settings:
+    bootstrap: _bootstrap.php
+    memory_limit: 1024M
+    colors: true
+modules:
+    config:
+        Yii2:
+            configFile: 'config/test.php'
+            cleanup: false
+    enabled:
+        - Db:
+            dsn: 'pgsql:host=localhost;dbname=torrentlibre_test'
+            user: 'torrentlibre'
+            password: 'torrentlibre'
+            dump: 'tests/_data/torrentlibre.sql'
+            populate: true # run populator before all tests
+            cleanup: true # run populator before each test
+            populator: 'psql -U $user -h $host -d $dbname < $dump'
+
+# To enable code coverage:
+#coverage:
+#    #c3_url: http://localhost:8080/index-test.php/
+#    enabled: true
+#    #remote: true
+#    #remote_config: '../codeception.yml'
+#    whitelist:
+#        include:
+#            - models/*
+#            - controllers/*
+#            - commands/*
+#            - mail/*
+#    blacklist:
+#        include:
+#            - assets/*
+#            - config/*
+#            - runtime/*
+#            - vendor/*
+#            - views/*
+#            - web/*
+#            - tests/*

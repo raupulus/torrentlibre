@@ -1,0 +1,38 @@
+## Bloquear descarga del htaccess
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+## Bloquear descarga del htpasswd
+<Files .htpasswd>
+    Order allow,deny
+    Deny from all
+</Files>
+
+## Permitir seguir enlaces
+Options +FollowSymLinks
+
+## Ignorar indexación de directorios
+IndexIgnore */*
+
+## Permitir mostrar directorios
+#Options +Indexes
+
+## Quitar atributos al listar directorios
+#IndexOptions -FancyIndexing
+
+RewriteEngine on
+
+## Si existe un directorio o archivo se utiliza directamente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+## En caso de no existir archivo o directorio se reenvía a index.php
+RewriteRule . index.php
+
+## Proteger mediante contraseña
+#AuthType Basic
+#AuthName "Zona Privada"
+#AuthUserFile /var/www/.htpasswd
+#Require valid-user

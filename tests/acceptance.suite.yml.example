@@ -1,0 +1,16 @@
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver:
+            url: http://localhost:8088/
+            browser: chrome
+            port: 9515   # Quitar esta línea si se usa Selenium
+            window_size: false
+            capabilities:
+                chromeOptions:
+                    args: ["--headless", "--disable-gpu", "--disable-extensions"]
+                    binary: "/usr/bin/google-chrome"
+        - Yii2:
+            part: orm
+            entryScript: index-test.php
+            cleanup: false
