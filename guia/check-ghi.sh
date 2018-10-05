@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! -x /usr/local/bin/ghi ]
+if [ ! -x /usr/bin/ghi ]
 then
     echo "Error: falta el programa ghi."
     exit 1
