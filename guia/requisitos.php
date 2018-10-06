@@ -1,4 +1,4 @@
-#!/usr/bin/env php
+<#!/usr/bin/env php
 <?php
 
 if (file_exists('vendor')) {
@@ -15,9 +15,9 @@ if ($issues) {
     echo "'requisitos.md' y 'requisitos.xlsx' (en cambio, si el archivo\n";
     echo "'requisitos.xlsx' contiene ya las incidencias creadas, no se\n";
     echo "volverán a crear ni se modificarán en GitHub).\n\n";
-    echo "¿Deseas continuar? (s/N): ";
+    echo '¿Deseas continuar? (s/N): ';
     $sn = '';
-    fscanf(STDIN, "%s", $sn);
+    fscanf(STDIN, '%s', $sn);
     if ($sn !== 's' && $sn !== 'S') {
         exit(1);
     }
@@ -25,7 +25,7 @@ if ($issues) {
 
 echo "Leyendo archivo requisitos.xlsx...\n";
 \PhpOffice\PhpSpreadsheet\Settings::setLocale('es');
-$objPHPExcel = \PhpOffice\PhpSpreadsheet\IOFactory::load("requisitos.xlsx");
+$objPHPExcel = \PhpOffice\PhpSpreadsheet\IOFactory::load('requisitos.xlsx');
 $objWorksheet = $objPHPExcel->getSheet(0);
 $highestRow = $objWorksheet->getHighestDataRow(); // e.g. 10
 $highestColumn = $objWorksheet->getHighestDataColumn(); // e.g 'F'
@@ -33,9 +33,9 @@ $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFrom
 $requisitos = "\n# Catálogo de requisitos\n\n";
 $resumen = "\n## Cuadro resumen\n\n"
          . '| **Requisito** | **Prioridad** | **Tipo** | **Complejidad** | **Entrega** |'
-         . ($issues ? " **Incidencia** |" : '') . "\n"
+         . ($issues ? ' **Incidencia** |' : '') . "\n"
          . '| :------------ | :-----------: | :------: | :-------------: | :---------: |'
-         . ($issues ? " :------------: |" : '') . "\n";
+         . ($issues ? ' :------------: |' : '') . "\n";
 
 $salida = `ghi`;
 $matches = [];
@@ -51,7 +51,7 @@ if ($issues) {
 
 for ($row = 2; $row <= $highestRow; $row++) {
     if (($row - 1) % 10 === 0) {
-        echo "Deteniendo la ejecución por 10 segundos para evitar exceso de tasa...";
+        echo 'Deteniendo la ejecución por 10 segundos para evitar exceso de tasa...';
         sleep(10);
         echo "\n";
     }

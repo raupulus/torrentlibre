@@ -1,5 +1,6 @@
 .PHONY: all test tests cs codecept pre_codecept post_codecept run_codecept \
-	fastcs fast phpcs docs api guia guide install psql
+	fastcs fast phpcs docs api guide guia install db psql \
+	clean permisos perm p requeriments req dbh dbheroku
 
 all: test
 
@@ -37,9 +38,40 @@ guide guia:
 serve:
 	@[ -f .env ] && export $$(cat .env) ; ./yii serve
 
-install:
-	composer install
-	composer run-script post-create-project-cmd
+install: requeriments install db permisos
+
+db:
+	db/load.sh
+
+dbfull:
+	db/create.sh
+	db/load.sh
+
+dbh dbheroku:
+	heroku psql < db/torrentlibre.sql
+	heroku psql < db/torrentlibre_datos.sql
 
 psql:
 	db/psql.sh
+
+clean:
+	find 'runtime' -not -path 'runtime' -not -name ".gitignore" -exec rm -Rf {} \; || echo ''
+	find 'web/assets' -not -path 'web/assets' -not -name ".gitignore" -exec rm -Rf {} \; || echo ''
+	find 'web/tmp' -not -path 'web/tmp' -not -name ".gitignore" -exec rm -Rf {} \; || echo ''
+
+permisos perm p:
+	echo 'Aplicando permisos'
+	sudo chmod -R 770 .
+	sudo chmod -R 777 runtime
+	sudo chmod -R 755 web
+	sudo chmod -R 777 web/assets
+	sudo chmod -R 775 web/css
+	sudo chmod -R 775 web/images
+	sudo chmod -R 775 web/js
+	sudo chmod -R 500 web/.htaccess
+	sudo chmod -R 500 yii
+	bash -c 'yo=$(shell whoami) && sudo chown -R $${yo}:www-data . && echo $${yo}'
+
+requeriments req:
+	composer install
+	composer run-script post-create-project-cmd

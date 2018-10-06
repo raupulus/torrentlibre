@@ -1,14 +1,16 @@
-### What steps will reproduce the problem?
+### Pasos para Reproducir el problema?
 
-### What's expected?
+### Que se espera?
 
-### What do you get instead?
+### Que obtienes en lugar de lo esperado?
 
 
-### Additional info
+### Información Técnica
 
 | Q                | A
 | ---------------- | ---
 | Yii vesion       |
 | PHP version      |
 | Operating system |
+
+### Información Adicional

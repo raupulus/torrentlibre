@@ -1,16 +1,14 @@
 {
-    "name": "Torrentlibre",
+    "name": "TorrentLibre",
     "description": "Web para compartir material con licencia libre",
     "keywords": ["torrentlibre", "fryntiz"],
     "homepage": "https://torrentlibre.laguialinux.es/",
     "type": "project",
-    "license": "BSD-3-Clause",
+    "license": "GPL-v3",
     "support": {
-        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
-        "forum": "http://www.yiiframework.com/forum/",
-        "wiki": "http://www.yiiframework.com/wiki/",
-        "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/yii2"
+        "issues": "https://github.com/fryntiz/torrentlibre/issues",
+        "wiki": "https://github.com/fryntiz/torrentlibre/wiki",
+        "source": "https://github.com/fryntiz/torrentlibre"
     },
     "minimum-stability": "stable",
     "require": {
@@ -59,6 +57,12 @@
                 {
                     "runtime": "0777",
                     "web/assets": "0777",
+                    "web/css": "0775",
+                    "web/images": "0775",
+                    "web/js": "0775",
+                    "web/tmp": "0775",
+                    "web/uploads": "0775",
+                    "web/.htaccess": "0500",
                     "yii": "0755"
                 }
             ]
