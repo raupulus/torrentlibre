@@ -11,7 +11,7 @@ else
         sudo -u postgres dropuser --if-exists torrentlibre
     fi
 
-    sudo -u postgres psql -c "CREATE USER torrentlibre_ PASSWORD 'torrentlibre_' SUPERUSER;"
+    sudo -u postgres psql -c "CREATE USER torrentlibre PASSWORD 'torrentlibre' SUPERUSER;"
 
     if [[ "$1" != "test" ]]; then
         sudo -u postgres createdb -O torrentlibre torrentlibre

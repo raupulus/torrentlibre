@@ -2,8 +2,13 @@
 
 ## Diagramas de clases
 
-Incluir.
 
 ## Diagramas de estructura lógica de datos
 
-Incluir.
+### Diagrama ER Simple
+
+![Diagrama ER](images/Diagrama-ER-para-DB.png)
+
+### Diagrama ER Completo
+
+![Diagrama ER](images/Diagrama-ER-Completo.png)
