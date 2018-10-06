@@ -11,6 +11,9 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+
+$params = Yii::$app->params;
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -19,7 +22,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php $this->registerCsrfMetaTags() ?>
+    <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
@@ -38,16 +41,19 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => \Yii::t('main', 'home'), 'url' => ['/site/index']],
+            ['label' => \Yii::t('main', 'users'), 'url' => ['/usuarios/index']],
+            ['label' => \Yii::t('main', 'torrents'), 'url' => ['/torrents/index']],
+            ['label' => \Yii::t('main', 'about'), 'url' => ['/site/about']],
+            ['label' => \Yii::t('main', 'contact'), 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+            ['label' => \Yii::t('main', 'login'), 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    \Yii::t('main', 'home').'(' .
+                    Yii::$app->user->identity->nick . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -69,9 +75,12 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <?= $params['sitename']; ?> 2018-<?= date
+            ('Y')
+            ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right"><a href="http://www.fryntiz.es" alt="web de
+        Raúl Caro Pastorino">Raúl Caro Pastorino</a></p>
     </div>
 </footer>
 
