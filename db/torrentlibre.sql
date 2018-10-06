@@ -246,28 +246,6 @@ CREATE INDEX idx_reportes_torrents_torrent_id ON reportes_torrents (torrent_id);
 
 
 ---------------------------------------------------
---                    PUNTOS                     --
----------------------------------------------------
-DROP TABLE IF EXISTS puntos CASCADE;
-
-/*
- * Puntos de los torrents que han dado los usuarios
- */
-CREATE TABLE puntos (
-    id              BIGSERIAL     PRIMARY KEY
-  , usuario_id      BIGINT        NOT NULL REFERENCES usuarios (id)
-                                  ON DELETE NO ACTION
-                                  ON UPDATE CASCADE
-  , torrent_id      BIGINT        NOT NULL REFERENCES torrents (id)
-                                  ON DELETE NO ACTION
-                                  ON UPDATE CASCADE
-  , created_at      TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
-  , UNIQUE (usuario_id, torrent_id)
-);
-
-CREATE INDEX idx_puntos_torrent_id ON puntos (torrent_id);
-
----------------------------------------------------
 --                 COMENTARIOS                   --
 ---------------------------------------------------
 DROP TABLE IF EXISTS comentarios CASCADE;
@@ -379,19 +357,31 @@ CREATE TABLE demandas (
 ---------------------------------------------------
 DROP TABLE IF EXISTS puntuacion_torrents CASCADE;
 CREATE TABLE puntuacion_torrents (
-      id            BIGSERIAL    PRIMARY KEY
-    , usuario_id    BIGINT       REFERENCES "usuarios" (id)
-    , torrent_id    BIGINT       REFERENCES "torrents" (id)
-    , puntuacion    BIGINT       NOT NULL --Valor del 0 al 10
+    id               BIGSERIAL    PRIMARY KEY
+  , usuario_id       BIGINT       REFERENCES "usuarios" (id)
+  , torrent_id       BIGINT       REFERENCES "torrents" (id)
+  , puntuacion       BIGINT       NOT NULL --Valor del 0 al 10
+  , created_at       TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
+  , UNIQUE (usuario_id, torrent_id)
 );
+
+CREATE INDEX idx_puntuacion_torrents_torrent_id
+  ON puntuacion_torrents (torrent_id);
+
 
 DROP TABLE IF EXISTS puntuacion_comentarios CASCADE;
 CREATE TABLE puntuacion_comentarios (
-    id            BIGSERIAL    PRIMARY KEY
-  , usuario_id    BIGINT       REFERENCES "usuarios" (id)
+    id               BIGSERIAL    PRIMARY KEY
+  , usuario_id       BIGINT       REFERENCES "usuarios" (id)
   , comentario_id    BIGINT    REFERENCES "comentarios" (id)
-  , puntuacion    BIGINT       NOT NULL --Valor del 0 al 10
+  , puntuacion       BIGINT       NOT NULL --Valor del 0 al 10
+  , created_at       TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
+  , UNIQUE (usuario_id, comentario_id)
 );
+
+CREATE INDEX idx_puntuacion_comentarios_comentario_id
+  ON puntuacion_comentarios (comentario_id);
+
 
 ---------------------------------------------------
 --                   REGISTROS                   --
@@ -407,9 +397,12 @@ DROP TABLE IF EXISTS descargas CASCADE;
 CREATE TABLE descargas (
       id            BIGSERIAL    PRIMARY KEY
     , ip            VARCHAR(15)  -- IP DE ACCESO
-    , torrent       BIGINT       NOT NULL REFERENCES "torrents" (id)
+    , torrent_id    BIGINT       NOT NULL REFERENCES "torrents" (id)
     , registered_at TIMESTAMP(0) DEFAULT LOCALTIMESTAMP
 );
+
+CREATE INDEX idx_descargas_torrent_id
+  ON descargas (torrent_id);
 
 ---------------------------------------------------
 --                     VISTAS                    --
