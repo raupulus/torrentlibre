@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "usuarios".
@@ -39,7 +40,7 @@ use Yii;
  * @property UsuariosId $id0
  * @property UsuariosBloqueados $usuariosBloqueados
  */
-class Usuarios extends \yii\db\ActiveRecord
+class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -211,5 +212,68 @@ class Usuarios extends \yii\db\ActiveRecord
     public function getUsuariosBloqueados()
     {
         return $this->hasOne(UsuariosBloqueados::className(), ['usuario_id' => 'id']);
+    }
+
+    /* AUTENTICACIÓN DE USUARIOS */
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        /*
+        foreach (self::$users as $user) {
+            if ($user['token'] === $token) {
+                return new static($user);
+            }
+        }
+        return null;
+        */
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validateAuthKey($authKey)
+    {
+        return $this->auth_key === $authKey;
+    }
+
+    /**
+     * Compara si la cadena pasada como parámetro coincide con la
+     * contraseña de este usuario.
+     * @param  string $password La contraseña a validar.
+     * @return bool             Devuelve true si es válida.
+     */
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword(
+            $password,
+            $this->password
+        );
     }
 }

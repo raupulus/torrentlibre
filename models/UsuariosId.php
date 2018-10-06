@@ -33,7 +33,7 @@ class UsuariosId extends \yii\db\ActiveRecord
     {
         return [
             [['created_at', 'updated_at'], 'safe'],
-            [['rol_id'], 'default', 'value' => null],
+            [['rol_id'], 'default', 'value' => '4'],
             [['rol_id'], 'integer'],
             [['ip'], 'string', 'max' => 15],
             [['rol_id'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::className(), 'targetAttribute' => ['rol_id' => 'id']],
