@@ -336,20 +336,6 @@ VALUES
 ;
 
 ---------------------------------------------------
---                    PUNTOS                     --
----------------------------------------------------
-INSERT INTO puntos (usuario_id, torrent_id) VALUES
-    (1, 1)
-  , (1, 2)
-  , (1, 3)
-  , (1, 4)
-  , (2, 1)
-  , (2, 2)
-  , (2, 3)
-;
-
-
----------------------------------------------------
 --                 COMENTARIOS                   --
 ---------------------------------------------------
 INSERT INTO comentarios (usuario_id, torrent_id, contenido) VALUES
@@ -436,7 +422,7 @@ INSERT INTO accesos (usuario_id) VALUES
 ;
 
 
-INSERT INTO descargas (ip, torrent) VALUES
+INSERT INTO descargas (ip, torrent_id) VALUES
   ('127.0.0.97', 1)
   , ('127.0.0.98', 1)
   , ('127.0.0.99', 1)
