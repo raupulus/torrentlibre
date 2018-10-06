@@ -3,6 +3,7 @@
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $log = require __DIR__ . '/log.php';
+$translations = '@app/translations';  // Directorio con las traducciones
 
 $config = [
     'id' => 'basic',
@@ -22,7 +23,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\Usuarios',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -51,14 +52,27 @@ $config = [
         'formatter' => [
             'timeZone' => 'Europe/Madrid',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => $translations,
+                    //'sourceLanguage' => 'en-US',
+                    /*
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php',
+                    ],
+                    */
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];
