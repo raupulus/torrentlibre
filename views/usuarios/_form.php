@@ -120,11 +120,16 @@ use juliardi\captcha\Captcha;
 
     <div class="form-group">
         <div class="btn-anterior-box">
-            <?= Html::buttonInput('Anterior', ['class' =>
-                'btn-form btn-anterior']) ?>
+            <?= Html::buttonInput('Anterior', [
+                'id' => 'btn-form-usuarios-anterior',
+                'class' => 'btn-form btn-anterior',
+            ]); ?>
         </div>
         <div class="btn-siguiente-box">
-            <?= Html::buttonInput('Siguiente', ['class' => 'btn-form btn-siguiente']) ?>
+            <?= Html::buttonInput('Siguiente', [
+                'id' => 'btn-form-usuarios-siguiente',
+                'class' => 'btn-form btn-siguiente'
+            ]); ?>
         </div>
     </div>
 

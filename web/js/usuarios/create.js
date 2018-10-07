@@ -6,9 +6,17 @@
 
 (function($) {
     $(document).ready(function() {
+        /* Oculto formularios al comenzar */
+        $('.usuarios-form .form-dividido').hide();
+
+        /* Muestro solo la primera parte del formulario */
+        $('.usuarios-form .form-dividido').first().show();
+
+
+
         /**
-         * Añade evento a cada avatar para marcarse al ser seleccionado y además
-         * toma su numbre para el campo del formulario "avatar"
+         * Añade evento a cada avatar para marcarse al ser pulsado y además
+         * toma su nombre para el campo del formulario "avatar"
          */
         (function() {
             var images = $('#avatar-selector img');
@@ -31,21 +39,24 @@
         })();
 
         /**
+         * Oculta todas las secciones del formulario.
+         */
+        function ocultarSecciones() {
+            $('.usuarios-form .form-dividido').hide();
+            var secciones = $('.nav-form-usuario ul li');
+            secciones.removeClass('seccionactual');
+        }
+
+        /**
          * Muestra la sección del formulario sobre la que se ha pulsado.
          * @param seccion Recibe el elemento que se marcará activo y mostrará.
          */
         function mostrarSeccion(seccion) {
             ocultarSecciones();
             seccion.addClass('seccionactual');
-        }
 
-        /**
-         * Oculta todas las secciones del formulario.
-         */
-        function ocultarSecciones() {
-            var secciones = $('.nav-form-usuario ul li');
-
-            secciones.removeClass('seccionactual');
+            /* Muestro solo la primera parte del formulario */
+            $('#' + seccion.data('seccion')).show();
         }
 
         /**
@@ -60,24 +71,42 @@
         }
 
         function seccionProxima() {
-            var secciones = obtenerSecciones();
+            var secciones = obtenerSecciones().toArray();
+            var seccionActual = $('.seccionactual').data('seccion');
 
-            ocultarSecciones();
-
-            var seccion = $('.seccionactual').data('seccion');
-
-            var nuevaseccionkey = secciones.each(function(idx) {
-                if ($(this).data('seccion') = seccion) {
-                    //return secciones.keys(idx + 1);
-                    console.log(secciones.keys(idx + 1).data('seccion'));
+            var esperado = false;
+            for (let ele in secciones) {
+                if (ele == secciones.length) {
+                    break;
+                } else if (esperado == true) {
+                    ocultarSecciones();
+                    mostrarSeccion(
+                        $('.nav-form-usuario ul li[data-seccion=' + secciones[ele] + ']')
+                    );
+                    break;
+                } else if (secciones[ele] == seccionActual) {
+                    esperado = true;
                 }
-            })
-
-            mostrarSeccion(x);
+            };
         }
 
         function seccionAnterior() {
-            var secciones = obtenerSecciones();
+            var secciones = obtenerSecciones().toArray();
+            var seccionActual = $('.seccionactual').data('seccion');
+
+            var esperado = false;
+            for (let ele = secciones.length; ele >= 0; ele--) {
+                if (esperado == true) {
+                    ocultarSecciones();
+                    mostrarSeccion(
+                        $('.nav-form-usuario ul li[data-seccion=' + secciones[ele] + ']')
+                    );
+                    break;
+                } else if (secciones[ele] == seccionActual) {
+                    esperado = true;
+                    continue;
+                }
+            }
         }
 
         /**
@@ -88,11 +117,17 @@
 
             secciones.each(function() {
                 $(this).click(function() {
-
-
                     mostrarSeccion($(this));
                 });
             });
+        })();
+
+        /**
+         * Añade funcionalidades a las flechas de navegación.
+         */
+        (function () {
+            var anterior = $('#btn-form-usuarios-anterior').click(seccionAnterior);
+            var proximo = $('#btn-form-usuarios-siguiente').click(seccionProxima);
         })();
     });
 })(jQuery);
