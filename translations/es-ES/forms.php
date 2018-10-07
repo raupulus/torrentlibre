@@ -1,15 +1,17 @@
 <?php
 return [
     'contact' => 'Contactar',
-    'fields' => [
-        'name' => 'Nombre',
-        'email' => 'Email',
-        'subject' => 'Asunto',
-        'message' => 'Mensaje',
-        'submit' => 'Enviar',
-        'finish' => 'Finalizar',
-        'next' => 'Siguiente',
-        'capcha' => 'Código de Verificación',
-        'erase' => 'Borrar',
-    ],
+    'name' => 'Nombre',
+    'email' => 'Email',
+    'subject' => 'Asunto',
+    'message' => 'Mensaje',
+    'submit' => 'Enviar',
+    'create' => 'Crear Cuenta',
+    'finish' => 'Finalizar',
+    'search' => 'Buscar',
+    'reset' => 'Reiniciar',
+    'next' => 'Siguiente',
+    'back' => 'Anterior',
+    'capcha' => 'Código de Verificación',
+    'erase' => 'Borrar',
 ];

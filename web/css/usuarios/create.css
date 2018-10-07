@@ -4,3 +4,115 @@
  * @copyright Copyright © 2018 Raúl Caro Pastorino
  * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
  */
+
+
+
+/*****************************************
+ *     Menú de navegación formulario     *
+ *****************************************/
+.nav-form-usuario {
+    width: 100%;
+    text-align: center;
+    background-color: #00334e;
+    font-weight: bolder;
+    border-radius: 5px;
+}
+
+.nav-form-usuario ul {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-form-usuario ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+    padding: 0 5px;
+    height: 80%;
+    cursor: pointer;
+    color: whitesmoke;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-form-usuario ul li:hover {
+    color: #dbebfa;
+    background-color: #004d73;
+}
+
+.seccionactual {
+    color: #dbebfa;
+    background-color: #004d73;
+    border-bottom: 3px solid #832561 !important;
+
+}
+
+/*****************************************
+ *      Formulario al crear usuarios     *
+ *****************************************/
+.form-dividido {
+    margin: 15px 0;
+    padding: 8px 12px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #dbebfa;
+    box-shadow: 3px 3px 5px #000;
+}
+
+.form-dividido h3 {
+    text-align: center;
+}
+
+.btn-form {
+    padding: 5px 3px;
+    width: 150px;
+    border-radius: 5px;
+    font-weight: bolder;
+}
+
+.btn-anterior-box {
+    float: left;
+}
+
+.btn-siguiente-box {
+    float: right;
+}
+
+.btn-confirmar-box {
+    display: block;
+    margin: auto;
+}
+
+.btn-anterior {
+    color: lightskyblue;
+    background-color: #2e3436;
+}
+
+.btn-siguiente {
+    color: lightskyblue;
+    background-color: #2e3436;
+}
+
+.btn-confirmar {
+    color: white;
+    background-color: red;
+}
+
+/*.usuarios-form .btn-siguiente {
+    background-color: red;
+    margin-right: 0;
+    text-align: right;
+}*/
+
+#avatar-selector img {
+    width: 100%;
+    background-color: #004d73;
+    border: 8px solid transparent;
+    border-radius: 5px;
+}
+
+#avatar-selector img:hover {
+    border-color: #832561;
+}

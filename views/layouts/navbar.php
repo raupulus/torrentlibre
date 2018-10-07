@@ -13,6 +13,7 @@
  **/
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Html;
 
 
 NavBar::begin([
@@ -36,7 +37,7 @@ echo Nav::widget([
             '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                \Yii::t('main', 'home').'(' .
+                \Yii::t('main', 'logout').' (' .
                 Yii::$app->user->identity->nick . ')',
                 ['class' => 'btn btn-link logout']
             )

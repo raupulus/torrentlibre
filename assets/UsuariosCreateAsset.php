@@ -11,21 +11,17 @@ namespace app\assets;
 use yii\web\AssetBundle;
 
 /**
- * Main application asset bundle.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
+ * Assets para vistas de Usuarios
  */
-class AppAsset extends AssetBundle
+class UsuariosCreateAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
-        'css/styles.css',
+        'css/usuarios/create.css',
     ];
     public $js = [
-        'js/scripts.js'
+        'js/usuarios/create.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
