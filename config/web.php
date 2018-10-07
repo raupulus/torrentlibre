@@ -4,6 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $log = require __DIR__ . '/log.php';
 $translations = '@app/translations';  // Directorio con las traducciones
+$sitename = 'Torrent Libre (beta)';
 
 $config = [
     'id' => 'basic',
@@ -12,8 +13,13 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@r_avatar' => $params['rutaAvatar'],
+        '@r_imgTorrent' => $params['rutaImagenTorrent'],
+        '@p_torrents' => $params['paginacion_torrents'],
+        '@tmp' => '@app/'.$params['tmp'],
     ],
     'language' => 'es-ES',
+    'name' => $sitename,
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

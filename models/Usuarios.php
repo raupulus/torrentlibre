@@ -267,6 +267,23 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuariosId()
+    {
+        return $this->hasOne(UsuariosId::className(), ['id' => 'id']);
+    }
+
+    /**
+     * Devuelve el rol del usuario
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRol()
+    {
+        return $this->usuariosId->rol->tipo;
+    }
+
+    /**
      * Acciones llevadas a cabo antes de insertar un usuario
      * @param bool $insert Acción a realizar, si existe está insertando
      * @return bool Devuelve un booleano, si se lleva a cabo es true.
