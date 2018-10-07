@@ -43,6 +43,23 @@ use yii\web\IdentityInterface;
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
     /**
+     * @const ESCENARIO_CREATE Constante para cuando estamos insertando
+     */
+    const ESCENARIO_CREATE = 'create';
+
+    /**
+     * @const ESCENARIO_UPDATE Constante para cuando estamos actualizando
+     */
+    const ESCENARIO_UPDATE = 'update';
+
+    /**
+     * Atributo usado para guardar el campo de "confirmar contraseña" del
+     * formulario de creación de usuarios.
+     * @var string
+     */
+    public $password_repeat;
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
