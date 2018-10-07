@@ -91,7 +91,7 @@ use juliardi\captcha\Captcha;
 
         <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'biografia')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'biografia')->textarea(['maxlength' => true]) ?>
     </div>
 
     <div id="datos-sociales" class="form-dividido">

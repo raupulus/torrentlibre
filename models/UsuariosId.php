@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
+
 
 /**
  * This is the model class for table "usuarios_id".
@@ -51,6 +53,24 @@ class UsuariosId extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'rol_id' => 'Rol ID',
             'ip' => 'Ip',
+        ];
+    }
+
+    /**
+     * Sobreescribe el método personalizando la configuración
+     * @return array Devuelve la configuración
+     */
+    public function behaviors()
+    {
+        return [
+            // Creo un timestamp cada vez que salta el evento create
+            // o update asignando el timestamp actual
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ]
         ];
     }
 

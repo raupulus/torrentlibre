@@ -2,12 +2,18 @@
 
 namespace app\controllers;
 
+use function isEmpty;
 use Yii;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Preferencias;
+use app\models\UsuariosId;
+use yii\filters\AccessControl;
+use yii\db\Expression;
+
 
 /**
  * UsuariosController implements the CRUD actions for Usuarios model.
@@ -24,6 +30,17 @@ class UsuariosController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'delete', 'update'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
@@ -58,16 +75,42 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Creates a new Usuarios model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Crea un nuevo usuario a partir del modelo.
+     * Si consigue crearse correctamente, se redirigirá a la vista del usuario
+     * recién creado.
+     *
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Usuarios();
+        $model = new Usuarios(['scenario' => Usuarios::ESCENARIO_CREATE]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            // Creo un nuevo id para este usuarios desde "usuarios_id"
+            $usuario_id = new UsuariosId();
+
+            // Creo nuevo id para preferencias_id desde "preferencias"
+            $preferencias = new Preferencias(['tema_id' => 1]);
+        }
+
+        // Si entra mediante POST y puedo crear el usuario_id lo cargo al modelo
+        if ($model->load(Yii::$app->request->post()) &&
+            $usuario_id->save() &&
+            $preferencias->save()
+        ) {
+            $model->id = $usuario_id->id;
+            $model->preferencias_id = $preferencias->id;
+
+            if ($model->avatar == '') {
+                $model->avatar = 'default.png';
+            }
+
+            $model->lastlogin_at = new Expression('NOW()');
+
+            if ($model->save()) {
+                Yii::$app->user->login($model);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [

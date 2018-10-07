@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\web\IdentityInterface;
 use juliardi\captcha\CaptchaValidator;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "usuarios".
@@ -91,7 +92,32 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['preferencias_id'], 'exist', 'skipOnError' => true, 'targetClass' => Preferencias::className(), 'targetAttribute' => ['preferencias_id' => 'id']],
             [['id'], 'exist', 'skipOnError' => true, 'targetClass' => UsuariosId::className(), 'targetAttribute' => ['id' => 'id']],
             ['captcha', CaptchaValidator::className()],  // Validación captcha
+            [['password'], 'string', 'max' => 255],
+            [['password_repeat'], 'string', 'max' => 255],
+            [
+                ['password', 'password_repeat'],
+                'required', 'on' => self::ESCENARIO_CREATE
+            ],
+            [
+                ['password_repeat'],
+                'compare',
+                'compareAttribute' => 'password',
+                'skipOnEmpty' => false,
+                'on' => [self::ESCENARIO_CREATE, self::ESCENARIO_UPDATE],
+                'message' => 'Deben coincidir las contraseñas.',
+            ],
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return array
+     */
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), [
+            'password_repeat',
+        ]);
     }
 
     /**
@@ -115,6 +141,8 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             'token' => 'Token',
             'lastlogin_at' => 'Lastlogin At',
             'preferencias_id' => 'Preferencias ID',
+            'password' => 'Contraseña',
+            'password_repeat' => 'Confirmar contraseña',
         ];
     }
 
@@ -236,6 +264,48 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function getUsuariosBloqueados()
     {
         return $this->hasOne(UsuariosBloqueados::className(), ['usuario_id' => 'id']);
+    }
+
+    /**
+     * Acciones llevadas a cabo antes de insertar un usuario
+     * @param bool $insert Acción a realizar, si existe está insertando
+     * @return bool Devuelve un booleano, si se lleva a cabo es true.
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                $this->token = Yii::$app->security->generateRandomString();
+                $this->auth_key = Yii::$app->security->generateRandomString();
+
+                if ($this->scenario === self::ESCENARIO_CREATE) {
+                    $this->password = Yii::$app->security
+                        ->generatePasswordHash($this->password);
+                }
+            } elseif ($this->scenario === self::ESCENARIO_UPDATE) {
+                if ($this->password === '') {
+                    $this->password = $this->getOldAttribute('password');
+                } else {
+                    $this->password = Yii::$app->security
+                        ->generatePasswordHash($this->password);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /*
+     * Devuelve la ruta del avatar para el usuario actual.
+     * return String Ruta del avatar
+     */
+    public function getRutaImagen()
+    {
+        $nombre = Yii::getAlias('@r_avatar/') . $this->avatar;
+        if (file_exists($nombre)) {
+            return Url::to('/r_avatar/') . $this->avatar;
+        }
+        return Url::to('/r_avatar/') . 'default.png';
     }
 
     /* AUTENTICACIÓN DE USUARIOS */
