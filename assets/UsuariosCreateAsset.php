@@ -24,6 +24,7 @@ class UsuariosCreateAsset extends AssetBundle
         'js/usuarios/create.js',
     ];
     public $depends = [
-
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }

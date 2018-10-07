@@ -21,6 +21,7 @@ use juliardi\captcha\Captcha;
         <li><a href="#datos-basicos">Datos básicos</a></li>
         <li><a href="#datos-opcionales">Datos Opcionales</a></li>
         <li><a href="#datos-sociales">Datos Sociales</a></li>
+        <li><a href="#datos-captcha">Finalizar</a></li>
     </ul>
 </div>
 
@@ -53,8 +54,38 @@ use juliardi\captcha\Captcha;
 
     <div id="datos-opcionales" class="form-dividido">
         <h3>Datos Opcionales</h3>
+        <h4>Selecciona Avatar:</h4>
+        <div id="avatar-selector" class="row">
+            <div class="col-xs-3 col">
+                <img src="/images/user-avatar/default.png"
+                     data-name="default.png"
+                     alt="Imagen de Avatar por defecto"
+                     title="Imagen de Avatar por defecto" />
+            </div>
+            <div class="col-xs-3">
+                <img src="/images/user-avatar/hippy.png"
+                     data-name="hippy.png"
+                     alt="Imagen de Avatar hippy"
+                     title="Imagen de Avatar hippy" />
+            </div>
+            <div class="col-xs-3">
+                <img src="/images/user-avatar/rey.png"
+                     data-name="rey.png"
+                     alt="Imagen de Avatar rey"
+                     title="Imagen de Avatar rey" />
+            </div>
+            <div class="col-xs-3">
+                <img src="/images/user-avatar/rockero.png"
+                     data-name="rockero.png"
+                     alt="Imagen de Avatar rockero"
+                     title="Imagen de Avatar rockero" />
+            </div>
+        </div>
 
-        <?= $form->field($model, 'avatar')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'avatar')
+                 ->textInput(['maxlength' => true])
+                 ->hiddenInput()
+                 ->label(false)?>
 
         <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
@@ -73,11 +104,12 @@ use juliardi\captcha\Captcha;
         <?= $form->field($model, 'googleplus')->textInput(['maxlength' => true]) ?>
     </div>
 
+    <!--
     <div id="datos-preferencias" class="form-dividido">
         <h3>Preferencias</h3>
-        <!-- Añadir campos para marcar preferencias -->
         <?php // $form->field($model, 'preferencias_id')->textInput() ?>
     </div>
+    -->
 
     <div id="datos-captcha" class="form-dividido">
         <h3>¿No soy un Robot?</h3>
@@ -103,5 +135,4 @@ use juliardi\captcha\Captcha;
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>
