@@ -124,4 +124,21 @@ class UsuariosController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+
+    /**
+     * Acciones para configurar el captcha en formulario.
+     * @return array Devuelve la configuración del captcha
+     */
+    public function actions()
+    {
+        return [
+            'captcha' => [
+                'class' => 'juliardi\captcha\CaptchaAction',
+                'length' => 4,   // Cantidad de carácteres
+                'width' => 200,  // Ancho de la imagen generada
+                'height' => 80,  // Alto de la imagen generada
+            ],
+        ];
+    }
 }

@@ -17,7 +17,8 @@
         "ext-intl": "*",
         "yiisoft/yii2": "^2.0.10",
         "yiisoft/yii2-bootstrap": "^2.0.0",
-        "yiisoft/yii2-swiftmailer": "^2.1.0"
+        "yiisoft/yii2-swiftmailer": "^2.1.0",
+        "juliardi/yii2-captcha": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "^2.0.0",

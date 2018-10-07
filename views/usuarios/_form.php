@@ -9,6 +9,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use juliardi\captcha\Captcha;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
@@ -76,6 +77,11 @@ use yii\widgets\ActiveForm;
         <h3>Preferencias</h3>
         <!-- Añadir campos para marcar preferencias -->
         <?php // $form->field($model, 'preferencias_id')->textInput() ?>
+    </div>
+
+    <div id="datos-captcha" class="form-dividido">
+        <h3>¿No soy un Robot?</h3>
+        <?php echo $form->field($model, 'captcha')->widget(Captcha::className()) ?>
     </div>
 
     <div class="form-group">

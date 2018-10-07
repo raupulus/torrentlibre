@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\web\IdentityInterface;
+use juliardi\captcha\CaptchaValidator;
 
 /**
  * This is the model class for table "usuarios".
@@ -60,6 +61,11 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public $password_repeat;
 
     /**
+     * Atributo usado para guardar el captcha
+     */
+    public $captcha;
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
@@ -84,6 +90,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['id'], 'unique'],
             [['preferencias_id'], 'exist', 'skipOnError' => true, 'targetClass' => Preferencias::className(), 'targetAttribute' => ['preferencias_id' => 'id']],
             [['id'], 'exist', 'skipOnError' => true, 'targetClass' => UsuariosId::className(), 'targetAttribute' => ['id' => 'id']],
+            ['captcha', CaptchaValidator::className()],  // Validación captcha
         ];
     }
 
