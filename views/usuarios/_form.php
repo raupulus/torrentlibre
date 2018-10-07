@@ -18,10 +18,12 @@ use juliardi\captcha\Captcha;
 
 <div class="nav-form-usuario">
     <ul>
-        <li><a href="#datos-basicos">Datos básicos</a></li>
-        <li><a href="#datos-opcionales">Datos Opcionales</a></li>
-        <li><a href="#datos-sociales">Datos Sociales</a></li>
-        <li><a href="#datos-captcha">Finalizar</a></li>
+        <li data-seccion="datos-basicos" class="seccionactual">
+            Datos básicos
+        </li>
+        <li data-seccion="datos-opcionales">Datos Opcionales</li>
+        <li data-seccion="datos-sociales">Datos Sociales</li>
+        <li data-seccion="datos-finalizar">Finalizar</li>
     </ul>
 </div>
 
@@ -111,7 +113,7 @@ use juliardi\captcha\Captcha;
     </div>
     -->
 
-    <div id="datos-captcha" class="form-dividido">
+    <div id="datos-finalizar" class="form-dividido">
         <h3>¿No soy un Robot?</h3>
         <?php echo $form->field($model, 'captcha')->widget(Captcha::className()) ?>
     </div>

@@ -5,30 +5,48 @@
  * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
  */
 
+
+
 /*****************************************
  *     Menú de navegación formulario     *
  *****************************************/
 .nav-form-usuario {
     width: 100%;
     text-align: center;
-    background-color: #0e2231;
+    background-color: #00334e;
     font-weight: bolder;
-    border-radius: 5px 5px 0 0;
+    border-radius: 5px;
+}
+
+.nav-form-usuario ul {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-form-usuario ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0 10px;
-    display: inline-block;
-}
-
-.nav-form-usuario ul li a {
+    padding: 0 5px;
+    height: 80%;
+    cursor: pointer;
     color: whitesmoke;
-    text-decoration: none;
+    border-bottom: 3px solid transparent;
 }
 
-.nav-form-usuario ul li a:hover {
-    color: black;
-    background-color: #00cc66;
+.nav-form-usuario ul li:hover {
+    color: #dbebfa;
+    background-color: #004d73;
+}
+
+.seccionactual {
+    color: #dbebfa;
+    background-color: #004d73;
+    border-bottom: 3px solid #832561 !important;
+
 }
 
 /*****************************************
