@@ -4,3 +4,84 @@
  * @copyright Copyright © 2018 Raúl Caro Pastorino
  * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
  */
+
+/*****************************************
+ *     Menú de navegación formulario     *
+ *****************************************/
+.nav-form-usuario {
+    width: 100%;
+    text-align: center;
+    background-color: #0e2231;
+    font-weight: bolder;
+    border-radius: 5px 5px 0 0;
+}
+
+.nav-form-usuario ul li {
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.nav-form-usuario ul li a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.nav-form-usuario ul li a:hover {
+    color: black;
+    background-color: #00cc66;
+}
+
+/*****************************************
+ *      Formulario al crear usuarios     *
+ *****************************************/
+.form-dividido {
+    margin: 15px 0;
+    padding: 8px 12px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.form-dividido h3 {
+    text-align: center;
+}
+
+.btn-form {
+    padding: 5px 3px;
+    width: 150px;
+    border-radius: 5px;
+    font-weight: bolder;
+}
+
+.btn-anterior-box {
+    float: left;
+}
+
+.btn-siguiente-box {
+    float: right;
+}
+
+.btn-confirmar-box {
+    display: block;
+    margin: auto;
+}
+
+.btn-anterior {
+    color: lightskyblue;
+    background-color: #2e3436;
+}
+
+.btn-siguiente {
+    color: lightskyblue;
+    background-color: #2e3436;
+}
+
+.btn-confirmar {
+    color: white;
+    background-color: red;
+}
+
+/*.usuarios-form .btn-siguiente {
+    background-color: red;
+    margin-right: 0;
+    text-align: right;
+}*/
