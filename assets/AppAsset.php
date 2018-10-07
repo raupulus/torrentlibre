@@ -1,9 +1,10 @@
 <?php
 /**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- */
+ * @author Raúl Caro Pastorino
+ * @link https://fryntiz.es
+ * @copyright Copyright (c) 2018 Raúl Caro Pastorino
+ * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
+ **/
 
 namespace app\assets;
 
@@ -21,8 +22,10 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/styles.css',
     ];
     public $js = [
+        'js/scripts.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
