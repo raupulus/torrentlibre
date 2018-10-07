@@ -8,14 +8,18 @@
  **/
 
 use app\assets\UsuariosCreateAsset;
+use app\models\Usuarios;
 use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
-$this->title = 'Crear nuevo usuario';
-$this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
+$this->title = Yii::t('usuarios-create', 'title');
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('usuarios-create', 'breadcrumbs'),
+    'url' => ['index']
+];
 $this->params['breadcrumbs'][] = $this->title;
 
 // Registro assets para esta vista

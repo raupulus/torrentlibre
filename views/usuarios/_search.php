@@ -46,8 +46,12 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'preferencias_id') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('forms', 'search'), [
+                'class' => 'btn btn-primary'
+        ]) ?>
+        <?= Html::resetButton(Yii::t('forms', 'reset'), [
+                'class' => 'btn btn-default'
+        ]) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

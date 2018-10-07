@@ -49,10 +49,10 @@ class UsuariosId extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => Yii::t('attributelabels', 'created_at'),
+            'updated_at' => Yii::t('attributelabels', 'updated_at'),
             'rol_id' => 'Rol ID',
-            'ip' => 'Ip',
+            'ip' => Yii::t('attributelabels', 'ip'),
         ];
     }
 

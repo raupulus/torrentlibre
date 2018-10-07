@@ -19,11 +19,17 @@ use juliardi\captcha\Captcha;
 <div class="nav-form-usuario">
     <ul>
         <li data-seccion="datos-basicos" class="seccionactual">
-            Datos básicos
+            <?= Yii::t('usuarios-create', 'datos-basicos'); ?>
         </li>
-        <li data-seccion="datos-opcionales">Datos Opcionales</li>
-        <li data-seccion="datos-sociales">Datos Sociales</li>
-        <li data-seccion="datos-finalizar">Finalizar</li>
+        <li data-seccion="datos-opcionales">
+            <?= Yii::t('usuarios-create', 'datos-opcionales'); ?>
+        </li>
+        <li data-seccion="datos-sociales">
+            <?= Yii::t('usuarios-create', 'datos-sociales'); ?>
+        </li>
+        <li data-seccion="datos-finalizar">
+            <?= Yii::t('usuarios-create', 'datos-finalizar'); ?>
+        </li>
     </ul>
 </div>
 
@@ -39,7 +45,7 @@ use juliardi\captcha\Captcha;
     <?php // $form->field($model, 'lastlogin_at')->textInput() ?>
 
     <div id="datos-basicos" class="form-dividido">
-        <h3>Datos Básicos</h3>
+        <h3><?= Yii::t('usuarios-create', 'datos-basicos'); ?></h3>
 
         <?= $form->field($model, 'nick')->textInput([
             'enableAjaxValidation' => true,
@@ -55,8 +61,8 @@ use juliardi\captcha\Captcha;
     </div>
 
     <div id="datos-opcionales" class="form-dividido">
-        <h3>Datos Opcionales</h3>
-        <h4>Selecciona Avatar:</h4>
+        <h3><?= Yii::t('usuarios-create', 'datos-opcionales'); ?></h3>
+        <h4><?= Yii::t('usuarios-create', 'seleccionar-avatar'); ?></h4>
         <div id="avatar-selector" class="row">
             <div class="col-xs-3 col">
                 <img src="/images/user-avatar/default.png"
@@ -95,7 +101,7 @@ use juliardi\captcha\Captcha;
     </div>
 
     <div id="datos-sociales" class="form-dividido">
-        <h3>Datos Sociales</h3>
+        <h3><?= Yii::t('usuarios-create', 'datos-sociales'); ?></h3>
 
         <?= $form->field($model, 'web')->textInput(['maxlength' => true]) ?>
 
@@ -114,19 +120,21 @@ use juliardi\captcha\Captcha;
     -->
 
     <div id="datos-finalizar" class="form-dividido">
-        <h3>¿No soy un Robot?</h3>
+        <h3><?= Yii::t('usuarios-create', 'datos-finalizar'); ?></h3>
         <?php echo $form->field($model, 'captcha')->widget(Captcha::className()) ?>
     </div>
 
     <div class="form-group">
         <div class="btn-anterior-box">
-            <?= Html::buttonInput('Anterior', [
+            <?= Html::buttonInput(Yii::t('forms', 'back'),
+                [
                 'id' => 'btn-form-usuarios-anterior',
                 'class' => 'btn-form btn-anterior',
             ]); ?>
         </div>
         <div class="btn-siguiente-box">
-            <?= Html::buttonInput('Siguiente', [
+            <?= Html::buttonInput(Yii::t('forms', 'next'),
+                [
                 'id' => 'btn-form-usuarios-siguiente',
                 'class' => 'btn-form btn-siguiente'
             ]); ?>
@@ -136,8 +144,10 @@ use juliardi\captcha\Captcha;
 
     <div class="form-group">
         <div class="btn-confirmar-box">
-            <?= Html::submitButton('Crear Cuenta', ['class' => 'btn-form 
-            btn-confirmar']) ?>
+            <?= Html::submitButton(Yii::t('forms', 'create'),
+                [
+                        'class' => 'btn-form btn-confirmar'
+                ]) ?>
         </div>
     </div>
 
