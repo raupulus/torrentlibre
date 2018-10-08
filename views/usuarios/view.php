@@ -13,7 +13,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
-$this->title = $model->id;
+$this->title = $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -98,7 +98,6 @@ if (!Yii::$app->user->isGuest) {
                 'twitter',
                 'facebook',
                 'googleplus',
-                'password',
                 'lastlogin_at',
                 'usuariosId.rol.tipo',
                 'usuariosId.ip',
