@@ -24,8 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 // Registro assets para esta vista
 UsuariosCreateAsset::register($this);
-
 ?>
+
+<?= Yii::$app->session->getFlash('error'); ?>
+
 <div class="usuarios-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
