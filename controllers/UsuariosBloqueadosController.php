@@ -7,9 +7,11 @@ use redirect;
 use Yii;
 use app\models\UsuariosBloqueados;
 use yii\data\ActiveDataProvider;
+use yii\rbac\Role;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * UsuariosBloqueadosController implements the CRUD actions for UsuariosBloqueados model.
@@ -26,6 +28,19 @@ class UsuariosBloqueadosController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['bloquear', 'desbloquear'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return  Yii::$app->getUser()->identity->rol === 'admin';
+                        }
+                    ],
                 ],
             ],
         ];
