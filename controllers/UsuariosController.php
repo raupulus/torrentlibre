@@ -125,6 +125,37 @@ class UsuariosController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    public function actionUpdate($id = 0)
+    {
+        $rol = Yii::$app->user->identity->rol;
+
+        if ($rol !== 'admin') {
+            $id = Yii::$app->user->id;
+        }
+
+        $model = $this->findModel($id);
+
+        $model->scenario = Usuarios::ESCENARIO_UPDATE;
+        $model->password = '';
+        $model->password_repeat = '';
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing Usuarios model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    /*
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -137,6 +168,7 @@ class UsuariosController extends Controller
             'model' => $model,
         ]);
     }
+    */
 
     /**
      * Deletes an existing Usuarios model.
