@@ -13,15 +13,15 @@ use yii\web\AssetBundle;
 /**
  * Assets para vistas de Usuarios
  */
-class UsuariosCreateAsset extends AssetBundle
+class UsuariosViewAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/usuarios/create.css',
+        'css/usuarios/view.css',
     ];
     public $js = [
-        'js/usuarios/create.js',
+        'js/usuarios/view.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

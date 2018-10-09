@@ -33,7 +33,7 @@
 -- GNU General Public License for more details.
 --
 -- You should have received a copy of the GNU General Public License
--- along with this program.  If not, see <http://www.gnu.org/licenses/>
+-- along with this program.  If not, see <https://www.gnu.org/licenses/>
 -------------------------------------------------------------------------------
 
 CREATE EXTENSION pgcrypto;
@@ -102,7 +102,7 @@ INSERT INTO usuarios (
     , 'Administrador'
     , 'admin'
     , 'https://fryntiz.es'
-    , 'Estudiando DAW'
+    , 'Administrador en plataforma de pruebas (beta)'
     , 'admin@admin.com'
     , '@admin'
     , '@admin'
@@ -117,8 +117,8 @@ INSERT INTO usuarios (
       2
     , 'Editor'
     , 'editor'
-    , 'http://www.fryntiz.es'
-    , 'Estudiando DAW'
+    , 'https://www.fryntiz.es'
+    , 'Editor en plataforma de pruebas (beta)'
     , 'user1@domain.com'
     , '@editor'
     , '@editor'
@@ -133,8 +133,8 @@ INSERT INTO usuarios (
       3
     , 'Pepe'
     , 'pepeneitor3000'
-    , 'http://www.fryntiz.es'
-    , 'Estudiando DAW'
+    , 'https://www.fryntiz.es'
+    , 'Usuario normal en plataforma de pruebas (beta)'
     , 'user2@domain.com'
     , '@pepeitor'
     , '@pepeitor'
