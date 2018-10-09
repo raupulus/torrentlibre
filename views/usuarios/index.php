@@ -23,15 +23,13 @@ if (!Yii::$app->user->isGuest) {
 
 <div class="usuarios-index">
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <h3>Usuarios Registrados</h3>
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <!-- Esta vista solo la puede ver el administrador -->
     <?php if (isset($rol) && ($rol === 'admin')): ?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
+            //'filterModel' => $searchModel,
             'class' => 'grid-view',
             'tableOptions' => [
                 'class' => 'tablaUsuariosIndex'

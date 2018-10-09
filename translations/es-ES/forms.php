@@ -14,4 +14,5 @@ return [
     'back' => 'Anterior',
     'capcha' => 'Código de Verificación',
     'erase' => 'Borrar',
+    'clear' => 'Limpiar',
 ];

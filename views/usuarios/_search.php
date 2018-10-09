@@ -6,54 +6,56 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\UsuariosSearch */
 /* @var $form yii\widgets\ActiveForm */
+
+if (!Yii::$app->user->isGuest) {
+    $rol = Yii::$app->user->identity->rol;
+} else {
+    return;
+}
 ?>
 
-<div class="usuarios-search">
+<div id="box-form-search"
+     class="text-center usuarios-search container center-block">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'id' => 'form-search-users-index',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="row col-sm-4 center-block">
+        <?= $form->field($model, 'nick') ?>
+    </div>
 
-    <?= $form->field($model, 'nombre') ?>
+    <?php if ($rol === 'admin'): ?>
+        <div class="row col-sm-4 center-block">
+            <?= $form->field($model, 'email') ?>
+        </div>
 
-    <?= $form->field($model, 'nick') ?>
+        <div class="row col-sm-4 center-block">
+            <?= $form->field($model, 'id') ?>
+        </div>
+    <?php endif ?>
 
-    <?= $form->field($model, 'web') ?>
 
-    <?= $form->field($model, 'biografia') ?>
 
-    <?php // echo $form->field($model, 'email') ?>
+    <!-- IP -->
+    <!-- ROL -->
+</div>
 
-    <?php // echo $form->field($model, 'twitter') ?>
-
-    <?php // echo $form->field($model, 'facebook') ?>
-
-    <?php // echo $form->field($model, 'googleplus') ?>
-
-    <?php // echo $form->field($model, 'avatar') ?>
-
-    <?php // echo $form->field($model, 'password') ?>
-
-    <?php // echo $form->field($model, 'auth_key') ?>
-
-    <?php // echo $form->field($model, 'token') ?>
-
-    <?php // echo $form->field($model, 'lastlogin_at') ?>
-
-    <?php // echo $form->field($model, 'preferencias_id') ?>
-
-    <div class="form-group">
+<div id="box-form-button-search" class="container col-sm-12 center-block">
+    <div class="col-sm-6 text-right center-block">
         <?= Html::submitButton(Yii::t('forms', 'search'), [
-                'class' => 'btn btn-primary'
-        ]) ?>
-        <?= Html::resetButton(Yii::t('forms', 'reset'), [
-                'class' => 'btn btn-default'
+            'class' => 'btn btn-primary'
         ]) ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
-
+    <div class="col-sm-6 text-left center-block">
+        <?= Html::button(Yii::t('forms', 'clear'), [
+            'id' => 'form-btn-clear',
+            'class' => 'btn btn-danger',
+        ]) ?>
+    </div>
 </div>
+
+<?php ActiveForm::end(); ?>

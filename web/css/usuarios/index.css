@@ -13,6 +13,7 @@
     border: 8px solid #f5e79e;
     border-radius: 10px;
     box-shadow: 5px 5px 5px black;
+    overflow-x: scroll;
 }
 
 .grid-view .tablaUsuariosIndex {
@@ -46,4 +47,29 @@
 .grid-view .tablaUsuariosIndex th, .grid-view .tablaUsuariosIndex td {
     text-align: center;
     vertical-align: middle;
+}
+
+
+/*****************************************
+ *                _SEARCH                *
+ *****************************************/
+
+#box-form-search {
+
+}
+
+#form-search-users-index {
+
+}
+
+#form-search-users-index .form-group {
+    margin: 2px 8px;
+}
+
+#box-form-button-search {
+    margin: 8px 5px;
+}
+
+#box-form-button-search button {
+    min-width: 100px;
 }
