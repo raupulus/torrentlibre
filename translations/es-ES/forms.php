@@ -15,4 +15,5 @@ return [
     'capcha' => 'Código de Verificación',
     'erase' => 'Borrar',
     'clear' => 'Limpiar',
+    'update' => 'Actualizar',
 ];

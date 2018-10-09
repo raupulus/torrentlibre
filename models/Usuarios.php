@@ -80,7 +80,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['id', 'nick', 'email', 'password'], 'required'],
+            [['id', 'nick', 'email'], 'required'],
             [['id', 'preferencias_id'], 'default', 'value' => null],
             [['id', 'preferencias_id'], 'integer'],
             [['lastlogin_at'], 'safe'],
@@ -91,6 +91,10 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['id'], 'unique'],
             [['preferencias_id'], 'exist', 'skipOnError' => true, 'targetClass' => Preferencias::className(), 'targetAttribute' => ['preferencias_id' => 'id']],
             [['id'], 'exist', 'skipOnError' => true, 'targetClass' => UsuariosId::className(), 'targetAttribute' => ['id' => 'id']],
+            [
+                ['captcha'],
+                'required', 'on' => self::ESCENARIO_CREATE
+            ],
             ['captcha', CaptchaValidator::className()],  // Validación captcha
             [['password'], 'string', 'max' => 255],
             [['password_repeat'], 'string', 'max' => 255],
