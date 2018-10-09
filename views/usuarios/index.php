@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @author Raúl Caro Pastorino
+ * @link https://fryntiz.es
+ * @copyright Copyright (c) 2018 Raúl Caro Pastorino
+ * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
+ **/
+
 use app\assets\UsuariosIndexAsset;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -76,7 +83,7 @@ if (!Yii::$app->user->isGuest) {
         <!-- Esta vista la puede ver cualquier usuario registrado -->
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
+            //'filterModel' => $searchModel,
             'class' => 'grid-view',
             'tableOptions' => [
                 'class' => 'tablaUsuariosIndex'

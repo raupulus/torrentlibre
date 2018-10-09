@@ -39,6 +39,7 @@ if (!Yii::$app->user->isGuest) {
                 'id',
                 'nombre',
                 'nick',
+                'usuariosId.rol.tipo',
                 'web',
                 'biografia',
                 'email:email',
@@ -46,11 +47,7 @@ if (!Yii::$app->user->isGuest) {
                 'facebook',
                 'googleplus',
                 'avatar',
-                'password',
-                'auth_key',
-                'token',
                 'lastlogin_at',
-                'preferencias_id',
                 [
                     'attribute' => 'avatar',
                     'format' => 'raw',
@@ -65,7 +62,6 @@ if (!Yii::$app->user->isGuest) {
                         return '<img src="'.$ruta.$img.'" />';
                     }
                 ],
-                'usuariosId.rol.tipo',
                 'usuariosId.ip',
             ],
         ])

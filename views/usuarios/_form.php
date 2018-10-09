@@ -7,6 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
  **/
 
+use function Composer\Autoload\includeFile;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use juliardi\captcha\Captcha;
@@ -64,30 +65,37 @@ use juliardi\captcha\Captcha;
         <h3><?= Yii::t('usuarios-create', 'datos-opcionales'); ?></h3>
         <h4><?= Yii::t('usuarios-create', 'seleccionar-avatar'); ?></h4>
         <div id="avatar-selector" class="row">
-            <div class="col-xs-3 col">
-                <img src="/images/user-avatar/default.png"
-                     data-name="default.png"
-                     alt="Imagen de Avatar por defecto"
-                     title="Imagen de Avatar por defecto" />
-            </div>
-            <div class="col-xs-3">
-                <img src="/images/user-avatar/hippy.png"
-                     data-name="hippy.png"
-                     alt="Imagen de Avatar hippy"
-                     title="Imagen de Avatar hippy" />
-            </div>
-            <div class="col-xs-3">
-                <img src="/images/user-avatar/rey.png"
-                     data-name="rey.png"
-                     alt="Imagen de Avatar rey"
-                     title="Imagen de Avatar rey" />
-            </div>
-            <div class="col-xs-3">
-                <img src="/images/user-avatar/rockero.png"
-                     data-name="rockero.png"
-                     alt="Imagen de Avatar rockero"
-                     title="Imagen de Avatar rockero" />
-            </div>
+            <?php
+                // TODO → Utilizar archivo externo en /data/avatar.php
+                //$avatares = include "../../data/avatar.php";
+
+                $avatares = [
+                    [
+                        'nombre' => 'default.png',
+                        'titulo' => 'Imagen de Avatar por defecto'
+                    ],
+                    [
+                        'nombre' => 'hippy.png',
+                        'titulo' => 'Imagen de Avatar hippy'
+                    ],
+                    [
+                        'nombre' => 'rey.png',
+                        'titulo' => 'Imagen de Avatar rey'
+                    ],
+                    [
+                        'nombre' => 'rockero.png',
+                        'titulo' => 'Imagen de Avatar rockero'
+                    ],
+                ];
+
+                foreach($avatares as $av): ?>
+                    <div class="col-xs-3 col">
+                        <img src="/images/user-avatar/<?= $av['nombre'] ?>"
+                             data-name="<?= $av['nombre'] ?>"
+                             alt="<?= $av['titulo'] ?>"
+                             title="<?= $av['titulo'] ?>" />
+                    </div>
+            <?php endforeach ?>
         </div>
 
         <?= $form->field($model, 'avatar')
@@ -120,8 +128,16 @@ use juliardi\captcha\Captcha;
     -->
 
     <div id="datos-finalizar" class="form-dividido">
-        <h3><?= Yii::t('usuarios-create', 'datos-finalizar'); ?></h3>
-        <?php echo $form->field($model, 'captcha')->widget(Captcha::className()) ?>
+        <?php if ($model->scenario === 'create'): ?>
+            <h3><?= Yii::t('usuarios-create', 'datos-finalizar'); ?></h3>
+            <?php echo $form->field($model, 'captcha')->widget(Captcha::className()) ?>
+        <?php else: ?>
+            <h3>Para guardar pulse el siguiente botón</h3>
+            <a href="/usuarios/view?id=<?= $model->id ?>"
+               class="btn btn-success center-block">
+                <?= Yii::t('forms', 'update') ?>
+            </a>
+        <?php endif ?>
     </div>
 
     <div class="form-group">
@@ -144,7 +160,7 @@ use juliardi\captcha\Captcha;
 
     <div class="form-group">
         <div class="btn-confirmar-box">
-            <?= Html::submitButton(Yii::t('forms', 'create'),
+            <?= Html::submitButton(Yii::t('forms', $model->scenario),
                 [
                         'class' => 'btn-form btn-confirmar'
                 ]) ?>
