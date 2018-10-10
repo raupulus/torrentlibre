@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: fryntiz
- * Date: 7/10/18
- * Time: 1:40
+ * Date: 10/10/18
+ * Time: 23:21
  */
 /**
  * @author    Raúl Caro Pastorino
@@ -14,22 +14,18 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Torrent Libre';
+$this->title = 'Usuario Bloqueado';
 
 ?>
-<div class="site-index">
-    <h1>Torrent Libre</h1>
+<div class="site-userlocked">
+    <h1>Usuario Bloqueado</h1>
     <h2>Sitio temporal con el desarrollo</h2>
-    <p>
-        Esta aplicación web está en desarrollo y es mi proyecto
-        integrado para final de DAW.
-    </p>
 
     <p>
-        Los datos introducidos no son reales y se perderán en cualquier momento.
+        Este usuario ha sido bloqueado.
     </p>
 
     <p class="alert-warning">
-        No uses esta aplicación hasta que entre en una fase beta más avanzada.
+        Para cualquier consulta al respecto diríjase por favor a ????
     </p>
 </div>

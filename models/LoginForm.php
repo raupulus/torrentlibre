@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use function var_dump;
 use Yii;
 use yii\base\Model;
 
@@ -81,7 +82,6 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            //$this->_user = User::findByUsername($this->username);
             $this->_user = Usuarios::findOne([
                 'nick' => $this->login
             ]);
@@ -95,3 +95,15 @@ class LoginForm extends Model
         return $this->_user;
     }
 }
+
+
+
+
+// Si está bloqueado redirije a la vista de usuario bloqueado.
+/*
+if ($this->getUser()->usuarioBloqueado) {
+    Yii::$app->getResponse()
+        ->redirect(['site/userlocked'])
+        ->send();
+}
+*/

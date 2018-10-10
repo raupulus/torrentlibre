@@ -125,4 +125,15 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    /**
+     * Displays userlocked page.
+     *
+     * @return string
+     */
+    public function actionUserlocked()
+    {
+        return $this->render('userlocked');
+    }
 }
+

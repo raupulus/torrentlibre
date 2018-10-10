@@ -7,7 +7,6 @@ use redirect;
 use Yii;
 use app\models\UsuariosBloqueados;
 use yii\data\ActiveDataProvider;
-use yii\rbac\Role;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
