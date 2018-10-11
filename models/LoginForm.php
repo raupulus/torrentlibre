@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use function is_object;
+use function var_dump;
 use Yii;
 use yii\base\Model;
 
@@ -81,7 +83,6 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            //$this->_user = User::findByUsername($this->username);
             $this->_user = Usuarios::findOne([
                 'nick' => $this->login
             ]);
@@ -92,6 +93,17 @@ class LoginForm extends Model
                 ]);
             }
         }
+
+        /*
+         * Cuando _user es un objeto comprueba si está bloqueado el usuario
+         * para redireccionar a la vista "userlocked"
+         */
+        if (is_object($this->_user) && ($this->_user->usuarioBloqueado)) {
+            Yii::$app->getResponse()
+                ->redirect(['site/userlocked'])
+                ->send();
+        }
+
         return $this->_user;
     }
 }

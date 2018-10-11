@@ -75,6 +75,36 @@ if (!Yii::$app->user->isGuest) {
                 'twitter',
                 'facebook',
                 'googleplus',
+                [
+                    'attribute' => 'bloquear',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                        if (isset($model->usuariosBloqueados->usuario)) {
+                            return Html::a('Desbloquear', [
+                                Url::to('usuarios-bloqueados/desbloquear'),
+                                'id' => $model->usuariosBloqueados->id
+                                ],
+                                [
+                                    'class' => 'btn btn-success',
+                                    'data' => [
+                                        'method' => 'post',
+                                    ],
+
+                                ]
+                            );
+                        } else {
+                            return Html::a('Bloquear', [
+                                Url::to('usuarios-bloqueados/bloquear'),
+                                'id' => $model->id,
+
+                            ],
+                                [
+                                    'class' => 'btn btn-danger',
+                                ]
+                            );
+                        }
+                    }
+                ],
                 ['class' => 'yii\grid\ActionColumn'],
             ],
         ]); ?>

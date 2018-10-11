@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use function var_dump;
 use Yii;
 use yii\web\IdentityInterface;
 use juliardi\captcha\CaptchaValidator;
@@ -375,7 +376,12 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        return $this->auth_key === $authKey;
+        // COMPROBAR SI ESTÁ BLOQUEADO
+        if (! $this->usuarioBloqueado) {
+            return $this->auth_key === $authKey;
+        }
+
+        return false;
     }
 
     /**
@@ -386,9 +392,25 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        return Yii::$app->security->validatePassword(
-            $password,
-            $this->password
-        );
+        if (! $this->usuarioBloqueado) {
+            return Yii::$app->security->validatePassword(
+                $password,
+                $this->password
+            );
+        }
+
+        return false;
+    }
+
+    /**
+     * Comprueba si el usuario está bloqueado.
+     *
+     * @return bool Será true si está bloqueado.
+     */
+    public function getUsuarioBloqueado()
+    {
+        return UsuariosBloqueados::findOne([
+            'usuario_id' => $this->id,
+        ]) ? true : false;
     }
 }

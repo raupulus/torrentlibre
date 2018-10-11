@@ -2,12 +2,15 @@
 
 namespace app\controllers;
 
+use app\models\Usuarios;
+use redirect;
 use Yii;
 use app\models\UsuariosBloqueados;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * UsuariosBloqueadosController implements the CRUD actions for UsuariosBloqueados model.
@@ -26,8 +29,71 @@ class UsuariosBloqueadosController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['bloquear', 'desbloquear'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return  Yii::$app->getUser()->identity->rol === 'admin';
+                        }
+                    ],
+                ],
+            ],
         ];
     }
+
+    /**
+     * Bloquea el usuario recibido.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionBloquear($id)
+    {
+        if (!empty($id)) {
+            // Crear modelo de UsuariosBloqueados con la id de usuario recibida.
+            $model = new UsuariosBloqueados([
+                'usuario_id' => $id,
+            ]);
+        } else {
+            // responder mensaje de error flash
+            Yii::$app->session->setFlash('error',
+                'Error bloqueando usuario');
+        }
+
+        // Insertar una nueva entrada para este usuario en UsuariosBloqueados
+        if ((!empty($model->usuario_id)) && ($model->save())) {
+            Yii::$app->session->setFlash('success',
+                'Se ha bloqueando el usuario correctamente');
+            return $this->redirect(['usuarios/index']);
+        }
+
+        return $this->redirect(['usuarios/index']);
+    }
+
+    /**
+     * Desbloquea el usuario recibido.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDesbloquear($id)
+    {
+        if (!empty($id) && ($this->findModel($id)->delete())) {
+            Yii::$app->session->setFlash('success',
+                'Se ha desbloqueando el usuario correctamente');
+        } else {
+            Yii::$app->session->setFlash('error',
+                'Error al eliminar usuario');
+            return $this->redirect(['usuarios/index']);
+        }
+
+        return $this->redirect(['usuarios/index']);
+    }
+
 
     /**
      * Lists all UsuariosBloqueados models.
