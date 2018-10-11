@@ -7,7 +7,10 @@ use app\models\Torrents;
 use app\models\TorrentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use app\models\Categorias;
+use app\models\Licencias;
 
 /**
  * TorrentsController implements the CRUD actions for Torrents model.
@@ -25,6 +28,17 @@ class TorrentsController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+
+            'access' => [
+            'class' => AccessControl::className(),
+            'only' => ['create', 'delete', 'update'],
+            'rules' => [
+                [
+                    'allow' => true,
+                    'roles' => ['@'],
+                ],
+            ],
             ],
         ];
     }
@@ -70,8 +84,13 @@ class TorrentsController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $licencias = Licencias::getAll();
+        $categorias = Categorias::getAll();
+
         return $this->render('create', [
             'model' => $model,
+            'licencias' => $licencias,
+            'categorias' => $categorias,
         ]);
     }
 
