@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\imagine\Image;
 
 /**
  * This is the model class for table "torrents".
@@ -39,6 +40,29 @@ use Yii;
 class Torrents extends \yii\db\ActiveRecord
 {
     /**
+     * Imagen subida mediante el formulario.
+     * @var \yii\web\UploadedFile
+     */
+    public $u_img;
+
+    /**
+     * Archivo torrent subido mediante el formulario.
+     * @var \yii\web\UploadedFile
+     *
+     */
+    public $u_torrent;
+
+    /**
+     * @const ESCENARIO_CREATE Constante para cuando estamos insertando
+     */
+    const ESCENARIO_CREATE = 'create';
+
+    /**
+     * @const ESCENARIO_UPDATE Constante para cuando estamos actualizando
+     */
+    const ESCENARIO_UPDATE = 'update';
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
@@ -66,17 +90,29 @@ class Torrents extends \yii\db\ActiveRecord
 
     /**
      * {@inheritdoc}
+     * @return array
+     */
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), [
+            'u_img',
+            'u_torrent',
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
-            'licencia_id' => 'Licencia ID',
-            'categoria_id' => 'Categoria ID',
-            'usuario_id' => 'Usuario ID',
-            'titulo' => 'Titulo',
+            'licencia_id' => 'Licencia',
+            'categoria_id' => 'Categoria',
+            'usuario_id' => 'Uploader',
+            'titulo' => 'Título',
             'resumen' => 'Resumen',
-            'descripcion' => 'Descripcion',
+            'descripcion' => 'Descripción',
             'imagen' => 'Imagen',
             'file' => 'File',
             'size' => 'Size',
@@ -87,6 +123,8 @@ class Torrents extends \yii\db\ActiveRecord
             'n_visitas' => 'N Visitas',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'u_img' => 'Imagen Portada',
+            'u_torrent' => 'Archivo Torrent',
         ];
     }
 
@@ -117,7 +155,7 @@ class Torrents extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuarios()
+    public function getPuntuadores()
     {
         return $this->hasMany(Usuarios::className(), ['id' => 'usuario_id'])->viaTable('puntos', ['torrent_id' => 'id']);
     }
@@ -125,7 +163,7 @@ class Torrents extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPuntuacionTorrents()
+    public function getPuntuacion()
     {
         return $this->hasMany(PuntuacionTorrents::className(), ['torrent_id' => 'id']);
     }
@@ -133,7 +171,7 @@ class Torrents extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getReportesTorrents()
+    public function getReportes()
     {
         return $this->hasMany(ReportesTorrents::className(), ['torrent_id' => 'id']);
     }
@@ -141,7 +179,7 @@ class Torrents extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuarios0()
+    public function getReportadores()
     {
         return $this->hasMany(Usuarios::className(), ['id' => 'usuario_id'])->viaTable('reportes_torrents', ['torrent_id' => 'id']);
     }
