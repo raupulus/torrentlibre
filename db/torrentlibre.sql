@@ -202,8 +202,8 @@ CREATE TABLE torrents (
   , magnet          VARCHAR(255)  -- Enlace magnet al torrent
   , password        VARCHAR(255)  -- Contraseña para descomprimir el torrent
   , md5             VARCHAR(255)  -- Verificación del .torrent
-  , n_descargas     BIGINT        DEFAULT 0  -- Cantidad de veces descargado
-  , n_visitas       BIGINT        DEFAULT 0  -- Cantidad de visitas
+  --, n_descargas     BIGINT        DEFAULT 0  -- Cantidad de veces descargado
+  --, n_visitas       BIGINT        DEFAULT 0  -- Cantidad de visitas
   --, online          BOOLEAN       DEFAULT TRUE -- Indica si es válido
   --, modificar       BOOLEAN  -- Indica si han solicitado modificación
   , created_at      TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
@@ -222,7 +222,7 @@ CREATE INDEX idx_torrents_categoria_id ON torrents (categoria_id);
 DROP TABLE IF EXISTS reportes_torrents CASCADE;
 
 /*
- * Listado de reportes realizados a torrents (Mal uso o caido)
+ * Listado de reportes realizados a torrents (Mal uso o caído)
  */
 CREATE TABLE reportes_torrents (
     id              BIGSERIAL     PRIMARY KEY

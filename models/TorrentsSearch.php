@@ -18,7 +18,7 @@ class TorrentsSearch extends Torrents
     public function rules()
     {
         return [
-            [['id', 'licencia_id', 'categoria_id', 'usuario_id', 'size', 'n_descargas', 'n_visitas'], 'integer'],
+            [['id', 'licencia_id', 'categoria_id', 'usuario_id', 'size',], 'integer'],
             [['titulo', 'resumen', 'descripcion', 'imagen', 'file', 'magnet', 'password', 'md5', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -64,8 +64,6 @@ class TorrentsSearch extends Torrents
             'categoria_id' => $this->categoria_id,
             'usuario_id' => $this->usuario_id,
             'size' => $this->size,
-            'n_descargas' => $this->n_descargas,
-            'n_visitas' => $this->n_visitas,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);

@@ -43,7 +43,6 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'n_descargas') ?>
 
-    <?php // echo $form->field($model, 'n_visitas') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 

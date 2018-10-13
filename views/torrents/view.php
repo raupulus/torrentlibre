@@ -42,8 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'magnet',
             'password',
             'md5',
-            'n_descargas',
-            'n_visitas',
             'created_at',
             'updated_at',
         ],

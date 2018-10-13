@@ -78,7 +78,9 @@ class TorrentsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Torrents();
+        $model = new Torrents([
+            'usuario_id' => Yii::$app->user->identity->id,
+        ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

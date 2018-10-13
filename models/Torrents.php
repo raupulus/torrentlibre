@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\imagine\Image;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "torrents".
@@ -21,8 +22,6 @@ use yii\imagine\Image;
  * @property string $magnet
  * @property string $password
  * @property string $md5
- * @property int $n_descargas
- * @property int $n_visitas
  * @property string $created_at
  * @property string $updated_at
  *
@@ -77,14 +76,22 @@ class Torrents extends \yii\db\ActiveRecord
     {
         return [
             [['licencia_id', 'categoria_id', 'usuario_id', 'titulo', 'resumen'], 'required'],
-            [['licencia_id', 'categoria_id', 'usuario_id', 'size', 'n_descargas', 'n_visitas'], 'default', 'value' => null],
-            [['licencia_id', 'categoria_id', 'usuario_id', 'size', 'n_descargas', 'n_visitas'], 'integer'],
+            [['licencia_id', 'categoria_id', 'usuario_id', 'size'], 'default', 'value' => null],
+            [['licencia_id', 'categoria_id', 'usuario_id', 'size'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['titulo', 'resumen', 'imagen', 'file', 'magnet', 'password', 'md5'], 'string', 'max' => 255],
             [['descripcion'], 'string', 'max' => 500],
             [['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::className(), 'targetAttribute' => ['categoria_id' => 'id']],
             [['licencia_id'], 'exist', 'skipOnError' => true, 'targetClass' => Licencias::className(), 'targetAttribute' => ['licencia_id' => 'id']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
+            [['u_img'], 'file', 'extensions' => 'png, jpg'],
+            [['u_torrent'], 'file', 'extensions' => 'torrent'],
+            /*
+            [
+                ['u_torrent'], 'required', 'on' => self::ESCENARIO_CREATE,
+                'message' => 'Es obligatorio agregar un Torrent válido'
+            ],
+            */
         ];
     }
 
@@ -119,14 +126,92 @@ class Torrents extends \yii\db\ActiveRecord
             'magnet' => 'Magnet',
             'password' => 'Password',
             'md5' => 'Md5',
-            'n_descargas' => 'N Descargas',
-            'n_visitas' => 'N Visitas',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'u_img' => 'Imagen Portada',
             'u_torrent' => 'Archivo Torrent',
         ];
     }
+
+    /**
+     * Sobreescribe el método personalizando la configuración
+     * @return array Devuelve la configuración
+     */
+    public function behaviors()
+    {
+        return [
+            // Creo un timestamp cada vez que salta el evento create
+            // o update asignando el timestamp actual
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ]
+        ];
+    }
+
+    /**
+     * Acciones llevadas a cabo antes de insertar un usuario
+     * @param bool $insert Acción a realizar, si existe está insertando
+     * @return bool Devuelve un booleano, si se lleva a cabo es true.
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                if ($this->scenario === self::ESCENARIO_UPDATE) {
+                    return true;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Sube la imagen al directorio correspondiente y devuelve si fue posible.
+     * El nombre se compone del "id-" seguido del nombre real de la imagen.
+     * @return bool Indica si se lleva la acción
+     */
+    public function uploadImg()
+    {
+        if ($this->u_img === null) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Sube la imagen al directorio correspondiente y devuelve si fue posible.
+     * El nombre se compone del "id-" seguido del nombre real de la imagen.
+     * @return bool Indica si se lleva la acción
+     */
+    public function uploadTorrent()
+    {
+        // Es obligatorio subir un torrent
+        if ($this->u_torrent === null) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function aumentarDescargas()
+    {
+        return true;
+    }
+
+    public function aumentarVisitas()
+    {
+        return true;
+    }
+
+    public function getVisitas()
+    {
+        return true;
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery
