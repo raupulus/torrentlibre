@@ -189,25 +189,30 @@ DROP TABLE IF EXISTS torrents CASCADE;
  * Información sobre los torrents
  */
 CREATE TABLE torrents (
-    id              BIGSERIAL     PRIMARY KEY
-  , licencia_id     BIGINT        NOT NULL REFERENCES licencias (id)
-  , categoria_id    BIGINT        NOT NULL REFERENCES categorias (id)
-  , usuario_id      BIGINT        NOT NULL REFERENCES usuarios (id)
-  , titulo          VARCHAR(255)  NOT NULL
-  , resumen         VARCHAR(255)  NOT NULL
-  , descripcion     VARCHAR(500)
-  , imagen          VARCHAR(255)
-  , file            VARCHAR(255)  -- Archivo .torrent
-  , size            INTEGER       -- Tamaño ocupado en KB
-  , magnet          VARCHAR(255)  -- Enlace magnet al torrent
-  , password        VARCHAR(255)  -- Contraseña para descomprimir el torrent
-  , md5             VARCHAR(255)  -- Verificación del .torrent
+    id                BIGSERIAL     PRIMARY KEY
+  , licencia_id       BIGINT        NOT NULL REFERENCES licencias (id)
+  , categoria_id      BIGINT        NOT NULL REFERENCES categorias (id)
+  , usuario_id        BIGINT        NOT NULL REFERENCES usuarios (id)
+  , titulo            VARCHAR(255)  NOT NULL
+  , resumen           VARCHAR(255)  NOT NULL
+  , descripcion       VARCHAR(500)
+  , imagen            VARCHAR(255)
+  , hash              VARCHAR(255)  -- Hashinfo codificada para generar torrent
+  , size              BIGINT        -- Tamaño ocupado
+  , n_piezas          NUMERIC
+  , size_piezas       NUMERIC
+  , archivos          VARCHAR
+  , password          VARCHAR(255)  -- Contraseña para descomprimir el torrent
+  , created_at        TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
+  , torrentcreate_at  TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
+  , updated_at        TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP  --, magnet
+  --   VARCHAR(255)  -- Enlace magnet al torrent
+  --, file            VARCHAR(255)  -- Archivo .torrent
+  --, md5             VARCHAR(255)  -- Verificación del .torrent
   --, n_descargas     BIGINT        DEFAULT 0  -- Cantidad de veces descargado
   --, n_visitas       BIGINT        DEFAULT 0  -- Cantidad de visitas
   --, online          BOOLEAN       DEFAULT TRUE -- Indica si es válido
   --, modificar       BOOLEAN  -- Indica si han solicitado modificación
-  , created_at      TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
-  , updated_at      TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
 );
 
 -- Este indexado no vale para buscar por ilike

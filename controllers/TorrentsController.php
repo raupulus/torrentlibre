@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 use app\models\Categorias;
 use app\models\Licencias;
 use yii\web\UploadedFile;
-//use vendor\coldwinds\torrent-rw;
+use Devristo\Torrent\Torrent;
 
 /**
  * TorrentsController implements the CRUD actions for Torrents model.
@@ -90,17 +90,25 @@ class TorrentsController extends Controller
 
             // Es obligatorio que haya un torrent para continuar
             if ($model->u_torrent !== null) {
-                $nombre = $model->u_torrent->baseName . '.' .
-                          $model->u_torrent->extension;
-                $model->md5 = md5_file($model->u_torrent->tempName);
-                $model->file = $model->md5 . '-' . $nombre;
+                $tempname = $model->u_torrent->tempName;
+                $torrent = Torrent::fromFile($tempname);
 
-                //$torrent = new Torrent( './test.torrent' );
+                $piezas = $torrent->getNumPieces();  // Número total de piezas
+                $sizePiezas = $torrent->getPieceSize();  // Tamaño de cada pieza
+                $archivos = $torrent->getFiles();  // Array con los archivos
+                $creado = $torrent->getCreationDate()->format('Y-m-d H-m-i');  // Fecha del torrent
 
-                /// Guardo modelo y subo archivos
-                if ($model->save() &&
-                    $model->uploadTorrent())
-                {
+                // Modifico valores del torrent
+                $torrent->setName($model->titulo);
+                $torrent->setPrivate(false);
+                $torrent->setComment($model->descripcion);
+
+                $model->size = $torrent->getSize(false);
+                //$model->hash = $torrent->getInfoHash(false);
+                //$model->magnet = 'magnet:?xt=urn:'.$torrent->getInfoHash(false);
+
+                // Guardo modelo y subo archivos
+                if ($model->save()) {
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             } else {

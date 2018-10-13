@@ -19,7 +19,7 @@
         "yiisoft/yii2-bootstrap": "^2.0.0",
         "yiisoft/yii2-swiftmailer": "^2.1.0",
         "juliardi/yii2-captcha": "*",
-        "coldwinds/torrent-rw": "^1.1"
+        "devristo/torrent": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "^2.0.0",
@@ -83,6 +83,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/ricpelo/yii2-apidoc"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Devristo/torrent"
         }
     ]
 }

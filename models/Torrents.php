@@ -17,11 +17,8 @@ use yii\db\Expression;
  * @property string $resumen
  * @property string $descripcion
  * @property string $imagen
- * @property string $file
  * @property int $size
- * @property string $magnet
  * @property string $password
- * @property string $md5
  * @property string $created_at
  * @property string $updated_at
  *
@@ -79,7 +76,7 @@ class Torrents extends \yii\db\ActiveRecord
             [['licencia_id', 'categoria_id', 'usuario_id', 'size'], 'default', 'value' => null],
             [['licencia_id', 'categoria_id', 'usuario_id', 'size'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['titulo', 'resumen', 'imagen', 'file', 'magnet', 'password', 'md5'], 'string', 'max' => 255],
+            [['titulo', 'resumen', 'imagen', 'password'], 'string', 'max' => 255],
             [['descripcion'], 'string', 'max' => 500],
             [['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::className(), 'targetAttribute' => ['categoria_id' => 'id']],
             [['licencia_id'], 'exist', 'skipOnError' => true, 'targetClass' => Licencias::className(), 'targetAttribute' => ['licencia_id' => 'id']],
@@ -119,11 +116,9 @@ class Torrents extends \yii\db\ActiveRecord
             'resumen' => 'Resumen',
             'descripcion' => 'Descripción',
             'imagen' => 'Imagen',
-            'file' => 'File',
             'size' => 'Size',
-            'magnet' => 'Magnet',
             'password' => 'Password',
-            'md5' => 'Md5',
+            'hash' => 'Hash',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'u_img' => 'Imagen Portada',
@@ -178,28 +173,6 @@ class Torrents extends \yii\db\ActiveRecord
             return false;
         }
         return true;
-    }
-
-    /**
-     * Sube la imagen al directorio correspondiente y devuelve si fue posible.
-     * El nombre se compone del "id-" seguido del nombre real de la imagen.
-     * @return bool Indica si se lleva la acción
-     */
-    public function uploadTorrent()
-    {
-        // Es obligatorio subir un torrent
-        if ($this->u_torrent === null) {
-            Yii::$app->session->setFlash('error', 'Es obligatorio el archivo torrent');
-            return false;
-        }
-
-        $nombre = $this->md5 . '-' .
-            $this->u_torrent->baseName . '.' .
-            $this->u_torrent->extension;
-
-        $rutaSave = Yii::getAlias('@r_torrents/') . $nombre;
-        $res = $this->u_torrent->saveAs($rutaSave);
-        return $res;
     }
 
     public function aumentarDescargas()

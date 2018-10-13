@@ -19,7 +19,7 @@ class TorrentsSearch extends Torrents
     {
         return [
             [['id', 'licencia_id', 'categoria_id', 'usuario_id', 'size',], 'integer'],
-            [['titulo', 'resumen', 'descripcion', 'imagen', 'file', 'magnet', 'password', 'md5', 'created_at', 'updated_at'], 'safe'],
+            [['titulo', 'resumen', 'descripcion', 'imagen', 'password', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -72,10 +72,7 @@ class TorrentsSearch extends Torrents
             ->andFilterWhere(['ilike', 'resumen', $this->resumen])
             ->andFilterWhere(['ilike', 'descripcion', $this->descripcion])
             ->andFilterWhere(['ilike', 'imagen', $this->imagen])
-            ->andFilterWhere(['ilike', 'file', $this->file])
-            ->andFilterWhere(['ilike', 'magnet', $this->magnet])
-            ->andFilterWhere(['ilike', 'password', $this->password])
-            ->andFilterWhere(['ilike', 'md5', $this->md5]);
+            ->andFilterWhere(['ilike', 'password', $this->password]);
 
         return $dataProvider;
     }
