@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\imagine\Image;
 use yii\db\Expression;
 
 /**
@@ -16,20 +17,16 @@ use yii\db\Expression;
  * @property string $resumen
  * @property string $descripcion
  * @property string $imagen
- * @property string $hash
  * @property int $size
- * @property string $n_piezas
- * @property string $size_piezas
- * @property string $archivos
  * @property string $password
  * @property string $created_at
- * @property string $torrentcreate_at
  * @property string $updated_at
  *
  * @property Comentarios[] $comentarios
  * @property Descargas[] $descargas
- * @property PuntuacionTorrents[] $puntuacionTorrents
+ * @property Puntos[] $puntos
  * @property Usuarios[] $usuarios
+ * @property PuntuacionTorrents[] $puntuacionTorrents
  * @property ReportesTorrents[] $reportesTorrents
  * @property Usuarios[] $usuarios0
  * @property Categorias $categoria
@@ -78,10 +75,8 @@ class Torrents extends \yii\db\ActiveRecord
             [['licencia_id', 'categoria_id', 'usuario_id', 'titulo', 'resumen'], 'required'],
             [['licencia_id', 'categoria_id', 'usuario_id', 'size'], 'default', 'value' => null],
             [['licencia_id', 'categoria_id', 'usuario_id', 'size'], 'integer'],
-            [['n_piezas', 'size_piezas'], 'number'],
-            [['archivos'], 'string'],
-            [['created_at', 'torrentcreate_at', 'updated_at'], 'safe'],
-            [['titulo', 'resumen', 'imagen', 'hash', 'password'], 'string', 'max' => 255],
+            [['created_at', 'updated_at'], 'safe'],
+            [['titulo', 'resumen', 'imagen', 'password'], 'string', 'max' => 255],
             [['descripcion'], 'string', 'max' => 500],
             [['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::className(), 'targetAttribute' => ['categoria_id' => 'id']],
             [['licencia_id'], 'exist', 'skipOnError' => true, 'targetClass' => Licencias::className(), 'targetAttribute' => ['licencia_id' => 'id']],
@@ -93,6 +88,18 @@ class Torrents extends \yii\db\ActiveRecord
                 'message' => 'Es obligatorio agregar un Torrent válido'
             ],
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return array
+     */
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), [
+            'u_img',
+            'u_torrent',
+        ]);
     }
 
     /**
@@ -109,15 +116,11 @@ class Torrents extends \yii\db\ActiveRecord
             'resumen' => 'Resumen',
             'descripcion' => 'Descripción',
             'imagen' => 'Imagen',
-            'hash' => 'Hash',
-            'size' => 'Tamaño',
-            'n_piezas' => 'Cantidad de Piezas',
-            'size_piezas' => 'Tamaño de Piezas',
-            'archivos' => 'Archivos del Torrent',
+            'size' => 'Size',
             'password' => 'Password',
-            'created_at' => 'Creado en',
-            'torrentcreate_at' => 'Torrent creado en',
-            'updated_at' => 'Actualizado en',
+            'hash' => 'Hash',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
             'u_img' => 'Imagen Portada',
             'u_torrent' => 'Archivo Torrent',
         ];
@@ -142,7 +145,7 @@ class Torrents extends \yii\db\ActiveRecord
     }
 
     /**
-     * Acciones llevadas a cabo antes de insertar un torrent
+     * Acciones llevadas a cabo antes de insertar un usuario
      * @param bool $insert Acción a realizar, si existe está insertando
      * @return bool Devuelve un booleano, si se lleva a cabo es true.
      */
@@ -187,6 +190,7 @@ class Torrents extends \yii\db\ActiveRecord
         return true;
     }
 
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -200,7 +204,7 @@ class Torrents extends \yii\db\ActiveRecord
      */
     public function getDescargas()
     {
-        return $this->hasMany(Descargas::className(), ['torrent_id' => 'id']);
+        return $this->hasMany(Descargas::className(), ['torrent' => 'id']);
     }
 
     /**
@@ -208,7 +212,7 @@ class Torrents extends \yii\db\ActiveRecord
      */
     public function getPuntos()
     {
-        return $this->hasMany(PuntuacionTorrents::className(), ['torrent_id' => 'id']);
+        return $this->hasMany(Puntos::className(), ['torrent_id' => 'id']);
     }
 
     /**
@@ -216,7 +220,15 @@ class Torrents extends \yii\db\ActiveRecord
      */
     public function getPuntuadores()
     {
-        return $this->hasMany(Usuarios::className(), ['id' => 'usuario_id'])->viaTable('puntuacion_torrents', ['torrent_id' => 'id']);
+        return $this->hasMany(Usuarios::className(), ['id' => 'usuario_id'])->viaTable('puntos', ['torrent_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPuntuacion()
+    {
+        return $this->hasMany(PuntuacionTorrents::className(), ['torrent_id' => 'id']);
     }
 
     /**

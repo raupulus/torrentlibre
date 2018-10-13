@@ -2,12 +2,13 @@
 
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Torrents;
 
 /**
- * TorrentsSearch represents the model behind the search form of `\app\models\Torrents`.
+ * TorrentsSearch represents the model behind the search form of `app\models\Torrents`.
  */
 class TorrentsSearch extends Torrents
 {
@@ -17,9 +18,8 @@ class TorrentsSearch extends Torrents
     public function rules()
     {
         return [
-            [['id', 'licencia_id', 'categoria_id', 'usuario_id', 'size'], 'integer'],
-            [['titulo', 'resumen', 'descripcion', 'imagen', 'hash', 'archivos', 'password', 'created_at', 'torrentcreate_at', 'updated_at'], 'safe'],
-            [['n_piezas', 'size_piezas'], 'number'],
+            [['id', 'licencia_id', 'categoria_id', 'usuario_id', 'size',], 'integer'],
+            [['titulo', 'resumen', 'descripcion', 'imagen', 'password', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -64,10 +64,7 @@ class TorrentsSearch extends Torrents
             'categoria_id' => $this->categoria_id,
             'usuario_id' => $this->usuario_id,
             'size' => $this->size,
-            'n_piezas' => $this->n_piezas,
-            'size_piezas' => $this->size_piezas,
             'created_at' => $this->created_at,
-            'torrentcreate_at' => $this->torrentcreate_at,
             'updated_at' => $this->updated_at,
         ]);
 
@@ -75,8 +72,6 @@ class TorrentsSearch extends Torrents
             ->andFilterWhere(['ilike', 'resumen', $this->resumen])
             ->andFilterWhere(['ilike', 'descripcion', $this->descripcion])
             ->andFilterWhere(['ilike', 'imagen', $this->imagen])
-            ->andFilterWhere(['ilike', 'hash', $this->hash])
-            ->andFilterWhere(['ilike', 'archivos', $this->archivos])
             ->andFilterWhere(['ilike', 'password', $this->password]);
 
         return $dataProvider;

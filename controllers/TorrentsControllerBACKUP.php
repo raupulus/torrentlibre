@@ -31,15 +31,16 @@ class TorrentsController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+
             'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['create', 'delete', 'update'],
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
+            'class' => AccessControl::className(),
+            'only' => ['create', 'delete', 'update'],
+            'rules' => [
+                [
+                    'allow' => true,
+                    'roles' => ['@'],
                 ],
+            ],
             ],
         ];
     }
@@ -89,20 +90,24 @@ class TorrentsController extends Controller
 
             // Es obligatorio que haya un torrent para continuar
             if ($model->u_torrent !== null) {
-                $torrent = Torrent::fromFile($model->u_torrent->tempName);
-                $model->n_piezas = $torrent->getNumPieces();
-                $model->size_piezas = $torrent->getPieceSize();
-                $model->torrentcreate_at = $torrent->getCreationDate()
-                                            ->format('Y-m-d H:m:i');
-                $model->size = $torrent->getSize(false);
-                $model->hash = $torrent->getInfoHash(false);
-                $model->archivos = implode($torrent->getFiles());
+                $tempname = $model->u_torrent->tempName;
+                $torrent = Torrent::fromFile($tempname);
+
+                $piezas = $torrent->getNumPieces();  // Número total de piezas
+                $sizePiezas = $torrent->getPieceSize();  // Tamaño de cada pieza
+                $archivos = $torrent->getFiles();  // Array con los archivos
+                $creado = $torrent->getCreationDate()->format('Y-m-d H-m-i');  // Fecha del torrent
 
                 // Modifico valores del torrent
                 $torrent->setName($model->titulo);
                 $torrent->setPrivate(false);
                 $torrent->setComment($model->descripcion);
 
+                $model->size = $torrent->getSize(false);
+                //$model->hash = $torrent->getInfoHash(false);
+                //$model->magnet = 'magnet:?xt=urn:'.$torrent->getInfoHash(false);
+
+                // Guardo modelo y subo archivos
                 if ($model->save()) {
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
