@@ -86,12 +86,10 @@ class Torrents extends \yii\db\ActiveRecord
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
             [['u_img'], 'file', 'extensions' => 'png, jpg'],
             [['u_torrent'], 'file', 'extensions' => 'torrent'],
-            /*
             [
                 ['u_torrent'], 'required', 'on' => self::ESCENARIO_CREATE,
                 'message' => 'Es obligatorio agregar un Torrent válido'
             ],
-            */
         ];
     }
 
@@ -115,7 +113,7 @@ class Torrents extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'licencia_id' => 'Licencia',
-            'categoria_id' => 'Categoria',
+            'categoria_id' => 'Categoría',
             'usuario_id' => 'Uploader',
             'titulo' => 'Título',
             'resumen' => 'Resumen',
@@ -191,10 +189,17 @@ class Torrents extends \yii\db\ActiveRecord
     {
         // Es obligatorio subir un torrent
         if ($this->u_torrent === null) {
+            Yii::$app->session->setFlash('error', 'Es obligatorio el archivo torrent');
             return false;
         }
 
-        return true;
+        $nombre = $this->md5 . '-' .
+            $this->u_torrent->baseName . '.' .
+            $this->u_torrent->extension;
+
+        $rutaSave = Yii::getAlias('@r_torrents/') . $nombre;
+        $res = $this->u_torrent->saveAs($rutaSave);
+        return $res;
     }
 
     public function aumentarDescargas()

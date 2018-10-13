@@ -11,6 +11,8 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use app\models\Categorias;
 use app\models\Licencias;
+use yii\web\UploadedFile;
+//use vendor\coldwinds\torrent-rw;
 
 /**
  * TorrentsController implements the CRUD actions for Torrents model.
@@ -82,8 +84,30 @@ class TorrentsController extends Controller
             'usuario_id' => Yii::$app->user->identity->id,
         ]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        // En el caso de existir datos mediante POST los proceso
+        if ($model->load(Yii::$app->request->post())) {
+            $model->u_torrent = UploadedFile::getInstance($model, 'u_torrent');
+
+            // Es obligatorio que haya un torrent para continuar
+            if ($model->u_torrent !== null) {
+                $nombre = $model->u_torrent->baseName . '.' .
+                          $model->u_torrent->extension;
+                $model->md5 = md5_file($model->u_torrent->tempName);
+                $model->file = $model->md5 . '-' . $nombre;
+
+                //$torrent = new Torrent( './test.torrent' );
+
+                /// Guardo modelo y subo archivos
+                if ($model->save() &&
+                    $model->uploadTorrent())
+                {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } else {
+                Yii::$app->session->setFlash('error', 'Es obligatorio el archivo torrent');
+                $model->addError('u_torrent',
+                    'Es obligatorio agregar un Torrent válido');
+            }
         }
 
         $licencias = Licencias::getAll();
