@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Comentarios;
+use app\models\Torrents;
 
 /**
- * ComentariosSearch represents the model behind the search form of `app\models\Comentarios`.
+ * TorrentsSearch represents the model behind the search form of `app\models\Torrents`.
  */
-class ComentariosSearch extends Comentarios
+class TorrentsSearch extends Torrents
 {
     /**
      * {@inheritdoc}
@@ -18,9 +18,8 @@ class ComentariosSearch extends Comentarios
     public function rules()
     {
         return [
-            [['id', 'usuario_id', 'torrent_id', 'comentario_id'], 'integer'],
-            [['contenido', 'created_at', 'updated_at'], 'safe'],
-            [['deleted'], 'boolean'],
+            [['id', 'licencia_id', 'categoria_id', 'usuario_id', 'size',], 'integer'],
+            [['titulo', 'resumen', 'descripcion', 'imagen', 'password', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -42,7 +41,7 @@ class ComentariosSearch extends Comentarios
      */
     public function search($params)
     {
-        $query = Comentarios::find();
+        $query = Torrents::find();
 
         // add conditions that should always apply here
 
@@ -61,15 +60,19 @@ class ComentariosSearch extends Comentarios
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'licencia_id' => $this->licencia_id,
+            'categoria_id' => $this->categoria_id,
             'usuario_id' => $this->usuario_id,
-            'torrent_id' => $this->torrent_id,
-            'comentario_id' => $this->comentario_id,
+            'size' => $this->size,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'deleted' => $this->deleted,
         ]);
 
-        $query->andFilterWhere(['ilike', 'contenido', $this->contenido]);
+        $query->andFilterWhere(['ilike', 'titulo', $this->titulo])
+            ->andFilterWhere(['ilike', 'resumen', $this->resumen])
+            ->andFilterWhere(['ilike', 'descripcion', $this->descripcion])
+            ->andFilterWhere(['ilike', 'imagen', $this->imagen])
+            ->andFilterWhere(['ilike', 'password', $this->password]);
 
         return $dataProvider;
     }

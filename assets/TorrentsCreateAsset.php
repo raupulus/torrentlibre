@@ -11,21 +11,20 @@ namespace app\assets;
 use yii\web\AssetBundle;
 
 /**
- * Assets para vistas de Usuarios
+ * Assets para vista al crear Torrents
  */
-class UsuariosViewAsset extends AssetBundle
+class TorrentsCreateAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/usuarios/view.css',
+        'css/torrents/create.css',
     ];
     public $js = [
-        'js/usuarios/view.js',
+        'js/torrents/create.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'app\assets\AppAsset',
     ];
 }

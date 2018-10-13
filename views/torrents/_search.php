@@ -31,21 +31,21 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'imagen') ?>
 
-    <?php // echo $form->field($model, 'file') ?>
+    <?php // echo $form->field($model, 'hash') ?>
 
     <?php // echo $form->field($model, 'size') ?>
 
-    <?php // echo $form->field($model, 'magnet') ?>
+    <?php // echo $form->field($model, 'n_piezas') ?>
+
+    <?php // echo $form->field($model, 'size_piezas') ?>
+
+    <?php // echo $form->field($model, 'archivos') ?>
 
     <?php // echo $form->field($model, 'password') ?>
 
-    <?php // echo $form->field($model, 'md5') ?>
-
-    <?php // echo $form->field($model, 'n_descargas') ?>
-
-    <?php // echo $form->field($model, 'n_visitas') ?>
-
     <?php // echo $form->field($model, 'created_at') ?>
+
+    <?php // echo $form->field($model, 'torrentcreate_at') ?>
 
     <?php // echo $form->field($model, 'updated_at') ?>
 

@@ -178,7 +178,7 @@ INSERT INTO categorias (nombre, descripcion) VALUES
 --                   TORRENTS                    --
 ---------------------------------------------------
 INSERT INTO torrents (licencia_id, categoria_id, usuario_id, titulo, resumen,
-                      descripcion, imagen, file, size, md5, magnet)
+                      descripcion, imagen, size, hash)
 VALUES
   (
       1
@@ -188,10 +188,8 @@ VALUES
     , 'Descripción corta del torrent de prueba'
     , 'Descripción larga donde se explica a fondo el torrent y su contenido'
     , 'torrent1.jpg'
-    , 'torrent1.torrent'
     , 1024
     , '1da569f68f3b3c472caafec432c569f0'
-    , 'magnet:xxxxxxxxxxxxxxx'
   )
 
   , (
@@ -202,10 +200,8 @@ VALUES
     , 'Descripción corta del torrent de prueba'
     , 'Descripción larga donde se explica a fondo el torrent y su contenido'
     , 'torrent2.jpg'
-    , 'torrent1.torrent'
     , 1024
     , '1da569f68f3b3c472caafec432c569f1'
-    , 'magnet:xxxxxxxxxxxxxxy'
   )
 
   , (
@@ -216,10 +212,8 @@ VALUES
     , 'Descripción corta del torrent de prueba'
     , 'Descripción larga donde se explica a fondo el torrent y su contenido'
     , 'torrent3.jpg'
-    , 'torrent1.torrent'
     , 1024
     , '1da569f68f3b3c472caafec432c569f2'
-    , 'magnet:xxxxxxxxxxxxxxz'
   )
 
   , (
@@ -230,10 +224,8 @@ VALUES
     , 'Descripción corta del torrent de prueba'
     , 'Descripción larga donde se explica a fondo el torrent y su contenido'
     , 'torrent4.jpg'
-    , 'torrent1.torrent'
     , 1024
     , '1da569f68f3b3c472caafec432c569f3'
-    , 'magnet:xxxxxxxxxxxxxxz'
   )
 
   , (
@@ -244,10 +236,8 @@ VALUES
     , 'Descripción corta del torrent de prueba'
     , 'Descripción larga donde se explica a fondo el torrent y su contenido'
     , 'torrent5.jpg'
-    , 'torrent1.torrent'
     , 1024
     , '1da569f68f3b3c472caafec432c569f4'
-    , 'magnet:xxxxxxxxxxxxxxz'
   )
 
   , (
@@ -258,10 +248,8 @@ VALUES
     , 'Descripción corta del torrent de prueba'
     , 'Descripción larga donde se explica a fondo el torrent y su contenido'
     , 'torrent6.jpg'
-    , 'torrent1.torrent'
     , 1024
     , '1da569f68f3b3c472caafec432c569f5'
-    , 'magnet:xxxxxxxxxxxxxxz'
   )
 
   , (
@@ -272,10 +260,8 @@ VALUES
     , 'Descripción corta del torrent de prueba'
     , 'Descripción larga donde se explica a fondo el torrent y su contenido'
     , 'torrent7.jpg'
-    , 'torrent1.torrent'
     , 1024
     , '1da569f68f3b3c472caafec432c569f6'
-    , 'magnet:xxxxxxxxxxxxxxz'
   )
 
   , (
@@ -286,10 +272,8 @@ VALUES
     , 'Descripción corta del torrent de prueba'
     , 'Descripción larga donde se explica a fondo el torrent y su contenido'
     , 'torrent8.jpg'
-    , 'torrent1.torrent'
     , 1024
     , '1da569f68f3b3c472caafec432c569f7'
-    , 'magnet:xxxxxxxxxxxxxxz'
 )
 
   , (
@@ -300,10 +284,8 @@ VALUES
     , 'Descripción corta del torrent de prueba'
     , 'Descripción larga donde se explica a fondo el torrent y su contenido'
     , 'torrent1.jpg'
-    , 'torrent1.torrent'
     , 1024
     , '1da569f68f3b3c472caafec432c569f8'
-    , 'magnet:xxxxxxxxxxxxxxz'
   )
 
   , (
@@ -314,10 +296,8 @@ VALUES
     , 'Descripción corta del torrent de prueba'
     , 'Descripción larga donde se explica a fondo el torrent y su contenido'
     , 'torrent1.jpg'
-    , 'torrent1.torrent'
     , 1024
     , '1da569f68f3b3c472caafec432c569f9'
-    , 'magnet:xxxxxxxxxxxxxxz'
   )
 
   , (
@@ -328,10 +308,8 @@ VALUES
     , 'Descripción corta del torrent de prueba'
     , 'Descripción larga donde se explica a fondo el torrent y su contenido'
     , 'torrent1.jpg'
-    , 'torrent1.torrent'
     , 1024
     , '1da569f68f3b3c472caafec432c56910'
-    , 'magnet:xxxxxxxxxxxxxxz'
   )
 ;
 

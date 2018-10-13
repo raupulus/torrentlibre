@@ -11,9 +11,11 @@ use app\assets\UsuariosCreateAsset;
 use app\models\Usuarios;
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
+
+// Registro assets para esta vista
+UsuariosCreateAsset::register($this);
 
 $this->title = Yii::t('usuarios-create', 'title');
 $this->params['breadcrumbs'][] = [
@@ -22,8 +24,7 @@ $this->params['breadcrumbs'][] = [
 ];
 $this->params['breadcrumbs'][] = $this->title;
 
-// Registro assets para esta vista
-UsuariosCreateAsset::register($this);
+
 ?>
 
 <?= Yii::$app->session->getFlash('error'); ?>
