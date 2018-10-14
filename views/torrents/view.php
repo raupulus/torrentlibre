@@ -11,7 +11,7 @@ use yii\helpers\Url;
 // Registro assets para esta vista
 TorrentsViewAsset::register($this);
 
-$this->title = $model->id;
+$this->title = $model->titulo;
 $this->params['breadcrumbs'][] = ['label' => 'Torrents', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -20,25 +20,32 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
     <?= DetailView::widget([
         'model' => $model,
+        'options' => [
+            'id' => 'tabletorrentview',
+            'class' => [
+                'table',
+                'table-striped',
+                'table-bordered',
+                'detail-view',
+            ],
+        ],
         'attributes' => [
             //'id',
-            'titulo',
-
             [
                 'attribute' => 'imagen',
+                'label' => false,
+                'labelColOptions' => ['hidden' => true],
+                'captionOptions' => ['class' => 'labelhidden'],
+                'contentOptions' => [
+                    'class' => [
+                        'text-center',
+                        'imagenportada',
+                        'col-sm-6'
+                    ],
+                    'colspan' => 2,
+                ],
                 'format' => 'raw',
                 'value' => function($model) {
                     $img = $model->imagen;
@@ -51,22 +58,67 @@ $this->params['breadcrumbs'][] = $this->title;
                     return '<img src="'.$ruta.$img.'" />';
                 }
             ],
-            'licencia_id',
-            'categoria_id',
-            'usuario_id',
-            'resumen',
+            [
+                'attribute' => 'resumen',
+                'label' => false,
+                'labelColOptions' => ['hidden' => true],
+                'captionOptions' => ['class' => 'labelhidden'],
+                'contentOptions' => [
+                    'class' => [
+                        'resumen'
+                    ],
+                    'colspan' => 2,
+                ],
+            ],
+            'licencia.tipo:text:Licencia',
+            'categoria.nombre:text:Categoría',
+            'usuario.nick:text:Uploader',
             'descripcion',
-            'imagen',
-            'hash',
-            'size',
+            [
+                'format' => 'raw',
+                'label' => false,
+                'labelColOptions' => ['hidden' => true],
+                'captionOptions' => ['class' => 'labelhidden'],
+                'contentOptions' => [
+                    'class' => [
+                        'magnet',
+                        'text-center',
+                    ],
+                    'colspan' => 2,
+                ],
+                'value' => function($model) {
+                    $r = '<img src="/images/icons/magnet.png"';
+                    $r .= 'alt="Copy Magnet to clipboard" id="copymagnet" />';
+                    $r .= 'magnet:?xt=urn:btih:' . $model->hash . '<br /><br />';
+                    $r .= '<a href="#" title="Descargar '. $model->titulo. '"';
+                    $r .= 'class="btn btn-success col-sm-12">';
+                    $r .= 'Descargar Torrent</a>';
+                    return $r;
+                }
+            ],
+            'size:shortSize',
             'n_piezas',
-            'size_piezas',
+            'size_piezas:shortSize',
             'archivos',
-            'password',
-            'created_at',
-            'torrentcreate_at',
-            'updated_at',
+            [
+                'attribute' => 'password',
+                'visible' => (!empty($model->password)),
+            ],
+            'created_at:datetime',
+            'torrentcreate_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 
+    <p>
+        <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => '¿Seguro que quieres eliminar este torrent?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
 </div>
