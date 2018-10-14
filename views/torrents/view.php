@@ -2,9 +2,14 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\assets\TorrentsViewAsset;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Torrents */
+
+// Registro assets para esta vista
+TorrentsViewAsset::register($this);
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Torrents', 'url' => ['index']];
@@ -29,11 +34,26 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
+            'titulo',
+
+            [
+                'attribute' => 'imagen',
+                'format' => 'raw',
+                'value' => function($model) {
+                    $img = $model->imagen;
+                    $ruta = Yii::$app->request->baseUrl . yii::getAlias('@r_imgTorrent').'/';
+
+                    if ((! isset($img)) || (! file_exists($ruta.$img))) {
+                        $img = 'default.png';
+                    }
+
+                    return '<img src="'.$ruta.$img.'" />';
+                }
+            ],
             'licencia_id',
             'categoria_id',
             'usuario_id',
-            'titulo',
             'resumen',
             'descripcion',
             'imagen',
