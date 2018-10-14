@@ -29,6 +29,10 @@
     cursor: pointer;
 }
 
+#magnet {
+    font-weight: bold;
+}
+
 #tabletorrentview .imagenportada {
 
 }

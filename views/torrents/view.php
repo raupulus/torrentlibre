@@ -89,10 +89,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     $r = '<img src="/images/icons/magnet.png"';
                     $r .= 'alt="Copy Magnet to clipboard" id="copymagnet" />';
+
+                    $r .= '<span id="magnet">';
                     $r .= 'magnet:?xt=urn:btih:' . $model->hash . '<br /><br />';
+                    $r .= '</span>';
+
                     $r .= '<a href="#" title="Descargar '. $model->titulo. '"';
                     $r .= 'class="btn btn-success col-sm-12">';
                     $r .= 'Descargar Torrent</a>';
+
                     return $r;
                 }
             ],
