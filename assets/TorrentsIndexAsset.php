@@ -13,15 +13,15 @@ use yii\web\AssetBundle;
 /**
  * Assets para vistas de Torrents
  */
-class TorrentsViewAsset extends AssetBundle
+class TorrentsIndexAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/torrents/view.css',
+        'css/torrents/index.css',
     ];
     public $js = [
-        'js/torrents/view.js',
+        'js/torrents/index.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
