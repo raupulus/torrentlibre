@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'categoria.nombre:text:Categoría',
             'usuario.nick:text:Uploader',
             'descripcion',
-            [
+            [ // Magnet
                 'format' => 'raw',
                 'label' => false,
                 'labelColOptions' => ['hidden' => true],
@@ -116,7 +116,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'size:shortSize',
             'n_piezas',
             'size_piezas:shortSize',
-            'archivos',
+            [
+                'attribute' => 'archivos',
+                'format' => 'raw',
+                'value' => function($model) {
+                    $archivos = explode(',', $model->archivos);
+                    $lista = '<ul class="listaArchivos">';
+                    foreach ($archivos as $archivo) {
+                        $lista .= '<li>'.$archivo.'</li>';
+                    }
+                    $lista .= '</ul>';
+
+                    return $lista;
+                }
+            ],
             [
                 'attribute' => 'password',
                 'visible' => (!empty($model->password)),

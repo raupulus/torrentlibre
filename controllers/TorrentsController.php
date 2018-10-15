@@ -99,7 +99,7 @@ class TorrentsController extends Controller
                                             ->format('Y-m-d H:m:i');
                 $model->size = $torrent->getSize(false);
                 $model->hash = $torrent->getInfoHash(false);
-                $model->archivos = implode($torrent->getFiles());
+                $model->archivos = implode(",", $torrent->getFiles());
 
                 // Modifico valores del torrent
                 $torrent->setName($model->titulo);
