@@ -87,16 +87,28 @@ $this->params['breadcrumbs'][] = $this->title;
                     'colspan' => 2,
                 ],
                 'value' => function($model) {
-                    $r = '<img src="/images/icons/magnet.png"';
-                    $r .= 'alt="Copy Magnet to clipboard" id="copymagnet" />';
+                    $magnet = 'magnet:?xt=urn:btih:' . $model->hash;
+                    $magnet .= '&dn='.urlencode($model->titulo);
 
-                    $r .= '<span id="magnet">';
-                    $r .= 'magnet:?xt=urn:btih:' . $model->hash . '<br /><br />';
-                    $r .= '</span>';
+                    $r = Html::img('/images/icons/magnet.png', [
+                        'id' => 'copymagnet',
+                        'alt' => 'Copy '.$model->titulo.' magnet to clipboard',
+                        'title' => 'Copy '.$model->titulo.' magnet to clipboard',
+                    ]);
 
-                    $r .= '<a href="#" title="Descargar '. $model->titulo. '"';
-                    $r .= 'class="btn btn-success col-sm-12">';
-                    $r .= 'Descargar Torrent</a>';
+                    $r .= '<a id="magnet" href='.$magnet.'>'.$magnet.'</a>';
+
+                    $r .= Html::a('Descargar Torrent',
+                        Url::to(['torrents/descargar',
+                            'id' => $model->id,
+                            'hash' => $model->hash,
+                        ]),
+                        [
+                            'title' => 'Descargar '.$model->titulo,
+                            'alt' => 'Descargar '.$model->titulo,
+                            'class' => 'btn btn-success col-sm-12',
+                        ]
+                    );
 
                     return $r;
                 }

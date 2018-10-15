@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use app\models\Torrents;use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -27,17 +27,19 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'resumen')->textarea(['maxlength' => true]) ?>
     </div>
 
+    <?php if ($model->scenario === Torrents::ESCENARIO_CREATE): ?>
     <div class="row col-sm-12">
         <?= $form->field($model, 'u_img')->fileInput() ?>
         <?= $form->field($model, 'u_torrent')->fileInput() ?>
     </div>
+    <?php endif ?>
 
     <div class="row col-sm-12">
         <?= $form->field($model, 'descripcion')->textarea(['maxlength' => true]) ?>
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Subir', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

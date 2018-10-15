@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use Bhutanio\BEncode\BEncode;
+use Devristo\Torrent\Bee;
+use function var_dump;
 use Yii;
 use app\models\Torrents;
 use app\models\TorrentsSearch;
@@ -113,6 +116,8 @@ class TorrentsController extends Controller
             }
         }
 
+        $model->scenario = Torrents::ESCENARIO_CREATE;
+
         $licencias = Licencias::getAll();
         $categorias = Categorias::getAll();
 
@@ -138,9 +143,47 @@ class TorrentsController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $model->scenario = Torrents::ESCENARIO_UPDATE;
+
+        $licencias = Licencias::getAll();
+        $categorias = Categorias::getAll();
+
         return $this->render('update', [
             'model' => $model,
+            'licencias' => $licencias,
+            'categorias' => $categorias,
         ]);
+    }
+
+    /**
+     * Convierte el enlace hash del magnet recibido en un archivo torrent
+     * @param $hash
+     */
+    public function actionDescargar($id, $hash)
+    {
+        $bcoder = new BEncode;
+        $bcoder->set([
+            'announce'=>'http://www.private-tracker.com',
+            'comment'=>'Downloaded from Private Tracker',
+            'created_by'=>'PrivateTracker v1.0',
+            'hash' =>'c7c7f829f48653bfd0ab0a4f896bdc2e8bee0a91',
+        ]);
+
+
+
+
+        //die();
+        /*
+        $torrent = $bcoder->bencode(
+            [
+                ['c7c7f829f48653bfd0ab0a4f896bdc2e8bee0a91&dn=asdasdasd']
+        ]);
+        */
+
+        //print_r($bcoder->bdecode(['info']['infohash']));
+        //echo $bcoder->bencode($torrent);
+
+        //var_dump($torrent);
     }
 
     /**

@@ -4,9 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "957b1f20e9a521e7a5934df61d31b5aa",
-    "content-hash": "8729e75eec7841de767cdfcb020f34a7",
+    "hash": "fc6ea9646f501cec1db2dcbe4346859f",
+    "content-hash": "7dc91e2d70ef34528617bcf80457f268",
     "packages": [
+        {
+            "name": "bhutanio/torrent-bencode",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bhutanio/torrent-bencode.git",
+                "reference": "6209c23a83b234bc07661df53d6b810321bbd7b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bhutanio/torrent-bencode/zipball/6209c23a83b234bc07661df53d6b810321bbd7b4",
+                "reference": "6209c23a83b234bc07661df53d6b810321bbd7b4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Bhutanio": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "abi",
+                    "homepage": "http://abi.io"
+                }
+            ],
+            "description": "PHP Library for decoding and encoding BitTorrent BEncoded data",
+            "homepage": "https://github.com/bhutanio/torrent-bencode",
+            "keywords": [
+                "bdecode",
+                "bencode",
+                "bittorrent",
+                "decode",
+                "encode",
+                "torrent"
+            ],
+            "time": "2018-09-27 23:45:35"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.7",
@@ -1997,16 +2042,16 @@
         },
         {
             "name": "markbaker/complex",
-            "version": "1.4.6",
+            "version": "1.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MarkBaker/PHPComplex.git",
-                "reference": "a78d82ae4e682c3809fc3023d1b0ce654f6ab12b"
+                "reference": "1ea674a8308baf547cbcbd30c5fcd6d301b7c000"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MarkBaker/PHPComplex/zipball/a78d82ae4e682c3809fc3023d1b0ce654f6ab12b",
-                "reference": "a78d82ae4e682c3809fc3023d1b0ce654f6ab12b",
+                "url": "https://api.github.com/repos/MarkBaker/PHPComplex/zipball/1ea674a8308baf547cbcbd30c5fcd6d301b7c000",
+                "reference": "1ea674a8308baf547cbcbd30c5fcd6d301b7c000",
                 "shasum": ""
             },
             "require": {
@@ -2088,7 +2133,7 @@
                 "complex",
                 "mathematics"
             ],
-            "time": "2018-07-31 08:38:40"
+            "time": "2018-10-13 23:28:42"
         },
         {
             "name": "mikevanriel/text-to-latex",
@@ -5337,6 +5382,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "devristo/torrent": 20,
+        "bhutanio/torrent-bencode": 20,
         "yiisoft/yii2-gii": 20,
         "yiisoft/yii2-shell": 20,
         "yiisoft/yii2-apidoc": 20
