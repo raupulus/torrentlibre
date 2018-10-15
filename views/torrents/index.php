@@ -36,8 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'tablaTorrentsIndex',
         ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'id',
+            //['class' => 'yii\grid\SerialColumn'],
+            //'id',
             [
                 'attribute' => 'titulo',
                 'format' => 'raw',
@@ -71,19 +71,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $link;
                 }
             ],
-            'licencia_id',
-            'categoria_id',
-            'usuario_id',
+            'licencia.tipo:text:Licencia',
+            'categoria.nombre:text:Categoría',
+            'usuario.nick:text:Uploader',
             //'resumen',
             //'descripcion',
             //'imagen',
             //'hash',
-            //'size',
+            'size:shortSize',
             //'n_piezas',
             //'size_piezas',
             //'archivos',
             //'password',
-            //'created_at',
+            'created_at:datetime',
             //'torrentcreate_at',
             //'updated_at',
 
