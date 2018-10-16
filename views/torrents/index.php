@@ -21,16 +21,15 @@ if (!Yii::$app->user->isGuest) {
 }
 ?>
 <div class="torrents-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?php if (!Yii::$app->user->isGuest): ?>
         <p>
             <?= Html::a('Añadir un torrent', ['create'],
-                            ['class' => 'btn btn-primary']) ?>
+                ['class' => 'btn btn-primary']) ?>
         </p>
     <?php endif ?>
+
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

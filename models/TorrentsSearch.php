@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use function var_dump;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Torrents;
@@ -41,7 +42,12 @@ class TorrentsSearch extends Torrents
      */
     public function search($params)
     {
-        $query = Torrents::find();
+        $query = Torrents::find()
+            //->leftJoin('puntuacion_torrents', 'torrents.puntuacion_id = puntuacion_torrents.id');
+            //->leftJoin('reportes_torrents', 'torrents.reportestorrents_id = reportes_torrents.id');
+            ->leftJoin('categorias', 'torrents.categoria_id = categorias.id')
+            ->leftJoin('licencias', 'torrents.licencia_id = licencias.id')
+            ->leftJoin('usuarios', 'torrents.usuario_id = usuarios.id');
 
         // add conditions that should always apply here
 
