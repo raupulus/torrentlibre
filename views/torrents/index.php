@@ -14,6 +14,11 @@ TorrentsIndexAsset::register($this);
 
 $this->title = 'Torrents';
 $this->params['breadcrumbs'][] = $this->title;
+
+// Variables
+if (!Yii::$app->user->isGuest) {
+    $rol = Yii::$app->user->identity->rol;
+}
 ?>
 <div class="torrents-index">
 

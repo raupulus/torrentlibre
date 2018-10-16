@@ -14,7 +14,12 @@ TorrentsViewAsset::register($this);
 $this->title = $model->titulo;
 $this->params['breadcrumbs'][] = ['label' => 'Torrents', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+
+// Variables
+if (!Yii::$app->user->isGuest) {
+    $rol = Yii::$app->user->identity->rol;
+    $user = Yii::$app->user->identity->getId();
+}
 ?>
 <div class="torrents-view">
 
@@ -140,15 +145,22 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-    <p>
-        <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+    <?php
+        if (!Yii::$app->user->isGuest and (
+           ($rol === 'admin') or
+           ($user === $model->usuario_id)
+        )):
+    ?>
+        <p>
+            <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '¿Seguro que quieres eliminar este torrent?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+            <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => '¿Seguro que quieres eliminar este torrent?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </p>
+    <?php endif ?>
 </div>
