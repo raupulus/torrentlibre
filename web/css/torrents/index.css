@@ -4,3 +4,96 @@
  * @copyright Copyright © 2018 Raúl Caro Pastorino
  * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
  */
+
+/*****************************************
+ *               Gridview                *
+ *****************************************/
+.grid-view {
+    margin: 25px 5px;
+}
+
+.grid-view .trSearch {
+
+}
+
+.grid-view .trSearch td {
+    background-color: white;
+}
+
+.grid-view .tablaTorrentsIndex {
+    width: 100%;
+}
+
+.grid-view .tablaTorrentsIndex  tr {
+    border-top: 1px solid #000000;
+}
+
+.grid-view .tablaTorrentsIndex tr td img {
+    width: 250px;
+}
+
+.grid-view .tablaTorrentsIndex th, .grid-view .tablaTorrentsIndex td {
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/*****************************************
+ *  Cada celda de una fila en la tabla   *
+ *****************************************/
+.grid-view .tablaTorrentsIndex tr {
+    margin: 40px 0;
+    width: 100%;
+    display: block;
+    border: 3px solid #f5e79e;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px black;
+}
+
+.grid-view .tablaTorrentsIndex td {
+    display: inline-block;
+}
+
+
+/* TITULO */
+.grid-view .tablaTorrentsIndex .tabla-titulo {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    background-color: #0e2231;
+}
+
+.grid-view .tablaTorrentsIndex .tabla-titulo a {
+    width: 100%;
+    color: white;
+    font-weight: bolder;
+}
+
+
+/* IMAGEN */
+.grid-view .tablaTorrentsIndex .tabla-imagen {
+    width: 40%;
+}
+
+.grid-view .tablaTorrentsIndex .tabla-resumen {
+    width: 60%;
+}
+
+.grid-view .tablaTorrentsIndex .tabla-licencia {
+
+}
+
+.grid-view .tablaTorrentsIndex .tabla-categoria {
+
+}
+
+.grid-view .tablaTorrentsIndex .tabla-nick {
+
+}
+
+.grid-view .tablaTorrentsIndex .tabla-n_descargas {
+
+}
+
+.grid-view .tablaTorrentsIndex .tabla-online {
+
+}

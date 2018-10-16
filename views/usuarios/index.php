@@ -68,7 +68,7 @@ if (!Yii::$app->user->isGuest) {
                 ],
                 'usuariosId.rol.tipo',  // Tipo de rol
                 'email:email',
-                'lastlogin_at',
+                'lastlogin_at:datetime',
                 'usuariosId.ip',
                 'web',
                 'biografia',

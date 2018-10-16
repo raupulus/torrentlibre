@@ -4,3 +4,59 @@
  * @copyright Copyright © 2018 Raúl Caro Pastorino
  * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
  */
+
+#tabletorrentview {
+    border: 3px solid #000;
+    border-radius: 10px;
+}
+
+#tabletorrentview .imagenportada img {
+    max-height: 300px;
+}
+
+.labelhidden {
+    display: none;
+}
+#copymagnet {
+    margin: 3px 8px;
+    padding: 5px;
+    width: 30px;
+    border-radius: 3px;
+}
+
+#copymagnet:hover {
+    background-color: #000;
+    cursor: pointer;
+}
+
+#magnet {
+    font-weight: bold;
+}
+
+#tabletorrentview .imagenportada {
+
+}
+
+#tabletorrentview .resumen {
+
+}
+
+#tabletorrentview .licencia {
+
+}
+
+#tabletorrentview .categoria {
+
+}
+
+#tabletorrentview .usuario {
+
+}
+
+#tabletorrentview .descripcion {
+
+}
+
+#tabletorrentview .magnet {
+
+}

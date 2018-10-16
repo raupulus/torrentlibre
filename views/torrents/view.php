@@ -2,51 +2,165 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\assets\TorrentsViewAsset;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Torrents */
 
-$this->title = $model->id;
+// Registro assets para esta vista
+TorrentsViewAsset::register($this);
+
+$this->title = $model->titulo;
 $this->params['breadcrumbs'][] = ['label' => 'Torrents', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+
+// Variables
+if (!Yii::$app->user->isGuest) {
+    $rol = Yii::$app->user->identity->rol;
+    $user = Yii::$app->user->identity->getId();
+}
 ?>
 <div class="torrents-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
     <?= DetailView::widget([
         'model' => $model,
+        'options' => [
+            'id' => 'tabletorrentview',
+            'class' => [
+                'table',
+                'table-striped',
+                'table-bordered',
+                'detail-view',
+            ],
+        ],
         'attributes' => [
-            'id',
-            'licencia_id',
-            'categoria_id',
-            'usuario_id',
-            'titulo',
-            'resumen',
+            //'id',
+            [
+                'attribute' => 'imagen',
+                'label' => false,
+                'labelColOptions' => ['hidden' => true],
+                'captionOptions' => ['class' => 'labelhidden'],
+                'contentOptions' => [
+                    'class' => [
+                        'text-center',
+                        'imagenportada',
+                        'col-sm-6'
+                    ],
+                    'colspan' => 2,
+                ],
+                'format' => 'raw',
+                'value' => function($model) {
+                    $img = $model->imagen;
+                    $ruta = Yii::$app->request->baseUrl . yii::getAlias('@r_imgTorrent').'/';
+
+                    if ((! isset($img)) || (! file_exists($ruta.$img))) {
+                        $img = 'default.png';
+                    }
+
+                    return '<img src="'.$ruta.$img.'" />';
+                }
+            ],
+            [
+                'attribute' => 'resumen',
+                'label' => false,
+                'labelColOptions' => ['hidden' => true],
+                'captionOptions' => ['class' => 'labelhidden'],
+                'contentOptions' => [
+                    'class' => [
+                        'resumen'
+                    ],
+                    'colspan' => 2,
+                ],
+            ],
+            'licencia.tipo:text:Licencia',
+            'categoria.nombre:text:Categoría',
+            'usuario.nick:text:Uploader',
             'descripcion',
-            'imagen',
-            'hash',
-            'size',
+            [ // Magnet
+                'format' => 'raw',
+                'label' => false,
+                'labelColOptions' => ['hidden' => true],
+                'captionOptions' => ['class' => 'labelhidden'],
+                'contentOptions' => [
+                    'class' => [
+                        'magnet',
+                        'text-center',
+                    ],
+                    'colspan' => 2,
+                ],
+                'value' => function($model) {
+                    $magnet = 'magnet:?xt=urn:btih:' . $model->hash;
+                    $magnet .= '&dn='.urlencode($model->titulo);
+
+                    $r = Html::img('/images/icons/magnet.png', [
+                        'id' => 'copymagnet',
+                        'alt' => 'Copy '.$model->titulo.' magnet to clipboard',
+                        'title' => 'Copy '.$model->titulo.' magnet to clipboard',
+                    ]);
+
+                    $r .= '<a id="magnet" href='.$magnet.'>'.$magnet.'</a>';
+
+                    $r .= Html::a('Descargar Torrent',
+                        Url::to(['torrents/descargar',
+                            'id' => $model->id,
+                            'hash' => $model->hash,
+                        ]),
+                        [
+                            'title' => 'Descargar '.$model->titulo,
+                            'alt' => 'Descargar '.$model->titulo,
+                            'class' => 'btn btn-success col-sm-12',
+                        ]
+                    );
+
+                    return $r;
+                }
+            ],
+            'size:shortSize',
             'n_piezas',
-            'size_piezas',
-            'archivos',
-            'password',
-            'created_at',
-            'torrentcreate_at',
-            'updated_at',
+            'size_piezas:shortSize',
+            [
+                'attribute' => 'archivos',
+                'format' => 'raw',
+                'value' => function($model) {
+                    $archivos = explode(',', $model->archivos);
+                    $lista = '<ul class="listaArchivos">';
+                    foreach ($archivos as $archivo) {
+                        $lista .= '<li>'.$archivo.'</li>';
+                    }
+                    $lista .= '</ul>';
+
+                    return $lista;
+                }
+            ],
+            [
+                'attribute' => 'password',
+                'visible' => (!empty($model->password)),
+            ],
+            'created_at:datetime',
+            'torrentcreate_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 
+    <?php
+        if (!Yii::$app->user->isGuest and (
+           ($rol === 'admin') or
+           ($user === $model->usuario_id)
+        )):
+    ?>
+        <p>
+            <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+
+            <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => '¿Seguro que quieres eliminar este torrent?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </p>
+    <?php endif ?>
 </div>
