@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use function isEmpty;
+use function var_dump;
 use Yii;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
@@ -38,7 +39,29 @@ class UsuariosController extends Controller
                 'only' => ['index', 'view', 'delete', 'update'],
                 'rules' => [
                     [
+                        'actions' => ['index', 'view'],
                         'allow' => true,
+                        'roles' => ['@'],
+                    ],
+
+                    [
+                        'actions' => ['delete', 'update'],
+                        'allow' => true,
+                        'matchCallback' => function($rule, $action) {
+                            if (Yii::$app->user->isGuest) {
+                                return false;
+                            }
+
+                            $rol = Yii::$app->user->identity->rol;
+                            if ($rol === 'admin') {
+                                return true;
+                            } else if (Yii::$app->user->identity->getId()
+                                == $_REQUEST['id']) {
+                                return true;
+                            }
+
+                            return false;
+                        },
                         'roles' => ['@'],
                     ],
                 ],
