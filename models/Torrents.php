@@ -52,6 +52,12 @@ class Torrents extends \yii\db\ActiveRecord
     public $u_torrent;
 
     /**
+     * Elemento que representa a todas las celdas para buscar en ellas
+     * @var String
+     */
+    public $allfields;
+
+    /**
      * @const ESCENARIO_CREATE Constante para cuando estamos insertando
      */
     const ESCENARIO_CREATE = 'create';

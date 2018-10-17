@@ -15,15 +15,17 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?php // echo $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'licencia_id') ?>
+    <?php // echo  $form->field($model, 'licencia_id') ?>
 
-    <?= $form->field($model, 'categoria_id') ?>
+    <?php // echo  $form->field($model, 'categoria_id') ?>
 
-    <?= $form->field($model, 'usuario_id') ?>
+    <?php // echo  $form->field($model, 'usuario_id') ?>
 
-    <?= $form->field($model, 'titulo') ?>
+    <?php // echo  $form->field($model, 'titulo') ?>
+
+    <?= $form->field($model, 'allfields')->label('Buscar:') ?>
 
     <?php // echo $form->field($model, 'resumen') ?>
 
@@ -50,8 +52,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'updated_at') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
+        <?php // Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
