@@ -83,7 +83,9 @@ class UsuariosController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Usuarios(['scenario' => Usuarios::ESCENARIO_CREATE]);
+        $model = new Usuarios([
+            'scenario' => Usuarios::ESCENARIO_CREATE
+        ]);
 
         if ($model->load(Yii::$app->request->post())) {
             // Creo un nuevo id para este usuarios desde "usuarios_id"
@@ -108,7 +110,11 @@ class UsuariosController extends Controller
             $model->lastlogin_at = new Expression('NOW()');
 
             if ($model->save()) {
-                Yii::$app->user->login($model);
+                $rol = Yii::$app->user->identity->rol;
+                if ($rol !== 'admin') {
+                    Yii::$app->user->login($model);
+                }
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
