@@ -23,6 +23,7 @@ UsuariosViewAsset::register($this);
 // Variables
 if (!Yii::$app->user->isGuest) {
     $rol = Yii::$app->user->identity->rol;
+    $user = Yii::$app->user->identity->getId();
 }
 
 ?>

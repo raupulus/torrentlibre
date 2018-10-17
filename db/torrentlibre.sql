@@ -192,7 +192,7 @@ CREATE TABLE torrents (
     id                BIGSERIAL     PRIMARY KEY
   , licencia_id       BIGINT        NOT NULL REFERENCES licencias (id)
   , categoria_id      BIGINT        NOT NULL REFERENCES categorias (id)
-  , usuario_id        BIGINT        NOT NULL REFERENCES usuarios (id)
+  , usuario_id        BIGINT        NOT NULL REFERENCES usuarios_id (id)
   , titulo            VARCHAR(255)  NOT NULL
   , resumen           VARCHAR(255)  NOT NULL
   , descripcion       VARCHAR(500)
@@ -264,7 +264,7 @@ DROP TABLE IF EXISTS comentarios CASCADE;
  */
 CREATE TABLE comentarios (
     id              BIGSERIAL  PRIMARY KEY
-  , usuario_id      BIGINT     NOT NULL REFERENCES "usuarios" (id)
+  , usuario_id      BIGINT     NOT NULL REFERENCES "usuarios_id" (id)
                                ON DELETE NO ACTION
                                ON UPDATE CASCADE
   , torrent_id      BIGINT     NOT NULL REFERENCES torrents (id)
@@ -295,7 +295,7 @@ DROP TABLE IF EXISTS reportes_comentarios CASCADE;
 CREATE TABLE reportes_comentarios (
     id              BIGSERIAL     PRIMARY KEY
   , usuario_id      BIGINT        NOT NULL
-                                  REFERENCES usuarios (id)
+                                  REFERENCES usuarios_id (id)
                                   ON DELETE NO ACTION
                                   ON UPDATE CASCADE
   , comentario_id   BIGINT        NOT NULL
@@ -324,7 +324,7 @@ DROP TABLE IF EXISTS usuarios_bloqueados CASCADE;
  */
 CREATE TABLE usuarios_bloqueados (
     id            BIGSERIAL    PRIMARY KEY
-  , usuario_id    BIGINT       NOT NULL UNIQUE REFERENCES "usuarios" (id)
+  , usuario_id    BIGINT       NOT NULL UNIQUE REFERENCES "usuarios_id" (id)
   , created_at    TIMESTAMP(0) DEFAULT  LOCALTIMESTAMP
 );
 
@@ -350,7 +350,7 @@ DROP TABLE IF EXISTS demandas CASCADE;
  */
 CREATE TABLE demandas (
     id            BIGSERIAL    PRIMARY KEY
-  , usuario_id    BIGINT       NOT NULL REFERENCES "usuarios" (id)
+  , usuario_id    BIGINT       NOT NULL REFERENCES "usuarios_id" (id)
   , titulo        VARCHAR(255) NOT NULL UNIQUE
   , descripcion   VARCHAR(255) NOT NULL
   , atendido      BOOLEAN      NOT NULL DEFAULT FALSE
@@ -363,7 +363,7 @@ CREATE TABLE demandas (
 DROP TABLE IF EXISTS puntuacion_torrents CASCADE;
 CREATE TABLE puntuacion_torrents (
     id               BIGSERIAL    PRIMARY KEY
-  , usuario_id       BIGINT       REFERENCES "usuarios" (id)
+  , usuario_id       BIGINT       REFERENCES "usuarios_id" (id)
   , torrent_id       BIGINT       REFERENCES "torrents" (id)
   , puntuacion       BIGINT       NOT NULL --Valor del 0 al 10
   , created_at       TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
@@ -377,7 +377,7 @@ CREATE INDEX idx_puntuacion_torrents_torrent_id
 DROP TABLE IF EXISTS puntuacion_comentarios CASCADE;
 CREATE TABLE puntuacion_comentarios (
     id               BIGSERIAL    PRIMARY KEY
-  , usuario_id       BIGINT       REFERENCES "usuarios" (id)
+  , usuario_id       BIGINT       REFERENCES "usuarios_id" (id)
   , comentario_id    BIGINT    REFERENCES "comentarios" (id)
   , puntuacion       BIGINT       NOT NULL --Valor del 0 al 10
   , created_at       TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
@@ -394,7 +394,7 @@ CREATE INDEX idx_puntuacion_comentarios_comentario_id
 DROP TABLE IF EXISTS accesos CASCADE;
 CREATE TABLE accesos (
       id            BIGSERIAL    PRIMARY KEY
-    , usuario_id    BIGINT       NOT NULL REFERENCES "usuarios" (id)
+    , usuario_id    BIGINT       NOT NULL REFERENCES "usuarios_id" (id)
     , registered_at TIMESTAMP(0) DEFAULT LOCALTIMESTAMP
 );
 
