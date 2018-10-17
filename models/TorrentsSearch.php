@@ -19,7 +19,7 @@ class TorrentsSearch extends Torrents
     {
         return [
             [['id', 'licencia_id', 'categoria_id', 'usuario_id', 'size'], 'integer'],
-            [['titulo', 'resumen', 'descripcion', 'imagen', 'hash', 'archivos', 'password', 'created_at', 'torrentcreate_at', 'updated_at'], 'safe'],
+            [['titulo', 'resumen', 'descripcion', 'imagen', 'hash', 'archivos', 'password', 'created_at', 'torrentcreate_at', 'updated_at', 'allfields'], 'safe'],
             [['n_piezas', 'size_piezas'], 'number'],
         ];
     }
@@ -61,6 +61,14 @@ class TorrentsSearch extends Torrents
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
+        }
+
+        if ($this->allfields != '') {
+            $query->orFilterWhere(['ilike', 'titulo', $this->allfields])
+            ->orFilterWhere(['ilike', 'resumen', $this->allfields])
+            ->orFilterWhere(['ilike', 'torrents.descripcion',
+                $this->allfields])
+            ->orFilterWhere(['ilike', 'archivos', $this->allfields]);
         }
 
         // grid filtering conditions
