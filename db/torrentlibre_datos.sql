@@ -94,7 +94,7 @@ INSERT INTO usuarios_datos (
   , (
     'Anónimo'
     , 'Anónimo'
-    , 'https://www.fryntiz.es'
+    , 'https://fryntiz.es'
     , 'Usuario Anónimo o borrado del sistema'
     , 'anonimo@domain.com'
     , '@anonimo'
@@ -147,7 +147,7 @@ INSERT INTO usuarios_datos (
     , '@antonio'
     , crypt('1234', gen_salt('bf', 13))
     , ''
-    , 'temp3'
+    , 'temp4'
     , 3
     )
 
@@ -162,7 +162,7 @@ INSERT INTO usuarios_datos (
     , '@maria'
     , crypt('1234', gen_salt('bf', 13))
     , ''
-    , 'temp3'
+    , 'temp5'
     , 3
   )
 ;
@@ -170,31 +170,36 @@ INSERT INTO usuarios_datos (
 ---------------------------------------------------
 --                    Usuarios                   --
 ---------------------------------------------------
-INSERT INTO usuarios (rol_id,ip)
+INSERT INTO usuarios (rol_id, datos_id)
 VALUES
   (
-      1
-    , '199.199.199.199'
+     1
+   , 1
   )
 
   , (
       2
-    , '199.199.199.200'
+    , 2
+  )
+
+  , (
+      3
+    , 3
   )
 
   , (
       6
-    , '199.199.199.201'
+    , 4
   )
 
   , (
-    6
-    , '199.199.199.202'
+      6
+    , 5
   )
 
   , (
-    6
-    , '199.199.199.203'
+      6
+    , 6
   )
 ;
 

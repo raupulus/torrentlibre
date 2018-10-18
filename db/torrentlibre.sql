@@ -369,7 +369,7 @@ CREATE INDEX idx_puntuacion_torrents_torrent_id
 DROP TABLE IF EXISTS puntuacion_comentarios CASCADE;
 CREATE TABLE puntuacion_comentarios (
     id               BIGSERIAL    PRIMARY KEY
-  , usuario_id       BIGINT       REFERENCES "usuarios_id" (id)
+  , usuario_id       BIGINT       REFERENCES "usuarios" (id)
   , comentario_id    BIGINT    REFERENCES "comentarios" (id)
   , puntuacion       BIGINT       NOT NULL --Valor del 0 al 10
   , created_at       TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP

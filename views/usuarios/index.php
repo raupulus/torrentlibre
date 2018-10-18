@@ -11,6 +11,7 @@ use app\assets\UsuariosIndexAsset;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use app\helpers\Roles;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsuariosSearch */
@@ -23,18 +24,20 @@ $this->params['breadcrumbs'][] = $this->title;
 UsuariosIndexAsset::register($this);
 
 // Variables
+$isAdmin = Roles::isAdmin();
+
 if (!Yii::$app->user->isGuest) {
-    $rol = Yii::$app->user->identity->rol;
     $user = Yii::$app->user->identity->getId();
 }
 ?>
+
 
 <div class="usuarios-index">
     <h1><?= Html::encode($this->title) ?></h1>
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <!-- Esta vista solo la puede ver el administrador -->
-    <?php if (isset($rol) && ($rol === 'admin')): ?>
+    <?php if ($isAdmin): ?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             //'filterModel' => $searchModel,
@@ -48,34 +51,31 @@ if (!Yii::$app->user->isGuest) {
             'columns' => [
                 'id',
                 [
-                    'attribute' => 'nombre',
                     'format' => 'raw',
                     'value' => function($model) {
-                        return Html::a($model->nombre, [
+                        return Html::a($model->datos->nombre, [
                             Url::to('usuarios/view'),
                             'id' => $model->id
                         ]);
                     }
                 ],
                 [
-                    'attribute' => 'nick',
                     'format' => 'raw',
                     'value' => function($model) {
-                        return Html::a($model->nick, [
+                        return Html::a($model->datos->nick, [
                             Url::to('usuarios/view'),
                             'id' => $model->id
                         ]);
                     }
                 ],
-                'usuariosId.rol.tipo',  // Tipo de rol
-                'email:email',
-                'lastlogin_at:datetime',
-                'usuariosId.ip',
-                'web',
-                'biografia',
-                'twitter',
-                'facebook',
-                'googleplus',
+                'rol.tipo',  // Tipo de rol
+                'datos.email:email',
+                'datos.lastlogin_at:datetime',
+                'datos.web',
+                'datos.biografia',
+                'datos.twitter',
+                'datos.facebook',
+                'datos.googleplus',
                 [
                     'attribute' => 'bloquear',
                     'format' => 'raw',
@@ -84,7 +84,7 @@ if (!Yii::$app->user->isGuest) {
                             return Html::a('Desbloquear', [
                                 Url::to('usuarios-bloqueados/desbloquear'),
                                 'id' => $model->usuariosBloqueados->id
-                                ],
+                            ],
                                 [
                                     'class' => 'btn btn-success',
                                     'data' => [
@@ -126,7 +126,6 @@ if (!Yii::$app->user->isGuest) {
                 //['class' => 'yii\grid\SerialColumn'],
 
                 [
-                    'attribute' => 'avatar',
                     'format' => 'raw',
                     'value' => function($model, $key, $index) {
                         $img = $model->datos->avatar;
@@ -141,23 +140,22 @@ if (!Yii::$app->user->isGuest) {
                 ],
 
                 [
-                    'attribute' => 'nick',
                     'format' => 'raw',
                     'value' => function($model) {
-                        return Html::a($model->nick, [
+                        return Html::a($model->datos->nick, [
                             Url::to('usuarios/view'),
                             'id' => $model->id
                         ]);
                     }
                 ],
 
-                'nombre',
-                'web',
-                'biografia',
-                'email:email',
-                'twitter',
-                'facebook',
-                'googleplus',
+                'datos.nombre',
+                'datos.web',
+                'datos.biografia',
+                'datos.email:email',
+                'datos.twitter',
+                'datos.facebook',
+                'datos.googleplus',
             ],
         ]); ?>
     <?php endif; ?>
