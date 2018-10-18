@@ -89,17 +89,20 @@ if (!Yii::$app->user->isGuest) {
                 'attribute' => 'categoria.nombre',
                 'contentOptions' => ['class' => 'tabla-categoria'],
             ],
+            /*
             [
-                'attribute' => 'usuario.nick',
+                'attribute' => 'usuario',
                 'format' => 'raw',
                 'contentOptions' => ['class' => 'tabla-nick'],
                 'value' => function($model) {
-                    return Html::a($model->usuario->nick, [
+                    return Html::a($model->usuario->datos->id0, [
                         Url::to('usuarios/view'),
                         'id' => $model->id
                     ]);
                 }
             ],
+            */
+            'usuarios.datos.nick',
 
             /*
             [
