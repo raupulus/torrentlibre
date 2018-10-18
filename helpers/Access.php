@@ -32,4 +32,18 @@ class Access
     {
 
     }
+
+    /*
+     * Comprueba si el usuario actual es el autor
+     * @param String Recibe el id del autor del contenido
+     */
+    public static function isAutor($id)
+    {
+        if (!Yii::$app->user->isGuest) {
+            $user = Yii::$app->user->identity->getId();
+            return $user == $id;
+        }
+
+        return false;
+    }
 }

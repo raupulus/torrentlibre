@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\Roles;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -7,11 +8,8 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\UsuariosSearch */
 /* @var $form yii\widgets\ActiveForm */
 
-if (!Yii::$app->user->isGuest) {
-    $rol = Yii::$app->user->identity->rol;
-} else {
-    return;
-}
+// Variables
+$isAdmin = Roles::isAdmin();
 ?>
 
 <div id="box-form-search"
@@ -23,7 +21,7 @@ if (!Yii::$app->user->isGuest) {
         'id' => 'form-search-users-index',
     ]); ?>
 
-    <?php if ($rol === 'admin'): ?>
+    <?php if ($isAdmin): ?>
         <?php $sizerow = '4' ?>
         <div class="row col-sm-<?=$sizerow?> center-block">
             <?= $form->field($model, 'email') ?>
@@ -45,7 +43,7 @@ if (!Yii::$app->user->isGuest) {
 </div>
 
 <div id="box-form-button-search" class="container col-sm-12 center-block">
-    <?php if ($rol === 'admin'): ?>
+    <?php if ($isAdmin): ?>
         <?php $sizerow = '4' ?>
         <div class="col-sm-<?=$sizerow?> text-center center-block">
             <?= Html::a('Crear Usuario', ['usuarios/create'], [

@@ -196,7 +196,11 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getRol()
     {
-        return $this->usuarioId->rol->tipo;
+        if ($this->usuarioId != null) {
+            return $this->usuarioId->rol->tipo;
+        }
+
+        return 'borrado';
     }
 
     /**

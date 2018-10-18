@@ -5,6 +5,7 @@ namespace app\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Usuarios;
+use app\models\UsuariosDatos;
 
 /**
  * UsuariosSearch represents the model behind the search form of `app\models\Usuarios`.
@@ -17,10 +18,14 @@ class UsuariosSearch extends Usuarios
     public function rules()
     {
         return [
-            [['id', 'datos_id', 'rol_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['id'], 'integer'],
+            [['nombre', 'nick', 'email'], 'safe'],
         ];
     }
+
+    public $nombre;
+    public $nick;
+    public $email;
 
     /**
      * {@inheritdoc}
@@ -40,7 +45,8 @@ class UsuariosSearch extends Usuarios
      */
     public function search($params)
     {
-        $query = Usuarios::find();
+        $query = Usuarios::find()
+            ->leftJoin('usuarios_datos', 'usuarios.datos_id = usuarios_datos.id');
 
         // add conditions that should always apply here
 
@@ -58,12 +64,27 @@ class UsuariosSearch extends Usuarios
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'datos_id' => $this->datos_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'rol_id' => $this->rol_id,
+            'usuarios.id' => $this->id,
+            //'lastlogin_at' => $this->lastlogin_at,
+            //'preferencias_id' => $this->preferencias_id,
         ]);
+
+        $query->andFilterWhere(['ilike', 'usuarios_datos.nombre',
+            $this->nombre])
+            ->andFilterWhere(['ilike', 'usuarios_datos.nick', $this->nick])
+            //->andFilterWhere(['ilike', 'web', $this->web])
+            //->andFilterWhere(['ilike', 'biografia', $this->biografia])
+            ->andFilterWhere(['ilike', 'usuarios_datos.email', $this->email]);
+
+            /*
+            ->andFilterWhere(['ilike', 'twitter', $this->twitter])
+            ->andFilterWhere(['ilike', 'facebook', $this->facebook])
+            ->andFilterWhere(['ilike', 'googleplus', $this->googleplus])
+            ->andFilterWhere(['ilike', 'avatar', $this->avatar])
+            ->andFilterWhere(['ilike', 'password', $this->password])
+            ->andFilterWhere(['ilike', 'auth_key', $this->auth_key])
+            ->andFilterWhere(['ilike', 'token', $this->token]);
+            */
 
         return $dataProvider;
     }

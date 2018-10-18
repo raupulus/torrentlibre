@@ -25,12 +25,7 @@ UsuariosIndexAsset::register($this);
 
 // Variables
 $isAdmin = Roles::isAdmin();
-
-if (!Yii::$app->user->isGuest) {
-    $user = Yii::$app->user->identity->getId();
-}
 ?>
-
 
 <div class="usuarios-index">
     <h1><?= Html::encode($this->title) ?></h1>
