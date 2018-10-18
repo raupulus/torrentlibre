@@ -15,6 +15,8 @@
 
 namespace app\helpers;
 
+use Yii;
+
 /**
  * Contiene clases estáticas para gestionar el acceso de los usuarios y/o
  * bloquearlos si fuera necesario
@@ -40,7 +42,7 @@ class Access
     public static function isAutor($id)
     {
         if (!Yii::$app->user->isGuest) {
-            $user = Yii::$app->user->identity->getId();
+            $user = Yii::$app->user->identity->usuarioId->id;
             return $user == $id;
         }
 
