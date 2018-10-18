@@ -80,7 +80,8 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
             [['token'], 'unique'],
             [['id'], 'unique'],
             [['preferencias_id'], 'exist', 'skipOnError' => true, 'targetClass' => Preferencias::className(), 'targetAttribute' => ['preferencias_id' => 'id']],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => UsuariosId::className(), 'targetAttribute' => ['id' => 'id']],
+            [['id'], 'exist', 'skipOnError' => true, 'targetClass' =>
+                Usuarios::className(), 'targetAttribute' => ['id' => 'id']],
             [
                 ['captcha'],
                 'required', 'on' => self::ESCENARIO_CREATE

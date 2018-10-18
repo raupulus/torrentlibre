@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\UsuariosDatos;
 use Yii;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
@@ -58,17 +59,51 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Creates a new Usuarios model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Crea un nuevo usuario a partir del modelo.
+     * Si consigue crearse correctamente, se redirigirá a la vista del usuario
+     * recién creado.
+     *
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Usuarios();
+        $model = new UsuariosDatos([
+            'scenario' => UsuariosDatos::ESCENARIO_CREATE
+        ]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $isPOST = $model->load(Yii::$app->request->post());
+
+
+        if ($isPOST) {
+            // Creo un nuevo id para este usuarios desde "usuarios_id"
+            //$usuario_id = new UsuariosId();
+
+            // Creo nuevo id para preferencias_id desde "preferencias"
+            //$preferencias = new Preferencias(['tema_id' => 1]);
         }
+
+        // Si entra mediante POST y puedo crear el usuario_id lo cargo al modelo
+        /*
+        if ($isPOST && $usuario_id->save() && $preferencias->save() ) {
+            $model->id = $usuario_id->id;
+            $model->preferencias_id = $preferencias->id;
+
+            if ($model->avatar == '') {
+                $model->avatar = 'default.png';
+            }
+
+            $model->lastlogin_at = new Expression('NOW()');
+
+            if ($model->save()) {
+                $rol = Yii::$app->user->identity->rol;
+                if ($rol !== 'admin') {
+                    Yii::$app->user->login($model);
+                }
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+        */
 
         return $this->render('create', [
             'model' => $model,
