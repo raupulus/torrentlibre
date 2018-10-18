@@ -180,5 +180,24 @@ class Usuarios extends \yii\db\ActiveRecord
         return $this->hasOne(UsuariosDatos::className(), ['id' => 'datos_id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuariosBloqueados()
+    {
+        return $this->hasOne(UsuariosBloqueados::className(), ['usuario_id' => 'id']);
+    }
+
+    /**
+     * Comprueba si el usuario está bloqueado.
+     *
+     * @return bool Será true si está bloqueado.
+     */
+    public function getUsuarioBloqueado()
+    {
+        return UsuariosBloqueados::findOne([
+            'usuario_id' => $this->id,
+        ]) ? true : false;
+    }
 
 }
