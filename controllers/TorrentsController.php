@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\helpers\Access;
+use app\helpers\Roles;
 use Bhutanio\BEncode\BEncode;
 use Devristo\Torrent\Bee;
 use function var_dump;
@@ -39,7 +41,24 @@ class TorrentsController extends Controller
                 'only' => ['create', 'delete', 'update'],
                 'rules' => [
                     [
+                        'actions' => ['create'],
                         'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['delete', 'update'],
+                        'allow' => true,
+                        'matchCallback' => function($rule, $action) {
+                            $id = Torrents::findOne($_REQUEST['id'])->usuario_id;
+                            $isAdmin = Roles::isAdmin();
+                            $isAutor = Access::isAutor($id);
+
+                            if ($isAdmin || $isAutor) {
+                                return true;
+                            }
+
+                            return false;
+                        },
                         'roles' => ['@'],
                     ],
                 ],
@@ -84,6 +103,8 @@ class TorrentsController extends Controller
     {
         $model = new Torrents([
             'usuario_id' => Yii::$app->user->identity->id,
+            'scenario' => Torrents::ESCENARIO_CREATE,
+
         ]);
 
         // En el caso de existir datos mediante POST los proceso
@@ -115,8 +136,6 @@ class TorrentsController extends Controller
                     'Es obligatorio agregar un Torrent válido');
             }
         }
-
-        $model->scenario = Torrents::ESCENARIO_CREATE;
 
         $licencias = Licencias::getAll();
         $categorias = Categorias::getAll();

@@ -14,6 +14,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
         '@r_avatar' => $params['rutaAvatar'],
+        '@r_iconos' => $params['rutaIconos'],
         '@r_imgTorrent' => $params['rutaImagenTorrent'],
         '@r_torrents' => '@app/web' . $params['rutaTorrent'],
         '@p_torrents' => $params['paginacion_torrents'],
@@ -30,7 +31,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\Usuarios',
+            'identityClass' => 'app\models\UsuariosDatos',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [

@@ -13,9 +13,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
-$this->title = 'Actualizar Usuario:' . $model->nick;
+$this->title = 'Actualizar Usuario:' . $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->nick, 'url' => ['view',
+$this->params['breadcrumbs'][] = ['label' => $model->nombre, 'url' => ['view',
     'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Modificar Usuario';
 

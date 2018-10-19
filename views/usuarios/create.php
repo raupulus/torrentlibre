@@ -23,11 +23,7 @@ $this->params['breadcrumbs'][] = [
     'url' => ['index']
 ];
 $this->params['breadcrumbs'][] = $this->title;
-
-
 ?>
-
-<?= Yii::$app->session->getFlash('error'); ?>
 
 <div class="usuarios-create">
 

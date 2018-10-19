@@ -1,5 +1,7 @@
 <?php
 
+use app\helpers\Access;
+use app\helpers\Roles;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\assets\TorrentsViewAsset;
@@ -16,10 +18,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Torrents', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 // Variables
-if (!Yii::$app->user->isGuest) {
-    $rol = Yii::$app->user->identity->rol;
-    $user = Yii::$app->user->identity->getId();
-}
+$isAdmin = Roles::isAdmin();
+$isAutor = Access::isAutor($model->usuario_id);
 ?>
 <div class="torrents-view">
 
@@ -77,7 +77,7 @@ if (!Yii::$app->user->isGuest) {
             ],
             'licencia.tipo:text:Licencia',
             'categoria.nombre:text:Categoría',
-            'usuario.nick:text:Uploader',
+            'usuario.datos.nick:text:Uploader',
             'descripcion',
             [ // Magnet
                 'format' => 'raw',
@@ -145,12 +145,7 @@ if (!Yii::$app->user->isGuest) {
         ],
     ]) ?>
 
-    <?php
-        if (!Yii::$app->user->isGuest and (
-           ($rol === 'admin') or
-           ($user === $model->usuario_id)
-        )):
-    ?>
+    <?php if ($isAutor || $isAdmin): ?>
         <p>
             <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 

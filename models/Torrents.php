@@ -81,7 +81,8 @@ class Torrents extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['licencia_id', 'categoria_id', 'usuario_id', 'titulo', 'resumen'], 'required'],
+            [['licencia_id', 'categoria_id', 'usuario_id', 'titulo', 'resumen'],
+                'required'],
             [['licencia_id', 'categoria_id', 'usuario_id', 'size'], 'default', 'value' => null],
             [['licencia_id', 'categoria_id', 'usuario_id', 'size'], 'integer'],
             [['n_piezas', 'size_piezas'], 'number'],
@@ -91,7 +92,8 @@ class Torrents extends \yii\db\ActiveRecord
             [['descripcion'], 'string', 'max' => 500],
             [['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::className(), 'targetAttribute' => ['categoria_id' => 'id']],
             [['licencia_id'], 'exist', 'skipOnError' => true, 'targetClass' => Licencias::className(), 'targetAttribute' => ['licencia_id' => 'id']],
-            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
+            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' =>
+                Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
             [['u_img'], 'file', 'extensions' => 'png, jpg'],
             [['u_torrent'], 'file', 'extensions' => 'torrent'],
             [
@@ -110,7 +112,7 @@ class Torrents extends \yii\db\ActiveRecord
             'id' => 'ID',
             'licencia_id' => 'Licencia',
             'categoria_id' => 'Categoría',
-            'usuario_id' => 'Uploader',
+            'usuario' => 'Uploader',
             'titulo' => 'Título',
             'resumen' => 'Resumen',
             'descripcion' => 'Descripción',
@@ -121,8 +123,8 @@ class Torrents extends \yii\db\ActiveRecord
             'size_piezas' => 'Tamaño de Piezas',
             'archivos' => 'Archivos del Torrent',
             'password' => 'Password',
-            'created_at' => 'Creado en',
-            'torrentcreate_at' => 'Torrent creado en',
+            'created_at' => 'Fecha de subida',
+            'torrentcreate_at' => 'Fecha de creación',
             'updated_at' => 'Actualizado en',
             'u_img' => 'Imagen Portada',
             'u_torrent' => 'Archivo Torrent',

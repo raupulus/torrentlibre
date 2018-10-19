@@ -42,7 +42,8 @@ CREATE EXTENSION pgcrypto;
 --                     Roles                     --
 ---------------------------------------------------
 INSERT INTO roles (tipo, descripcion) VALUES
-    ('admin', 'Administrador principal de la aplicación')
+  ('admin', 'Administrador principal de la aplicación')
+  , ('borrado', 'Cuenta de usuario borrada en el sistema')
   , ('editor', 'Puede moderar, bloquear usuarios y ver estadísticas')
   , ('especial', 'Designado manualmente por el administrador para colaborar ' ||
                  'en la administración o moderación del sitio')
@@ -71,35 +72,13 @@ INSERT INTO preferencias (tema_id) VALUES
   (1), (2), (3)
 ;
 
----------------------------------------------------
---                    Usuarios                   --
----------------------------------------------------
-INSERT INTO usuarios_id (rol_id,ip)
-VALUES
-  (
-      1
-    , '199.199.199.199'
-  )
-
-  , (
-      2
-    , '199.199.199.200'
-)
-
-  , (
-      5
-    , '199.199.199.201'
-)
-;
-
-INSERT INTO usuarios (
-  id, nombre, nick, web, biografia, email,
+INSERT INTO usuarios_datos (
+  nombre, nick, web, biografia, email,
   twitter, facebook, googleplus, password,
   auth_key, token, preferencias_id
-) VALUES
+  ) VALUES
   (
-      1
-    , 'Administrador'
+    'Administrador'
     , 'admin'
     , 'https://fryntiz.es'
     , 'Administrador en plataforma de pruebas (beta)'
@@ -112,12 +91,25 @@ INSERT INTO usuarios (
     , 'temp1'
     , 1
   )
+  , (
+    'Anónimo'
+    , 'Anónimo'
+    , 'https://fryntiz.es'
+    , 'Usuario Anónimo o borrado del sistema'
+    , 'anonimo@domain.com'
+    , '@anonimo'
+    , '@anonimo'
+    , '@anonimo'
+    , crypt('1234', gen_salt('bf', 13))
+    , ''
+    , 'anonimo'
+    , 3
+  )
 
   , (
-      2
-    , 'Editor'
+    'Editor'
     , 'editor'
-    , 'https://www.fryntiz.es'
+    , 'https://fryntiz.es'
     , 'Editor en plataforma de pruebas (beta)'
     , 'user1@domain.com'
     , '@editor'
@@ -130,12 +122,11 @@ INSERT INTO usuarios (
   )
 
   , (
-      3
-    , 'Pepe'
-    , 'pepeneitor3000'
-    , 'https://www.fryntiz.es'
+    'Pepe'
+    , 'pepe'
+    , 'https://fryntiz.es'
     , 'Usuario normal en plataforma de pruebas (beta)'
-    , 'user2@domain.com'
+    , 'pepe@domain.com'
     , '@pepeitor'
     , '@pepeitor'
     , '@pepeitor'
@@ -143,6 +134,72 @@ INSERT INTO usuarios (
     , ''
     , 'temp3'
     , 3
+  )
+
+  , (
+    'Antonio'
+    , 'Antonio'
+    , 'https://fryntiz.es'
+    , 'Usuario normal en plataforma de pruebas (beta)'
+    , 'antonio@domain.com'
+    , '@antonio'
+    , '@antonio'
+    , '@antonio'
+    , crypt('1234', gen_salt('bf', 13))
+    , ''
+    , 'temp4'
+    , 3
+    )
+
+  , (
+    'María'
+    , 'María'
+    , 'https://fryntiz.es'
+    , 'Usuario normal en plataforma de pruebas (beta)'
+    , 'maria@domain.com'
+    , '@maria'
+    , '@maria'
+    , '@maria'
+    , crypt('1234', gen_salt('bf', 13))
+    , ''
+    , 'temp5'
+    , 3
+  )
+;
+
+---------------------------------------------------
+--                    Usuarios                   --
+---------------------------------------------------
+INSERT INTO usuarios (rol_id, datos_id)
+VALUES
+  (
+     1
+   , 1
+  )
+
+  , (
+      2
+    , 2
+  )
+
+  , (
+      3
+    , 3
+  )
+
+  , (
+      6
+    , 4
+  )
+
+  , (
+      6
+    , 5
+  )
+
+  , (
+      6
+    , 6
   )
 ;
 

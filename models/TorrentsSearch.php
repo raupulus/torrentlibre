@@ -93,6 +93,11 @@ class TorrentsSearch extends Torrents
             ->andFilterWhere(['ilike', 'archivos', $this->archivos])
             ->andFilterWhere(['ilike', 'password', $this->password]);
 
+        // Ordenar por defecto descendientemente
+        $query->orderBy([
+            'torrents.created_at' => SORT_DESC,
+        ]);
+
         return $dataProvider;
     }
 }

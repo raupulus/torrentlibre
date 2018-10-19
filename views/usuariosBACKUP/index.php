@@ -11,7 +11,6 @@ use app\assets\UsuariosIndexAsset;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
-use app\helpers\Roles;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsuariosSearch */
@@ -24,33 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
 UsuariosIndexAsset::register($this);
 
 // Variables
-$isAdmin = Roles::isAdmin();
-
-$redesSociales = [
-    'label' => 'Redes Sociales',
-    'format' => 'raw',
-    'value' => function($model) {
-        $web = $model->datos->web;
-        $facebook = 'https://facebook.com/' .
-            $model->datos->facebook;
-        $twitter = 'https://twitter.com/' .
-            $model->datos->twitter;
-        $gplus = 'https://plus.google.com/' .
-            $model->datos->googleplus;
-        $dir_iconos = yii::getAlias('@r_iconos');
-
-        $imgs = '<a href="'.$facebook.'" class="user-social">';
-        $imgs .= '<img src="'.$dir_iconos.'/facebook.png"/></a>';
-
-        $imgs .= '<a href="'.$twitter.'" class="user-social">';
-        $imgs .= '<img src="'.$dir_iconos.'/twitter.png"/></a>';
-
-        $imgs .= '<a href="'.$gplus.'" class="user-social">';
-        $imgs .= '<img src="'.$dir_iconos.'/gplus.png"/></a>';
-
-        return $imgs;
-    }
-];
+if (!Yii::$app->user->isGuest) {
+    $rol = Yii::$app->user->identity->rol;
+    $user = Yii::$app->user->identity->getId();
+}
 ?>
 
 <div class="usuarios-index">
@@ -58,7 +34,7 @@ $redesSociales = [
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <!-- Esta vista solo la puede ver el administrador -->
-    <?php if ($isAdmin): ?>
+    <?php if (isset($rol) && ($rol === 'admin')): ?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             //'filterModel' => $searchModel,
@@ -72,50 +48,45 @@ $redesSociales = [
             'columns' => [
                 'id',
                 [
+                    'attribute' => 'nombre',
                     'format' => 'raw',
                     'value' => function($model) {
-                        return Html::a($model->datos->nombre, [
+                        return Html::a($model->nombre, [
                             Url::to('usuarios/view'),
                             'id' => $model->id
                         ]);
                     }
                 ],
                 [
+                    'attribute' => 'nick',
                     'format' => 'raw',
                     'value' => function($model) {
-                        return Html::a($model->datos->nick, [
+                        return Html::a($model->nick, [
                             Url::to('usuarios/view'),
                             'id' => $model->id
                         ]);
                     }
                 ],
-                'rol.tipo',  // Tipo de rol
-                'datos.email:email',
-                'datos.lastlogin_at:datetime',
-                'datos.biografia',
-                [
-                    'attribute' => 'datos.web',
-                    'format' => 'raw',
-                    'value' => function($model) {
-                        return Html::a($model->datos->web, $model->datos->web,
-                            [
-                                'class' => 'btn'
-                            ]);
-                    }
-                ],
-                $redesSociales,
+                'usuariosId.rol.tipo',  // Tipo de rol
+                'email:email',
+                'lastlogin_at:datetime',
+                'usuariosId.ip',
+                'web',
+                'biografia',
+                'twitter',
+                'facebook',
+                'googleplus',
                 [
                     'attribute' => 'bloquear',
                     'format' => 'raw',
                     'value' => function($model) {
-                        $buttons = '';
                         if (isset($model->usuariosBloqueados->usuario)) {
-                            $buttons .=  Html::a('Desbloquear', [
+                            return Html::a('Desbloquear', [
                                 Url::to('usuarios-bloqueados/desbloquear'),
                                 'id' => $model->usuariosBloqueados->id
-                            ],
+                                ],
                                 [
-                                    'class' => 'btn btn-warning btn-admin',
+                                    'class' => 'btn btn-success',
                                     'data' => [
                                         'method' => 'post',
                                     ],
@@ -123,55 +94,19 @@ $redesSociales = [
                                 ]
                             );
                         } else {
-                            $buttons .=  Html::a('Bloquear', [
+                            return Html::a('Bloquear', [
                                 Url::to('usuarios-bloqueados/bloquear'),
                                 'id' => $model->id,
 
                             ],
                                 [
-                                    'class' => 'btn btn-danger btn-admin',
+                                    'class' => 'btn btn-danger',
                                 ]
                             );
                         }
-
-                        $buttons .=  Html::a('Ver', [
-                            Url::to('usuarios/view'),
-                            'id' => $model->id,
-
-                        ],
-                            [
-                                'class' => 'btn btn-success btn-admin',
-                            ]
-                        );
-
-                        $buttons .=  Html::a('Modificar', [
-                            Url::to('usuarios/update'),
-                            'id' => $model->id,
-
-                        ],
-                            [
-                                'class' => 'btn btn-primary btn-admin',
-                            ]
-                        );
-
-                        $buttons .=  Html::a('Eliminar', [
-                            Url::to('usuarios/delete'),
-                            'id' => $model->id,
-                        ],
-                            [
-                                'class' => 'btn btn-danger btn-admin',
-                                'data' => [
-                                    'confirm' => '¿Estás seguro que quieres eliminar el usuario?',
-                                    'method' => 'post',
-                                ],
-                            ]
-                        );
-
-
-                        return $buttons;
                     }
                 ],
-                //['class' => 'yii\grid\ActionColumn'],
+                ['class' => 'yii\grid\ActionColumn'],
             ],
         ]); ?>
 
@@ -191,6 +126,7 @@ $redesSociales = [
                 //['class' => 'yii\grid\SerialColumn'],
 
                 [
+                    'attribute' => 'avatar',
                     'format' => 'raw',
                     'value' => function($model, $key, $index) {
                         $img = $model->datos->avatar;
@@ -205,17 +141,23 @@ $redesSociales = [
                 ],
 
                 [
+                    'attribute' => 'nick',
                     'format' => 'raw',
                     'value' => function($model) {
-                        return Html::a($model->datos->nick, [
+                        return Html::a($model->nick, [
                             Url::to('usuarios/view'),
                             'id' => $model->id
                         ]);
                     }
                 ],
 
-                'datos.biografia',
-                $redesSociales,
+                'nombre',
+                'web',
+                'biografia',
+                'email:email',
+                'twitter',
+                'facebook',
+                'googleplus',
             ],
         ]); ?>
     <?php endif; ?>

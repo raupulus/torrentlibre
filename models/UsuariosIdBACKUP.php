@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use function var_dump;
 use Yii;
 use yii\db\Expression;
 
@@ -77,7 +78,7 @@ class UsuariosId extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuarios()
+    public function getDatos()
     {
         return $this->hasOne(Usuarios::className(), ['id' => 'id']);
     }

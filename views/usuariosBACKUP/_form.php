@@ -66,42 +66,42 @@ use juliardi\captcha\Captcha;
         <h4><?= Yii::t('usuarios-create', 'seleccionar-avatar'); ?></h4>
         <div id="avatar-selector" class="row">
             <?php
-            // TODO → Utilizar archivo externo en /data/avatar.php
-            //$avatares = include "../../data/avatar.php";
+                // TODO → Utilizar archivo externo en /data/avatar.php
+                //$avatares = include "../../data/avatar.php";
 
-            $avatares = [
-                [
-                    'nombre' => 'default.png',
-                    'titulo' => 'Imagen de Avatar por defecto'
-                ],
-                [
-                    'nombre' => 'hippy.png',
-                    'titulo' => 'Imagen de Avatar hippy'
-                ],
-                [
-                    'nombre' => 'rey.png',
-                    'titulo' => 'Imagen de Avatar rey'
-                ],
-                [
-                    'nombre' => 'rockero.png',
-                    'titulo' => 'Imagen de Avatar rockero'
-                ],
-            ];
+                $avatares = [
+                    [
+                        'nombre' => 'default.png',
+                        'titulo' => 'Imagen de Avatar por defecto'
+                    ],
+                    [
+                        'nombre' => 'hippy.png',
+                        'titulo' => 'Imagen de Avatar hippy'
+                    ],
+                    [
+                        'nombre' => 'rey.png',
+                        'titulo' => 'Imagen de Avatar rey'
+                    ],
+                    [
+                        'nombre' => 'rockero.png',
+                        'titulo' => 'Imagen de Avatar rockero'
+                    ],
+                ];
 
-            foreach($avatares as $av): ?>
-                <div class="col-xs-3 col">
-                    <img src="/images/user-avatar/<?= $av['nombre'] ?>"
-                         data-name="<?= $av['nombre'] ?>"
-                         alt="<?= $av['titulo'] ?>"
-                         title="<?= $av['titulo'] ?>" />
-                </div>
+                foreach($avatares as $av): ?>
+                    <div class="col-xs-3 col">
+                        <img src="/images/user-avatar/<?= $av['nombre'] ?>"
+                             data-name="<?= $av['nombre'] ?>"
+                             alt="<?= $av['titulo'] ?>"
+                             title="<?= $av['titulo'] ?>" />
+                    </div>
             <?php endforeach ?>
         </div>
 
         <?= $form->field($model, 'avatar')
-            ->textInput(['maxlength' => true])
-            ->hiddenInput()
-            ->label(false)?>
+                 ->textInput(['maxlength' => true])
+                 ->hiddenInput()
+                 ->label(false)?>
 
         <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
@@ -144,16 +144,16 @@ use juliardi\captcha\Captcha;
         <div class="btn-anterior-box">
             <?= Html::buttonInput(Yii::t('forms', 'back'),
                 [
-                    'id' => 'btn-form-usuarios-anterior',
-                    'class' => 'btn-form btn-anterior',
-                ]); ?>
+                'id' => 'btn-form-usuarios-anterior',
+                'class' => 'btn-form btn-anterior',
+            ]); ?>
         </div>
         <div class="btn-siguiente-box">
             <?= Html::buttonInput(Yii::t('forms', 'next'),
                 [
-                    'id' => 'btn-form-usuarios-siguiente',
-                    'class' => 'btn-form btn-siguiente'
-                ]); ?>
+                'id' => 'btn-form-usuarios-siguiente',
+                'class' => 'btn-form btn-siguiente'
+            ]); ?>
         </div>
     </div>
 
@@ -162,7 +162,7 @@ use juliardi\captcha\Captcha;
         <div class="btn-confirmar-box">
             <?= Html::submitButton(Yii::t('forms', $model->scenario),
                 [
-                    'class' => 'btn-form btn-confirmar'
+                        'class' => 'btn-form btn-confirmar'
                 ]) ?>
         </div>
     </div>

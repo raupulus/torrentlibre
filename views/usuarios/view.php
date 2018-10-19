@@ -7,13 +7,15 @@
  **/
 
 use app\assets\UsuariosViewAsset;
+use app\helpers\Roles;
+use app\helpers\Access;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
-$this->title = $model->nombre;
+$this->title = $model->datos->nick;
 $this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -21,137 +23,122 @@ $this->params['breadcrumbs'][] = $this->title;
 UsuariosViewAsset::register($this);
 
 // Variables
-if (!Yii::$app->user->isGuest) {
-    $rol = Yii::$app->user->identity->rol;
-}
-
+$isAdmin = Roles::isAdmin();
+$isAutor = Access::isAutor($model->id);
 ?>
 
 <div class="usuarios-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <!-- Si es el administrador -->
-    <?php if ($rol === 'admin'): ?>
+    <?= DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                [
+                    'attribute' => 'avatar',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                        $img = $model->datos->avatar;
+                        $ruta = yii::getAlias('@r_avatar').'/';
+
+                        if ((! isset($img)) || (! file_exists($ruta.$img))) {
+                            $img = 'default.png';
+                        }
+
+                        return '<img src="'.$ruta.$img.'" />';
+                    }
+                ],
+                'datos.nick',
+                'datos.biografia',
+                [
+                    'attribute' => 'datos.web',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                        return Html::a($model->datos->web, $model->datos->web,
+                        [
+                            'class' => 'btn'
+                        ]);
+                    }
+                ],
+                [
+                    'attribute' => 'datos.twitter',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                        $link = 'https://twitter.com/' .
+                                $model->datos->twitter;
+                        return Html::a($link, $link,[
+                            'class' => 'btn'
+                        ]);
+                    }
+                ],
+                [
+                    'attribute' => 'datos.facebook',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                        $link = 'https://facebook.com/' .
+                                 $model->datos->facebook;
+
+                        return Html::a($link, $link,[
+                            'class' => 'btn'
+                        ]);
+                    }
+                ],
+                [
+                    'attribute' => 'datos.googleplus',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                        $link = 'https://plus.google.com/' .
+                                 $model->datos->googleplus;
+
+                        return Html::a($link, $link,[
+                            'class' => 'btn'
+                        ]);
+                    }
+                ],
+            ],
+        ])
+    ?>
+
+    <!-- Si es el autor o el administrador -->
+    <?php if ($isAutor || $isAdmin): ?>
+        <h3>Datos del perfil</h3>
         <?= DetailView::widget([
             'model' => $model,
             'attributes' => [
                 'id',
-                'nombre',
-                'nick',
-                'usuariosId.rol.tipo',
-                'web',
-                'biografia',
-                'email:email',
-                'twitter',
-                'facebook',
-                'googleplus',
-                'avatar',
-                'lastlogin_at',
-                [
-                    'attribute' => 'avatar',
-                    'format' => 'raw',
-                    'value' => function($model) {
-                        $img = $model->avatar;
-                        $ruta = yii::getAlias('@r_avatar').'/';
-
-                        if ((! isset($img)) || (! file_exists($ruta.$img))) {
-                            $img = 'default.png';
-                        }
-
-                        return '<img src="'.$ruta.$img.'" />';
-                    }
-                ],
-                'usuariosId.ip',
+                'datos.nombre',
+                'rol.tipo',
+                'datos.email:email',
+                'datos.avatar',
+                'datos.lastlogin_at:datetime',
             ],
         ])
-    ?>
+        ?>
 
-    <!-- Si es el usuario al que corresponde la información -->
-    <?php elseif (Yii::$app->user->id === $model->id): ?>
+        <h3>Preferencias del usuario</h3>
         <?= DetailView::widget([
             'model' => $model,
             'attributes' => [
-                [
-                    'attribute' => 'avatar',
-                    'format' => 'raw',
-                    'value' => function($model) {
-                        $img = $model->avatar;
-                        $ruta = yii::getAlias('@r_avatar').'/';
-
-                        if ((! isset($img)) || (! file_exists($ruta.$img))) {
-                            $img = 'default.png';
-                        }
-
-                        return '<img src="'.$ruta.$img.'" />';
-                    }
-                ],
-                'nombre',
-                'nick',
-                'web',
-                'biografia',
-                'email:email',
-                'twitter',
-                'facebook',
-                'googleplus',
-                'lastlogin_at',
-                'usuariosId.rol.tipo',
-                'usuariosId.ip',
-            ],
-        ])
-    ?>
-
-    <h3>Preferencias del usuario</h3>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'preferencias.tema.nombre',
-            'preferencias.tema.descripcion',
-            'preferencias.promociones:boolean',
-            'preferencias.noticias:boolean',
-            'preferencias.resumen:boolean',
-            'preferencias.tour:boolean',
-        ],
-    ]) ?>
-
-    <?php else: ?>
-        <?= DetailView::widget([
-            'model' => $model,
-            'attributes' => [
-                [
-                    'attribute' => 'avatar',
-                    'format' => 'raw',
-                    'value' => function($model) {
-                        $img = $model->avatar;
-                        $ruta = yii::getAlias('@r_avatar').'/';
-
-                        if ((! isset($img)) || (! file_exists($ruta.$img))) {
-                            $img = 'default.png';
-                        }
-
-                        return '<img src="'.$ruta.$img.'" />';
-                    }
-                ],
-                'nick',
-                'web',
-                'biografia',
-                'email:email',
-                'twitter',
-                'facebook',
-                'googleplus',
-                'usuariosId.rol.tipo',
+                'datos.preferencias.tema.nombre',
+                'datos.preferencias.tema.descripcion',
+                'datos.preferencias.promociones:boolean',
+                'datos.preferencias.noticias:boolean',
+                'datos.preferencias.resumen:boolean',
+                'datos.preferencias.tour:boolean',
             ],
         ]) ?>
     <?php endif ?>
 
     <p>
-        <?php if ((Yii::$app->user->id === $model->id) || ($rol === 'admin')): ?>
+        <?php if ($isAutor || $isAdmin): ?>
             <?= Html::a('Modificar',
                 ['update', 'id' => $model->id],
                 ['class' => 'btn btn-primary']) ?>
 
-            <?= Html::a('Eliminar cuenta', ['delete', 'id' => $model->id], [
+            <?= Html::a('Eliminar cuenta', [
+                'delete',
+                'id' => $model->id
+            ], [
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => '¿Estás seguro que quieres eliminar el usuario?',
@@ -160,5 +147,4 @@ if (!Yii::$app->user->isGuest) {
             ]) ?>
         <?php endif ?>
     </p>
-
 </div>

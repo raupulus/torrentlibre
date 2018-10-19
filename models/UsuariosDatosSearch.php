@@ -4,13 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Usuarios;
 use app\models\UsuariosDatos;
 
 /**
- * UsuariosSearch represents the model behind the search form of `app\models\Usuarios`.
+ * UsuariosDatosSearch represents the model behind the search form of `app\models\UsuariosDatos`.
  */
-class UsuariosSearch extends Usuarios
+class UsuariosDatosSearch extends UsuariosDatos
 {
     /**
      * {@inheritdoc}
@@ -18,14 +17,10 @@ class UsuariosSearch extends Usuarios
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nombre', 'nick', 'email'], 'safe'],
+            [['id', 'preferencias_id'], 'integer'],
+            [['nombre', 'nick', 'web', 'biografia', 'email', 'twitter', 'facebook', 'googleplus', 'avatar', 'password', 'auth_key', 'token', 'lastlogin_at'], 'safe'],
         ];
     }
-
-    public $nombre;
-    public $nick;
-    public $email;
 
     /**
      * {@inheritdoc}
@@ -45,8 +40,7 @@ class UsuariosSearch extends Usuarios
      */
     public function search($params)
     {
-        $query = Usuarios::find()
-            ->leftJoin('usuarios_datos', 'usuarios.datos_id = usuarios_datos.id');
+        $query = UsuariosDatos::find();
 
         // add conditions that should always apply here
 
@@ -64,19 +58,16 @@ class UsuariosSearch extends Usuarios
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'usuarios.id' => $this->id,
-            //'lastlogin_at' => $this->lastlogin_at,
-            //'preferencias_id' => $this->preferencias_id,
+            'id' => $this->id,
+            'lastlogin_at' => $this->lastlogin_at,
+            'preferencias_id' => $this->preferencias_id,
         ]);
 
-        $query->andFilterWhere(['ilike', 'usuarios_datos.nombre',
-            $this->nombre])
-            ->andFilterWhere(['ilike', 'usuarios_datos.nick', $this->nick])
-            //->andFilterWhere(['ilike', 'web', $this->web])
-            //->andFilterWhere(['ilike', 'biografia', $this->biografia])
-            ->andFilterWhere(['ilike', 'usuarios_datos.email', $this->email]);
-
-            /*
+        $query->andFilterWhere(['ilike', 'nombre', $this->nombre])
+            ->andFilterWhere(['ilike', 'nick', $this->nick])
+            ->andFilterWhere(['ilike', 'web', $this->web])
+            ->andFilterWhere(['ilike', 'biografia', $this->biografia])
+            ->andFilterWhere(['ilike', 'email', $this->email])
             ->andFilterWhere(['ilike', 'twitter', $this->twitter])
             ->andFilterWhere(['ilike', 'facebook', $this->facebook])
             ->andFilterWhere(['ilike', 'googleplus', $this->googleplus])
@@ -84,12 +75,6 @@ class UsuariosSearch extends Usuarios
             ->andFilterWhere(['ilike', 'password', $this->password])
             ->andFilterWhere(['ilike', 'auth_key', $this->auth_key])
             ->andFilterWhere(['ilike', 'token', $this->token]);
-            */
-
-        // Ordenar por defecto descendientemente
-        $query->orderBy([
-            'usuarios.created_at' => SORT_DESC,
-        ]);
 
         return $dataProvider;
     }

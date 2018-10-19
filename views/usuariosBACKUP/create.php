@@ -8,25 +8,28 @@
  **/
 
 use app\assets\UsuariosCreateAsset;
+use app\models\Usuarios;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
-$this->title = 'Actualizar Usuario:' . $model->nick;
-$this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->nick, 'url' => ['view',
-    'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Modificar Usuario';
-
 // Registro assets para esta vista
 UsuariosCreateAsset::register($this);
 
-echo $model->SCENARIO;
+$this->title = Yii::t('usuarios-create', 'title');
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('usuarios-create', 'breadcrumbs'),
+    'url' => ['index']
+];
+$this->params['breadcrumbs'][] = $this->title;
+
 
 ?>
 
-<div class="usuarios-update">
+<?= Yii::$app->session->getFlash('error'); ?>
+
+<div class="usuarios-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -1,4 +1,4 @@
-<?php header('Content-Type: text/html; charset=UTF-8');
+<?php
 /**
  * Created by PhpStorm.
  * User: fryntiz
@@ -12,9 +12,9 @@
  * @license   https://www.gnu.org/licenses/gpl-3.0-standalone.html
  **/
 
-
 namespace app\helpers;
 
+use Yii;
 
 class Roles
 {
@@ -26,9 +26,21 @@ class Roles
      */
     public static function is(String $role): boolean
     {
-        // TODO Comprobar primero si está logueado el usuario.
-        // TODO → Comparar con el usuario.
-        return true;
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+
+        // Si es administrador siempre devuelve true
+        if (Yii::$app->user->identity->rol == 'admin') {
+            return true;
+        }
+
+        // Si coincide con el usuario logueado devuelve true
+        if (Yii::$app->user->identity->rol == $role) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -36,10 +48,17 @@ class Roles
      *
      * @return bool Devuelve boolean indicando true si coincide
      */
-    public static function isAdmin(): boolean
+    public static function isAdmin()
     {
-        // TODO Comprobar primero si está logueado el usuario.
-        // TODO → Comparar con el usuario.
-        return true;
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+
+        // Si es administrador siempre devuelve true
+        if (Yii::$app->user->identity->rol == 'admin') {
+            return true;
+        }
+
+        return false;
     }
 }

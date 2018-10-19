@@ -92,36 +92,13 @@ CREATE TABLE preferencias (
 ---------------------------------------------------
 --                    Usuarios                   --
 ---------------------------------------------------
-DROP TABLE IF EXISTS usuarios_id CASCADE;
-
 /*
- * Usuarios y datos del programa (no sensible), nunca se eliminará.
- * Este identificador relaciona 1:1 a un usuario de la tabla "usuarios"
+ * Datos sensibles de usuario, se puede borrar ya que se relacionará
+ * sobre usuarios
  */
-CREATE TABLE usuarios_id (
+DROP TABLE IF EXISTS usuarios_datos CASCADE;
+CREATE TABLE usuarios_datos (
     id               BIGSERIAL     PRIMARY KEY
-
-  , created_at       TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
-  , updated_at       TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
-  --, datos_id         BIGINT        REFERENCES usuarios_datos (id)
-  , rol_id           BIGINT        DEFAULT 1
-                                   NOT NULL REFERENCES roles (id)
-                                   ON DELETE NO ACTION
-                                   ON UPDATE CASCADE
-  , ip               VARCHAR(15)  -- Última IP de acceso
-);
-
-
-DROP TABLE IF EXISTS usuarios CASCADE;
-
-/*
- * Usuario y datos sensibles, se puede borrar ya que se relacionará
- * sobre usuarios_id
- */
-CREATE TABLE usuarios (
-    id               BIGINT        PRIMARY KEY REFERENCES usuarios_id (id)
-                                   ON DELETE NO ACTION
-                                   ON UPDATE CASCADE
   , nombre           VARCHAR(255)
   , nick             VARCHAR(255)  NOT NULL UNIQUE
   , web              VARCHAR(255)
@@ -144,15 +121,30 @@ CREATE TABLE usuarios (
   --, fecha_nacimiento DATE
   --, geoloc           VARCHAR(255)
   --, sexo             CHAR          --CONSTRAINT ck_sexo_f_o_m
-                                   --CHECK (sexo = 'F'OR sexo = 'M')
+  --CHECK (sexo = 'F'OR sexo = 'M')
 );
 
+DROP TABLE IF EXISTS usuarios CASCADE;
+
+/*
+ * Usuarios y datos del programa (no sensible), nunca se eliminará.
+ * Este identificador relaciona 1:1 a un usuario de la tabla "usuarios_datos"
+ */
+CREATE TABLE usuarios (
+    id               BIGSERIAL     PRIMARY KEY
+  , datos_id         BIGINT        REFERENCES usuarios_datos (id)
+  , created_at       TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
+  , updated_at       TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
+  , rol_id           BIGINT        DEFAULT 5
+  REFERENCES roles (id)
+  ON DELETE NO ACTION
+  ON UPDATE CASCADE
+);
 
 ---------------------------------------------------
 --                  Licencias                    --
 ---------------------------------------------------
 DROP TABLE IF EXISTS licencias CASCADE;
-
 /*
  * Licencias para asignar a los torrents.
  * Las licencias (tipo) tienen un enlace hacia la web oficial (url) y
@@ -324,7 +316,7 @@ DROP TABLE IF EXISTS usuarios_bloqueados CASCADE;
  */
 CREATE TABLE usuarios_bloqueados (
     id            BIGSERIAL    PRIMARY KEY
-  , usuario_id    BIGINT       NOT NULL UNIQUE REFERENCES "usuarios" (id)
+  , usuario_id    BIGINT       NOT NULL UNIQUE REFERENCES "usuarios_datos" (id)
   , created_at    TIMESTAMP(0) DEFAULT  LOCALTIMESTAMP
 );
 
