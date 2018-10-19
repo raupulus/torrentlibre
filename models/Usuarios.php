@@ -46,7 +46,8 @@ class Usuarios extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['datos_id', 'rol_id'], 'default', 'value' => null],
+            [['datos_id'], 'default', 'value' => null],
+            [['rol_id'], 'default', 'value' => 5],
             [['datos_id', 'rol_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['rol_id'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::className(), 'targetAttribute' => ['rol_id' => 'id']],

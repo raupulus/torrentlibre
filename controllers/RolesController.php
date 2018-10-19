@@ -2,22 +2,17 @@
 
 namespace app\controllers;
 
-use app\helpers\Roles;
-use app\models\Preferencias;
-use app\models\UsuariosDatos;
-use function var_dump;
 use Yii;
-use app\models\Usuarios;
-use app\models\UsuariosSearch;
-use yii\db\Expression;
+use app\models\Roles;
+use app\models\RolesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UsuariosController implements the CRUD actions for Usuarios model.
+ * RolesController implements the CRUD actions for Roles model.
  */
-class UsuariosController extends Controller
+class RolesController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -35,12 +30,12 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Lists all Usuarios models.
+     * Lists all Roles models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UsuariosSearch();
+        $searchModel = new RolesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -50,7 +45,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Displays a single Usuarios model.
+     * Displays a single Roles model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -63,58 +58,25 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Crea un nuevo usuario a partir del modelo.
-     * Si consigue crearse correctamente, se redirigirá a la vista del usuario
-     * recién creado.
-     *
+     * Creates a new Roles model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new UsuariosDatos([
-            'scenario' => UsuariosDatos::ESCENARIO_CREATE
-        ]);
+        $model = new Roles();
 
-        $isPOST = $model->load(Yii::$app->request->post());
-
-
-        if ($isPOST) {
-            // Creo nuevo id para preferencias_id desde "preferencias"
-            $preferencias = new Preferencias(['tema_id' => 1]);
-
-            $usuario_id = new Usuarios(['rol_id' => 5]);
-        }
-
-        if ($isPOST && $preferencias->save() && $usuario_id->save()) {
-            $model->preferencias_id = $preferencias->id;
-            $model->id = $usuario_id->id;
-
-            if ($model->avatar == '') {
-                $model->avatar = 'default.png';
-            }
-
-            $model->lastlogin_at = new Expression('NOW()');
-        }
-
-
-        if ($isPOST && $model->save()) {
-            $usuario_id->datos_id = $model->id;
-
-            if (! Roles::isAdmin()) {
-                Yii::$app->user->login($model);
-            }
-
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        //var_dump($model->errors);die();
         return $this->render('create', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing Usuarios model.
+     * Updates an existing Roles model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -134,7 +96,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Deletes an existing Usuarios model.
+     * Deletes an existing Roles model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -148,15 +110,15 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Finds the Usuarios model based on its primary key value.
+     * Finds the Roles model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Usuarios the loaded model
+     * @return Roles the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Usuarios::findOne($id)) !== null) {
+        if (($model = Roles::findOne($id)) !== null) {
             return $model;
         }
 

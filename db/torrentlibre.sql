@@ -135,8 +135,8 @@ CREATE TABLE usuarios (
   , datos_id         BIGINT        REFERENCES usuarios_datos (id)
   , created_at       TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
   , updated_at       TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
-  , rol_id           BIGINT        DEFAULT 1
-  NOT NULL REFERENCES roles (id)
+  , rol_id           BIGINT        DEFAULT 5
+  REFERENCES roles (id)
   ON DELETE NO ACTION
   ON UPDATE CASCADE
 );
