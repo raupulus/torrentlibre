@@ -65,7 +65,7 @@ $isAutor = Access::isAutor($model->id);
                     'format' => 'raw',
                     'value' => function($model) {
                         $link = 'https://twitter.com/' .
-                                $model->datos->facebook;
+                                $model->datos->twitter;
                         return Html::a($link, $link,[
                             'class' => 'btn'
                         ]);
@@ -87,8 +87,8 @@ $isAutor = Access::isAutor($model->id);
                     'attribute' => 'datos.googleplus',
                     'format' => 'raw',
                     'value' => function($model) {
-                        $link = 'https://plus.google.com/'
-                                .$model->datos->googleplus;
+                        $link = 'https://plus.google.com/' .
+                                 $model->datos->googleplus;
 
                         return Html::a($link, $link,[
                             'class' => 'btn'

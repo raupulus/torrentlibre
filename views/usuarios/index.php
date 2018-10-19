@@ -25,6 +25,32 @@ UsuariosIndexAsset::register($this);
 
 // Variables
 $isAdmin = Roles::isAdmin();
+
+$redesSociales = [
+    'label' => 'Redes Sociales',
+    'format' => 'raw',
+    'value' => function($model) {
+        $web = $model->datos->web;
+        $facebook = 'https://facebook.com/' .
+            $model->datos->facebook;
+        $twitter = 'https://twitter.com/' .
+            $model->datos->twitter;
+        $gplus = 'https://plus.google.com/' .
+            $model->datos->googleplus;
+        $dir_iconos = yii::getAlias('@r_iconos');
+
+        $imgs = '<a href="'.$facebook.'" class="user-social">';
+        $imgs .= '<img src="'.$dir_iconos.'/facebook.png"/></a>';
+
+        $imgs .= '<a href="'.$twitter.'" class="user-social">';
+        $imgs .= '<img src="'.$dir_iconos.'/twitter.png"/></a>';
+
+        $imgs .= '<a href="'.$gplus.'" class="user-social">';
+        $imgs .= '<img src="'.$dir_iconos.'/gplus.png"/></a>';
+
+        return $imgs;
+    }
+];
 ?>
 
 <div class="usuarios-index">
@@ -66,22 +92,30 @@ $isAdmin = Roles::isAdmin();
                 'rol.tipo',  // Tipo de rol
                 'datos.email:email',
                 'datos.lastlogin_at:datetime',
-                'datos.web',
                 'datos.biografia',
-                'datos.twitter',
-                'datos.facebook',
-                'datos.googleplus',
+                [
+                    'attribute' => 'datos.web',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                        return Html::a($model->datos->web, $model->datos->web,
+                            [
+                                'class' => 'btn'
+                            ]);
+                    }
+                ],
+                $redesSociales,
                 [
                     'attribute' => 'bloquear',
                     'format' => 'raw',
                     'value' => function($model) {
+                        $buttons = '';
                         if (isset($model->usuariosBloqueados->usuario)) {
-                            return Html::a('Desbloquear', [
+                            $buttons .=  Html::a('Desbloquear', [
                                 Url::to('usuarios-bloqueados/desbloquear'),
                                 'id' => $model->usuariosBloqueados->id
                             ],
                                 [
-                                    'class' => 'btn btn-success',
+                                    'class' => 'btn btn-warning btn-admin',
                                     'data' => [
                                         'method' => 'post',
                                     ],
@@ -89,19 +123,55 @@ $isAdmin = Roles::isAdmin();
                                 ]
                             );
                         } else {
-                            return Html::a('Bloquear', [
+                            $buttons .=  Html::a('Bloquear', [
                                 Url::to('usuarios-bloqueados/bloquear'),
                                 'id' => $model->id,
 
                             ],
                                 [
-                                    'class' => 'btn btn-danger',
+                                    'class' => 'btn btn-danger btn-admin',
                                 ]
                             );
                         }
+
+                        $buttons .=  Html::a('Ver', [
+                            Url::to('usuarios/view'),
+                            'id' => $model->id,
+
+                        ],
+                            [
+                                'class' => 'btn btn-success btn-admin',
+                            ]
+                        );
+
+                        $buttons .=  Html::a('Modificar', [
+                            Url::to('usuarios/update'),
+                            'id' => $model->id,
+
+                        ],
+                            [
+                                'class' => 'btn btn-primary btn-admin',
+                            ]
+                        );
+
+                        $buttons .=  Html::a('Eliminar', [
+                            Url::to('usuarios/delete'),
+                            'id' => $model->id,
+                        ],
+                            [
+                                'class' => 'btn btn-danger btn-admin',
+                                'data' => [
+                                    'confirm' => '¿Estás seguro que quieres eliminar el usuario?',
+                                    'method' => 'post',
+                                ],
+                            ]
+                        );
+
+
+                        return $buttons;
                     }
                 ],
-                ['class' => 'yii\grid\ActionColumn'],
+                //['class' => 'yii\grid\ActionColumn'],
             ],
         ]); ?>
 
@@ -144,13 +214,8 @@ $isAdmin = Roles::isAdmin();
                     }
                 ],
 
-                'datos.nombre',
-                'datos.web',
                 'datos.biografia',
-                'datos.email:email',
-                'datos.twitter',
-                'datos.facebook',
-                'datos.googleplus',
+                $redesSociales,
             ],
         ]); ?>
     <?php endif; ?>

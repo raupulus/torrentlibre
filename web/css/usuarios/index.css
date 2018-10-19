@@ -10,7 +10,7 @@
  *****************************************/
 .grid-view {
     margin: 25px 5px;
-    border: 8px solid #f5e79e;
+    border: 8px solid gray;
     border-radius: 10px;
     box-shadow: 5px 5px 5px black;
     overflow-x: scroll;
@@ -72,4 +72,17 @@
 
 #box-form-button-search button {
     min-width: 100px;
+}
+
+/* Iconos para redes sociales */
+.user-social img {
+    display: block;
+    margin: 5px 10px;
+    width: 40px !important;
+}
+
+/* Botones de acción para administrar (bloquear/ver/modificar/eliminar */
+.btn-admin {
+    margin: 5px 10px;
+    width: 100px;
 }
