@@ -133,10 +133,10 @@ use juliardi\captcha\Captcha;
             <?php echo $form->field($model, 'captcha')->widget(Captcha::className()) ?>
         <?php else: ?>
             <h3>Para guardar pulse el siguiente botón</h3>
-            <a href="/usuarios/view?id=<?= $model->id ?>"
-               class="btn btn-success center-block">
-                <?= Yii::t('forms', 'update') ?>
-            </a>
+            <?= Html::submitButton(Yii::t('forms', $model->scenario),
+                [
+                    'class' => 'btn btn-success center-block btn-guardar'
+                ]) ?>
         <?php endif ?>
     </div>
 
