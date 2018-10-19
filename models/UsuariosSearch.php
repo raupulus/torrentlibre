@@ -86,6 +86,11 @@ class UsuariosSearch extends Usuarios
             ->andFilterWhere(['ilike', 'token', $this->token]);
             */
 
+        // Ordenar por defecto descendientemente
+        $query->orderBy([
+            'usuarios.created_at' => SORT_DESC,
+        ]);
+
         return $dataProvider;
     }
 }
