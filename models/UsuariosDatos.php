@@ -44,6 +44,11 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
     const ESCENARIO_UPDATE = 'update';
 
     /**
+     * @const CAPTCHA_ACTIVE Constante para cuando se debe validar el captcha
+     */
+    const CAPTCHA_ACTIVE = 'captcha';
+
+    /**
      * Atributo usado para guardar el campo de "confirmar contraseña" del
      * formulario de creación de usuarios.
      * @var string
@@ -84,7 +89,7 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
                 Usuarios::className(), 'targetAttribute' => ['id' => 'id']],
             [
                 ['captcha'],
-                'required', 'on' => self::ESCENARIO_CREATE
+                'required', 'on' => self::CAPTCHA_ACTIVE
             ],
             ['captcha', CaptchaValidator::className()],  // Validación captcha
             [['password'], 'string', 'max' => 255],

@@ -83,24 +83,27 @@ class UsuariosController extends Controller
             $preferencias = new Preferencias(['tema_id' => 1]);
 
             $usuario_id = new Usuarios(['rol_id' => 5]);
+
+            $model->lastlogin_at = new Expression('NOW()');
         }
 
-        if ($isPOST && $preferencias->save() && $usuario_id->save()) {
+        if ($isPOST && $model->validate() &&
+                       $preferencias->save() &&
+                       $usuario_id->save()) {
+
             $model->preferencias_id = $preferencias->id;
             $model->id = $usuario_id->id;
 
             if ($model->avatar == '') {
                 $model->avatar = 'default.png';
             }
-
-            $model->lastlogin_at = new Expression('NOW()');
         }
 
 
         if ($isPOST && $model->save()) {
             $usuario_id->datos_id = $model->id;
 
-            if (! Roles::isAdmin()) {
+            if ($usuario_id->save() && (! Roles::isAdmin())) {
                 Yii::$app->user->login($model);
             }
 
