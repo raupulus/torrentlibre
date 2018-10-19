@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use function var_dump;
 use Yii;
 use yii\web\IdentityInterface;
 use juliardi\captcha\CaptchaValidator;
@@ -75,8 +76,8 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['id', 'nick', 'email'], 'required'],
-            [['id', 'preferencias_id'], 'default', 'value' => null],
+            [['nick', 'email'], 'required'],
+            [['preferencias_id'], 'default', 'value' => null],
             [['id', 'preferencias_id'], 'integer'],
             [['lastlogin_at'], 'safe'],
             [['nombre', 'nick', 'web', 'biografia', 'email', 'twitter', 'facebook', 'googleplus', 'avatar', 'password', 'auth_key', 'token'], 'string', 'max' => 255],
@@ -85,8 +86,6 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
             [['token'], 'unique'],
             [['id'], 'unique'],
             [['preferencias_id'], 'exist', 'skipOnError' => true, 'targetClass' => Preferencias::className(), 'targetAttribute' => ['preferencias_id' => 'id']],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' =>
-                Usuarios::className(), 'targetAttribute' => ['id' => 'id']],
             [
                 ['captcha'],
                 'required', 'on' => self::CAPTCHA_ACTIVE
@@ -158,9 +157,30 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
                 $this->token = Yii::$app->security->generateRandomString();
                 $this->auth_key = Yii::$app->security->generateRandomString();
 
+                if ($this->avatar == '') {
+                    $this->avatar = 'default.png';
+                }
+
                 if ($this->scenario === self::ESCENARIO_CREATE) {
                     $this->password = Yii::$app->security
                         ->generatePasswordHash($this->password);
+
+                    // Creo Preferencias
+                    $preferencias = new Preferencias(['tema_id' => 1]);
+                    $preferencias->save();
+
+                    // Creo usuario_id
+                    $usuario_id = new Usuarios([
+                        'rol_id' => 5,
+                        'datos_id' => 2,
+                    ]);
+                    if (!$usuario_id->save()) {
+                        return false;
+                    }
+
+                    // Asigno Preferencias y usuario_id a este usuario
+                    $this->preferencias_id = $preferencias->id;
+                    $this->id = $usuario_id->id;
                 }
             } elseif ($this->scenario === self::ESCENARIO_UPDATE) {
                 if ($this->password === '') {

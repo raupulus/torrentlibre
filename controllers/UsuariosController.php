@@ -72,38 +72,18 @@ class UsuariosController extends Controller
     public function actionCreate()
     {
         $model = new UsuariosDatos([
-            'scenario' => UsuariosDatos::ESCENARIO_CREATE
+            'scenario' => UsuariosDatos::ESCENARIO_CREATE,
+            'lastlogin_at' => new Expression('NOW()'),
         ]);
 
         $isPOST = $model->load(Yii::$app->request->post());
 
-
-        if ($isPOST) {
-            // Creo nuevo id para preferencias_id desde "preferencias"
-            $preferencias = new Preferencias(['tema_id' => 1]);
-
-            $usuario_id = new Usuarios(['rol_id' => 5]);
-
-            $model->lastlogin_at = new Expression('NOW()');
-        }
-
-        if ($isPOST && $model->validate() &&
-                       $preferencias->save() &&
-                       $usuario_id->save()) {
-
-            $model->preferencias_id = $preferencias->id;
-            $model->id = $usuario_id->id;
-
-            if ($model->avatar == '') {
-                $model->avatar = 'default.png';
-            }
-        }
-
-
         if ($isPOST && $model->save()) {
+            $usuario_id = Usuarios::findOne($model->id);
             $usuario_id->datos_id = $model->id;
+            $usuario_id->update();
 
-            if ($usuario_id->save() && (! Roles::isAdmin())) {
+            if (! Roles::isAdmin()) {
                 Yii::$app->user->login($model);
             }
 
