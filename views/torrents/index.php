@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\Roles;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\assets\TorrentsIndexAsset;
@@ -15,13 +16,11 @@ TorrentsIndexAsset::register($this);
 $this->title = 'Torrents';
 $this->params['breadcrumbs'][] = $this->title;
 
-// Variables
-if (!Yii::$app->user->isGuest) {
-    $rol = Yii::$app->user->identity->rol;
-}
+$isAdmin = Roles::isAdmin();
+$isGuest = Yii::$app->user->isGuest;
 ?>
 <div class="torrents-index">
-    <?php if (!Yii::$app->user->isGuest): ?>
+    <?php if (!$isGuest): ?>
         <p>
             <?= Html::a('Añadir un torrent', ['create'],
                 ['class' => 'btn btn-primary']) ?>
@@ -102,7 +101,7 @@ if (!Yii::$app->user->isGuest) {
                 }
             ],
             */
-            'usuarios.datos.nick',
+            'usuario.datos.nick',
 
             /*
             [

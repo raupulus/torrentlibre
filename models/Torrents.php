@@ -81,9 +81,10 @@ class Torrents extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['licencia_id', 'categoria_id', 'usuario', 'titulo', 'resumen'], 'required'],
-            [['licencia_id', 'categoria_id', 'usuario', 'size'], 'default', 'value' => null],
-            [['licencia_id', 'categoria_id', 'usuario', 'size'], 'integer'],
+            [['licencia_id', 'categoria_id', 'usuario_id', 'titulo', 'resumen'],
+                'required'],
+            [['licencia_id', 'categoria_id', 'usuario_id', 'size'], 'default', 'value' => null],
+            [['licencia_id', 'categoria_id', 'usuario_id', 'size'], 'integer'],
             [['n_piezas', 'size_piezas'], 'number'],
             [['archivos'], 'string'],
             [['created_at', 'torrentcreate_at', 'updated_at'], 'safe'],
@@ -91,8 +92,8 @@ class Torrents extends \yii\db\ActiveRecord
             [['descripcion'], 'string', 'max' => 500],
             [['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::className(), 'targetAttribute' => ['categoria_id' => 'id']],
             [['licencia_id'], 'exist', 'skipOnError' => true, 'targetClass' => Licencias::className(), 'targetAttribute' => ['licencia_id' => 'id']],
-            [['usuario'], 'exist', 'skipOnError' => true, 'targetClass' =>
-                UsuariosId::className(), 'targetAttribute' => ['usuario' => 'id']],
+            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' =>
+                Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
             [['u_img'], 'file', 'extensions' => 'png, jpg'],
             [['u_torrent'], 'file', 'extensions' => 'torrent'],
             [
@@ -263,6 +264,6 @@ class Torrents extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(UsuariosId::className(), ['id' => 'usuario_id']);
+        return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id']);
     }
 }

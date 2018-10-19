@@ -84,6 +84,8 @@ class TorrentsController extends Controller
     {
         $model = new Torrents([
             'usuario_id' => Yii::$app->user->identity->id,
+            'scenario' => Torrents::ESCENARIO_CREATE,
+
         ]);
 
         // En el caso de existir datos mediante POST los proceso
@@ -115,8 +117,6 @@ class TorrentsController extends Controller
                     'Es obligatorio agregar un Torrent válido');
             }
         }
-
-        $model->scenario = Torrents::ESCENARIO_CREATE;
 
         $licencias = Licencias::getAll();
         $categorias = Categorias::getAll();
