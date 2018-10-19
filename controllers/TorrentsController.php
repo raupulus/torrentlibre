@@ -49,8 +49,9 @@ class TorrentsController extends Controller
                         'actions' => ['delete', 'update'],
                         'allow' => true,
                         'matchCallback' => function($rule, $action) {
+                            $id = Torrents::findOne($_REQUEST['id'])->usuario_id;
                             $isAdmin = Roles::isAdmin();
-                            $isAutor = Access::isAutor($_REQUEST['id']);
+                            $isAutor = Access::isAutor($id);
 
                             if ($isAdmin || $isAutor) {
                                 return true;
