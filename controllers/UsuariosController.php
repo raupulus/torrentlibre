@@ -162,7 +162,17 @@ class UsuariosController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $isAdmin = Roles::isAdmin();
+
+        $user = Usuarios::findOne($id);
+        $user->datos_id = 2;
+        $user->update();
+
+        UsuariosDatos::findOne($id)->delete();
+
+        if ($isAdmin) {
+            return $this->redirect(['usuarios/index']);
+        }
 
         return $this->redirect(['index']);
     }
