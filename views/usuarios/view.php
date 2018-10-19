@@ -15,7 +15,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
-$this->title = $model->datos->nombre;
+$this->title = $model->datos->nick;
 $this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -110,7 +110,7 @@ $isAutor = Access::isAutor($model->id);
                 'rol.tipo',
                 'datos.email:email',
                 'datos.avatar',
-                'datos.lastlogin_at',
+                'datos.lastlogin_at:datetime',
             ],
         ])
         ?>

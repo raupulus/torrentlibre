@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\Access;
 use app\helpers\Roles;
 use app\models\Preferencias;
 use app\models\UsuariosDatos;
@@ -48,15 +49,10 @@ class UsuariosController extends Controller
                         'actions' => ['delete', 'update'],
                         'allow' => true,
                         'matchCallback' => function($rule, $action) {
-                            if (Yii::$app->user->isGuest) {
-                                return false;
-                            }
+                            $isAdmin = Roles::isAdmin();
+                            $isAutor = Access::isAutor($_REQUEST['id']);
 
-                            $rol = Yii::$app->user->identity->rol;
-                            if ($rol === 'admin') {
-                                return true;
-                            } else if (Yii::$app->user->identity->getId()
-                                == $_REQUEST['id']) {
+                            if ($isAdmin || $isAutor) {
                                 return true;
                             }
 

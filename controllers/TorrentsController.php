@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\helpers\Access;
+use app\helpers\Roles;
 use Bhutanio\BEncode\BEncode;
 use Devristo\Torrent\Bee;
 use function var_dump;
@@ -39,7 +41,23 @@ class TorrentsController extends Controller
                 'only' => ['create', 'delete', 'update'],
                 'rules' => [
                     [
+                        'actions' => ['create'],
                         'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['delete', 'update'],
+                        'allow' => true,
+                        'matchCallback' => function($rule, $action) {
+                            $isAdmin = Roles::isAdmin();
+                            $isAutor = Access::isAutor($_REQUEST['id']);
+
+                            if ($isAdmin || $isAutor) {
+                                return true;
+                            }
+
+                            return false;
+                        },
                         'roles' => ['@'],
                     ],
                 ],
