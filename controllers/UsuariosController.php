@@ -13,12 +13,14 @@ use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * UsuariosController implements the CRUD actions for Usuarios model.
  */
 class UsuariosController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -29,6 +31,39 @@ class UsuariosController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'delete', 'update'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+
+                    [
+                        'actions' => ['delete', 'update'],
+                        'allow' => true,
+                        'matchCallback' => function($rule, $action) {
+                            if (Yii::$app->user->isGuest) {
+                                return false;
+                            }
+
+                            $rol = Yii::$app->user->identity->rol;
+                            if ($rol === 'admin') {
+                                return true;
+                            } else if (Yii::$app->user->identity->getId()
+                                == $_REQUEST['id']) {
+                                return true;
+                            }
+
+                            return false;
+                        },
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];

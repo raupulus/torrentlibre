@@ -31,23 +31,9 @@ $isAutor = Access::isAutor($model->id);
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <!-- Si es el administrador -->
-    <?php if ($isAdmin): ?>
-        <?= DetailView::widget([
+    <?= DetailView::widget([
             'model' => $model,
             'attributes' => [
-                'id',
-                'datos.nombre',
-                'datos.nick',
-                'rol.tipo',
-                'datos.web',
-                'datos.biografia',
-                'datos.email:email',
-                'datos.twitter',
-                'datos.facebook',
-                'datos.googleplus',
-                'datos.avatar',
-                'datos.lastlogin_at',
                 [
                     'attribute' => 'avatar',
                     'format' => 'raw',
@@ -62,44 +48,74 @@ $isAutor = Access::isAutor($model->id);
                         return '<img src="'.$ruta.$img.'" />';
                     }
                 ],
+                'datos.nick',
+                'datos.biografia',
+                [
+                    'attribute' => 'datos.web',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                        return Html::a($model->datos->web, $model->datos->web,
+                        [
+                            'class' => 'btn'
+                        ]);
+                    }
+                ],
+                [
+                    'attribute' => 'datos.twitter',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                        $link = 'https://twitter.com/' .
+                                $model->datos->facebook;
+                        return Html::a($link, $link,[
+                            'class' => 'btn'
+                        ]);
+                    }
+                ],
+                [
+                    'attribute' => 'datos.facebook',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                        $link = 'https://facebook.com/' .
+                                 $model->datos->facebook;
+
+                        return Html::a($link, $link,[
+                            'class' => 'btn'
+                        ]);
+                    }
+                ],
+                [
+                    'attribute' => 'datos.googleplus',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                        $link = 'https://plus.google.com/'
+                                .$model->datos->googleplus;
+
+                        return Html::a($link, $link,[
+                            'class' => 'btn'
+                        ]);
+                    }
+                ],
             ],
         ])
-        ?>
+    ?>
 
-        <!-- Si es el usuario al que corresponde la información -->
-    <?php elseif ($isAutor): ?>
+    <!-- Si es el autor o el administrador -->
+    <?php if ($isAutor || $isAdmin): ?>
+        <h3>Datos del perfil</h3>
         <?= DetailView::widget([
             'model' => $model,
             'attributes' => [
-                [
-                    'format' => 'raw',
-                    'value' => function($model, $key, $index) {
-                        $img = $model->datos->avatar;
-                        $ruta = yii::getAlias('@r_avatar').'/';
-
-                        if ((! isset($img)) || (! file_exists($ruta.$img))) {
-                            $img = 'default.png';
-                        }
-
-                        return '<img src="'.$ruta.$img.'" />';
-                    }
-                ],
+                'id',
                 'datos.nombre',
-                'datos.nick',
-                'datos.web',
-                'datos.biografia',
-                'datos.email:email',
-                'datos.twitter',
-                'datos.facebook',
-                'datos.googleplus',
-                'datos.lastlogin_at',
                 'rol.tipo',
+                'datos.email:email',
+                'datos.avatar',
+                'datos.lastlogin_at',
             ],
         ])
         ?>
 
         <h3>Preferencias del usuario</h3>
-
         <?= DetailView::widget([
             'model' => $model,
             'attributes' => [
@@ -111,35 +127,6 @@ $isAutor = Access::isAutor($model->id);
                 'datos.preferencias.tour:boolean',
             ],
         ]) ?>
-
-    <?php else: ?>
-        <?= DetailView::widget([
-            'model' => $model,
-            'attributes' => [
-                [
-                    'attribute' => 'avatar',
-                    'format' => 'raw',
-                    'value' => function($model) {
-                        $img = $model->avatar;
-                        $ruta = yii::getAlias('@r_avatar').'/';
-
-                        if ((! isset($img)) || (! file_exists($ruta.$img))) {
-                            $img = 'default.png';
-                        }
-
-                        return '<img src="'.$ruta.$img.'" />';
-                    }
-                ],
-                'nick',
-                'web',
-                'biografia',
-                'email:email',
-                'twitter',
-                'facebook',
-                'googleplus',
-                'usuariosId.rol.tipo',
-            ],
-        ]) ?>
     <?php endif ?>
 
     <p>
@@ -148,7 +135,10 @@ $isAutor = Access::isAutor($model->id);
                 ['update', 'id' => $model->id],
                 ['class' => 'btn btn-primary']) ?>
 
-            <?= Html::a('Eliminar cuenta', ['delete', 'id' => $model->id], [
+            <?= Html::a('Eliminar cuenta', [
+                'delete',
+                'id' => $model->id
+            ], [
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => '¿Estás seguro que quieres eliminar el usuario?',
@@ -157,5 +147,4 @@ $isAutor = Access::isAutor($model->id);
             ]) ?>
         <?php endif ?>
     </p>
-
 </div>
