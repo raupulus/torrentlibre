@@ -217,7 +217,7 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Devuelve el rol del usuario
+     * Devuelve el rol del usuario o borrado
      * @return \yii\db\ActiveQuery
      */
     public function getRol()
@@ -227,6 +227,19 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
         }
 
         return 'borrado';
+    }
+
+    /**
+     * Devuelve el id del rol o borrado
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRolId()
+    {
+        if ($this->usuarioId != null) {
+            return $this->usuarioId->rol->id;
+        }
+
+        return 2;
     }
 
     /**

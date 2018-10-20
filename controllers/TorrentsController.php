@@ -101,6 +101,11 @@ class TorrentsController extends Controller
      */
     public function actionCreate()
     {
+        if (! Roles::canUpload()) {
+            Yii::$app->session->setFlash('error', 'Has subido el límite de torrents diarios para tu rango actual');
+            $this->redirect(['torrents/index']);
+        }
+
         $model = new Torrents([
             'usuario_id' => Yii::$app->user->identity->id,
             'scenario' => Torrents::ESCENARIO_CREATE,
@@ -128,6 +133,16 @@ class TorrentsController extends Controller
                 $torrent->setComment($model->descripcion);
 
                 if ($model->save()) {
+                    $rol = Yii::$app->user->identity->rol;
+                    $roles = Roles::allRoles();
+                    Roles::subirRole();
+
+
+
+
+
+
+
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             } else {

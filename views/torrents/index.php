@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $isAdmin = Roles::isAdmin();
 $isGuest = Yii::$app->user->isGuest;
 ?>
+
 <div class="torrents-index">
     <?php if (!$isGuest): ?>
         <p>
