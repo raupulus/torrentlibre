@@ -137,16 +137,11 @@ class TorrentsController extends Controller
                     $roles = Roles::allRoles();
                     Roles::subirRole();
 
-
-
-
-
-
-
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             } else {
-                Yii::$app->session->setFlash('error', 'Es obligatorio el archivo torrent');
+                Yii::$app->session->setFlash('error',
+                              'Es obligatorio el archivo torrent');
                 $model->addError('u_torrent',
                     'Es obligatorio agregar un Torrent válido');
             }

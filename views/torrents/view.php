@@ -75,9 +75,45 @@ $isAutor = Access::isAutor($model->usuario_id);
                     'colspan' => 2,
                 ],
             ],
-            'licencia.tipo:text:Licencia',
+            [
+                'attribute' => 'licencia.tipo',
+                'label' => false,
+                'labelColOptions' => ['hidden' => true],
+                'captionOptions' => ['class' => 'labelhidden'],
+                'contentOptions' => [
+                    'class' => [
+                        'text-center',
+                        'licencia',
+                    ],
+                    'colspan' => 2,
+                ],
+                'format' => 'raw',
+                'value' => function($model) {
+                    $img = $model->licencia->imagen;
+                    $r_img = yii::getAlias('@r_imgLicencias').'/'.$img;
+
+                    return '<a href="'.$model->licencia->url.'" target="_blank">'.
+                        '<img src="'.$r_img.'" /></a>';
+                }
+            ],
             'categoria.nombre:text:Categoría',
-            'usuario.datos.nick:text:Uploader',
+            [
+                'attribute' => 'usuario.datos.nick',
+                'label' => 'Uploader',
+                'contentOptions' => [
+                    'class' => [
+                        'text-center',
+                        'nick',
+                    ],
+                ],
+                'format' => 'raw',
+                'value' => function($model) {
+                    return Html::a($model->usuario->datos->nombre, [
+                        Url::to('usuarios/view'),
+                        'id' => $model->usuario->datos_id
+                    ]);
+                }
+            ],
             'descripcion',
             [ // Magnet
                 'format' => 'raw',

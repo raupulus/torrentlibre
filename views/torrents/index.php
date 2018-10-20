@@ -21,7 +21,7 @@ $isGuest = Yii::$app->user->isGuest;
 ?>
 
 <div class="torrents-index">
-    <?php if (!$isGuest): ?>
+    <?php if (Roles::canUpload()): ?>
         <p>
             <?= Html::a('Añadir un torrent', ['create'],
                 ['class' => 'btn btn-primary']) ?>
@@ -83,7 +83,15 @@ $isGuest = Yii::$app->user->isGuest;
             ],
             [
                 'attribute' => 'licencia.tipo',
+                'format' => 'raw',
                 'contentOptions' => ['class' => 'tabla-licencia'],
+                'value' => function($model, $key, $index) {
+                    $img = $model->licencia->imagen;
+                    $r_img = yii::getAlias('@r_imgLicencias').'/'.$img;
+
+                    return '<a href="'.$model->licencia->url.'" target="_blank">'.
+                        '<img src="'.$r_img.'" /></a>';
+                }
             ],
             [
                 'attribute' => 'categoria.nombre',
@@ -102,8 +110,17 @@ $isGuest = Yii::$app->user->isGuest;
                 }
             ],
             */
-            'usuario.datos.nick',
-
+            [
+                'attribute' => 'usuario.datos.nick',
+                'format' => 'raw',
+                'contentOptions' => ['class' => 'tabla-nick'],
+                'value' => function($model) {
+                    return Html::a($model->usuario->datos->nombre, [
+                        Url::to('usuarios/view'),
+                        'id' => $model->usuario->datos_id
+                    ]);
+                }
+            ],
             /*
             [
                 'attribute' => 'n_descargas',

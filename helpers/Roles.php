@@ -75,6 +75,12 @@ class Roles
 
         $role = Yii::$app->user->identity->rol;
 
+        if ($role == 'tmp') {
+            Yii::$app->session->setFlash('info',
+                'No puedes subir torrents hasta verificar tu email' );
+            return false;
+        }
+
         if (($role == 'admin') ||
             ($role == 'editor') ||
             ($role == 'especial')) {
@@ -106,7 +112,14 @@ class Roles
             ->andWhere(['=', 'usuario_id', Yii::$app->user->id])
             ->all();
 
-        return count($subidasHoy) <= $maxUpload;
+        if (count($subidasHoy) >= $maxUpload) {
+            Yii::$app->session->setFlash('warning',
+                'Has superado tu límite diario de torrents: '.
+                $roles[$role][1].'<br />'.
+                ' No podrás subir más hasta mañana.');
+            return false;
+        }
+        return true;
     }
 
     /*
@@ -146,6 +159,12 @@ class Roles
         $roles = self::allRoles();
 
         if (empty($roles[$role])) {
+            return false;
+        }
+
+        if ($role == 'tmp') {
+            Yii::$app->session->setFlash('info',
+                'No puedes subir torrents hasta verificar tu email' );
             return false;
         }
 
