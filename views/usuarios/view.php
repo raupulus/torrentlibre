@@ -49,9 +49,13 @@ $isAutor = Access::isAutor($model->id);
                     }
                 ],
                 'datos.nick',
-                'datos.biografia',
+                [
+                    'attribute' => 'datos.biografia',
+                    'visible' => (!empty($model->datos->biografia)),
+                ],
                 [
                     'attribute' => 'datos.web',
+                    'visible' => (!empty($model->datos->web)),
                     'format' => 'raw',
                     'value' => function($model) {
                         return Html::a($model->datos->web, $model->datos->web,
@@ -62,6 +66,7 @@ $isAutor = Access::isAutor($model->id);
                 ],
                 [
                     'attribute' => 'datos.twitter',
+                    'visible' => (!empty($model->datos->twitter)),
                     'format' => 'raw',
                     'value' => function($model) {
                         $link = 'https://twitter.com/' .
@@ -73,6 +78,7 @@ $isAutor = Access::isAutor($model->id);
                 ],
                 [
                     'attribute' => 'datos.facebook',
+                    'visible' => (!empty($model->datos->facebook)),
                     'format' => 'raw',
                     'value' => function($model) {
                         $link = 'https://facebook.com/' .
@@ -85,6 +91,7 @@ $isAutor = Access::isAutor($model->id);
                 ],
                 [
                     'attribute' => 'datos.googleplus',
+                    'visible' => (!empty($model->datos->googleplus)),
                     'format' => 'raw',
                     'value' => function($model) {
                         $link = 'https://plus.google.com/' .
