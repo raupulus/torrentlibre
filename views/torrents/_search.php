@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="torrents-search">
+<div class="torrents-search container">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -25,9 +25,16 @@ use yii\widgets\ActiveForm;
 
     <?php // echo  $form->field($model, 'titulo') ?>
 
-    <?= $form->field($model, 'allfields')->label('Buscar:') ?>
+    <div class="row">
+        <div class="col-sm-6">
+            <?= $form->field($model, 'allfields')->label('Buscar:') ?>
+        </div>
 
-    <?= $form->field($model, 'categoria_id')->dropDownList($categorias) ?>
+        <div class="col-sm-6">
+            <?= $form->field($model, 'categoria_id')->dropDownList($categorias) ?>
+        </div>
+    </div>
+
 
     <?php // echo $form->field($model, 'resumen') ?>
 
@@ -53,7 +60,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'updated_at') ?>
 
-    <div class="form-group">
+    <div class="row text-center">
         <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
         <?php // Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
     </div>
