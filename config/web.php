@@ -21,7 +21,7 @@ $config = [
         '@r_imgLicencias' => $params['rutaImagenLicencias'],
         '@r_torrents' => '@app/web' . $params['rutaTorrent'],
         '@p_torrents' => $params['paginacion_torrents'],
-        '@tmp' => '@app/'.$params['tmp'],
+        '@tmp' => $params['tmp'],
         '@maxErrorsLogin' => $maxErrorsLogin,
     ],
     'language' => 'es-ES',

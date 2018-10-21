@@ -3,14 +3,19 @@
 namespace app\controllers;
 
 use app\helpers\Access;
+use app\helpers\Magnet2torrent;
 use app\helpers\Roles;
 use app\helpers\Security;
 use app\models\Descargas;
 use function array_combine;
 use function array_push;
 use Bhutanio\BEncode\BEncode;
+use function date_timestamp_get;
 use DateTime;
 use Devristo\Torrent\Bee;
+use function fclose;
+use function fopen;
+use function fwrite;
 use function GuzzleHttp\Promise\all;
 use function var_dump;
 use Yii;
@@ -210,32 +215,29 @@ class TorrentsController extends Controller
      */
     public function actionDescargar($id, $hash)
     {
-        // Anoto una descarga para el torrent actual
+        // Anoto una descarga para el torrent actual.
         $this->actionAnotardescarga($id);
 
+        // Array con toda la información del torrent.
+        $info = Magnet2torrent::generateTorrentInfo($id);
+
+        // Creo el torrent con la información de $info
         $bcoder = new BEncode;
-        $bcoder->set([
-            'announce'=>'http://www.private-tracker.com',
-            'comment'=>'Downloaded from Private Tracker',
-            'created_by'=>'PrivateTracker v1.0',
-            'hash' =>'c7c7f829f48653bfd0ab0a4f896bdc2e8bee0a91',
-        ]);
+        $torrent = $bcoder->bencode($info);
 
+        // Genero el archivo descargable
+        $datetime = new DateTime('now');
+        $datetime = $datetime->getTimestamp();
+        $tmpName = $info['name'].$info['info_hash'].$datetime.'.torrent';
 
+        $ruta = Yii::getAlias('@tmp');
+        $rutaSave = 'uploads/'.$tmpName;
 
+        $file = fopen($rutaSave, 'w+');
+        $x = fwrite($file, $torrent);
+        fclose($file);
 
-        //die();
-        /*
-        $torrent = $bcoder->bencode(
-            [
-                ['c7c7f829f48653bfd0ab0a4f896bdc2e8bee0a91&dn=asdasdasd']
-        ]);
-        */
-
-        //print_r($bcoder->bdecode(['info']['infohash']));
-        //echo $bcoder->bencode($torrent);
-
-        //var_dump($torrent);
+        var_dump($torrent);
     }
 
     /**
@@ -291,8 +293,9 @@ class TorrentsController extends Controller
                 'torrent_id' => $torrent_id,
                 'ip' => $ip
             ]);
+            return $descargas->save();
         }
 
-        return $descargas->save();
+        return false;
     }
 }
