@@ -34,15 +34,12 @@ $isGuest = Yii::$app->user->isGuest;
         'categorias' => $categorias,
     ]); ?>
 
-    <?php
-    $dataProvider->pagination->pageSize=4;
-    ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
         'id' => 'torrents-index-gridview',
         'class' => 'torrents-index-class',
+        'summary' => false,  // Oculto total de elementos
         'showHeader' => false,
         //'showFooter' => false,
         'emptyCell' => 'N/D',

@@ -57,6 +57,8 @@ class TorrentsSearch extends Torrents
 
         $this->load($params);
 
+        $dataProvider->pagination->pageSize=4;
+
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
