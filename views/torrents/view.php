@@ -96,6 +96,7 @@ $isAutor = Access::isAutor($model->usuario_id);
                         '<img src="'.$r_img.'" /></a>';
                 }
             ],
+            'descargas',
             'categoria.nombre:text:Categoría',
             [
                 'attribute' => 'usuario.datos.nick',
