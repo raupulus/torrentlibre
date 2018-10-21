@@ -29,7 +29,10 @@ $isGuest = Yii::$app->user->isGuest;
     <?php endif ?>
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?= $this->render('_search', ['model' => $searchModel]); ?>
+    <?= $this->render('_search', [
+        'model' => $searchModel,
+        'categorias' => $categorias,
+    ]); ?>
 
     <?php
     $dataProvider->pagination->pageSize=4;

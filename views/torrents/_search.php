@@ -27,6 +27,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'allfields')->label('Buscar:') ?>
 
+    <?= $form->field($model, 'categoria_id')->dropDownList($categorias) ?>
+
     <?php // echo $form->field($model, 'resumen') ?>
 
     <?php // echo $form->field($model, 'descripcion') ?>
