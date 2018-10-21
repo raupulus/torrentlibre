@@ -210,6 +210,9 @@ class TorrentsController extends Controller
      */
     public function actionDescargar($id, $hash)
     {
+        // Anoto una descarga para el torrent actual
+        $this->actionAnotardescarga($id);
+
         $bcoder = new BEncode;
         $bcoder->set([
             'announce'=>'http://www.private-tracker.com',
