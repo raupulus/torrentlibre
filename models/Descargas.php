@@ -30,12 +30,12 @@ class Descargas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['torrent'], 'required'],
-            [['torrent'], 'default', 'value' => null],
-            [['torrent'], 'integer'],
+            [['torrent_id'], 'required'],
+            [['torrent_id'], 'default', 'value' => null],
+            [['torrent_id'], 'integer'],
             [['registered_at'], 'safe'],
             [['ip'], 'string', 'max' => 15],
-            [['torrent'], 'exist', 'skipOnError' => true, 'targetClass' => Torrents::className(), 'targetAttribute' => ['torrent' => 'id']],
+            [['torrent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Torrents::className(), 'targetAttribute' => ['torrent_id' => 'id']],
         ];
     }
 
@@ -47,7 +47,7 @@ class Descargas extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'ip' => 'Ip',
-            'torrent' => 'Torrent',
+            'torrent_id' => 'Torrent',
             'registered_at' => 'Registered At',
         ];
     }
@@ -55,7 +55,7 @@ class Descargas extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTorrent0()
+    public function getTorrentId()
     {
         return $this->hasOne(Torrents::className(), ['id' => 'torrent']);
     }
