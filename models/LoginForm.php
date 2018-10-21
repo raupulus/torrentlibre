@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\helpers\Access;
 use function is_object;
 use function var_dump;
 use Yii;
@@ -99,6 +100,12 @@ class LoginForm extends Model
          * para redireccionar a la vista "userlocked"
          */
         if (is_object($this->_user) && ($this->_user->usuarioBloqueado)) {
+            Yii::$app->getResponse()
+                ->redirect(['site/userlocked'])
+                ->send();
+        }
+
+        if (is_object($this->_user) && ($this->_user->id == 2)) {
             Yii::$app->getResponse()
                 ->redirect(['site/userlocked'])
                 ->send();

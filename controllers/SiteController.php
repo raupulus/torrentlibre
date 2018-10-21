@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\Access;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -71,13 +72,25 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        if (Access::ipBloqueada()) {
+            Yii::$app->getResponse()
+                ->redirect(['site/iplocked'])
+                ->send();
+        }
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        // Cargo datos y registro si el login es correcto o no lo es
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->login()) {
+                Access::registrarAcceso();
+                return $this->goBack();
+            } else {
+                Access::registrarErrorAcceso();
+            }
         }
 
         $model->password = '';
@@ -134,6 +147,16 @@ class SiteController extends Controller
     public function actionUserlocked()
     {
         return $this->render('userlocked');
+    }
+
+    /**
+     * Displays iplocked page.
+     *
+     * @return string
+     */
+    public function actionIplocked()
+    {
+        return $this->render('iplocked');
     }
 }
 

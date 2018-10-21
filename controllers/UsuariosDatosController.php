@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\Access;
 use Yii;
 use app\models\UsuariosDatos;
 use app\models\UsuariosDatosSearch;

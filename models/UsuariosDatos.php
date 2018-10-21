@@ -337,6 +337,11 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getUsuarioBloqueado()
     {
+        // El usuario anonimo del sistema (id=2) nunca puede iniciar sesión
+        if ($this->id == 2) {
+            return true;
+        }
+
         return UsuariosBloqueados::findOne([
             'usuario_id' => $this->id,
         ]) ? true : false;
