@@ -31,15 +31,38 @@ $isGuest = Yii::$app->user->isGuest;
     <h1><?= Html::encode($this->title) ?></h1>
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 
+    <?php
+    $dataProvider->pagination->pageSize=4;
+    ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
-        'class' => 'grid-view',
+        'id' => 'torrents-index-gridview',
+        'class' => 'torrents-index-class',
         'showHeader' => false,
         //'showFooter' => false,
         'emptyCell' => 'N/D',
         'tableOptions' => [
             'class' => 'tablaTorrentsIndex',
+
+        ],
+        'pager' => [
+            'class' => \kop\y2sp\ScrollPager::className(),
+            'container' => '#torrents-index-gridview tbody',
+            'item' => 'tr',
+            'triggerOffset' => 1000,
+            'negativeMargin' => 100,
+            'delay'=>0,
+            'spinnerSrc'=> yii::getAlias('@r_img').'/load-torrent.gif',
+            'paginationSelector' => '.grid-view .pagination',
+            'enabledExtensions'=> [
+                \kop\y2sp\ScrollPager::EXTENSION_TRIGGER,
+                \kop\y2sp\ScrollPager::EXTENSION_SPINNER,
+                \kop\y2sp\ScrollPager::EXTENSION_NONE_LEFT,
+                \kop\y2sp\ScrollPager::EXTENSION_PAGING
+            ],
+            //'triggerTemplate' => '<tr class="ias-trigger"><td  colspan="100%" style="text-align: center"><a style="cursor: pointer">{text}</a></td></tr>',
         ],
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
@@ -166,4 +189,6 @@ $isGuest = Yii::$app->user->isGuest;
             //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    </div>
+
 </div>

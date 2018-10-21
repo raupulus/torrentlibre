@@ -17,6 +17,7 @@ $config = [
         '@r_avatar' => $params['rutaAvatar'],
         '@r_iconos' => $params['rutaIconos'],
         '@r_imgTorrent' => $params['rutaImagenTorrent'],
+        '@r_img' => $params['rutaImagenes'],
         '@r_imgLicencias' => $params['rutaImagenLicencias'],
         '@r_torrents' => '@app/web' . $params['rutaTorrent'],
         '@p_torrents' => $params['paginacion_torrents'],

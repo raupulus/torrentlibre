@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fc6ea9646f501cec1db2dcbe4346859f",
-    "content-hash": "7dc91e2d70ef34528617bcf80457f268",
+    "hash": "15d2cb4df856d7133744c20f5cc4524c",
+    "content-hash": "f1ef87d7fa203fd3ccfc3af4a64ecf6c",
     "packages": [
         {
             "name": "bhutanio/torrent-bencode",
@@ -108,6 +108,25 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/77d2a51d0520d2ee44173afdf4e40a9201f5964e",
                 "reference": "77d2a51d0520d2ee44173afdf4e40a9201f5964e",
+                "shasum": null
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/jquery-infinite-scroll",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/metafizzy/infinite-scroll.git",
+                "reference": "f0d9eecb55a428b2fd4027964a22b84633ba6e3e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/metafizzy/infinite-scroll/zipball/f0d9eecb55a428b2fd4027964a22b84633ba6e3e",
+                "reference": "f0d9eecb55a428b2fd4027964a22b84633ba6e3e",
                 "shasum": null
             },
             "type": "bower-asset",
@@ -506,6 +525,103 @@
             "time": "2017-11-14 05:11:33"
         },
         {
+            "name": "kop/yii2-scroll-pager",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kop/yii2-scroll-pager.git",
+                "reference": "9b9727ce441fbfc487044535ab6ce0b7694d810b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kop/yii2-scroll-pager/zipball/9b9727ce441fbfc487044535ab6ce0b7694d810b",
+                "reference": "9b9727ce441fbfc487044535ab6ce0b7694d810b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "webcreate/jquery-ias": "^2.2.1",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kop\\y2sp\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Koptiev",
+                    "email": "ivan.koptiev@codex.systems",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Infinite AJAX scrolling for Yii2 ListView widget",
+            "homepage": "http://kop.github.io/yii2-scroll-pager/",
+            "keywords": [
+                "pager",
+                "pagination",
+                "scroll",
+                "scrolling",
+                "yii",
+                "yii2"
+            ],
+            "time": "2016-07-06 19:56:33"
+        },
+        {
+            "name": "nirvana-msu/yii2-infinite-scroll",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nirvana-msu/yii2-infinite-scroll.git",
+                "reference": "ee78b2f2abb1a2c18248867733ddc37eee68392c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nirvana-msu/yii2-infinite-scroll/zipball/ee78b2f2abb1a2c18248867733ddc37eee68392c",
+                "reference": "ee78b2f2abb1a2c18248867733ddc37eee68392c",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery-infinite-scroll": "2.*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "nirvana\\infinitescroll\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Stepanov",
+                    "email": "student_vmk@mail.ru"
+                }
+            ],
+            "description": "Yii2 extension for infinite-scroll jQuery plugin",
+            "keywords": [
+                "infinite-scroll",
+                "jquery",
+                "plugin",
+                "widget",
+                "yii2"
+            ],
+            "time": "2017-07-17 20:37:34"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v6.1.3",
             "source": {
@@ -612,6 +728,46 @@
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
             "time": "2018-10-03 08:46:40"
+        },
+        {
+            "name": "webcreate/jquery-ias",
+            "version": "v2.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webcreate/infinite-ajax-scroll.git",
+                "reference": "97ba99a34e68a3fc186ceb518c9cff51370be24b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webcreate/infinite-ajax-scroll/zipball/97ba99a34e68a3fc186ceb518c9cff51370be24b",
+                "reference": "97ba99a34e68a3fc186ceb518c9cff51370be24b",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary",
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "fieg",
+                    "email": "jeroen@webcreate.nl",
+                    "homepage": "http://webcreate.nl"
+                }
+            ],
+            "description": "Infinite Ajax Scroll: A jQuery plugin that turns your server-side pagination into an infinite scrolling one using AJAX",
+            "homepage": "https://infiniteajaxscroll.com",
+            "keywords": [
+                "ajax",
+                "ias",
+                "infinite",
+                "jquery",
+                "pagination",
+                "scroll",
+                "scrolling"
+            ],
+            "time": "2018-03-21 20:14:31"
         },
         {
             "name": "yiisoft/yii2",
@@ -1627,16 +1783,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.13.0",
+            "version": "v2.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "7136aa4e0c5f912e8af82383775460d906168a10"
+                "reference": "54814c62d5beef3ba55297b9b3186ed8b8a1b161"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/7136aa4e0c5f912e8af82383775460d906168a10",
-                "reference": "7136aa4e0c5f912e8af82383775460d906168a10",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/54814c62d5beef3ba55297b9b3186ed8b8a1b161",
+                "reference": "54814c62d5beef3ba55297b9b3186ed8b8a1b161",
                 "shasum": ""
             },
             "require": {
@@ -1647,7 +1803,7 @@
                 "ext-tokenizer": "*",
                 "php": "^5.6 || >=7.0 <7.3",
                 "php-cs-fixer/diff": "^1.3",
-                "symfony/console": "^3.2 || ^4.0",
+                "symfony/console": "^3.4.17 || ^4.1.6",
                 "symfony/event-dispatcher": "^3.0 || ^4.0",
                 "symfony/filesystem": "^3.0 || ^4.0",
                 "symfony/finder": "^3.0 || ^4.0",
@@ -1683,11 +1839,6 @@
                 "php-cs-fixer"
             ],
             "type": "application",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.13-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "PhpCsFixer\\": "src/"
@@ -1719,7 +1870,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2018-08-23 13:15:44"
+            "time": "2018-10-21 00:32:10"
         },
         {
             "name": "fzaninotto/faker",
@@ -2567,16 +2718,16 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "1.4.1",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "57404f43742a8164b5eac3ab03b962d8740885c1"
+                "reference": "2dfd06c59825914a1a325f2a2ed13634b9d8c411"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/57404f43742a8164b5eac3ab03b962d8740885c1",
-                "reference": "57404f43742a8164b5eac3ab03b962d8740885c1",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/2dfd06c59825914a1a325f2a2ed13634b9d8c411",
+                "reference": "2dfd06c59825914a1a325f2a2ed13634b9d8c411",
                 "shasum": ""
             },
             "require": {
@@ -2650,7 +2801,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2018-09-30 03:57:24"
+            "time": "2018-10-21 10:04:54"
         },
         {
             "name": "phpspec/php-diff",
@@ -5383,6 +5534,8 @@
     "stability-flags": {
         "devristo/torrent": 20,
         "bhutanio/torrent-bencode": 20,
+        "nirvana-msu/yii2-infinite-scroll": 20,
+        "kop/yii2-scroll-pager": 20,
         "yiisoft/yii2-gii": 20,
         "yiisoft/yii2-shell": 20,
         "yiisoft/yii2-apidoc": 20
