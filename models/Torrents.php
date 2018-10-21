@@ -128,6 +128,7 @@ class Torrents extends \yii\db\ActiveRecord
             'updated_at' => 'Actualizado en',
             'u_img' => 'Imagen Portada',
             'u_torrent' => 'Archivo Torrent',
+            'descargas' => 'Veces descargado',
         ];
     }
 
@@ -180,16 +181,6 @@ class Torrents extends \yii\db\ActiveRecord
         return true;
     }
 
-    public function aumentarDescargas()
-    {
-        return true;
-    }
-
-    public function aumentarVisitas()
-    {
-        return true;
-    }
-
     public function getVisitas()
     {
         return true;
@@ -208,7 +199,9 @@ class Torrents extends \yii\db\ActiveRecord
      */
     public function getDescargas()
     {
-        return $this->hasMany(Descargas::className(), ['torrent_id' => 'id']);
+
+        return $this->hasMany(Descargas::className(), ['torrent_id' => 'id'])
+            ->count();
     }
 
     /**

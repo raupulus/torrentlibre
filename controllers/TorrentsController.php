@@ -4,9 +4,12 @@ namespace app\controllers;
 
 use app\helpers\Access;
 use app\helpers\Roles;
+use app\helpers\Security;
+use app\models\Descargas;
 use function array_combine;
 use function array_push;
 use Bhutanio\BEncode\BEncode;
+use DateTime;
 use Devristo\Torrent\Bee;
 use function GuzzleHttp\Promise\all;
 use function var_dump;
@@ -207,6 +210,9 @@ class TorrentsController extends Controller
      */
     public function actionDescargar($id, $hash)
     {
+        // Anoto una descarga para el torrent actual
+        $this->actionAnotardescarga($id);
+
         $bcoder = new BEncode;
         $bcoder->set([
             'announce'=>'http://www.private-tracker.com',
@@ -260,5 +266,33 @@ class TorrentsController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /*
+     * Anota una descarga para el torrent recibido.
+     * Solo registra 1 acción por minuto en cada IP.
+     *
+     * @param $torrent_id El id del torrent que anotará la descarga.
+     */
+    public function actionAnotardescarga($torrent_id) {
+        $ip = Security::getIp();
+
+        $min1 = new DateTime('now');
+        $min1->modify('-1 min');
+        $min1 = $min1->format('Y-m-d H:i:s');
+
+        $oldDesc = Descargas::find()
+            ->where(['ip' => $ip])
+            ->andWhere(['>=', 'registered_at', $min1])
+            ->count();
+
+        if ($oldDesc == 0) {
+            $descargas = new Descargas([
+                'torrent_id' => $torrent_id,
+                'ip' => $ip
+            ]);
+        }
+
+        return $descargas->save();
     }
 }
