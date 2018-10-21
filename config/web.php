@@ -5,6 +5,7 @@ $db = require __DIR__ . '/db.php';
 $log = require __DIR__ . '/log.php';
 $translations = '@app/translations';  // Directorio con las traducciones
 $sitename = 'Torrent Libre (beta)';
+$maxErrorsLogin = 10;  // Máximos intentos de iniciar sesión
 
 $config = [
     'id' => 'basic',
@@ -20,6 +21,7 @@ $config = [
         '@r_torrents' => '@app/web' . $params['rutaTorrent'],
         '@p_torrents' => $params['paginacion_torrents'],
         '@tmp' => '@app/'.$params['tmp'],
+        '@maxErrorsLogin' => $maxErrorsLogin,
     ],
     'language' => 'es-ES',
     'name' => $sitename,

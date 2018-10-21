@@ -102,6 +102,12 @@ class UsuariosController extends Controller
      */
     public function actionCreate()
     {
+        if (Access::ipBloqueada()) {
+            Yii::$app->getResponse()
+                ->redirect(['site/iplocked'])
+                ->send();
+        }
+
         $model = new UsuariosDatos([
             'scenario' => UsuariosDatos::ESCENARIO_CREATE,
             'lastlogin_at' => new Expression('NOW()'),

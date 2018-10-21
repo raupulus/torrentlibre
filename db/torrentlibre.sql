@@ -390,6 +390,13 @@ CREATE TABLE accesos (
     , registered_at TIMESTAMP(0) DEFAULT LOCALTIMESTAMP
 );
 
+DROP TABLE IF EXISTS accesoserror CASCADE;
+CREATE TABLE accesoserror (
+    id            BIGSERIAL    PRIMARY KEY
+  , ip            VARCHAR(15)  -- IP DE ACCESO
+  , registered_at TIMESTAMP(0) DEFAULT LOCALTIMESTAMP
+);
+
 DROP TABLE IF EXISTS descargas CASCADE;
 CREATE TABLE descargas (
       id            BIGSERIAL    PRIMARY KEY
