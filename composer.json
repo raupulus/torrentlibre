@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "^2.1.0",
         "juliardi/yii2-captcha": "*",
         "devristo/torrent": "dev-master",
-        "bhutanio/torrent-bencode": "dev-master"
+        "bhutanio/torrent-bencode": "dev-master",
+        "kop/yii2-scroll-pager": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "^2.0.0",

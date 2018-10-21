@@ -4,8 +4,11 @@ namespace app\controllers;
 
 use app\helpers\Access;
 use app\helpers\Roles;
+use function array_combine;
+use function array_push;
 use Bhutanio\BEncode\BEncode;
 use Devristo\Torrent\Bee;
+use function GuzzleHttp\Promise\all;
 use function var_dump;
 use Yii;
 use app\models\Torrents;
@@ -75,9 +78,23 @@ class TorrentsController extends Controller
         $searchModel = new TorrentsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $query = Categorias::find()->select(['id', 'nombre'])->asArray()
+            ->all();
+
+        $categoriasId = [''];
+        $categoriasNombres = ['Todas las Categorías'];
+
+        foreach ($query as $ele) {
+            array_push($categoriasId, $ele['id']);
+            array_push($categoriasNombres, $ele['nombre']);
+        }
+
+        $categorias = array_combine($categoriasId, $categoriasNombres);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'categorias' => $categorias,
         ]);
     }
 
