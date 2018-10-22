@@ -55,17 +55,22 @@ class Magnet2torrent
 
         return [
             'announce' => $trackers[0],
+            'announce-list' => $trackers,
+            'encoding' => 'UTF-8',
             'filename' => $oldTorrent->titulo,
             'created by' => 'TorrentLibre',
-            'created_by' => 'TorrentLibre',
             'creation date' => $oldTorrent->torrentcreate_at,
-            'creation_date' => $oldTorrent->torrentcreate_at,
-            'name' => $oldTorrent->titulo,
             'comment' => $oldTorrent->resumen,
-            'announce_list' => $trackers,
-            'info_hash' => $oldTorrent->hash,
-            'size' => $oldTorrent->size,
-            'private' => false,
+            'info' => [
+                'root hash' => $oldTorrent->hash,
+                'name' => $oldTorrent->titulo,  // Nombre dir donde se guardara
+                'piece length' => $oldTorrent->size_piezas,
+                'pieces' => $oldTorrent->n_piezas,
+                'length' => $oldTorrent->size,
+                'private' => 0,
+                //'md5sum' =>
+                //'info' => []
+            ],
         ];
     }
 }

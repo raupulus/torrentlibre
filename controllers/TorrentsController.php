@@ -10,13 +10,12 @@ use app\models\Descargas;
 use function array_combine;
 use function array_push;
 use Bhutanio\BEncode\BEncode;
-use function date_timestamp_get;
 use DateTime;
-use Devristo\Torrent\Bee;
 use function fclose;
 use function fopen;
 use function fwrite;
-use function GuzzleHttp\Promise\all;
+use PHP\BitTorrent\Decoder;
+use PHP\BitTorrent\Encoder;
 use function var_dump;
 use Yii;
 use app\models\Torrents;
@@ -222,13 +221,19 @@ class TorrentsController extends Controller
         $info = Magnet2torrent::generateTorrentInfo($id);
 
         // Creo el torrent con la información de $info
-        $bcoder = new BEncode;
-        $torrent = $bcoder->bencode($info);
+        //$bcoder = new BEncode;
+        //$torrent = $bcoder->bencode($info);
 
+        $torrent = new Encoder();
+
+        var_dump($torrent->encodeDictionary($info));
+
+
+        /*
         // Genero el archivo descargable
         $datetime = new DateTime('now');
         $datetime = $datetime->getTimestamp();
-        $tmpName = $info['name'].$info['info_hash'].$datetime.'.torrent';
+        $tmpName = $info['info']['root hash'].$datetime.'.torrent';
 
         $ruta = Yii::getAlias('@tmp');
         $rutaSave = 'uploads/'.$tmpName;
@@ -238,6 +243,7 @@ class TorrentsController extends Controller
         fclose($file);
 
         var_dump($torrent);
+        */
     }
 
     /**

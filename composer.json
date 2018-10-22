@@ -21,7 +21,8 @@
         "juliardi/yii2-captcha": "*",
         "devristo/torrent": "dev-master",
         "bhutanio/torrent-bencode": "dev-master",
-        "kop/yii2-scroll-pager": "dev-master"
+        "kop/yii2-scroll-pager": "dev-master",
+        "christeredvartsen/php-bittorrent": "^1.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "^2.0.0",
