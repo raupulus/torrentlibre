@@ -163,7 +163,7 @@ CREATE TABLE licencias (
 DROP TABLE IF EXISTS categorias CASCADE;
 
 /*
- * Categorías a la que puede pertenecer un torrent
+ * Categorías a la que puede pertenecer un torrent.
  */
 CREATE TABLE categorias (
     id              BIGSERIAL     PRIMARY KEY
@@ -178,7 +178,7 @@ CREATE TABLE categorias (
 DROP TABLE IF EXISTS torrents CASCADE;
 
 /*
- * Información sobre los torrents
+ * Información sobre los torrents.
  */
 CREATE TABLE torrents (
     id                BIGSERIAL     PRIMARY KEY
@@ -193,17 +193,17 @@ CREATE TABLE torrents (
   , size              BIGINT        -- Tamaño ocupado
   , n_piezas          NUMERIC
   , size_piezas       NUMERIC
-  , archivos          VARCHAR
+  , archivos          VARCHAR  -- Nombre de los archivos
+  , archivos_hash     VARCHAR  -- Hash de cada archivo
+  , archivos_size     VARCHAR  -- Tamaño de cada archivo
+  , trackers          VARCHAR  -- Url de cada tracker
+  , name              VARCHAR  -- Nombre Real del torrent
   , password          VARCHAR(255)  -- Contraseña para descomprimir el torrent
   , created_at        TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
   , torrentcreate_at  TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
   , updated_at        TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP  --, magnet
-  --   VARCHAR(255)  -- Enlace magnet al torrent
   --, file            VARCHAR(255)  -- Archivo .torrent
   --, md5             VARCHAR(255)  -- Verificación del .torrent
-  --, n_descargas     BIGINT        DEFAULT 0  -- Cantidad de veces descargado
-  --, n_visitas       BIGINT        DEFAULT 0  -- Cantidad de visitas
-  --, online          BOOLEAN       DEFAULT TRUE -- Indica si es válido
   --, modificar       BOOLEAN  -- Indica si han solicitado modificación
 );
 

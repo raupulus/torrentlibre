@@ -15,6 +15,11 @@
 namespace app\helpers;
 
 use app\models\Torrents;
+use function array_combine;
+use function array_map;
+use function explode;
+use function functionCallback;
+use function implode;
 
 /**
  * Class Magnet2torrent
@@ -51,25 +56,58 @@ class Magnet2torrent
      */
     public static function generateTorrentInfo($id) {
         $oldTorrent = Torrents::findOne(['id' => $id]);
-        $trackers = Magnet2torrent::trackers();
+        $pieces = array_map(function($ele){
+            return sha1($ele, true);
+        }, explode(',', $oldTorrent->archivos_hash));
+        $pieces = implode('', $pieces);
+
+        if ($oldTorrent->trackers == '') {
+            $trackers = Magnet2torrent::trackers();
+        } else {
+            $trackers = explode(',', $oldTorrent->trackers);
+        }
+
+        $files_path = explode(',', $oldTorrent->archivos);
+        $files_length = explode(',', $oldTorrent->archivos_size);
+
+        $filesTMP = array_combine($files_path, $files_length);
+        $files = [];
+        foreach ($filesTMP as $path => $length) {
+            array_push($files,
+                [
+                    'path' => $path,
+                    'length' => $length,
+                ]
+            );
+        }
 
         return [
             'announce' => $trackers[0],
-            'announce-list' => $trackers,
-            'encoding' => 'UTF-8',
-            'filename' => $oldTorrent->titulo,
+            //'announce-list' => [$trackers],
             'created by' => 'TorrentLibre',
             'creation date' => $oldTorrent->torrentcreate_at,
-            'comment' => $oldTorrent->resumen,
+            'encoding' => 'UTF-8',
             'info' => [
+                'filename' => $oldTorrent->name ?: $oldTorrent->titulo,
+                'comment' => $oldTorrent->resumen ?: 'Sin detalles',
+                'infohash' => $oldTorrent->hash,
                 'root hash' => $oldTorrent->hash,
-                'name' => $oldTorrent->titulo,  // Nombre dir donde se guardara
+                'name' => $oldTorrent->titulo ?: $oldTorrent->name,
                 'piece length' => $oldTorrent->size_piezas,
-                'pieces' => $oldTorrent->n_piezas,
-                'length' => $oldTorrent->size,
+                'pieces' => $pieces,
+                'length' => $oldTorrent->size ?: '1',
                 'private' => 0,
                 //'md5sum' =>
                 //'info' => []
+                'files' => $files,
+
+                /*
+                'filetree' => [
+                    '??' => [
+                        ''
+                    ],
+                ],
+                */
             ],
         ];
     }

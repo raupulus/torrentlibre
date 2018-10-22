@@ -21,6 +21,10 @@ use yii\db\Expression;
  * @property string $n_piezas
  * @property string $size_piezas
  * @property string $archivos
+ * @property string $archivos_hash
+ * @property string $archivos_size
+ * @property string $trackers
+ * @property string $name
  * @property string $password
  * @property string $created_at
  * @property string $torrentcreate_at
@@ -86,7 +90,7 @@ class Torrents extends \yii\db\ActiveRecord
             [['licencia_id', 'categoria_id', 'usuario_id', 'size'], 'default', 'value' => null],
             [['licencia_id', 'categoria_id', 'usuario_id', 'size'], 'integer'],
             [['n_piezas', 'size_piezas'], 'number'],
-            [['archivos'], 'string'],
+            [['archivos', 'archivos_hash', 'archivos_size', 'trackers', 'name'], 'string'],
             [['created_at', 'torrentcreate_at', 'updated_at'], 'safe'],
             [['titulo', 'resumen', 'imagen', 'hash', 'password'], 'string', 'max' => 255],
             [['descripcion'], 'string', 'max' => 500],
@@ -122,6 +126,10 @@ class Torrents extends \yii\db\ActiveRecord
             'n_piezas' => 'Cantidad de Piezas',
             'size_piezas' => 'Tamaño de Piezas',
             'archivos' => 'Archivos del Torrent',
+            'archivos_hash' => 'Archivos Hash',
+            'archivos_size' => 'Archivos Size',
+            'trackers' => 'Trackers',
+            'name' => 'Nombre Original',
             'password' => 'Password',
             'created_at' => 'Fecha de subida',
             'torrentcreate_at' => 'Fecha de creación',
