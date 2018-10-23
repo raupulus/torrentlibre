@@ -25,6 +25,11 @@ use \yii\helpers\Html;
             <div class="col-sm-4">
                 <?= Html::a('Política de Cookies', ['site/politicacookies']) ?>
             </div>
+
+            <div class="col-sm-4">
+                <?= Html::a('Política de Privacidad',
+                           ['site/politicaprivacidad']) ?>
+            </div>
         </div>
 
         <div class="row">
@@ -33,7 +38,8 @@ use \yii\helpers\Html;
                 ?></p>
 
             <p class="pull-right">
-                <a href="http://www.fryntiz.es" alt="web de Raúl Caro Pastorino">
+                <a href="https://fryntiz.es" alt="web de Raúl Caro Pastorino"
+                   target="_blank" >
                     Raúl Caro Pastorino
                 </a>
             </p>

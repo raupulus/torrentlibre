@@ -178,5 +178,15 @@ class SiteController extends Controller
     {
         return $this->render('politicacookies');
     }
+
+    /**
+     * Displays politicaprivacidad page.
+     *
+     * @return string
+     */
+    public function actionPoliticaprivacidad()
+    {
+        return $this->render('politicaprivacidad');
+    }
 }
 

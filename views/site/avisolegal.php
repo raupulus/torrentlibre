@@ -14,11 +14,22 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Html;
+
 $this->title = 'Aviso Legal';
 
 ?>
 <div class="site-avisolegal container">
     <h1>Aviso Legal sobre <span>TorrentLibre</span></h1>
+
+    <div class="nav navbar-link">
+        <ul>
+            <li><?= Html::a('Política de Cookies', ['site/politicacookies'])
+                ?></li>
+            <li><?= Html::a('Política de Privacidad',
+                    ['site/politicaprivacidad']) ?></li>
+        </ul>
+    </div>
 
     <section class="row col-sm-12">
         <h2>Titularidad</h2>
