@@ -23,7 +23,6 @@ use app\assets\AppAsset;
 AppAsset::register($this);
 
 $params = Yii::$app->params;
-
 ?>
 
 <?php $this->beginPage() ?>
