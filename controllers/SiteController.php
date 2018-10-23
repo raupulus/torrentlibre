@@ -159,9 +159,24 @@ class SiteController extends Controller
         return $this->render('iplocked');
     }
 
+    /*
+     * Displaus avisolegal page.
+     *
+     * @return string
+     */
     public function actionAvisolegal()
     {
         return $this->render('avisolegal');
+    }
+
+    /**
+     * Displays politicacookies page.
+     *
+     * @return string
+     */
+    public function actionPoliticacookies()
+    {
+        return $this->render('politicacookies');
     }
 }
 

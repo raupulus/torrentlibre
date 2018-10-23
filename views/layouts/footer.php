@@ -15,22 +15,28 @@
 use \yii\helpers\Html;
 ?>
 
-<footer class="footer container">
-    <div class="row">
-        <p class="pull-left">&copy; <?= $params['sitename']; ?> 2018-<?= date
-            ('Y')
-            ?></p>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <?= Html::a('Aviso Legal', ['site/avisolegal']) ?>
+            </div>
 
-        <p class="pull-right">
-            <a href="http://www.fryntiz.es" alt="web de Raúl Caro Pastorino">
-                Raúl Caro Pastorino
-            </a>
-        </p>
-    </div>
+            <div class="col-sm-4">
+                <?= Html::a('Política de Cookies', ['site/politicacookies']) ?>
+            </div>
+        </div>
 
-    <div class="row">
-        <div class="col-sm-4">
-            <?= Html::a('Aviso Legal', ['site/avisolegal']) ?>
+        <div class="row">
+            <p class="pull-left">&copy; <?= $params['sitename']; ?> 2018-<?= date
+                ('Y')
+                ?></p>
+
+            <p class="pull-right">
+                <a href="http://www.fryntiz.es" alt="web de Raúl Caro Pastorino">
+                    Raúl Caro Pastorino
+                </a>
+            </p>
         </div>
     </div>
 </footer>
