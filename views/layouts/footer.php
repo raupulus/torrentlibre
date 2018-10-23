@@ -1,4 +1,4 @@
-<?php header('Content-Type: text/html; charset=UTF-8');
+<?php
 /**
  * Created by PhpStorm.
  * User: fryntiz
@@ -11,15 +11,26 @@
  * @copyright Copyright (c) 2018 Raúl Caro Pastorino
  * @license   https://www.gnu.org/licenses/gpl-3.0-standalone.html
  **/
+
+use \yii\helpers\Html;
 ?>
 
-<footer class="footer">
-    <div class="container">
+<footer class="footer container">
+    <div class="row">
         <p class="pull-left">&copy; <?= $params['sitename']; ?> 2018-<?= date
             ('Y')
             ?></p>
 
-        <p class="pull-right"><a href="http://www.fryntiz.es" alt="web de
-        Raúl Caro Pastorino">Raúl Caro Pastorino</a></p>
+        <p class="pull-right">
+            <a href="http://www.fryntiz.es" alt="web de Raúl Caro Pastorino">
+                Raúl Caro Pastorino
+            </a>
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <?= Html::a('Aviso Legal', ['site/avisolegal']) ?>
+        </div>
     </div>
 </footer>

@@ -158,5 +158,10 @@ class SiteController extends Controller
     {
         return $this->render('iplocked');
     }
+
+    public function actionAvisolegal()
+    {
+        return $this->render('avisolegal');
+    }
 }
 
