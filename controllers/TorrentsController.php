@@ -3,15 +3,24 @@
 namespace app\controllers;
 
 use app\helpers\Access;
+use app\helpers\Magnet2torrent;
 use app\helpers\Roles;
 use app\helpers\Security;
 use app\models\Descargas;
 use function array_combine;
+use function array_map;
 use function array_push;
 use Bhutanio\BEncode\BEncode;
 use DateTime;
-use Devristo\Torrent\Bee;
-use function GuzzleHttp\Promise\all;
+use function fclose;
+use function fopen;
+use function fwrite;
+use function implode;
+use function isEmpty;
+use PHP\BitTorrent\Decoder;
+use PHP\BitTorrent\Encoder;
+use function random_int;
+use function sha1;
 use function var_dump;
 use Yii;
 use app\models\Torrents;
@@ -139,18 +148,46 @@ class TorrentsController extends Controller
             // Es obligatorio que haya un torrent para continuar
             if ($model->u_torrent !== null) {
                 $torrent = Torrent::fromFile($model->u_torrent->tempName);
+                $pieces = array_map(function($ele) {
+                    return sha1($ele, false);
+                }, $torrent->getPieces());
+                $pieces = implode(',', $pieces);
+
+                $length = [];
+                $torrentArray = $torrent->toArray();
+                if (!empty($torrentArray['info']['files'])) {
+                    $files = $torrentArray['info']['files'];
+                    foreach ($files as $file) {
+                        $l = $file['length'];
+                        array_push($length, $l);
+                    }
+                }
+
+                $trackers = [];
+                foreach ($torrent->getAnnounceList() as $tracker) {
+                    array_push($trackers, $tracker[0]);
+                }
+
                 $model->n_piezas = $torrent->getNumPieces();
                 $model->size_piezas = $torrent->getPieceSize();
                 $model->torrentcreate_at = $torrent->getCreationDate()
                                             ->format('Y-m-d H:m:i');
                 $model->size = $torrent->getSize(false);
                 $model->hash = $torrent->getInfoHash(false);
-                $model->archivos = implode(",", $torrent->getFiles());
+                $model->archivos = implode(',', $torrent->getFiles());
+                $model->archivos_hash = $pieces;
+                $model->archivos_size = implode(',', $length);
+                $model->trackers = implode(',', $trackers);
+                $model->name = $torrent->getName();
 
-                // Modifico valores del torrent
-                $torrent->setName($model->titulo);
-                $torrent->setPrivate(false);
-                $torrent->setComment($model->descripcion);
+                /*
+                var_dump($model->archivos_hash);
+                var_dump($model->validate());
+                var_dump($model->errors);
+                die();
+                */
+                //var_dump($model->archivos_hash);die();
+
 
                 if ($model->save()) {
                     $rol = Yii::$app->user->identity->rol;
@@ -208,34 +245,37 @@ class TorrentsController extends Controller
      * Convierte el enlace hash del magnet recibido en un archivo torrent
      * @param $hash
      */
-    public function actionDescargar($id, $hash)
+    public function actionDescargar($id)
     {
-        // Anoto una descarga para el torrent actual
+        // Anoto una descarga para el torrent actual.
         $this->actionAnotardescarga($id);
 
-        $bcoder = new BEncode;
-        $bcoder->set([
-            'announce'=>'http://www.private-tracker.com',
-            'comment'=>'Downloaded from Private Tracker',
-            'created_by'=>'PrivateTracker v1.0',
-            'hash' =>'c7c7f829f48653bfd0ab0a4f896bdc2e8bee0a91',
-        ]);
+        // Array con toda la información del torrent.
+        $info = Magnet2torrent::generateTorrentInfo($id);
+
+        // Creo el torrent con la información de $info
+        //$bcoder = new BEncode;
+        //$torrent = $bcoder->bencode($info);
+
+        $torrent = new Encoder();
+
+        $torrent = $torrent->encodeDictionary($info);
 
 
+        // Genero el archivo descargable
+        $datetime = new DateTime('now');
+        $datetime = $datetime->getTimestamp();
+        $randomstring = random_int(1, 10000);
+        $tmpName = $info['info']['root hash'].$datetime.$randomstring.'.torrent';
 
+        $ruta = Yii::getAlias('@tmp');
+        $rutaSave = 'uploads/'.$tmpName;
 
-        //die();
-        /*
-        $torrent = $bcoder->bencode(
-            [
-                ['c7c7f829f48653bfd0ab0a4f896bdc2e8bee0a91&dn=asdasdasd']
-        ]);
-        */
+        $file = fopen($rutaSave, 'w+');
+        $x = fwrite($file, $torrent);
+        fclose($file);
 
-        //print_r($bcoder->bdecode(['info']['infohash']));
-        //echo $bcoder->bencode($torrent);
-
-        //var_dump($torrent);
+        $this->redirect('/'.$rutaSave);
     }
 
     /**
@@ -291,8 +331,9 @@ class TorrentsController extends Controller
                 'torrent_id' => $torrent_id,
                 'ip' => $ip
             ]);
+            return $descargas->save();
         }
 
-        return $descargas->save();
+        return false;
     }
 }

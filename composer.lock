@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "15d2cb4df856d7133744c20f5cc4524c",
-    "content-hash": "f1ef87d7fa203fd3ccfc3af4a64ecf6c",
+    "hash": "1d495886f15b6e0bc13948a1214f288a",
+    "content-hash": "5613eedba04d6c20466c67e097f5cc94",
     "packages": [
         {
             "name": "bhutanio/torrent-bencode",
@@ -116,25 +116,6 @@
             ]
         },
         {
-            "name": "bower-asset/jquery-infinite-scroll",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/metafizzy/infinite-scroll.git",
-                "reference": "f0d9eecb55a428b2fd4027964a22b84633ba6e3e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/metafizzy/infinite-scroll/zipball/f0d9eecb55a428b2fd4027964a22b84633ba6e3e",
-                "reference": "f0d9eecb55a428b2fd4027964a22b84633ba6e3e",
-                "shasum": null
-            },
-            "type": "bower-asset",
-            "license": [
-                "MIT"
-            ]
-        },
-        {
             "name": "bower-asset/punycode",
             "version": "v1.3.2",
             "source": {
@@ -231,6 +212,52 @@
                 "markdown-extra"
             ],
             "time": "2018-03-26 11:15:02"
+        },
+        {
+            "name": "christeredvartsen/php-bittorrent",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/christeredvartsen/php-bittorrent.git",
+                "reference": "a9315b6f93b45872667875668423cdb823f615d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/christeredvartsen/php-bittorrent/zipball/a9315b6f93b45872667875668423cdb823f615d0",
+                "reference": "a9315b6f93b45872667875668423cdb823f615d0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHP\\BitTorrent": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christer Edvartsen",
+                    "email": "cogo@starzinger.net",
+                    "homepage": "http://cogo.wordpress.com",
+                    "role": "Project lead"
+                }
+            ],
+            "description": "PHP\\BitTorrent is a set of components that can be used to interact with torrent files (read+write) and classes that can encode/decode to/from the BitTorrent format.",
+            "homepage": "https://github.com/christeredvartsen/php-bittorrent",
+            "keywords": [
+                "bittorrent",
+                "torrent"
+            ],
+            "time": "2013-01-11 12:12:20"
         },
         {
             "name": "devristo/torrent",
@@ -571,55 +598,6 @@
                 "yii2"
             ],
             "time": "2016-07-06 19:56:33"
-        },
-        {
-            "name": "nirvana-msu/yii2-infinite-scroll",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nirvana-msu/yii2-infinite-scroll.git",
-                "reference": "ee78b2f2abb1a2c18248867733ddc37eee68392c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nirvana-msu/yii2-infinite-scroll/zipball/ee78b2f2abb1a2c18248867733ddc37eee68392c",
-                "reference": "ee78b2f2abb1a2c18248867733ddc37eee68392c",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/jquery-infinite-scroll": "2.*",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "nirvana\\infinitescroll\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Stepanov",
-                    "email": "student_vmk@mail.ru"
-                }
-            ],
-            "description": "Yii2 extension for infinite-scroll jQuery plugin",
-            "keywords": [
-                "infinite-scroll",
-                "jquery",
-                "plugin",
-                "widget",
-                "yii2"
-            ],
-            "time": "2017-07-17 20:37:34"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1306,21 +1284,21 @@
         },
         {
             "name": "codeception/phpunit-wrapper",
-            "version": "6.0.12",
+            "version": "6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/phpunit-wrapper.git",
-                "reference": "de922c760dfddf8a33c4a066efcd0cd93576d957"
+                "reference": "12d76a447d3e4d12169ab71e188082be14b6ca01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/phpunit-wrapper/zipball/de922c760dfddf8a33c4a066efcd0cd93576d957",
-                "reference": "de922c760dfddf8a33c4a066efcd0cd93576d957",
+                "url": "https://api.github.com/repos/Codeception/phpunit-wrapper/zipball/12d76a447d3e4d12169ab71e188082be14b6ca01",
+                "reference": "12d76a447d3e4d12169ab71e188082be14b6ca01",
                 "shasum": ""
             },
             "require": {
                 "phpunit/php-code-coverage": ">=4.0.4 <6.0",
-                "phpunit/phpunit": ">=5.7.27 <7.0",
+                "phpunit/phpunit": ">=6.5.13 <7.0",
                 "sebastian/comparator": ">=1.2.4 <3.0",
                 "sebastian/diff": ">=1.4 <4.0"
             },
@@ -1348,7 +1326,7 @@
                 }
             ],
             "description": "PHPUnit classes used by Codeception",
-            "time": "2018-09-12 20:19:47"
+            "time": "2018-10-21 20:35:15"
         },
         {
             "name": "codeception/specify",
@@ -5534,7 +5512,6 @@
     "stability-flags": {
         "devristo/torrent": 20,
         "bhutanio/torrent-bencode": 20,
-        "nirvana-msu/yii2-infinite-scroll": 20,
         "kop/yii2-scroll-pager": 20,
         "yiisoft/yii2-gii": 20,
         "yiisoft/yii2-shell": 20,
