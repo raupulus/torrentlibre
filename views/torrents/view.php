@@ -143,12 +143,12 @@ $isAutor = Access::isAutor($model->usuario_id);
                     $r .= Html::a('Descargar Torrent',
                         Url::to(['torrents/descargar',
                             'id' => $model->id,
-                            'hash' => $model->hash,
                         ]),
                         [
                             'title' => 'Descargar '.$model->titulo,
                             'alt' => 'Descargar '.$model->titulo,
                             'class' => 'btn btn-success col-sm-12',
+                            'download'
                         ]
                     );
 

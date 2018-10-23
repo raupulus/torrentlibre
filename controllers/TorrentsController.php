@@ -19,6 +19,7 @@ use function implode;
 use function isEmpty;
 use PHP\BitTorrent\Decoder;
 use PHP\BitTorrent\Encoder;
+use function random_int;
 use function sha1;
 use function var_dump;
 use Yii;
@@ -244,7 +245,7 @@ class TorrentsController extends Controller
      * Convierte el enlace hash del magnet recibido en un archivo torrent
      * @param $hash
      */
-    public function actionDescargar($id, $hash)
+    public function actionDescargar($id)
     {
         // Anoto una descarga para el torrent actual.
         $this->actionAnotardescarga($id);
@@ -264,7 +265,8 @@ class TorrentsController extends Controller
         // Genero el archivo descargable
         $datetime = new DateTime('now');
         $datetime = $datetime->getTimestamp();
-        $tmpName = $info['info']['root hash'].$datetime.'.torrent';
+        $randomstring = random_int(1, 10000);
+        $tmpName = $info['info']['root hash'].$datetime.$randomstring.'.torrent';
 
         $ruta = Yii::getAlias('@tmp');
         $rutaSave = 'uploads/'.$tmpName;
@@ -273,7 +275,7 @@ class TorrentsController extends Controller
         $x = fwrite($file, $torrent);
         fclose($file);
 
-        var_dump($torrent);
+        $this->redirect('/'.$rutaSave);
     }
 
     /**

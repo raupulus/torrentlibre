@@ -56,7 +56,7 @@ class Magnet2torrent
      */
     public static function generateTorrentInfo($id) {
         $oldTorrent = Torrents::findOne(['id' => $id]);
-        $pieces = array_map(function($ele){
+        $pieces = array_map(function($ele) {
             return sha1($ele, true);
         }, explode(',', $oldTorrent->archivos_hash));
         $pieces = implode('', $pieces);
