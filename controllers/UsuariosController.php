@@ -111,6 +111,7 @@ class UsuariosController extends Controller
         $model = new UsuariosDatos([
             'scenario' => UsuariosDatos::ESCENARIO_CREATE,
             'lastlogin_at' => new Expression('NOW()'),
+            'privacy' => false,
         ]);
 
         $isPOST = $model->load(Yii::$app->request->post());
