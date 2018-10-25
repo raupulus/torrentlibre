@@ -5,6 +5,9 @@
  * Date: 7/10/18
  * Time: 1:40
  */
+
+use app\helpers\Amazons3;
+
 /**
  * @author    Raúl Caro Pastorino
  * @link      https://fryntiz.es
@@ -15,6 +18,12 @@
 /* @var $this yii\web\View */
 
 $this->title = Yii::getAlias('@sitename');
+
+
+$amazon = new Amazons3();
+$amazon->uploadImage('/images/torrent-image/default.png', '/');
+
+
 
 ?>
 <div class="site-index">

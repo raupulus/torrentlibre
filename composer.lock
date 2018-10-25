@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6d23a21049b171cd960b6770e1d2953e",
-    "content-hash": "c1cf12930f4547c7b028c4ff5de439c9",
+    "hash": "a034e7b8816e1f9ebb24ccf010339650",
+    "content-hash": "4176204ddfcae6730b1b45929688efd2",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -559,27 +559,32 @@
             "time": "2018-02-23 01:58:20"
         },
         {
-            "name": "fedemotta/yii2-aws-sdk",
-            "version": "v2.0",
+            "name": "frostealth/yii2-aws-s3",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fedemotta/yii2-aws-sdk.git",
-                "reference": "0f1de6a3f7ec7e8f8d845d81b350b779aacfac53"
+                "url": "https://github.com/frostealth/yii2-aws-s3.git",
+                "reference": "fd7bb53511833fb19712ad051cf97928c2e28a77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fedemotta/yii2-aws-sdk/zipball/0f1de6a3f7ec7e8f8d845d81b350b779aacfac53",
-                "reference": "0f1de6a3f7ec7e8f8d845d81b350b779aacfac53",
+                "url": "https://api.github.com/repos/frostealth/yii2-aws-s3/zipball/fd7bb53511833fb19712ad051cf97928c2e28a77",
+                "reference": "fd7bb53511833fb19712ad051cf97928c2e28a77",
                 "shasum": ""
             },
             "require": {
-                "aws/aws-sdk-php": "3.*",
-                "yiisoft/yii2": "2.*"
+                "aws/aws-sdk-php": "~3.17",
+                "php": ">=7.0.0",
+                "yiisoft/yii2": "~2.0"
+            },
+            "require-dev": {
+                "phpro/grumphp": "~0.8",
+                "squizlabs/php_codesniffer": "~2.3"
             },
             "type": "yii2-extension",
             "autoload": {
                 "psr-4": {
-                    "fedemotta\\awssdk\\": ""
+                    "frostealth\\yii2\\aws\\s3\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -588,24 +593,26 @@
             ],
             "authors": [
                 {
-                    "name": "Federico Nicolás Motta",
-                    "email": "fedemotta@gmail.com"
+                    "name": "Constantine Chuprik",
+                    "email": "constantinchuprik@gmail.com"
+                },
+                {
+                    "name": "Ivan Kudinov",
+                    "email": "i.kudinov@frostealth.ru",
+                    "homepage": "http://frostealth.ru"
                 }
             ],
-            "description": "This extension provides the AWS SDK integration for the Yii2 framework",
+            "description": "An Amazon S3 component for Yii2",
+            "homepage": "https://github.com/frostealth/yii2-aws-s3",
             "keywords": [
-                "amazon",
                 "aws",
-                "cloud",
-                "dynamodb",
-                "ec2",
-                "extension",
-                "glacier",
+                "aws-s3",
                 "s3",
-                "sdk",
-                "yii2"
+                "yii2",
+                "yii2-aws",
+                "yii2-s3"
             ],
-            "time": "2015-12-10 20:58:23"
+            "time": "2017-11-30 18:18:28"
         },
         {
             "name": "gregwar/captcha",

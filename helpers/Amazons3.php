@@ -12,6 +12,27 @@
  * @license   https://www.gnu.org/licenses/gpl-3.0-standalone.html
  **/
 
+/** @var \frostealth\yii2\aws\s3\Service $s3 */
+
+/*
+$result = $s3->commands()->get('filename.ext')->saveAs('/path/to/local/file.ext')->execute();
+
+$result = $s3->commands()->put('filename.ext', 'body')->withContentType('text/plain')->execute();
+
+$result = $s3->commands()->delete('filename.ext')->execute();
+
+$result = $s3->commands()->upload('filename.ext', '/path/to/local/file.ext')->withAcl('private')->execute();
+
+$result = $s3->commands()->restore('filename.ext', $days = 7)->execute();
+
+$result = $s3->commands()->list('path/')->execute();
+
+$exist = $s3->commands()->exist('filename.ext')->execute();
+
+$url = $s3->commands()->getUrl('filename.ext')->execute();
+
+$signedUrl = $s3->commands()->getPresignedUrl('filename.ext', '+2 days')->execute();
+ */
 namespace app\helpers;
 
 use function getenv;
@@ -25,38 +46,21 @@ class Amazons3
 {
     private $aws;
     private $s3;
-    private $bucket;
-    private $filepath;
 
     function __construct() {
-        $this->aws = Yii::$app->awssdk->getAwsSdk();
-        $this->s3 = $this->aws->createS3();
-
-        $this->bucket = getenv('AMAZON_S3_BUCKET');
-        $this->filepath = getenv('AMAZON_S3_PATH');
+        $this->s3 = Yii::$app->get('s3');
     }
 
-    public function uploadImage($nombre)
+    public function uploadImage($rutalocal, $rutaremoto)
     {
-        $result = $this->s3->putObject([
-            'Bucket' => $this->bucket,
-            'Key' => $nombre,
-            'SourceFile' => $this->filepath,
-            'ContentType' => 'text/plain',
-            'ACL' => 'public-read',
-            'StorageClass' => 'REDUCED_REDUNDANCY',
-            'Metadata' => [
-                'param1' => 'value 1',
-                'param2' => 'value 2'
-            ],
-        ]);
-        return $result;  //echo $result['ObjectURL'];
+        return $this->s3->commands()->upload(
+            $rutalocal,
+            $rutaremoto
+        )->execute();
+
     }
 
-    public function downloadImage($url) {
-        return $this->s3->getObject([
-            'Bucket' => $this->bucket,
-            'Key' => getenv($url),
-        ]);
+    public function downloadImage($nombre) {
+        return $this->s3->commands()->getUrl($nombre)->execute();
     }
 }

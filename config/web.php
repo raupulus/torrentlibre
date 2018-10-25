@@ -93,14 +93,15 @@ $config = [
             ],
         ],
 
-        'awssdk' => [
-            'class' => \fedemotta\awssdk\AwsSdk::class,
+        's3' => [
+            'class' => \frostealth\yii2\aws\s3\Service::class,
             'credentials' => [
                 'key' => getenv('AMAZON_S3_ACCESS'),
                 'secret' => getenv('AMAZON_S3_SECRET'),
             ],
             'region' => getenv('AMAZON_S3_REGION'),
-            'version' => 'latest',
+            'defaultBucket' => getenv('AMAZON_S3_BUCKET'),
+            'defaultAcl' => getenv('AMAZON_S3_ACL'),
         ],
     ],
     'params' => $params,
