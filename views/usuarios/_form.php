@@ -130,7 +130,16 @@ use juliardi\captcha\Captcha;
     <div id="datos-finalizar" class="form-dividido">
         <?php if ($model->scenario === 'create'): ?>
             <h3><?= Yii::t('usuarios-create', 'datos-finalizar'); ?></h3>
-            <?php echo $form->field($model, 'captcha')->widget(Captcha::className()) ?>
+            <?= $form->field($model, 'captcha')->widget(Captcha::className()) ?>
+
+            <?= $form->field($model, 'privacy')->checkbox([
+                'label' => '',
+                'template' => '{input}{beginLabel}{labelTitle}{endLabel}{error}',
+            ])->label(
+                'Yo acepto las ' . Html::a('Políticas de Privacidad',
+                ['site/politicaprivacidad']) . ' del sitio web.'
+            ) ?>
+
         <?php else: ?>
             <h3>Para guardar pulse el siguiente botón</h3>
             <?= Html::submitButton(Yii::t('forms', $model->scenario),
@@ -138,6 +147,20 @@ use juliardi\captcha\Captcha;
                     'class' => 'btn btn-success center-block btn-guardar'
                 ]) ?>
         <?php endif ?>
+
+        <div class="row">
+            <p>
+                Puede leer las políticas y condiciones de uso para el sitio web en
+                los siguientes enlaces:
+            </p>
+
+            <ul>
+                <li><?= Html::a('Aviso Legal', ['site/avisolegal']) ?></li>
+                <li><?= Html::a('Política de Privacidad',
+                        ['site/politicaprivacidad']) ?></li>
+                <li><?= Html::a('Política de Cookies', ['site/politicacookies']) ?></li>
+            </ul>
+        </div>
     </div>
 
     <div class="form-group">

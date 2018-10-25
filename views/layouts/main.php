@@ -42,6 +42,7 @@ $params = Yii::$app->params;
 </div>
 
 <?php require_once 'footer.php' ?>
+<?php require_once 'cookies.php' ?>
 
 <?php $this->endBody() ?>
 </body>

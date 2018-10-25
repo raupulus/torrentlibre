@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1d495886f15b6e0bc13948a1214f288a",
-    "content-hash": "5613eedba04d6c20466c67e097f5cc94",
+    "hash": "e15d589f0446c5fc73cc6e0a1ba236ba",
+    "content-hash": "362143a40811b0ff3f27ed7ceb10896a",
     "packages": [
         {
             "name": "bhutanio/torrent-bencode",
@@ -68,6 +68,25 @@
             },
             "require": {
                 "bower-asset/jquery": ">=1.9.1,<4.0"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/cookieconsent",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/insites/cookieconsent.git",
+                "reference": "973eb0a951de60d403ccc7107796cec06964af00"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/insites/cookieconsent/zipball/973eb0a951de60d403ccc7107796cec06964af00",
+                "reference": "973eb0a951de60d403ccc7107796cec06964af00",
+                "shasum": null
             },
             "type": "bower-asset",
             "license": [
@@ -598,6 +617,56 @@
                 "yii2"
             ],
             "time": "2016-07-06 19:56:33"
+        },
+        {
+            "name": "rudissaar/yii2-cookie-consent",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rudissaar/yii2-cookie-consent.git",
+                "reference": "a8c81ae585900a7cc518bb899c4c52d51284e7f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rudissaar/yii2-cookie-consent/zipball/a8c81ae585900a7cc518bb899c4c52d51284e7f1",
+                "reference": "a8c81ae585900a7cc518bb899c4c52d51284e7f1",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/cookieconsent": "2.0.*",
+                "yiisoft/yii2": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "rudissaar\\cookieconsent\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Rudissaar",
+                    "email": "kevin.rudissaar@gmail.com"
+                },
+                {
+                    "name": "Gogodigital.it",
+                    "email": "info@gogodigital.it",
+                    "homepage": "https://www.gogodigital.it"
+                }
+            ],
+            "description": "Cookie Consent plugin and wrapper for Yii2 framework.",
+            "homepage": "https://github.com/rudissaar/yii2-cookie-consent",
+            "keywords": [
+                "cookie-consent",
+                "cookie-law",
+                "gdpr",
+                "gdpr-cookie",
+                "yii2"
+            ],
+            "time": "2018-04-27 08:31:24"
         },
         {
             "name": "swiftmailer/swiftmailer",

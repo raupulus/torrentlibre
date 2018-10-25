@@ -61,6 +61,11 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public $captcha;
 
+    /**
+     * Atributo para confirmar que acepta políticas de privacidad
+     */
+    public $privacy;
+
 
     /**
      * {@inheritdoc}
@@ -92,6 +97,14 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
             ],
             ['captcha', CaptchaValidator::className()],  // Validación captcha
             [['password'], 'string', 'max' => 255],
+            [['privacy'], 'boolean'],
+            [
+                ['privacy'],
+                'required', 'on' => self::ESCENARIO_CREATE,
+                'requiredValue' => 1,
+                'message' => 'Si no está de acuerdo con los términos no puede ni
+                 debería usar esta aplicación. Este campo es obligatorio para continuar'
+            ],
             [['password_repeat'], 'string', 'max' => 255],
             [
                 ['password', 'password_repeat'],
@@ -116,6 +129,7 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return array_merge(parent::attributes(), [
             'password_repeat',
+            'privacy',
         ]);
     }
 
@@ -142,6 +156,7 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
             'lastlogin_at' => Yii::t('attributelabels', 'lastlogin_at'),
             'preferencias_id' => 'Preferencias ID',
             'captcha' => Yii::t('attributelabels', 'captcha'),
+            'privacy' => 'Políticas de privacidad',
         ];
     }
 
