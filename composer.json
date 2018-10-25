@@ -23,7 +23,8 @@
         "bhutanio/torrent-bencode": "dev-master",
         "kop/yii2-scroll-pager": "dev-master",
         "christeredvartsen/php-bittorrent": "^1.1",
-        "rudissaar/yii2-cookie-consent": "*"
+        "rudissaar/yii2-cookie-consent": "*",
+        "fedemotta/yii2-aws-sdk": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "^2.0.0",

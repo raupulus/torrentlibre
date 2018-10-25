@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </li>
 
             <li>
-                pepeneitor3000 → Es un usuario básico y la contraseña:
+                pepe → Es un usuario básico y la contraseña:
                 <strong>1234</strong>.
             </li>
         </ul>

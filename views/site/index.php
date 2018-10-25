@@ -14,7 +14,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Torrent Libre';
+$this->title = Yii::getAlias('@sitename');
 
 ?>
 <div class="site-index">

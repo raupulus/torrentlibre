@@ -1,31 +1,38 @@
 <?php
+/**
+ * @author    Raúl Caro Pastorino
+ * @link      https://fryntiz.es
+ * @copyright Copyright (c) 2018 Raúl Caro Pastorino
+ * @license   https://www.gnu.org/licenses/gpl-3.0-standalone.html
+ **/
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $log = require __DIR__ . '/log.php';
 $translations = '@app/translations';  // Directorio con las traducciones
-$sitename = 'Torrent Libre (beta)';
-$maxErrorsLogin = 10;  // Máximos intentos de iniciar sesión
 
 $config = [
-    'id' => 'basic',
+    'id' => 'torrentlibre',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@sitename' => $params['sitename'],
+        '@sitedescription' => $params['sitedescription'],
         '@r_avatar' => $params['rutaAvatar'],
         '@r_iconos' => $params['rutaIconos'],
         '@r_imgTorrent' => $params['rutaImagenTorrent'],
         '@r_img' => $params['rutaImagenes'],
         '@r_imgLicencias' => $params['rutaImagenLicencias'],
         '@r_torrents' => '@app/web' . $params['rutaTorrent'],
-        '@p_torrents' => $params['paginacion_torrents'],
+        '@p_torrents' => $params['paginaciontorrents'],
         '@tmp' => $params['tmp'],
-        '@maxErrorsLogin' => $maxErrorsLogin,
+        '@maxErrorsLogin' => $params['maxErrorsLogin'],
+        '@downloads' => $params['downloads'],
     ],
-    'language' => 'es-ES',
-    'name' => $sitename,
+    'language' => $params['language_default'],
+    'name' => $params['sitename'],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -62,7 +69,7 @@ $config = [
         'log' => $log,
         'db' => $db,
         'formatter' => [
-            'timeZone' => 'Europe/Madrid',
+            'timeZone' => getenv('SITE_TIMEZONE'),
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -84,6 +91,16 @@ $config = [
                     */
                 ],
             ],
+        ],
+
+        'awssdk' => [
+            'class' => \fedemotta\awssdk\AwsSdk::class,
+            'credentials' => [
+                'key' => getenv('AMAZON_S3_ACCESS'),
+                'secret' => getenv('AMAZON_S3_SECRET'),
+            ],
+            'region' => getenv('AMAZON_S3_REGION'),
+            'version' => 'latest',
         ],
     ],
     'params' => $params,
