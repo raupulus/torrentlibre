@@ -54,13 +54,13 @@ $isAutor = Access::isAutor($model->usuario_id);
                 'format' => 'raw',
                 'value' => function($model) {
                     $img = $model->imagen;
-                    $ruta = Yii::$app->request->baseUrl . yii::getAlias('@r_imgTorrent').'/';
 
-                    if ((! isset($img)) || (! file_exists($ruta.$img))) {
-                        $img = 'default.png';
+                    if ($model->imagen == '') {
+                        $img = Yii::$app->request->baseUrl .
+                                Yii::getAlias('@r_imgTorrent').'/default.png';
                     }
 
-                    return '<img src="'.$ruta.$img.'" />';
+                    return '<img src="'.$img.'" />';
                 }
             ],
             [

@@ -189,15 +189,14 @@ class TorrentsController extends Controller
 
                     // Subo Imagen a amazon
                     $imagenLocal = $imgObject->getRutaImagen();
-                    $nombreAmazon = $imgObject->getNombre();
+                    $nombreAmazon = 'torrentimages/' . $imgObject->getNombre();
                     $amazon = new Amazons3();
                     $amazon->uploadImage(
-                        'torrentimages/' . $nombreAmazon,
+                        $nombreAmazon,
                         $imagenLocal
                     );
 
-
-
+                    $model->imagen = $amazon->getUrlImage($nombreAmazon);
                     $model->u_img = ''; // Deshabilito este atributo temporal.
                 }
 

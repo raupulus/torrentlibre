@@ -86,7 +86,7 @@ class Imageresize
         $nombre = $this->rutaCompleta;
 
         if ($this->imgObject->saveAs($nombre)) {
-            return Image::thumbnail($nombre, 250, null)->save($nombre);
+            return Image::thumbnail($nombre, 500, null)->save($nombre);
         }
 
         return false;
