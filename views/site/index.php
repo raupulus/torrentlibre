@@ -21,11 +21,15 @@ $this->title = Yii::getAlias('@sitename');
 
 
 $amazon = new Amazons3();
-$amazon->uploadImage('/images/torrent-image/default.png', '/');
 
+// Sube correctamente al directorio "torrentimages"
+//$amazon->uploadImage('torrentimages/default.png', 'images/torrent-image/default.png');
 
+// Accede correctamente imagen a amazon s3 y devuelve url completa
+echo $amazon->getUrlImage('torrentimages/default.png');
 
 ?>
+
 <div class="site-index">
     <h1>Torrent Libre</h1>
     <h2>Sitio temporal con el desarrollo</h2>

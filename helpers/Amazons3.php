@@ -36,6 +36,8 @@ $signedUrl = $s3->commands()->getPresignedUrl('filename.ext', '+2 days')->execut
 namespace app\helpers;
 
 use function getenv;
+use function scandir;
+use function var_dump;
 use Yii;
 
 /**
@@ -47,20 +49,20 @@ class Amazons3
     private $aws;
     private $s3;
 
-    function __construct() {
+    public function __construct() {
         $this->s3 = Yii::$app->get('s3');
     }
 
-    public function uploadImage($rutalocal, $rutaremoto)
+    public function uploadImage($rutaremoto, $rutalocal)
     {
+        //var_dump(scandir('images')); die();
         return $this->s3->commands()->upload(
-            $rutalocal,
-            $rutaremoto
+            $rutaremoto,
+            $rutalocal
         )->execute();
-
     }
 
-    public function downloadImage($nombre) {
+    public function getUrlImage($nombre) {
         return $this->s3->commands()->getUrl($nombre)->execute();
     }
 }
