@@ -60,7 +60,7 @@ $isAutor = Access::isAutor($model->usuario_id);
                                 Yii::getAlias('@r_imgTorrent').'/default.png';
                     }
 
-                    return '<img src="'.$img.'" />';
+                    return '<img src="'.$img.'" alt="'.$model->titulo.'" />';
                 }
             ],
             [

@@ -85,13 +85,13 @@ $isGuest = Yii::$app->user->isGuest;
                 'contentOptions' => ['class' => 'tabla-imagen'],
                 'value' => function($model, $key, $index) {
                     $img = $model->imagen;
-                    $ruta = yii::getAlias('@r_imgTorrent').'/';
 
-                    if ((! isset($img)) || (! file_exists($ruta.$img))) {
-                        $img = 'default.png';
+                    if ($model->imagen == '') {
+                        $img = Yii::$app->request->baseUrl .
+                            Yii::getAlias('@r_imgTorrent').'/default.png';
                     }
 
-                    $img = '<img src="'.$ruta.$img.'" />';
+                    $img = '<img src="'.$img.'" alt="'.$model->titulo.'" />';
                     $link = Html::a($img, [
                         Url::to('torrents/view'),
                         'id' => $model->id

@@ -18,16 +18,6 @@ use app\helpers\Amazons3;
 /* @var $this yii\web\View */
 
 $this->title = Yii::getAlias('@sitename');
-
-
-//$amazon = new Amazons3();
-
-// Sube correctamente al directorio "torrentimages"
-//$amazon->uploadImage('torrentimages/default.png', 'images/torrent-image/default.png');
-
-// Accede correctamente imagen a amazon s3 y devuelve url completa
-//echo $amazon->getUrlImage('torrentimages/default.png');
-
 ?>
 
 <div class="site-index">
