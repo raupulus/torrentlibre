@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\helpers\Access;
+use app\helpers\Imageresize;
 use app\helpers\Magnet2torrent;
 use app\helpers\Roles;
 use app\helpers\Security;
@@ -143,15 +144,7 @@ class TorrentsController extends Controller
 
         // En el caso de existir datos mediante POST los proceso
         if ($model->load(Yii::$app->request->post())) {
-            $model->u_img = UploadedFile::getInstance($model, 'u_img');
             $model->u_torrent = UploadedFile::getInstance($model, 'u_torrent');
-
-            // Guardo imagen si existiera
-            if ($model->u_img !== null) {
-                $model->imagen = $model->??? . '-' .
-                $model->u_img->baseName . '.' .
-                $model->u_img->extension;
-            }
 
             // Es obligatorio que haya un torrent para continuar
             if ($model->u_torrent !== null) {
@@ -188,14 +181,17 @@ class TorrentsController extends Controller
                 $model->trackers = implode(',', $trackers);
                 $model->name = $torrent->getName();
 
-                /*
-                var_dump($model->archivos_hash);
-                var_dump($model->validate());
-                var_dump($model->errors);
-                die();
-                */
-                //var_dump($model->archivos_hash);die();
-
+                // Guardo imagen si existiera
+                $model->u_img = UploadedFile::getInstance($model, 'u_img');
+                if ($model->u_img !== null) {
+                    $imgObject = new Imageresize($model->u_img);
+                    if ( $imgObject->isImage() &&
+                         $imgObject->redimensionar() &&
+                         $model->uploadImg()) {
+                        $model->imagen = $imgObject->getNombre();
+                        // Subir a amazon
+                    }
+                }
 
                 if ($model->save()) {
                     $rol = Yii::$app->user->identity->rol;

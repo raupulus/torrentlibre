@@ -25,4 +25,5 @@ return [
     'downloads' => '/downloads',
     'paginaciontorrents' => getenv('TORRENTS_PAGINATION'),
     'maxErrorsLogin' => getenv('USERLOGIN_MAXERRORS'),
+    'uploadImages' => getenv('UPLOAD_IMAGES'),
 ];

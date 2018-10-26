@@ -14,36 +14,108 @@
 
 namespace app\helpers;
 
+use DateTime;
+use Exception;
+use function var_dump;
 use Yii;
+use yii\imagine\Image;
+use yii\web\UploadedFile;
 
 /**
+ * Class Imageresize
  *
  * @package app\helpers
  */
 class Imageresize
 {
-    /*
-     * Directorio donde se guardan las imagenes
+    /**
+     * @var String Ruta hacia el directorio de las imágenes.
      */
-    private $PATH;
+    private $ruta;
 
-    public function __construct($ruta)
+    /**
+     * @var String Ruta completa hacia el archivo de imagen.
+     */
+    private $rutaCompleta;
+
+    /**
+     * @var String Nombre final de la imagen subida.
+     */
+    private $NAME;
+
+    /**
+     * @var \yii\web\UploadedFile
+     */
+    private $imgObject;
+
+    /**
+     * @var int Timestamp del momento de la subida.
+     */
+    private $tsp;
+
+    /**
+     * Imageresize constructor.
+     * Recibe un objeto \yii\web\UploadedFile
+     *
+     * @param $imgObj Objeto que representa la imagen subida.
+     */
+    public function __construct($imgObj)
     {
-        $this->PATH = $ruta;
-
-        // Conseguir nombre de imagen
-        // Conseguir extension
+        $this->imgObject = $imgObj;
+        $this->ruta = Yii::getAlias('@uploadImages');
+        $this->tsp = (new Datetime('now'))->getTimestamp();
+        $this->subirImagen();
+        $this->NAME = $this->generateRandomName();
     }
 
-    private function isImage()
+    /**
+     * Sube la imagen al servidor y la redimensiona.
+     *
+     * @return bool
+     */
+    private function subirImagen()
     {
+        $ruta = $this->ruta . '/';
+        try {
+            $rdm = random_int(100000000, 999999999);
+        } catch (Exception $e) {
+            $rdm = 1234567890;
+        }
+        $extension = $this->imgObject->extension;
+        $this->rutaCompleta = $ruta.$this->tsp.'-'.$rdm.'.'.$extension;
+        $nombre = $this->rutaCompleta;
 
+        if ($this->imgObject->saveAs($nombre)) {
+            return Image::thumbnail($nombre, 250, null)->save($nombre);
+        }
+
+        return false;
     }
 
-
-
-    public static function redimensionar()
+    /**
+     * Genera una cadena aleatoria para la imagen.
+     */
+    private function generateRandomName()
     {
+        $this->NAME = $this->tsp.'-'.sha1_file($this->rutaCompleta);
+    }
 
+    /**
+     * Devuelve el nombre de la imagen subida.
+     *
+     * @return String|void
+     */
+    public function getNombre()
+    {
+        return $this->NAME;
+    }
+
+    /**
+     * Devuelve la ruta completa hacia la imagen, incluido nombre y extensión.
+     *
+     * @return String
+     */
+    public function getRutaImagen() {
+        return $this->rutaCompleta;
     }
 }

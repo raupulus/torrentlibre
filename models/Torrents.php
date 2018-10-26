@@ -98,7 +98,7 @@ class Torrents extends \yii\db\ActiveRecord
             [['licencia_id'], 'exist', 'skipOnError' => true, 'targetClass' => Licencias::className(), 'targetAttribute' => ['licencia_id' => 'id']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' =>
                 Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
-            [['u_img'], 'file', 'extensions' => 'png, jpg'],
+            [['u_img'], 'file', 'extensions' => 'jpg'],
             [['u_torrent'], 'file', 'extensions' => 'torrent'],
             [
                 ['u_torrent'], 'required', 'on' => self::ESCENARIO_CREATE,
@@ -174,19 +174,6 @@ class Torrents extends \yii\db\ActiveRecord
             return true;
         }
         return false;
-    }
-
-    /**
-     * Sube la imagen al directorio correspondiente y devuelve si fue posible.
-     * El nombre se compone del "id-" seguido del nombre real de la imagen.
-     * @return bool Indica si se lleva la acción
-     */
-    public function uploadImg()
-    {
-        if ($this->u_img === null) {
-            return false;
-        }
-        return true;
     }
 
     public function getVisitas()

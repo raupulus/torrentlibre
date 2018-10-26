@@ -30,6 +30,7 @@ $config = [
         '@tmp' => $params['tmp'],
         '@maxErrorsLogin' => $params['maxErrorsLogin'],
         '@downloads' => $params['downloads'],
+        '@uploadImages' => $params['uploadImages'],
     ],
     'language' => $params['language_default'],
     'name' => $params['sitename'],
