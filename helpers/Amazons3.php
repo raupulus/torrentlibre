@@ -46,7 +46,6 @@ use Yii;
  */
 class Amazons3
 {
-    private $aws;
     private $s3;
 
     public function __construct() {

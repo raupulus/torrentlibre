@@ -143,7 +143,15 @@ class TorrentsController extends Controller
 
         // En el caso de existir datos mediante POST los proceso
         if ($model->load(Yii::$app->request->post())) {
+            $model->u_img = UploadedFile::getInstance($model, 'u_img');
             $model->u_torrent = UploadedFile::getInstance($model, 'u_torrent');
+
+            // Guardo imagen si existiera
+            if ($model->u_img !== null) {
+                $model->imagen = $model->??? . '-' .
+                $model->u_img->baseName . '.' .
+                $model->u_img->extension;
+            }
 
             // Es obligatorio que haya un torrent para continuar
             if ($model->u_torrent !== null) {
