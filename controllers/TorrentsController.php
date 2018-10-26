@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\helpers\Access;
+use app\helpers\Amazons3;
 use app\helpers\Imageresize;
 use app\helpers\Magnet2torrent;
 use app\helpers\Roles;
@@ -185,24 +186,31 @@ class TorrentsController extends Controller
                 $model->u_img = UploadedFile::getInstance($model, 'u_img');
                 if ($model->u_img !== null) {
                     $imgObject = new Imageresize($model->u_img);
-                    if ( $imgObject->isImage() &&
-                         $imgObject->redimensionar() &&
-                         $model->uploadImg()) {
-                        $model->imagen = $imgObject->getNombre();
-                        // Subir a amazon
-                    }
+
+                    // Subo Imagen a amazon
+                    $imagenLocal = $imgObject->getRutaImagen();
+                    $nombreAmazon = $imgObject->getNombre();
+                    $amazon = new Amazons3();
+                    $amazon->uploadImage(
+                        'torrentimages/' . $nombreAmazon,
+                        $imagenLocal
+                    );
+
+
+
+                    $model->u_img = ''; // Deshabilito este atributo temporal.
                 }
 
                 if ($model->save()) {
-                    $rol = Yii::$app->user->identity->rol;
-                    $roles = Roles::allRoles();
+                    //$rol = Yii::$app->user->identity->rol;
+                    //$roles = Roles::allRoles();
                     Roles::subirRole();
 
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             } else {
                 Yii::$app->session->setFlash('error',
-                              'Es obligatorio el archivo torrent');
+                                    'Es obligatorio el archivo torrent');
                 $model->addError('u_torrent',
                     'Es obligatorio agregar un Torrent válido');
             }

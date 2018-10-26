@@ -98,7 +98,7 @@ class Torrents extends \yii\db\ActiveRecord
             [['licencia_id'], 'exist', 'skipOnError' => true, 'targetClass' => Licencias::className(), 'targetAttribute' => ['licencia_id' => 'id']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' =>
                 Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
-            [['u_img'], 'file', 'extensions' => 'jpg'],
+            [['u_img'], 'file', 'extensions' => 'png, jpg'],
             [['u_torrent'], 'file', 'extensions' => 'torrent'],
             [
                 ['u_torrent'], 'required', 'on' => self::ESCENARIO_CREATE,

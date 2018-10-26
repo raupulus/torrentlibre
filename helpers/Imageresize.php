@@ -65,7 +65,7 @@ class Imageresize
         $this->ruta = Yii::getAlias('@uploadImages');
         $this->tsp = (new Datetime('now'))->getTimestamp();
         $this->subirImagen();
-        $this->NAME = $this->generateRandomName();
+        $this->generateRandomName();
     }
 
     /**
@@ -97,7 +97,7 @@ class Imageresize
      */
     private function generateRandomName()
     {
-        $this->NAME = $this->tsp.'-'.sha1_file($this->rutaCompleta);
+        $this->NAME = $this->tsp . '-' . sha1_file($this->rutaCompleta);
     }
 
     /**
@@ -107,7 +107,7 @@ class Imageresize
      */
     public function getNombre()
     {
-        return $this->NAME;
+        return $this->NAME . '.' . $this->imgObject->extension;
     }
 
     /**
