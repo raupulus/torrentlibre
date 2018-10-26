@@ -176,19 +176,6 @@ class Torrents extends \yii\db\ActiveRecord
         return false;
     }
 
-    /**
-     * Sube la imagen al directorio correspondiente y devuelve si fue posible.
-     * El nombre se compone del "id-" seguido del nombre real de la imagen.
-     * @return bool Indica si se lleva la acción
-     */
-    public function uploadImg()
-    {
-        if ($this->u_img === null) {
-            return false;
-        }
-        return true;
-    }
-
     public function getVisitas()
     {
         return true;

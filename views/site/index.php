@@ -5,6 +5,9 @@
  * Date: 7/10/18
  * Time: 1:40
  */
+
+use app\helpers\Amazons3;
+
 /**
  * @author    Raúl Caro Pastorino
  * @link      https://fryntiz.es
@@ -14,9 +17,9 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Torrent Libre';
-
+$this->title = Yii::getAlias('@sitename');
 ?>
+
 <div class="site-index">
     <h1>Torrent Libre</h1>
     <h2>Sitio temporal con el desarrollo</h2>

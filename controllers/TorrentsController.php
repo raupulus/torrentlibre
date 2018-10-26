@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\helpers\Access;
+use app\helpers\Amazons3;
+use app\helpers\Imageresize;
 use app\helpers\Magnet2torrent;
 use app\helpers\Roles;
 use app\helpers\Security;
@@ -180,25 +182,34 @@ class TorrentsController extends Controller
                 $model->trackers = implode(',', $trackers);
                 $model->name = $torrent->getName();
 
-                /*
-                var_dump($model->archivos_hash);
-                var_dump($model->validate());
-                var_dump($model->errors);
-                die();
-                */
-                //var_dump($model->archivos_hash);die();
+                // Guardo imagen si existiera
+                $model->u_img = UploadedFile::getInstance($model, 'u_img');
+                if ($model->u_img !== null) {
+                    $imgObject = new Imageresize($model->u_img);
 
+                    // Subo Imagen a amazon
+                    $imagenLocal = $imgObject->getRutaImagen();
+                    $nombreAmazon = 'torrentimages/' . $imgObject->getNombre();
+                    $amazon = new Amazons3();
+                    $amazon->uploadImage(
+                        $nombreAmazon,
+                        $imagenLocal
+                    );
+
+                    $model->imagen = $amazon->getUrlImage($nombreAmazon);
+                    $model->u_img = ''; // Deshabilito este atributo temporal.
+                }
 
                 if ($model->save()) {
-                    $rol = Yii::$app->user->identity->rol;
-                    $roles = Roles::allRoles();
+                    //$rol = Yii::$app->user->identity->rol;
+                    //$roles = Roles::allRoles();
                     Roles::subirRole();
 
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             } else {
                 Yii::$app->session->setFlash('error',
-                              'Es obligatorio el archivo torrent');
+                                    'Es obligatorio el archivo torrent');
                 $model->addError('u_torrent',
                     'Es obligatorio agregar un Torrent válido');
             }
