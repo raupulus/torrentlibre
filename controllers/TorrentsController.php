@@ -36,6 +36,7 @@ use app\models\Categorias;
 use app\models\Licencias;
 use yii\web\UploadedFile;
 use Devristo\Torrent\Torrent;
+use yii2mod\editable\EditableAction;
 
 /**
  * TorrentsController implements the CRUD actions for Torrents model.
@@ -80,6 +81,20 @@ class TorrentsController extends Controller
                         'roles' => ['@'],
                     ],
                 ],
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        return [
+            'edit-page' => [
+                'class' => EditableAction::className(),
+                'modelClass' => Comment::className(),
+                'forceCreate' => false
             ],
         ];
     }

@@ -42,22 +42,19 @@ use yii2mod\editable\Editable;
                 <?php echo Html::a($model->getPostedDate(), $model->getAnchorUrl(), ['class' => 'comment-date']); ?>
             </div>
             <div class="comment-body">
-                <!--
-                <?php /*if (Roles::isAdmin() || ($model->createdBy ==
-                        yii::$app->user->id)): */?>
-                    <?php /*echo Editable::widget([
+                <?php if (Roles::isAdmin() || ($model->createdBy ==
+                        yii::$app->user->id)): ?>
+                    <?= Editable::widget([
                         'model' => $model,
                         'attribute' => 'content',
-                        'url' => '/comment/default/quick-edit',
+                        'url' => '/torrents/edit-page',
                         'options' => [
                             'id' => 'editable-comment-' . $model->id,
                         ],
-                    ]); */?>
-                <?php /*else: */?>
-                    <?/*= $model->getContent(); */?>
-                --><?php /*endif; */?>
-
-                <?= $model->getContent(); ?>
+                    ]); ?>
+                <?php else: ?>
+                    <?= $model->getContent(); ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>
