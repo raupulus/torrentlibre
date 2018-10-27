@@ -217,12 +217,13 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
     public function getRutaImagen()
     {
         $ruta = Yii::getAlias('@r_avatar');
-        $nombre = $ruta . '/' . $this->avatar;
+        $imagen = $ruta . '/' . $this->avatar;
 
-        if (file_exists($nombre)) {
-            return '/'.$nombre;
+        if (empty($this->avatar) || (! file_exists($imagen))) {
+            return '/' . $ruta . '/' . 'default.png';
         }
-        return Url::to($ruta . '/' . 'default.png');
+
+        return '/'.$imagen;
     }
 
     /**

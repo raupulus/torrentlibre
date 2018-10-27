@@ -90,7 +90,7 @@ $isAutor = Access::isAutor($model->usuario_id);
                 'format' => 'raw',
                 'value' => function($model) {
                     $img = $model->licencia->imagen;
-                    $r_img = yii::getAlias('@r_imgLicencias').'/'.$img;
+                    $r_img = '/'.yii::getAlias('@r_imgLicencias').'/'.$img;
 
                     return '<a href="'.$model->licencia->url.'" target="_blank">'.
                         '<img src="'.$r_img.'" /></a>';

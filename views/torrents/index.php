@@ -87,7 +87,7 @@ $isGuest = Yii::$app->user->isGuest;
                     $img = $model->imagen;
 
                     if ($model->imagen == '') {
-                        $img = Yii::$app->request->baseUrl .
+                        $img = '/' . Yii::$app->request->baseUrl .
                             Yii::getAlias('@r_imgTorrent').'/default.png';
                     }
 
@@ -110,7 +110,7 @@ $isGuest = Yii::$app->user->isGuest;
                 'contentOptions' => ['class' => 'tabla-licencia'],
                 'value' => function($model, $key, $index) {
                     $img = $model->licencia->imagen;
-                    $r_img = yii::getAlias('@r_imgLicencias').'/'.$img;
+                    $r_img = '/' . yii::getAlias('@r_imgLicencias').'/'.$img;
 
                     return '<a href="'.$model->licencia->url.'" target="_blank">'.
                         '<img src="'.$r_img.'" /></a>';

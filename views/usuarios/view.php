@@ -38,14 +38,15 @@ $isAutor = Access::isAutor($model->id);
                     'attribute' => 'avatar',
                     'format' => 'raw',
                     'value' => function($model) {
-                        $img = $model->datos->avatar;
-                        $ruta = yii::getAlias('@r_avatar').'/';
+                        $nombre = $model->datos->avatar;
+                        $ruta = yii::getAlias('@r_avatar');
+                        $imagen = $ruta.'/'.$nombre;
 
-                        if ((! isset($img)) || (! file_exists($ruta.$img))) {
-                            $img = 'default.png';
+                        if (empty($nombre) || (! file_exists($imagen))) {
+                            $imagen = $ruta.'/'.'default.png';
                         }
 
-                        return '<img src="'.$ruta.$img.'" />';
+                        return '<img src="/'.$imagen.'" />';
                     }
                 ],
                 'datos.nick',

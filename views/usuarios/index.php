@@ -40,13 +40,13 @@ $redesSociales = [
         $dir_iconos = yii::getAlias('@r_iconos');
 
         $imgs = '<a href="'.$facebook.'" class="user-social">';
-        $imgs .= '<img src="'.$dir_iconos.'/facebook.png"/></a>';
+        $imgs .= '<img src="/'.$dir_iconos.'/facebook.png"/></a>';
 
         $imgs .= '<a href="'.$twitter.'" class="user-social">';
-        $imgs .= '<img src="'.$dir_iconos.'/twitter.png"/></a>';
+        $imgs .= '<img src="/'.$dir_iconos.'/twitter.png"/></a>';
 
         $imgs .= '<a href="'.$gplus.'" class="user-social">';
-        $imgs .= '<img src="'.$dir_iconos.'/gplus.png"/></a>';
+        $imgs .= '<img src="/'.$dir_iconos.'/gplus.png"/></a>';
 
         return $imgs;
     }
@@ -192,15 +192,15 @@ $redesSociales = [
 
                 [
                     'format' => 'raw',
-                    'value' => function($model, $key, $index) {
-                        $img = $model->datos->avatar;
-                        $ruta = yii::getAlias('@r_avatar').'/';
+                    'value' => function($model) {
+                        $nombre = $model->datos->avatar;
+                        $ruta = yii::getAlias('@r_avatar');
+                        $imagen = $ruta.'/'.$nombre;
 
-                        if ((! isset($img)) || (! file_exists($ruta.$img))) {
-                            $img = 'default.png';
+                        if (empty($nombre) || (! file_exists($imagen))) {
+                            $imagen = $ruta.'/'.'default.png';
                         }
-
-                        return '<img src="'.$ruta.$img.'" />';
+                        return '<img src="/'.$imagen.'" />';
                     }
                 ],
 
