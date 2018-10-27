@@ -373,6 +373,7 @@ VALUES
 ---------------------------------------------------
 --                 COMENTARIOS                   --
 ---------------------------------------------------
+/*
 INSERT INTO comentarios (usuario_id, torrent_id, contenido) VALUES
     (3, 1, 'Este comentario es para decir lo bien que está ese torrent')
   , (3, 1, 'Y sigue subiendo contenido así máquina!')
@@ -380,18 +381,18 @@ INSERT INTO comentarios (usuario_id, torrent_id, contenido) VALUES
   , (3, 3, 'Este comentario es para decir lo bien que está ese torrent')
   , (3, 3, 'Este comentario está reportado')
 ;
-
+*/
 
 ---------------------------------------------------
 --             REPORTES COMENTARIOS              --
 ---------------------------------------------------
-
+/*
 INSERT INTO reportes_comentarios (usuario_id, comentario_id, ip, titulo,
 resumen)
 VALUES
     (3, 5, '127.0.0.99', 'Título de Prueba de Reporte', 'Resumen test')
 ;
-
+*/
 
 ---------------------------------------------------
 --                    DEMANDAS                   --
@@ -421,6 +422,7 @@ INSERT INTO puntuacion_torrents (usuario_id, torrent_id, puntuacion) VALUES
   , (3, 3, 0)
 ;
 
+/*
 INSERT INTO puntuacion_comentarios (usuario_id, comentario_id, puntuacion) VALUES
     (1, 1, 10)
   , (1, 2, 10)
@@ -430,7 +432,7 @@ INSERT INTO puntuacion_comentarios (usuario_id, comentario_id, puntuacion) VALUE
   , (3, 2, 6)
   , (3, 3, 0)
 ;
-
+*/
 
 ---------------------------------------------------
 --                   REGISTROS                   --

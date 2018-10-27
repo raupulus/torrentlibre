@@ -40,9 +40,9 @@ class Comment extends \yii\db\ActiveRecord
             [['entity', 'entityId', 'content', 'createdBy', 'updatedBy', 'createdAt', 'updatedAt', 'relatedTo'], 'required'],
             [['entityId', 'parentId', 'level', 'createdBy', 'updatedBy', 'status', 'createdAt', 'updatedAt'], 'default', 'value' => null],
             [['entityId', 'parentId', 'level', 'createdBy', 'updatedBy', 'status', 'createdAt', 'updatedAt'], 'integer'],
-            [['content', 'url'], 'string'],
+            [['url'], 'string'],
             [['entity'], 'string', 'max' => 10],
-            [['relatedTo'], 'string', 'max' => 500],
+            [['relatedTo', 'content'], 'string', 'max' => 500],
         ];
     }
 

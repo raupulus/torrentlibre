@@ -82,7 +82,8 @@ class Usuarios extends \yii\db\ActiveRecord
      */
     public function getComentarios()
     {
-        return $this->hasMany(Comentarios::className(), ['usuario_id' => 'id']);
+        //return $this->hasMany(Comentarios::className(), ['usuario_id' =>'id']);
+        return $this->hasMany(Comment::className(), ['usuario_id' => 'id']);
     }
 
     /**
