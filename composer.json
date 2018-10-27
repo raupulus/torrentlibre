@@ -25,7 +25,8 @@
         "christeredvartsen/php-bittorrent": "^1.1",
         "rudissaar/yii2-cookie-consent": "*",
         "frostealth/yii2-aws-s3": "~2.0",
-        "yiisoft/yii2-imagine": "^2.1"
+        "yiisoft/yii2-imagine": "^2.1",
+        "yii2mod/yii2-comments": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "^2.0.0",

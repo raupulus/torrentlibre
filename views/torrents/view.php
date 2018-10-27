@@ -196,3 +196,23 @@ $isAutor = Access::isAutor($model->usuario_id);
         </p>
     <?php endif ?>
 </div>
+
+
+
+
+<?php
+echo \yii2mod\comments\widgets\Comment::widget([
+    'model' => $model,
+    'commentView' => '@app/views/torrents/comentarios/_index.php',
+    'maxLevel' => 4,
+    'dataProviderConfig' => [
+        'pagination' => [
+            'pageSize' => 10
+        ],
+    ],
+    'listViewConfig' => [
+        'emptyText' => 'No hay comentarios',
+    ],
+]); ?>
+
+

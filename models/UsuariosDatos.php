@@ -361,4 +361,17 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
             'usuario_id' => $this->id,
         ]) ? true : false;
     }
+
+
+
+    // PARA COMENTARIOS
+    public function getAvatar()
+    {
+        return $this->getRutaImagen();
+    }
+
+    public function getUsername()
+    {
+        return $this->nick;
+    }
 }

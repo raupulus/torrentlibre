@@ -200,5 +200,4 @@ class Usuarios extends \yii\db\ActiveRecord
             'usuario_id' => $this->id,
         ]) ? true : false;
     }
-
 }
