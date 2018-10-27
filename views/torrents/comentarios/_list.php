@@ -9,6 +9,7 @@ use yii2mod\editable\Editable;
 /* @var $model \yii2mod\comments\models\CommentModel */
 /* @var $maxLevel null|integer comments max level */
 ?>
+
 <li class="comment" id="comment-<?= $model->id; ?>">
     <div class="comment-content" data-comment-content-id="<?= $model->id ?>">
         <div class="comment-author-avatar">
@@ -22,7 +23,15 @@ use yii2mod\editable\Editable;
             <div class="comment-action-buttons">
                 <?php if (Roles::isAdmin() || ($model->createdBy ==
                         yii::$app->user->id)): ?>
-                    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('yii2mod.comments', 'Delete'), '#', ['data' => ['action' => 'delete', 'url' => Url::to(['/comment/default/delete', 'id' => $model->id]), 'comment-id' => $model->id]]); ?>
+                    <?= Html::a('<span class="glyphicon glyphicon-trash"></span> Eliminar', [
+                        'eliminarcommentario',
+                        'id' => $model->id
+                    ], [
+                        'data' => [
+                            'confirm' => '¿Seguro que quieres eliminar este comentario?',
+                            'method' => 'post',
+                        ],
+                    ]) ?>
                 <?php endif; ?>
                 <?php if (!Yii::$app->user->isGuest && ($model->level < $maxLevel || is_null($maxLevel))) : ?>
                     <?php echo Html::a("<span class='glyphicon glyphicon-share-alt'></span> " . Yii::t('yii2mod.comments', 'Reply'), '#', ['class' => 'comment-reply', 'data' => ['action' => 'reply', 'comment-id' => $model->id]]); ?>
@@ -33,18 +42,22 @@ use yii2mod\editable\Editable;
                 <?php echo Html::a($model->getPostedDate(), $model->getAnchorUrl(), ['class' => 'comment-date']); ?>
             </div>
             <div class="comment-body">
-                <?php if (Yii::$app->getModule('comment')->enableInlineEdit && Yii::$app->getUser()->can('admin')): ?>
-                    <?php echo Editable::widget([
+                <!--
+                <?php /*if (Roles::isAdmin() || ($model->createdBy ==
+                        yii::$app->user->id)): */?>
+                    <?php /*echo Editable::widget([
                         'model' => $model,
                         'attribute' => 'content',
                         'url' => '/comment/default/quick-edit',
                         'options' => [
                             'id' => 'editable-comment-' . $model->id,
                         ],
-                    ]); ?>
-                <?php else: ?>
-                    <?php echo $model->getContent(); ?>
-                <?php endif; ?>
+                    ]); */?>
+                <?php /*else: */?>
+                    <?/*= $model->getContent(); */?>
+                --><?php /*endif; */?>
+
+                <?= $model->getContent(); ?>
             </div>
         </div>
     </div>

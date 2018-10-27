@@ -113,6 +113,12 @@ $config = [
     'modules' => [
         'comment' => [
             'class' => yii2mod\comments\Module::class,
+            'controllerMap' => [
+                'manage' => [
+                    'class' => 'yii2mod\comments\controllers\ManageController',
+                    'layout' => '@app/modules/admin/views/layouts/column2',
+                ],
+            ],
         ],
     ],
     'params' => $params,

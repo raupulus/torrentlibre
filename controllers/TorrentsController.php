@@ -8,6 +8,7 @@ use app\helpers\Imageresize;
 use app\helpers\Magnet2torrent;
 use app\helpers\Roles;
 use app\helpers\Security;
+use app\models\Comment;
 use app\models\Descargas;
 use function array_combine;
 use function array_map;
@@ -343,6 +344,23 @@ class TorrentsController extends Controller
                 'ip' => $ip
             ]);
             return $descargas->save();
+        }
+
+        return false;
+    }
+
+    /**
+     * Elimina un comentario.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionEliminarcommentario($id)
+    {
+        $model = Comment::findOne($id);
+
+        if (Roles::isAdmin() || (Yii::$app->user->id == $model->createdBy)) {
+            return $model->delete();
         }
 
         return false;
