@@ -1,6 +1,7 @@
 <?php
 
 use app\helpers\Roles;
+use yii\data\ArrayDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii2mod\editable\Editable;
@@ -23,9 +24,10 @@ use yii2mod\editable\Editable;
             <div class="comment-action-buttons">
                 <?php if (Roles::isAdmin() || ($model->createdBy ==
                         yii::$app->user->id)): ?>
-                    <?= Html::a('<span class="glyphicon glyphicon-trash"></span> Eliminar', [
+                    <?= Html::a('<span id="eliminarComentario"
+                          class="glyphicon glyphicon-trash"></span> Eliminar', [
                         'eliminarcommentario',
-                        'id' => $model->id
+                        'id' => $model->id,
                     ], [
                         'data' => [
                             'confirm' => '¿Seguro que quieres eliminar este comentario?',
@@ -34,7 +36,7 @@ use yii2mod\editable\Editable;
                     ]) ?>
                 <?php endif; ?>
                 <?php if (!Yii::$app->user->isGuest && ($model->level < $maxLevel || is_null($maxLevel))) : ?>
-                    <?php echo Html::a("<span class='glyphicon glyphicon-share-alt'></span> " . Yii::t('yii2mod.comments', 'Reply'), '#', ['class' => 'comment-reply', 'data' => ['action' => 'reply', 'comment-id' => $model->id]]); ?>
+                    <?php echo Html::a("<span class='glyphicon glyphicon-share-alt'></span> Responder", '#', ['class' => 'comment-reply', 'data' => ['action' => 'reply', 'comment-id' => $model->id]]); ?>
                 <?php endif; ?>
             </div>
             <div class="comment-author-name">
@@ -62,8 +64,9 @@ use yii2mod\editable\Editable;
 <?php if ($model->hasChildren()) : ?>
     <ul class="children">
         <?php foreach ($model->getChildren() as $children) : ?>
-            <li class="comment" id="comment-<?php echo $children->id; ?>">
-                <?php echo $this->render('_list', ['model' => $children, 'maxLevel' => $maxLevel]) ?>
+            <li class="comment" id="comment-<?= $children->id; ?>">
+                <?= $this->render('_list', ['model' => $children, 'maxLevel'
+                => $maxLevel]) ?>
             </li>
         <?php endforeach; ?>
     </ul>

@@ -111,7 +111,7 @@ CREATE TABLE usuarios_datos (
   , password         VARCHAR(255)  NOT NULL
   , auth_key         VARCHAR(255)
   , token            VARCHAR(255)  UNIQUE
-  , lastlogin_at     TIMESTAMP     -- Última fecha de login
+  , lastlogin_at     TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP -- Última fecha de login
   , preferencias_id  BIGINT        REFERENCES preferencias (id)
   --, localidad        VARCHAR(255)
   --, provincia        VARCHAR(255)

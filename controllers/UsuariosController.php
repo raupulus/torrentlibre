@@ -129,7 +129,6 @@ class UsuariosController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        //var_dump($model->errors);die();
         return $this->render('create', [
             'model' => $model,
         ]);

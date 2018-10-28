@@ -375,7 +375,8 @@ class TorrentsController extends Controller
         $model = Comment::findOne($id);
 
         if (Roles::isAdmin() || (Yii::$app->user->id == $model->createdBy)) {
-            return $model->delete();
+            $model->delete();
+            return $this->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
         }
 
         return false;
