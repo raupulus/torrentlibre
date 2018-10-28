@@ -24,7 +24,8 @@ $(document).ready(function() {
 
     var magnet = $('#magnet').text();
 
-    var trackers = Array.from(document.querySelectorAll(".trackers dl a")).map(node => node.textContent.trim()).concat(defaultTrackers);
+    var trackers = Array.from(document.querySelectorAll(".trackers dl a"))
+                  .map(node => node.textContent.trim()).concat(defaultTrackers);
 
     var trackersCmps = trackers.reduce((result, uri) => result + "&tr=" + encodeURIComponent(uri), "");
 
@@ -48,6 +49,12 @@ $(document).ready(function() {
     // Asigno evento para copiar al pulsar el icono de magnet
     $('#copymagnet').click(copyMagnetToClipboard);
 
-
-
+    /**
+     * Esta función refresca las descargas al pulsar el botón "Descargar"
+     */
+    function recargarDescargas() {
+        var btn = $('.magnet .btn');
+        //var campoDescargadso = $('?????');
+        // TODO → formatear detailview y cazar veces descargados
+    }
 });

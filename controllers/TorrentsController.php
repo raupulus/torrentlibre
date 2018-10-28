@@ -8,6 +8,7 @@ use app\helpers\Imageresize;
 use app\helpers\Magnet2torrent;
 use app\helpers\Roles;
 use app\helpers\Security;
+use app\models\Comment;
 use app\models\Descargas;
 use function array_combine;
 use function array_map;
@@ -35,6 +36,7 @@ use app\models\Categorias;
 use app\models\Licencias;
 use yii\web\UploadedFile;
 use Devristo\Torrent\Torrent;
+use yii2mod\editable\EditableAction;
 
 /**
  * TorrentsController implements the CRUD actions for Torrents model.
@@ -79,6 +81,20 @@ class TorrentsController extends Controller
                         'roles' => ['@'],
                     ],
                 ],
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        return [
+            'edit-page' => [
+                'class' => EditableAction::className(),
+                'modelClass' => Comment::className(),
+                'forceCreate' => false
             ],
         ];
     }
@@ -343,6 +359,24 @@ class TorrentsController extends Controller
                 'ip' => $ip
             ]);
             return $descargas->save();
+        }
+
+        return false;
+    }
+
+    /**
+     * Elimina un comentario.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionEliminarcommentario($id)
+    {
+        $model = Comment::findOne($id);
+
+        if (Roles::isAdmin() || (Yii::$app->user->id == $model->createdBy)) {
+            $model->delete();
+            return $this->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
         }
 
         return false;

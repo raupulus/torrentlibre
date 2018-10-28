@@ -216,11 +216,14 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getRutaImagen()
     {
-        $nombre = Yii::getAlias('@r_avatar') . '/' . $this->avatar;
-        if (file_exists($nombre)) {
-            return Url::to('/r_avatar/') . $this->avatar;
+        $ruta = Yii::getAlias('@r_avatar');
+        $imagen = $ruta . '/' . $this->avatar;
+
+        if (empty($this->avatar) || (! file_exists($imagen))) {
+            return '/' . $ruta . '/' . 'default.png';
         }
-        return Url::to('/r_avatar/') . 'default.png';
+
+        return '/'.$imagen;
     }
 
     /**
@@ -360,5 +363,18 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
         return UsuariosBloqueados::findOne([
             'usuario_id' => $this->id,
         ]) ? true : false;
+    }
+
+
+
+    // PARA COMENTARIOS
+    public function getAvatar()
+    {
+        return $this->getRutaImagen();
+    }
+
+    public function getUsername()
+    {
+        return $this->nick;
     }
 }

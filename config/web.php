@@ -80,8 +80,12 @@ $config = [
         ],
         'i18n' => [
             'translations' => [
+                'yii2mod.comments' => [
+                    'class' => \yii\i18n\PhpMessageSource::class,
+                    'basePath' => '@yii2mod/comments/messages',
+                ],
                 '*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
+                    'class' => \yii\i18n\PhpMessageSource::class,
                     'basePath' => $translations,
                     //'sourceLanguage' => 'en-US',
                     /*
@@ -103,6 +107,18 @@ $config = [
             'region' => getenv('AMAZON_S3_REGION'),
             'defaultBucket' => getenv('AMAZON_S3_BUCKET'),
             'defaultAcl' => getenv('AMAZON_S3_ACL'),
+        ],
+    ],
+
+    'modules' => [
+        'comment' => [
+            'class' => yii2mod\comments\Module::class,
+            'controllerMap' => [
+                'manage' => [
+                    'class' => 'yii2mod\comments\controllers\ManageController',
+                    'layout' => '@app/modules/admin/views/layouts/column2',
+                ],
+            ],
         ],
     ],
     'params' => $params,

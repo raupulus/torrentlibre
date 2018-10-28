@@ -111,7 +111,7 @@ CREATE TABLE usuarios_datos (
   , password         VARCHAR(255)  NOT NULL
   , auth_key         VARCHAR(255)
   , token            VARCHAR(255)  UNIQUE
-  , lastlogin_at     TIMESTAMP     -- Última fecha de login
+  , lastlogin_at     TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP -- Última fecha de login
   , preferencias_id  BIGINT        REFERENCES preferencias (id)
   --, localidad        VARCHAR(255)
   --, provincia        VARCHAR(255)
@@ -245,7 +245,7 @@ CREATE INDEX idx_reportes_torrents_torrent_id ON reportes_torrents (torrent_id);
 ---------------------------------------------------
 --                 COMENTARIOS                   --
 ---------------------------------------------------
-DROP TABLE IF EXISTS comentarios CASCADE;
+--DROP TABLE IF EXISTS comentarios CASCADE;
 
 /**
  * Tabla comentarios
@@ -254,6 +254,7 @@ DROP TABLE IF EXISTS comentarios CASCADE;
  * Un comentario puede ser hijo de otro (ser una respuesta a otro comentario)
  * en ese caso tendrá "comentario_id" que es precisamente el padre de este.
  */
+/*
 CREATE TABLE comentarios (
     id              BIGSERIAL  PRIMARY KEY
   , usuario_id      BIGINT     NOT NULL REFERENCES "usuarios" (id)
@@ -274,6 +275,48 @@ CREATE TABLE comentarios (
 CREATE INDEX idx_comentarios_usuario_id ON comentarios (usuario_id);
 CREATE INDEX idx_comentarios_torrent_id ON comentarios (torrent_id);
 CREATE INDEX idx_comentarios_comentario_id ON comentarios (comentario_id);
+*/
+
+/*
+DROP TABLE IF EXISTS comment CASCADE;
+CREATE TABLE comment (
+    id         BIGSERIAL     CONSTRAINT Comment_pkey PRIMARY KEY
+  , entity     VARCHAR(255)  NOT NULL
+  , entityId   BIGINT        NOT NULL
+  , content    text          NOT NULL
+  , parentId   BIGINT        NULL
+  , level      BIGINT        NOT NULL DEFAULT 1
+  , createdBy  BIGINT        NOT NULL
+  , updatedBy  BIGINT        NOT NULL
+  , status     BIGINT        NOT NULL DEFAULT 1
+  , createdAt  BIGINT        NOT NULL
+  , updatedAt  BIGINT        NOT NULL
+  , relatedTo  varchar(500)  NOT NULL
+  , url        text          DEFAULT NULL
+  --CONSTRAINT "Comment_pkey" PRIMARY KEY (id)
+);
+CREATE INDEX "idx-Comment-entity" ON comment USING btree (entity);
+CREATE INDEX "idx-Comment-status" ON comment USING btree (status);
+*/
+
+CREATE TABLE comment (
+  id serial NOT NULL,
+  entity bpchar(10) NOT NULL,
+  "entityId" int4 NOT NULL,
+  content text NOT NULL,
+  "parentId" int4 NULL,
+  "level" int2 NOT NULL DEFAULT 1,
+  "createdBy" int4 NOT NULL,
+  "updatedBy" int4 NOT NULL,
+  status int2 NOT NULL DEFAULT 1,
+  "createdAt" int4 NOT NULL,
+  "updatedAt" int4 NOT NULL,
+  "relatedTo" varchar(500) NOT NULL,
+  url text NULL,
+  CONSTRAINT "Comment_pkey" PRIMARY KEY (id)
+);
+CREATE INDEX "idx-Comment-entity" ON public.comment USING btree (entity);
+CREATE INDEX "idx-Comment-status" ON public.comment USING btree (status);
 
 
 ---------------------------------------------------
@@ -291,7 +334,7 @@ CREATE TABLE reportes_comentarios (
                                   ON DELETE NO ACTION
                                   ON UPDATE CASCADE
   , comentario_id   BIGINT        NOT NULL
-                                  REFERENCES comentarios (id)
+                                  REFERENCES comment (id)
                                   ON DELETE NO ACTION
                                   ON UPDATE CASCADE
   , ip              VARCHAR(15)
@@ -370,7 +413,7 @@ DROP TABLE IF EXISTS puntuacion_comentarios CASCADE;
 CREATE TABLE puntuacion_comentarios (
     id               BIGSERIAL    PRIMARY KEY
   , usuario_id       BIGINT       REFERENCES "usuarios" (id)
-  , comentario_id    BIGINT    REFERENCES "comentarios" (id)
+  , comentario_id    BIGINT    REFERENCES "comment" (id)
   , puntuacion       BIGINT       NOT NULL --Valor del 0 al 10
   , created_at       TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP
   , UNIQUE (usuario_id, comentario_id)

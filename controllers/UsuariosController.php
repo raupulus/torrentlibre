@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\helpers\Access;
 use app\helpers\Roles;
+use app\models\Comment;
 use app\models\Preferencias;
 use app\models\UsuariosDatos;
 use function var_dump;
@@ -128,7 +129,6 @@ class UsuariosController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        //var_dump($model->errors);die();
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -177,6 +177,7 @@ class UsuariosController extends Controller
             return $this->redirect(['usuarios/index']);
         }
 
+        Yii::$app->user->logout();
         return $this->redirect(['index']);
     }
 

@@ -33,7 +33,8 @@
 
                     // Añado el valor de cada imagen al campo "avatar" del form
                     let nombre = $(this).data('name');
-                    $('#usuarios-avatar').val(nombre);
+                    $('#usuariosdatos-avatar').val(nombre);
+                    console.log(nombre);
                 });
             });
         })();
