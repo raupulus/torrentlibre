@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use DateTime;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Demandas;
@@ -57,8 +58,15 @@ class DemandasSearch extends Demandas
             return $dataProvider;
         }
 
+        $treintadias = new DateTime('now');
+        $treintadias->modify('-30 days');
+        $treintadias = $treintadias->format('Y-m-d H:i:s');
+
+        $query->where(['>=', 'created_at', $treintadias])
+              ->andWhere(['=', 'atendido', false]);
+
         $query->andFilterWhere(['ilike', 'titulo', $this->allfields])
-            ->orFilterWhere(['ilike', 'descripcion', $this->allfields]);
+              ->orFilterWhere(['ilike', 'descripcion', $this->allfields]);
 
         return $dataProvider;
     }
