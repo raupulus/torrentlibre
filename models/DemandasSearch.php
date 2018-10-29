@@ -18,7 +18,7 @@ class DemandasSearch extends Demandas
     {
         return [
             [['id', 'usuario_id'], 'integer'],
-            [['titulo', 'descripcion'], 'safe'],
+            [['titulo', 'descripcion', 'allfields'], 'safe'],
             [['atendido'], 'boolean'],
         ];
     }
@@ -57,15 +57,8 @@ class DemandasSearch extends Demandas
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'usuario_id' => $this->usuario_id,
-            'atendido' => $this->atendido,
-        ]);
-
-        $query->andFilterWhere(['ilike', 'titulo', $this->titulo])
-            ->andFilterWhere(['ilike', 'descripcion', $this->descripcion]);
+        $query->andFilterWhere(['ilike', 'titulo', $this->allfields])
+            ->orFilterWhere(['ilike', 'descripcion', $this->allfields]);
 
         return $dataProvider;
     }
