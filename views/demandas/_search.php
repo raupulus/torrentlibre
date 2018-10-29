@@ -23,6 +23,27 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
+    <div class="row">
+        <!-- USAR ESTOS CAMPOS PARA PASAR AL MODELO DE BUSQUEDA COMO FILTRAR -->
+        <?= $form->field($model, 'search_activas')
+            ->hiddenInput(['id' => 'search_activas'])
+            ->label(false) ?>
+
+        <?= $form->field($model, 'search_encurso')
+            ->hiddenInput(['id' => 'search_encurso'])
+            ->label(false) ?>
+    </div>
+
+    <div class="row text-center">
+        <button id="btn-search_activas" class="btn btn-warning btn-sm">
+            Demandas Activas
+        </button>
+
+        <button id="btn-search_encurso" class="btn btn-warning btn-sm">
+            Demandas en Curso
+        </button>
+    </div>
+
     <?php ActiveForm::end(); ?>
 
 </div>

@@ -49,10 +49,22 @@ $columns = [
         'format' => 'raw',
         'contentOptions' => ['class' => 'box-demandas-btn'],
         'value' => function($model) {
-            return '<span class="btn-subir-demanda btn btn-xs btn-warning"' .
-                   'data-demandaid="' . $model->id . '">' .
-                       'Yo lo subo' .
-                   '</span>';
+            $solicitante = $model->solicitante_id;
+            $atendedor = $model->atendedor_id;
+            $usuario = Yii::$app->user->id;
+
+            if (($usuario != $solicitante) && ($atendedor == null)) {
+                return '<span class="btn-subir-demanda btn btn-xs btn-warning"' .
+                    'data-demandaid="' . $model->id . '">' .
+                    'Yo lo subo' .
+                    '</span>';
+            }
+
+            if ($atendedor != null) {
+                return 'Demanda atendida por: <br />' . $model->atendedor->nick;
+            }
+
+            return 'Esta demanda es tuya';
         }
     ],
 ];
@@ -85,7 +97,6 @@ if ($isAdmin){
 
 
     <?= $this->render('_search', ['model' => $searchModel]); ?>
-
 
     <!-- Demandas Activas -->
     <div>

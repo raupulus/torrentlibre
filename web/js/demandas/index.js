@@ -9,6 +9,9 @@ $(document).ready(() => {
     /**
      * Al pulsar sobre el botón de "Yo lo subo" se actualizará la demanda que
      * corresponda asignando el id del usuario que ha pulsado.
+     *
+     * @param id Recibe el id de la demanda a modificar.
+     * @param row Recibe la fila a ocultar si se modifica correctamente.
      */
     function comprometerDemanda(id, row) {
         $.ajax({
@@ -20,10 +23,6 @@ $(document).ready(() => {
             success:function(data) {
                 $(row).hide();  //Elimino el nodo
             },
-            error: function() {
-                console.log(id);
-                console.log('ERROR AJAX DEMANDAS');
-            }
         });
     }
 
@@ -34,5 +33,30 @@ $(document).ready(() => {
         var id = $(this).data('demandaid');
         var row = $(this).parent().parent();
         comprometerDemanda(id, row);
+    });
+
+    /**
+     * Envía el formulario para Demandas.
+     */
+    function buscarDemandas() {
+        $('.demandas-search button[type="submit"]').submit();
+    }
+
+    /**
+     * Envía el formulario para buscar con demandas activas.
+     */
+    $('#btn-search_activas').click( function() {
+        $('#search_activas').val('true');
+        $('#search_encurso').val('');
+        buscarDemandas();
+    });
+
+    /**
+     * Envía el formulario para buscar con demandas en curso.
+     */
+    $('#btn-search_encurso').click( function() {
+        $('#search_encurso').val('true');
+        $('#search_activas').val('');
+        buscarDemandas();
     });
 });

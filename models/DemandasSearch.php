@@ -13,13 +13,23 @@ use app\models\Demandas;
 class DemandasSearch extends Demandas
 {
     /**
+     * Atributos para búsqueda y ordenación.
+     */
+    public $search_activas;
+    public $search_encurso;
+
+    /**
      * {@inheritdoc}
      */
     public function rules()
     {
+
         return [
             [['id', 'solicitante_id', 'atendedor_id'], 'integer'],
-            [['titulo', 'descripcion', 'created_at', 'allfields'], 'safe'],
+            [[
+                'titulo', 'descripcion', 'created_at', 'allfields',
+                'search_activas', 'search_encurso'
+            ], 'safe'],
         ];
     }
 
@@ -69,8 +79,13 @@ class DemandasSearch extends Demandas
          * Solo muestro los últimos 30 días de peticiones que no fueron
          * atendidas por ningún usuario.
          */
-        $query->where(['>=', 'created_at', $treintadias])
-              ->andWhere(['atendedor_id' => null]);
+        $query->where(['>=', 'created_at', $treintadias]);
+
+        if ($this->search_encurso == true) {
+            $query->andWhere(['not', ['atendedor_id' => null]]);
+        } else {
+            $query->andWhere(['atendedor_id' => null]);
+        }
 
         $query->andFilterWhere(['ilike', 'titulo', $this->allfields])
               ->orFilterWhere(['ilike', 'descripcion', $this->allfields])
