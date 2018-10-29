@@ -385,11 +385,10 @@ DROP TABLE IF EXISTS demandas CASCADE;
  */
 CREATE TABLE demandas (
     id            BIGSERIAL    PRIMARY KEY
-  , solicitante_id    BIGINT       NOT NULL REFERENCES "usuarios" (id)
-  , atendedor_id  BIGINT       NOT NULL REFERENCES "usuarios" (id)
+  , solicitante_id    BIGINT   NOT NULL REFERENCES "usuarios" (id)
+  , atendedor_id  BIGINT       REFERENCES "usuarios" (id)
   , titulo        VARCHAR(255) NOT NULL UNIQUE
   , descripcion   VARCHAR(255) NOT NULL
-  , atendido      BOOLEAN      NOT NULL DEFAULT FALSE
   , created_at    TIMESTAMP(0) DEFAULT  LOCALTIMESTAMP
 );
 

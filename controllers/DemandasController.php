@@ -2,9 +2,13 @@
 
 namespace app\controllers;
 
+use app\helpers\Access;
+use app\models\Roles;
+use app\models\Torrents;
 use Yii;
 use app\models\Demandas;
 use app\models\DemandasSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,6 +30,33 @@ class DemandasController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'actions' => ['create', 'update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'matchCallback' => function($rule, $action) {
+                            $id = Torrents::findOne($_REQUEST['id'])->usuario_id;
+                            $isAdmin = Roles::isAdmin();
+                            $isAutor = Access::isAutor($id);
+
+                            if ($isAdmin || $isAutor) {
+                                return true;
+                            }
+
+                            return false;
+                        },
+                        'roles' => ['@'],
+                    ],
+                ],
+            ]
         ];
     }
 
@@ -67,7 +98,7 @@ class DemandasController extends Controller
         $model = new Demandas();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [

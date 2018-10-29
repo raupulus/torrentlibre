@@ -18,9 +18,8 @@ class DemandasSearch extends Demandas
     public function rules()
     {
         return [
-            [['id', 'usuario_id'], 'integer'],
-            [['titulo', 'descripcion', 'allfields'], 'safe'],
-            [['atendido'], 'boolean'],
+            [['id', 'solicitante_id', 'atendedor_id'], 'integer'],
+            [['titulo', 'descripcion', 'created_at', 'allfields'], 'safe'],
         ];
     }
 
@@ -63,7 +62,7 @@ class DemandasSearch extends Demandas
         $treintadias = $treintadias->format('Y-m-d H:i:s');
 
         $query->where(['>=', 'created_at', $treintadias])
-              ->andWhere(['=', 'atendido', false]);
+              ->andWhere(['atendedor_id' => null]);
 
         $query->andFilterWhere(['ilike', 'titulo', $this->allfields])
               ->orFilterWhere(['ilike', 'descripcion', $this->allfields]);

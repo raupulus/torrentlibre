@@ -19,7 +19,7 @@ $columns = [
     [
         'format' => 'raw',
         'value' => function($model) {
-            $nombre = $model->usuario->avatar;
+            $nombre = $model->solicitante->avatar;
             $ruta = yii::getAlias('@r_avatar');
             $imagen = $ruta.'/'.$nombre;
 
@@ -29,10 +29,9 @@ $columns = [
             return '<img src="/'.$imagen.'" />';
         }
     ],
-    'usuario.nick',
+    'solicitante.nick:text:Solicitante',
     'titulo',
     'descripcion',
-    'atendido:boolean',
 ];
 
 if ($isAdmin){
@@ -47,7 +46,7 @@ if ($isAdmin){
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Añadir Demanda', ['create'], ['class' => 'btn 
+        <?= Html::a('Nueva Demanda', ['create'], ['class' => 'btn 
         btn-success']) ?>
     </p>
 
