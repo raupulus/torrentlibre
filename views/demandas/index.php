@@ -1,5 +1,6 @@
 <?php
 
+use app\assets\DemandasIndexAsset;
 use app\helpers\Roles;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -7,6 +8,9 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\DemandasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
+// Registro assets para esta vista
+DemandasIndexAsset::register($this);
 
 $this->title = 'Demandas';
 $this->params['breadcrumbs'][] = $this->title;
@@ -18,6 +22,8 @@ $columns = [
     //['class' => 'yii\grid\SerialColumn'],
     [
         'format' => 'raw',
+        //'headerOptions' => ['class' => 'text-center']
+        'contentOptions' => ['class' => 'box-demandas-index-avatar'],
         'value' => function($model) {
             $nombre = $model->solicitante->avatar;
             $ruta = yii::getAlias('@r_avatar');
@@ -26,12 +32,29 @@ $columns = [
             if (empty($nombre) || (! file_exists($imagen))) {
                 $imagen = $ruta.'/'.'default.png';
             }
-            return '<img src="/'.$imagen.'" />';
+            return '<img class="demandas-index-avatar" src="/'.$imagen.'" />';
         }
     ],
-    'solicitante.nick:text:Solicitante',
-    'titulo',
+    [
+        'attribute' => 'solicitante.nick',
+        'label' => 'Solicitante',
+        'contentOptions' => ['class' => 'box-demandas-nick'],
+    ],
+    [
+        'attribute' => 'titulo',
+        'contentOptions' => ['class' => 'box-demandas-titulo'],
+    ],
     'descripcion',
+    [
+        'format' => 'raw',
+        'contentOptions' => ['class' => 'box-demandas-btn'],
+        'value' => function($model) {
+            return '<span class="btn-subir-demanda btn btn-xs btn-warning"' .
+                   'data-demandaid="' . $model->id . '">' .
+                       'Yo lo subo' .
+                   '</span>';
+        }
+    ],
 ];
 
 if ($isAdmin){
@@ -41,18 +64,62 @@ if ($isAdmin){
 
 ?>
 <div class="demandas-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
-    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Nueva Demanda', ['create'], ['class' => 'btn 
-        btn-success']) ?>
+        Aquí puedes solicitar contenido para que otros usuarios puedan subirlo
+        y/o conocer lo que otros usuarios demandan.
     </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => $columns,
-    ]); ?>
+    <p>
+        Permanecerá cada demanda activa durante 30 días y luego será
+        automáticamente excluida si nadie promete subir ese contenido.
+    </p>
+
+    <div class="row text-center">
+        <p>
+            <?= Html::a('Nueva Demanda', ['create'], ['class' => 'btn 
+        btn-success']) ?>
+        </p>
+    </div>
+
+
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
+
+
+    <!-- Demandas Activas -->
+    <div>
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            //'filterModel' => $searchModel,
+            'id' => 'demandas-index-gridview',
+            'class' => 'demandas-index-class',
+            'summary' => false,  // Oculto total de elementos
+            'showHeader' => false,
+            //'showFooter' => false,
+            'emptyCell' => 'N/D',
+            'tableOptions' => [
+                'class' => 'tablaDemandasIndex',
+            ],
+            'pager' => [
+                'class' => \kop\y2sp\ScrollPager::className(),
+                'container' => '#demandas-index-gridview tbody',
+                'item' => 'tr',
+                'noneLeftText' => '',  // No muestra mensaje final
+                'triggerOffset' => 1000,
+                'negativeMargin' => 100,
+                'delay' => 0,
+                'spinnerSrc'=> yii::getAlias('@r_img').'/load-torrent.gif',
+                'paginationSelector' => '.grid-view .pagination',
+                'enabledExtensions'=> [
+                    \kop\y2sp\ScrollPager::EXTENSION_TRIGGER,
+                    \kop\y2sp\ScrollPager::EXTENSION_SPINNER,
+                    \kop\y2sp\ScrollPager::EXTENSION_NONE_LEFT,
+                    \kop\y2sp\ScrollPager::EXTENSION_PAGING
+                ],
+            ],
+            'columns' => $columns,
+        ]); ?>
+    </div>
+
 </div>

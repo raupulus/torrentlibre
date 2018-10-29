@@ -16,12 +16,10 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-12 text-right">
             <?= $form->field($model, 'allfields') ?>
-        </div>
-
-        <div class="col-sm-6">
-            <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('Buscar', ['class' => 'btn 
+            btn-xs btn-primary']) ?>
         </div>
     </div>
 

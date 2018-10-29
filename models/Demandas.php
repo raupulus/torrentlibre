@@ -61,7 +61,7 @@ class Demandas extends \yii\db\ActiveRecord
             'titulo' => 'Título',
             'descripcion' => 'Descripción',
             'created_at' => 'Creado por',
-            'allfields' => 'Buscar en todos los campos'
+            'allfields' => 'Buscar demandas activas'
         ];
     }
 

@@ -41,7 +41,11 @@ class DemandasSearch extends Demandas
      */
     public function search($params)
     {
-        $query = Demandas::find();
+        $query = Demandas::find()
+            ->leftJoin(
+                'usuarios_datos',
+                'demandas.solicitante_id = usuarios_datos.id'
+            );
 
         // add conditions that should always apply here
 
@@ -61,11 +65,21 @@ class DemandasSearch extends Demandas
         $treintadias->modify('-30 days');
         $treintadias = $treintadias->format('Y-m-d H:i:s');
 
+        /*
+         * Solo muestro los últimos 30 días de peticiones que no fueron
+         * atendidas por ningún usuario.
+         */
         $query->where(['>=', 'created_at', $treintadias])
               ->andWhere(['atendedor_id' => null]);
 
         $query->andFilterWhere(['ilike', 'titulo', $this->allfields])
-              ->orFilterWhere(['ilike', 'descripcion', $this->allfields]);
+              ->orFilterWhere(['ilike', 'descripcion', $this->allfields])
+              ->orFilterWhere(['ilike', 'nick', $this->allfields]);
+
+        // Ordenar por defecto descendientemente
+        $query->orderBy([
+            'created_at' => SORT_DESC,
+        ]);
 
         return $dataProvider;
     }
