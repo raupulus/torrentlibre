@@ -29,6 +29,7 @@ echo Nav::widget([
         ['label' => \Yii::t('main', 'home'), 'url' => ['/site/index']],
         ['label' => \Yii::t('main', 'users'), 'url' => ['/usuarios/index']],
         ['label' => \Yii::t('main', 'torrents'), 'url' => ['/torrents/index']],
+        ['label' => 'Demandas', 'url' => ['/demandas/index']],
         ['label' => \Yii::t('main', 'about'), 'url' => ['/site/about']],
         ['label' => \Yii::t('main', 'contact'), 'url' => ['/site/contact']],
         Yii::$app->user->isGuest ? (

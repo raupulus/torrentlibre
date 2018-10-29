@@ -1,0 +1,76 @@
+@charset "UTF-8";
+/**
+ * @author Raúl Caro Pastorino
+ * @copyright Copyright © 2018 Raúl Caro Pastorino
+ * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
+ */
+
+/*****************************************
+ *               Gridview                *
+ *****************************************/
+.grid-view {
+    margin: 25px 5px;
+}
+.tablaDemandasIndex {
+    width: 100%;
+    font-weight: bold;
+}
+
+.tablaDemandasIndex tr:nth-child(odd) {
+    color: #fff;
+    background-color: #007fdb;
+}
+
+.tablaDemandasIndex tr:nth-child(even) {
+    color: #bfca02;
+    background-color: #832561;
+}
+
+.tablaDemandasIndex tr {
+    padding: 14px 7px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    box-shadow: 5px 5px 5px #000;
+}
+
+/*
+ * Imagen Avatar de usuarios
+ */
+.box-demandas-index-avatar {
+    width: 10%;
+}
+
+.demandas-index-avatar {
+    width: 50px;
+}
+
+/*
+ * Nick de usuario
+ */
+.box-demandas-nick {
+    width: 10%;
+}
+
+/*
+ * Título
+ */
+.box-demandas-titulo {
+    width: 30%;
+}
+
+/**
+ * Botones
+ */
+.box-demandas-btn {
+    width: 10%;
+    right: 0;
+    color: #00334e;
+}
+
+.btn-subir-demanda {
+    padding: 10px 3px;
+    color: #00334e;
+    font-weight: bolder;
+    text-shadow: 1px 1px 1px #000;
+    box-shadow: 3px 3px 3px #000;
+}

@@ -2,9 +2,13 @@
 
 namespace app\controllers;
 
+use app\helpers\Access;
+use app\models\Roles;
+use app\models\Torrents;
 use Yii;
 use app\models\Demandas;
-use yii\data\ActiveDataProvider;
+use app\models\DemandasSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,6 +30,33 @@ class DemandasController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'actions' => ['create', 'update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'matchCallback' => function($rule, $action) {
+                            $id = Torrents::findOne($_REQUEST['id'])->usuario_id;
+                            $isAdmin = Roles::isAdmin();
+                            $isAutor = Access::isAutor($id);
+
+                            if ($isAdmin || $isAutor) {
+                                return true;
+                            }
+
+                            return false;
+                        },
+                        'roles' => ['@'],
+                    ],
+                ],
+            ]
         ];
     }
 
@@ -35,25 +66,12 @@ class DemandasController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Demandas::find(),
-        ]);
+        $searchModel = new DemandasSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single Demandas model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
         ]);
     }
 
@@ -64,10 +82,12 @@ class DemandasController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Demandas();
+        $model = new Demandas([
+            'solicitante_id' => Yii::$app->user->id,
+        ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -84,15 +104,15 @@ class DemandasController extends Controller
      */
     public function actionUpdate($id)
     {
+        $user_id = Yii::$app->user->id;
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        if ($user_id != $model->solicitante_id) {
+            $model->atendedor_id = $user_id;
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+            $model->load(Yii::$app->request->post());
+            $model->save();
+        }
     }
 
     /**

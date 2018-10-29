@@ -8,15 +8,22 @@ use Yii;
  * This is the model class for table "demandas".
  *
  * @property int $id
- * @property int $usuario_id
+ * @property int $solicitante_id
+ * @property int $atendedor_id
  * @property string $titulo
  * @property string $descripcion
- * @property bool $atendido
+ * @property string $created_at
  *
- * @property Usuarios $usuario
+ * @property Usuarios $solicitante
+ * @property Usuarios $atendedor
  */
 class Demandas extends \yii\db\ActiveRecord
 {
+    /**
+     * @var Atributo seguro para buscar en todos los campos a la vez.
+     */
+    public $allfields;
+
     /**
      * {@inheritdoc}
      */
@@ -31,13 +38,14 @@ class Demandas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['usuario_id', 'titulo', 'descripcion'], 'required'],
-            [['usuario_id'], 'default', 'value' => null],
-            [['usuario_id'], 'integer'],
-            [['atendido'], 'boolean'],
+            [['solicitante_id', 'titulo', 'descripcion'], 'required'],
+            [['solicitante_id', 'atendedor_id'], 'default', 'value' => null],
+            [['solicitante_id', 'atendedor_id'], 'integer'],
+            [['created_at', 'allfields'], 'safe'],
             [['titulo', 'descripcion'], 'string', 'max' => 255],
             [['titulo'], 'unique'],
-            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
+            [['solicitante_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['solicitante_id' => 'id']],
+            [['atendedor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['atendedor_id' => 'id']],
         ];
     }
 
@@ -48,18 +56,28 @@ class Demandas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'usuario_id' => 'Usuario ID',
-            'titulo' => 'Titulo',
-            'descripcion' => 'Descripcion',
-            'atendido' => 'Atendido',
+            'solicitante_id' => 'Solicitante',
+            'atendedor_id' => 'Atendedor',
+            'titulo' => 'Título',
+            'descripcion' => 'Descripción',
+            'created_at' => 'Creado por',
+            'allfields' => 'Buscar demandas activas'
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuario()
+    public function getSolicitante()
     {
-        return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id']);
+        return $this->hasOne(UsuariosDatos::className(), ['id' => 'solicitante_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAtendedor()
+    {
+        return $this->hasOne(UsuariosDatos::className(), ['id' => 'atendedor_id']);
     }
 }
