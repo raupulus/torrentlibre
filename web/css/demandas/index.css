@@ -5,6 +5,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
  */
 
+.demandas-index {
+
+}
+
+#demandas-info {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #00334e;
+    font-size: 1.2em;
+    font-weight: bolder;
+    background-color: #bfca02;
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px #000;
+}
+
 /*****************************************
  *               Gridview                *
  *****************************************/
@@ -73,4 +88,11 @@
     font-weight: bolder;
     text-shadow: 1px 1px 1px #000;
     box-shadow: 3px 3px 3px #000;
+}
+
+/**
+ * Demandas Search.
+ */
+.demandas-search {
+    color: #bfca02;
 }
