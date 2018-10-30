@@ -6,6 +6,7 @@
  * Time: 1:40
  */
 
+use app\assets\SiteIndexAsset;
 use app\helpers\Amazons3;
 
 /**
@@ -15,24 +16,43 @@ use app\helpers\Amazons3;
  * @license   https://www.gnu.org/licenses/gpl-3.0-standalone.html
  **/
 
+SiteIndexAsset::register($this);
+
 /* @var $this yii\web\View */
 
 $this->title = Yii::getAlias('@sitename');
 ?>
 
-<div class="site-index">
-    <h1>Torrent Libre</h1>
-    <h2>Sitio temporal con el desarrollo</h2>
-    <p>
-        Esta aplicación web está en desarrollo y es mi proyecto
-        integrado para final de DAW.
-    </p>
+<div class="site-index container">
+    <div id="index-box-title" class="row">
+        <h1>Torrent Libre</h1>
+        <h2>Sitio temporal con el desarrollo</h2>
+    </div>
 
-    <p>
-        Los datos introducidos no son reales y se perderán en cualquier momento.
-    </p>
+    <div id="index-box-slide" class="row">
+        SLIDE
+        <img id="index-slide"
+             src="/images/slides/slide1.jpg"
+             alt=""
+             title="" />
+    </div>
 
-    <p class="alert-warning">
-        No uses esta aplicación hasta que entre en una fase beta más avanzada.
-    </p>
+    <div id="index-box-all" class="row">
+        <div id="index-box-content" class="col-sm-9 container">
+            <div id="index-content" class="top-left col-xs-11">
+                CONTENT
+            </div>
+
+            <div id="index-options" class="text-center col-xs-1">
+                <div class="index-option"><i class="fa fa-ambulance"></i></div>
+                <div class="index-option"><i class="fa fa-youtube"></i></div>
+                <div class="index-option"><i class="fa fa-backward"></i></div>
+                <div class="index-option"><i class="fa fa-bell-slash"></i></div>
+            </div>
+        </div>
+
+        <div id="index-box-aside" class="col-sm-3">
+            ASIDE
+        </div>
+    </div>
 </div>

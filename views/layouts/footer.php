@@ -14,35 +14,40 @@
 
 use \yii\helpers\Html;
 ?>
+<footer id="boxfooter" class="row">
+    <section id="boxcontact" class="col-md-12">
+        <a href="'/site/contact'"
+           title="'Contactar"
+           class="">Contactar</a>
 
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <?= Html::a('Aviso Legal', ['site/avisolegal']) ?>
-            </div>
+    <hr />
+    </section>
 
-            <div class="col-sm-4">
-                <?= Html::a('Política de Cookies', ['site/politicacookies']) ?>
-            </div>
 
-            <div class="col-sm-4">
-                <?= Html::a('Política de Privacidad',
-                           ['site/politicaprivacidad']) ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <p class="pull-left">&copy; <?= $params['sitename']; ?> 2018-<?= date
-                ('Y')
-                ?></p>
-
-            <p class="pull-right">
-                <a href="https://fryntiz.es" alt="web de Raúl Caro Pastorino"
-                   target="_blank" >
-                    Raúl Caro Pastorino
-                </a>
-            </p>
-        </div>
+    <div class="col-sm-4">
+        <?= Html::a('Aviso Legal', ['site/avisolegal']) ?>
     </div>
+
+    <div class="col-sm-4">
+        <?= Html::a('Política de Cookies', ['site/politicacookies']) ?>
+    </div>
+
+    <div class="col-sm-4">
+        <?= Html::a('Política de Privacidad', ['site/politicaprivacidad']) ?>
+    </div>
+
+    <section class="col-md-12">
+        <hr />
+        <a href="https://fryntiz.es" alt="web de Raúl Caro Pastorino"
+           target="_blank">
+            Raúl Caro Pastorino
+        </a>
+    </section>
+
+    <section id="footer-sitename" class="col-md-12">
+        <a href="/"
+           title="config.licence">
+            <?= $params['sitename']; ?> 2018-<?= date('Y') ?>
+        </a>
+    </section>
 </footer>
