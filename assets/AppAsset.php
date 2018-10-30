@@ -23,10 +23,12 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/styles.css',
+        'css/plugins/jquery.leftbar.js'
     ];
     public $js = [
-        'js/scripts.js',
         'js/functions.js',
+        'js/plugins/jquery.leftbar.js',
+        'js/scripts.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

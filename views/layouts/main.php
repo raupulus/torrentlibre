@@ -1,4 +1,4 @@
-<?php header('Content-Type: text/html; charset=UTF-8');
+<?php
 /**
  * Created by PhpStorm.
  * User: fryntiz

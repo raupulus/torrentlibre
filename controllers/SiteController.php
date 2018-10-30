@@ -188,5 +188,15 @@ class SiteController extends Controller
     {
         return $this->render('politicaprivacidad');
     }
+
+    /**
+     * Displays Social Networks page.
+     *
+     * @return string
+     */
+    public function actionSocial()
+    {
+        return $this->render('redessociales');
+    }
 }
 
