@@ -24,7 +24,7 @@
             letras_background: '#ffffff',  // Color de fondo letras
             letras_borde: '#cc6633',       // Color del borde para bloque letras
             letras_ancho: 'auto',          // El ancho del bloque para letras
-            letras_alto: '20px',           // El ancho del bloque para letras
+            letras_alto: '35px',           // El alto del bloque para letras
         };
 
         $.extend(conf, options);
