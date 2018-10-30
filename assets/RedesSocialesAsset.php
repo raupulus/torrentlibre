@@ -11,24 +11,17 @@ namespace app\assets;
 use yii\web\AssetBundle;
 
 /**
- * Main application asset bundle.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
+ * Assets para vista de Redes Sociales
  */
-class AppAsset extends AssetBundle
+class RedesSocialesAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
-        'css/styles.css',
-        'css/plugins/jquery.leftbar.js'
+        'css/site/redessociales.css',
     ];
     public $js = [
-        'js/functions.js',
-        'js/plugins/jquery.leftbar.js',
-        'js/scripts.js',
+
     ];
     public $depends = [
         'yii\web\YiiAsset',

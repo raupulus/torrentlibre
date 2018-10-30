@@ -11,27 +11,20 @@ namespace app\assets;
 use yii\web\AssetBundle;
 
 /**
- * Main application asset bundle.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
+ * Assets para scripts externos
  */
-class AppAsset extends AssetBundle
+class AppAssetVendor extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $sourcePath = '@vendor';
     public $css = [
-        'css/site.css',
-        'css/styles.css',
-        'css/plugins/jquery.leftbar.js'
+        'fortawesome/font-awesome/css/font-awesome.css'
     ];
     public $js = [
-        'js/functions.js',
-        'js/plugins/jquery.leftbar.js',
-        'js/scripts.js',
+
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'app\assets\AppAsset',
     ];
 }

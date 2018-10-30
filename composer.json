@@ -26,7 +26,8 @@
         "rudissaar/yii2-cookie-consent": "*",
         "frostealth/yii2-aws-s3": "~2.0",
         "yiisoft/yii2-imagine": "^2.1",
-        "yii2mod/yii2-comments": "*"
+        "yii2mod/yii2-comments": "*",
+	"FortAwesome/Font-Awesome": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "^2.0.0",

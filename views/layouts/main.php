@@ -1,4 +1,4 @@
-<?php header('Content-Type: text/html; charset=UTF-8');
+<?php
 /**
  * Created by PhpStorm.
  * User: fryntiz
@@ -15,12 +15,14 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use app\assets\AppAssetVendor;
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+AppAssetVendor::register($this);
 
 $params = Yii::$app->params;
 ?>
