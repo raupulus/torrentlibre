@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/**
+ * @author Raúl Caro Pastorino
+ * @copyright Copyright © 2018 Raúl Caro Pastorino
+ * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
+ */
+
+#lista-redes-sociales {
+    list-style: none;
+}
+
+#lista-redes-sociales li {
+
+}
+
+#lista-redes-sociales .fa {
+    margin: 5px 4px;
+    padding: 5px 4px;
+}
+
+#lista-redes-sociales .fa-telegram {
+    color: #0d3349;
+}
+
+#lista-redes-sociales .fa-twitter {
+    color: #00A5E3;
+}
+
+#lista-redes-sociales .fa-google-plus {
+    color: #8c3900;
+}
+
+#lista-redes-sociales .fa-facebook {
+    color: #1a4580;
+}

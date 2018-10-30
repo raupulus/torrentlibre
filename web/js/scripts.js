@@ -21,9 +21,9 @@ $(document).ready(() => {
         },
         */
         [
-            ['Torrents','./images/1.jpg','/torrents/index'],
-            ['Demandas','./images/2.jpg','/demandas/index'],
-            ['Redes Sociales','./images/3.jpg','/site/social'],
+            ['Torrents','/images/leftbar/torrents.jpg','/torrents/index'],
+            ['Demandas','/images/leftbar/demandas.jpg','/demandas/index'],
+            ['Redes Sociales','/images/leftbar/redes.jpg','/site/social'],
         ]);
 
     /**
