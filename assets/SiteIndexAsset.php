@@ -11,27 +11,17 @@ namespace app\assets;
 use yii\web\AssetBundle;
 
 /**
- * Main application asset bundle.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
+ * Assets para vista del index principal.
  */
-class AppAsset extends AssetBundle
+class SiteIndexAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
-        'css/styles.css',
-        'css/breadcrumb.css',
-        'css/footer.css',
-        'css/navbar.css',
-        'css/plugins/jquery.leftbar.js'
+        'css/site/index.css',
     ];
     public $js = [
-        'js/functions.js',
-        'js/plugins/jquery.leftbar.js',
-        'js/scripts.js',
+        'js/site/index.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

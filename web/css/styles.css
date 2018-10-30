@@ -7,17 +7,22 @@
 
 h1 {
     text-align: center;
+    color: #dbebfa;
 }
 
 h2 {
-
+    color: #dbebfa;
 }
 
 h3 {
-
+    color: #dbebfa;
 }
 
 h1 h2 h3 {
     color: #0e2231;
     text-shadow: 3px 3px 3px black;
+}
+
+body {
+    background-image: url("/images/patron.png");
 }

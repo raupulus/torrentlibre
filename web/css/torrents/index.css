@@ -26,6 +26,7 @@
 
 .grid-view .tablaTorrentsIndex  tr {
     border-top: 1px solid #000000;
+    background-color: #dbebfa;
 }
 
 .grid-view .tablaTorrentsIndex tr td img {
@@ -100,4 +101,12 @@
 
 .grid-view .tablaTorrentsIndex .tabla-online {
 
+}
+
+/**
+ * Búsquedas Torrents Search
+ */
+
+.torrents-search label{
+    color: #bfca02;
 }

@@ -78,17 +78,19 @@ if ($isAdmin){
 <div class="demandas-index">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        Aquí puedes solicitar contenido para que otros usuarios puedan subirlo
-        y/o conocer lo que otros usuarios demandan.
-    </p>
+    <div id="demandas-info" class="row col-xs-8 col-xs-offset-2">
+        <p>
+            Aquí puedes solicitar contenido para que otros usuarios puedan
+            subirlo y/o conocer lo que otros usuarios demandan.
+        </p>
 
-    <p>
-        Permanecerá cada demanda activa durante 30 días y luego será
-        automáticamente excluida si nadie promete subir ese contenido.
-    </p>
+        <p>
+            Permanecerá cada demanda activa durante 30 días y luego será
+            automáticamente excluida si nadie promete subir ese contenido.
+        </p>
+    </div>
 
-    <div class="row text-center">
+    <div class="row col-xs-12 text-center">
         <p>
             <?= Html::a('Nueva Demanda', ['create'], ['class' => 'btn 
         btn-success']) ?>

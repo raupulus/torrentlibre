@@ -4,38 +4,19 @@
  * @copyright Copyright © 2018 Raúl Caro Pastorino
  * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
  */
-
 html,
 body {
-    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .wrap {
-    min-height: 100%;
-    height: auto;
-    margin: 0 auto -60px;
-    padding: 0 0 60px;
+    margin-top: 60px;
+    margin: 0 auto;
 }
 
 .wrap > .container {
-    padding: 70px 15px 20px;
-}
-
-.footer {
-    height: 60px;
-    background-color: #f5f5f5;
-    border-top: 1px solid #ddd;
-    padding-top: 20px;
-}
-
-.jumbotron {
-    text-align: center;
-    background-color: transparent;
-}
-
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
+    padding-top: 70px;
 }
 
 .not-set {

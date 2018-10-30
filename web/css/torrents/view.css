@@ -8,6 +8,7 @@
 #tabletorrentview {
     border: 3px solid #000;
     border-radius: 10px;
+    background-color: #dbebfa;
 }
 
 #tabletorrentview .imagenportada img {
@@ -70,6 +71,10 @@
 /************************************************
  *                 COMENTARIOS                  *
  ************************************************/
+.comment-content {
+    background-color: #dbebfa;
+}
+
 .comment-author-avatar img {
     width: 80px;
 }

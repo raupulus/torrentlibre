@@ -15,16 +15,6 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?php // echo $form->field($model, 'id') ?>
-
-    <?php // echo  $form->field($model, 'licencia_id') ?>
-
-    <?php // echo  $form->field($model, 'categoria_id') ?>
-
-    <?php // echo  $form->field($model, 'usuario_id') ?>
-
-    <?php // echo  $form->field($model, 'titulo') ?>
-
     <div class="row">
         <div class="col-sm-6">
             <?= $form->field($model, 'allfields')->label('Buscar:') ?>

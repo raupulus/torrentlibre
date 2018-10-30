@@ -1,7 +1,9 @@
 <?php
 
+use app\assets\TorrentsCreateAsset;
 use yii\helpers\Html;
 
+TorrentsCreateAsset::register($this);
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Torrents */
