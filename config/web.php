@@ -112,11 +112,17 @@ $config = [
 
     'modules' => [
         'comment' => [
-            'class' => yii2mod\comments\Module::class,
+            'class' => \yii2mod\comments\Module::class,
+            //'class' => app\models\Comentarios::class,
+            //'controllerNamespace' => 'app\controllers',
+            'commentModelClass' => app\models\Comentarios::class,
             'controllerMap' => [
                 'manage' => [
-                    'class' => 'yii2mod\comments\controllers\ManageController',
+                    'class' => app\controllers\ComentariosController::class,
                     'layout' => '@app/modules/admin/views/layouts/column2',
+                    'on afterSave' => function ($event) {
+                        die("afterSave");
+                    },
                 ],
             ],
         ],
