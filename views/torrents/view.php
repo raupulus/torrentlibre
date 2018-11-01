@@ -200,8 +200,7 @@ $isAutor = Access::isAutor($model->usuario_id);
 
 
 
-<?php
-echo \yii2mod\comments\widgets\Comment::widget([
+<?= \yii2mod\comments\widgets\Comment::widget([
     'model' => $model,
     'commentView' => '@app/views/torrents/comentarios/_index.php',
     'maxLevel' => 4,

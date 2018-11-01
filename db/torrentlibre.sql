@@ -310,7 +310,9 @@ CREATE TABLE comment (
   "updatedBy" int4 NOT NULL,
   status int2 NOT NULL DEFAULT 1,
   "createdAt" int4 NOT NULL,
+  created_at      TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP,
   "updatedAt" int4 NOT NULL,
+  updated_at      TIMESTAMP(0)  DEFAULT LOCALTIMESTAMP,
   "relatedTo" varchar(500) NOT NULL,
   url text NULL,
   CONSTRAINT "Comment_pkey" PRIMARY KEY (id)
