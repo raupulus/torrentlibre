@@ -20,6 +20,7 @@ use function fopen;
 use function fwrite;
 use function implode;
 use function isEmpty;
+use function json_encode;
 use PHP\BitTorrent\Decoder;
 use PHP\BitTorrent\Encoder;
 use function random_int;
@@ -28,6 +29,7 @@ use function var_dump;
 use Yii;
 use app\models\Torrents;
 use app\models\TorrentsSearch;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
@@ -362,6 +364,20 @@ class TorrentsController extends Controller
         }
 
         return false;
+    }
+
+    /**
+     * Recibe el "id" del torrent sobre el que obtener el número de descargas.
+     * Devuelve el número de descargas para el torrent solicitado.
+     *
+     * @param $id Identificador del torrent
+     *
+     * @return false|string
+     */
+    public function actionObtenerdescargas($id)
+    {
+        $descargas = Descargas::find()->where(['torrent_id' => $id])->count();
+        print_r(json_encode($descargas));
     }
 
     /**

@@ -53,8 +53,20 @@ $(document).ready(function() {
      * Esta función refresca las descargas al pulsar el botón "Descargar"
      */
     function recargarDescargas() {
-        var btn = $('.magnet .btn');
-        //var campoDescargadso = $('?????');
-        // TODO → formatear detailview y cazar veces descargados
+        var id = $('#btn-torrent-download').data('torrent_id');
+        $.ajax({
+            dataType: 'json',
+            type: 'GET',
+            url: "/torrents/obtenerdescargas",
+            async: false,
+            data: { 'id': id },
+            timeout:5000,  // Tiempo a esperar antes de dar error
+            success: function(data) {
+                $('#torrents-veces-descargado').text(data);
+            },
+        });
     }
+
+    // Añado evento al pulsar sobre el botón descargas para actualizar valor.
+    $('#btn-torrent-download').click(recargarDescargas);
 });

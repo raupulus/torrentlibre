@@ -96,7 +96,12 @@ $isAutor = Access::isAutor($model->usuario_id);
                         '<img src="'.$r_img.'" /></a>';
                 }
             ],
-            'descargas',
+            [
+                'attribute' => 'descargas',
+                'contentOptions' => [
+                    'id' => 'torrents-veces-descargado'
+                ]
+            ],
             'categoria.nombre:text:Categoría',
             [
                 'attribute' => 'usuario.datos.nick',
@@ -147,7 +152,9 @@ $isAutor = Access::isAutor($model->usuario_id);
                         [
                             'title' => 'Descargar '.$model->titulo,
                             'alt' => 'Descargar '.$model->titulo,
+                            'id' => 'btn-torrent-download',
                             'class' => 'btn btn-success col-sm-12',
+                            'data-torrent_id' => $model->id,
                             'download'
                         ]
                     );
