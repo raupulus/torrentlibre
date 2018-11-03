@@ -5,19 +5,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
  */
 
+/*
+    #00334e     Azul Oscuro
+    #004d73     Azul Medio
+    #007fdb     Azul Claro
+    #dbebfa     Azul Pastel
+    #832561     Morado
+    #11862f     Verde
+    #bfca02     Verde Claro
+    #333333     Gris oscuro
+    #848a8c     Gris
+ */
+
 #tabletorrentview {
-    border: 3px solid #000;
-    border-radius: 10px;
-    background-color: #dbebfa;
+
 }
 
-#tabletorrentview .imagenportada img {
-    max-height: 300px;
-}
-
-.labelhidden {
-    display: none;
-}
 #copymagnet {
     margin: 3px 8px;
     padding: 5px;
@@ -77,4 +80,34 @@
 
 .comment-author-avatar img {
     width: 80px;
+}
+
+
+
+
+/*
+ NUEVOOOOO
+ */
+#torrents-view-box {
+    padding: 10px 8px;
+    background-color: #dbebfa;
+    border: 3px solid #832561;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #000;
+}
+
+.imagen {
+    width: 300px;
+}
+
+.licencia {
+    width: 80px;
+}
+
+.lista ul li {
+    list-style-type: none;
+    background: url('/images/arrow.gif') no-repeat 0px 8px;
+    padding: 0 0 6px 12px;
+    font-size: 15px;
+    line-height: 18px;
 }

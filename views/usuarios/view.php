@@ -37,6 +37,16 @@ $isAutor = Access::isAutor($model->id);
                 [
                     'attribute' => 'avatar',
                     'format' => 'raw',
+                    'labelColOptions' => ['hidden' => true],
+                    'captionOptions' => ['class' => 'labelhidden'],
+                    'contentOptions' => [
+                        'class' => [
+                            'text-center',
+                            'imagenportada',
+                            'col-sm-6'
+                        ],
+                        'colspan' => 2,
+                    ],
                     'value' => function($model) {
                         $nombre = $model->datos->avatar;
                         $ruta = yii::getAlias('@r_avatar');

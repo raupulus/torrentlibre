@@ -53,8 +53,53 @@ $(document).ready(function() {
      * Esta función refresca las descargas al pulsar el botón "Descargar"
      */
     function recargarDescargas() {
-        var btn = $('.magnet .btn');
-        //var campoDescargadso = $('?????');
-        // TODO → formatear detailview y cazar veces descargados
+        var id = $('#btn-torrent-download').data('torrent_id');
+
+        setTimeout(function() {
+            $.ajax({
+                dataType: 'json',
+                type: 'GET',
+                url: "/torrents/obtenerdescargas",
+                async: false,
+                data: { 'id': id },
+                timeout:5000,  // Tiempo a esperar antes de dar error
+                success: function(data) {
+                    $('#torrents-veces-descargado').text(data);
+                },
+            });
+        }, 3000);
     }
+
+    // Añado evento al pulsar sobre el botón descargas para actualizar valor.
+    $('#btn-torrent-download').click(recargarDescargas);
+
+
+    function modificarPuntuacion(puntuacion, torrent) {
+        $.ajax({
+            type: 'GET',
+            url: "/puntuacion-torrents/modificar",
+            async: false,
+            data: {
+                'puntuacion': puntuacion,
+                'torrent' : torrent,
+            },
+            timeout:5000,
+        });
+    }
+
+    // Llamada al plugin de votación "star-rating"
+    $('.rating').starRating({
+        minus: true // step minus button
+    });
+
+    // Al pulsar un valor se actualiza en la DB.
+    $('.rating').click(function() {
+        var puntuacion = $('.rating').attr('data-val');
+        var torrent = $('.rating').attr('data-torrent');
+        modificarPuntuacion(puntuacion, torrent);
+        window.location = '/torrents/view?id='+torrent;
+    });
+
+    // Al cargar el documento se actualiza el valor
+
 });

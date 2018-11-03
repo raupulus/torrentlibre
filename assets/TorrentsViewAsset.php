@@ -19,9 +19,11 @@ class TorrentsViewAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/torrents/view.css',
+        'css/plugins/star-rating.css',
     ];
     public $js = [
         'js/torrents/view.js',
+        'js/plugins/star-rating.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

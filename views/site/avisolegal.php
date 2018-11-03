@@ -33,7 +33,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Titularidad</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 Se informa a los usuarios de la presente página web, en adelante Usuario, que el titular del website https://torrentlibre.laguialinux.es y su versión en desarrollo https://torrentlibre.herokuapp.com, en adelante Sitio Web, es Raúl Caro Pastorino.
             </p>
@@ -42,7 +42,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Condiciones de Uso</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 Si el usuario se suscribe a cualquier servicio del Sitio Web lo hará aceptando las Condiciones de Uso y Política de Privacidad y Cookies que se le mostrarán.
             </p>
@@ -51,7 +51,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Veracidad de los datos</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 El Usuario reconoce que los datos suministrados son veraces y ciertos, comprometiéndose a notificar cualquier cambio o modificación que se produzca en los mismos.
             </p>
@@ -60,7 +60,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Modificación del servicio</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 El Sitio Web se reserva el derecho de modificar o eliminar los servicios que ofrece a través de la web sin ninguna garantía por pérdida de datos o disconformidad.
             </p>
@@ -69,7 +69,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Normas generales de uso</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 El Usuario se obliga a utilizar este Sitio Web de forma diligente, correcta y respetuosa, en especial cuando publique opiniones y/o comentarios.
             </p>
@@ -104,7 +104,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Propiedad intelectual</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 Mediante estas condiciones legales no se cede ningún derecho
                 de propiedad intelectual o industrial sobre este Sitio Web y
@@ -126,7 +126,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Obligaciones del Sitio Web</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 El Sitio Web es responsable de los servicios que presta por ella misma y de los contenidos directamente originados por la propia web e identificados con su correspondiente copyright.
             </p>

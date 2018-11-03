@@ -32,7 +32,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>POLÍTICA DE COOKIES</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 Deseamos informarte que Sitio Web utiliza cookies para medir y analizar la navegación de nuestros usuarios.
             </p>

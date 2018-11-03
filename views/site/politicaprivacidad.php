@@ -31,7 +31,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>POLÍTICA DE PRIVACIDAD</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 Hasta ahora se venía cumpliendo la LOPD para temas de privacidad de datos, ley que a partir del 25 de Mayo del 2018 queda sustituida por el Reglamento General de Protección de datos (RGPD) de la Unión Europea.
             </p>
@@ -48,14 +48,14 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Datos Personales</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 Datos personales que requiere en el Sitio Web
                 Para poder prestar nuestros servicios necesitamos algunos datos identificativos según el servicio que Sitio Web te preste:
             </p>
         </div>
 
-        <div>
+        <div class="box-content-white">
             <h3>Para los comentarios</h3>
             <ul>
                 <li>
@@ -69,14 +69,14 @@ $this->title = 'Aviso Legal';
             </ul>
         </div>
 
-        <div>
+        <div class="box-content-white">
             <h3>Para el área privada de clientes</h3>
             <p>
                 El área de clientes se trata de una zona privada. El responsable del Sitio Web te proporcionará un usuario y contraseña para que como Usuario puedas acceder a este servicio restringido, entendiendo que aceptas todas las condiciones legales.
             </p>
         </div>
 
-        <div>
+        <div class="box-content-white">
             <h3>Para el formulario de contacto</h3>
             <ul>
                 <li>Nombre y apellidos → para poder responder a la consulta.</li>
@@ -84,7 +84,7 @@ $this->title = 'Aviso Legal';
             </ul>
         </div>
 
-        <div>
+        <div class="box-content-white">
             <p>
                 Adicionalmente, cuando visitas nuestro Sitio Web determinada información se almacena automáticamente por motivos técnicos como la dirección IP asignada por tu proveedor de acceso a Internet.
             </p>
@@ -93,7 +93,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Legitimación</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 Gracias al consentimiento podemos tratar tus datos, siendo este un requisito obligatorio para que puedas acceder de forma correcta a los servicios del Sitio Web.
             </p>
@@ -106,7 +106,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Categoría de los datos</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 Los datos que recopila Sitio Web no son considerados datos sensibles o protegidos.
             </p>
@@ -134,7 +134,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Tiempo de conservación de los datos</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 Los datos del cliente: nombre, correo electrónico, etc. permanecerán en nuestro sistema lo que legalmente y técnicamente se requiera para la operativa normal del Sitio Web, a menos que el Usuario ejerza su derecho a su eliminación o actualización.
             </p>
@@ -143,7 +143,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Normativa de aplicación</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 Desde el el 25 de mayo de 2018, el Sitio Web se rige por el Reglamento General sobre Protección de Datos (RGPD) de la Unión Europea.
 
@@ -159,7 +159,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Medidas de seguridad</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 Este Sitio Web está alojado en los sistemas operados por Heroku (Desarrollo), Acens y Aruba.it para producción, en adelante Servidores, están implantadas las medidas de seguridad técnicas y organizativas necesarias para garantizar la seguridad de los datos de carácter personal del Usuario y evitar así su alteración, pérdida y tratamiento y/o acceso no autorizado. Esto habida cuenta del estado de la tecnología, la naturaleza de los datos almacenados y los riesgos a que están expuestos, ya provengan de la acción humana o del medio físico o natural. Todo ello de conformidad con lo previsto en el RGPD.
             </p>
@@ -183,7 +183,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Ejercicios de derechos</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 Aquel Usuario que haya facilitado sus datos al Sitio Web, podrá dirigirse al titular de la web con el fin de poder ejercitar gratuitamente su derecho de acceso a sus datos, rectificación o supresión, limitación y oposición respecto de los datos incorporados en sus ficheros.
             </p>
@@ -212,7 +212,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Modificación de la política de privacidad</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 El Sitio Web se reserva el derecho de modificar la Política de Privacidad, motivado por un cambio legislativo, jurisprudencial o doctrinal de la Agencia Española de Protección de Datos.
             </p>
@@ -230,7 +230,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Servicios ofrecidos por terceros</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 Para prestar servicios estrictamente necesarios para su adecuado funcionamiento Sitio Web utiliza los siguientes prestadores de servicios bajo sus correspondientes condiciones de privacidad:
             </p>
@@ -243,7 +243,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Plugins sociales</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 En nuestro Sitio Web ofrecemos enlaces y servicios relacionados con diferentes redes sociales. Si el Usuario es miembro de una red social y hace clic sobre el correspondiente enlace, el proveedor de la red social podrá enlazar sus datos de perfil con la información de su visita al Sitio Web.
             </p>
@@ -287,7 +287,7 @@ $this->title = 'Aviso Legal';
 
     <section class="row col-sm-12">
         <h2>Aceptación, consentimiento y revocabilidad</h2>
-        <div>
+        <div class="box-content-white">
             <p>
                 El Usuario declara haber sido informado de las presentes condiciones sobre protección de datos de carácter personal, aceptando y consintiendo el tratamiento de los mismos por parte de Sitio Web en la forma y para las finalidades indicadas en el Aviso Legal.
             </p>
