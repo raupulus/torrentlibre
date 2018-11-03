@@ -135,6 +135,17 @@ function puntuacion($model) {
         '<div class="rating" data-rating-max="10" 
                              data-torrent="' . $model->id . '"></div>';
 }
+
+function reportar($model) {
+    if (!$model->estareportado) {
+        return Html::a('Reportar', ['/reportes-torrents/reportar', 'id' =>
+            $model->id], ['class' => 'btn btn-warning']);
+    }
+
+    return 'Ya has reportado este torrent';
+}
+
+
 ?>
 
 <div class="torrents-view container">
@@ -222,7 +233,7 @@ function puntuacion($model) {
 
                 <div class="row">
                     <div class="col-sm-12">
-                        Reportar
+                        <?= reportar($model) ?>
                     </div>
                 </div>
             </div>

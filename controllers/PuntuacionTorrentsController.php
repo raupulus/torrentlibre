@@ -41,6 +41,11 @@ class PuntuacionTorrentsController extends Controller
         ];
     }
 
+    /**
+     * Puntua un torrent recibiendo una puntuación y el torrent a reportar.
+     * @param $puntuacion Puntos del 1-10.
+     * @param $torrent Torrent sobre el que se puntúa.
+     */
     public function actionModificar($puntuacion, $torrent) {
         $usuario = Yii::$app->user->id;
         $model = PuntuacionTorrents::find()->where([
@@ -58,44 +63,6 @@ class PuntuacionTorrentsController extends Controller
         $model->puntuacion = $puntuacion;
 
         $model->save();
-    }
-
-    /**
-     * Creates a new PuntuacionTorrents model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new PuntuacionTorrents();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing PuntuacionTorrents model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
