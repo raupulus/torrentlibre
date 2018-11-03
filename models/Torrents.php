@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use function array_sum;
+use function var_dump;
 use Yii;
 use yii\db\Expression;
 
@@ -194,7 +196,6 @@ class Torrents extends \yii\db\ActiveRecord
      */
     public function getDescargas()
     {
-
         return $this->hasMany(Descargas::className(), ['torrent_id' => 'id'])
             ->count();
     }
@@ -204,7 +205,19 @@ class Torrents extends \yii\db\ActiveRecord
      */
     public function getPuntos()
     {
-        return $this->hasMany(PuntuacionTorrents::className(), ['torrent_id' => 'id']);
+        $p = PuntuacionTorrents::find()
+            ->select('puntuacion')
+            ->where(['torrent_id' => $this->id])
+            ->column();
+
+        $total = array_sum($p);
+        $votos = count($p);
+
+        if ($votos == 0) {
+            return 0;
+        }
+
+        return $total / $votos;
     }
 
     /**

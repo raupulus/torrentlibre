@@ -104,7 +104,7 @@
     width: 80px;
 }
 
-#torrents-view-box ul li {
+.lista ul li {
     list-style-type: none;
     background: url('/images/arrow.gif') no-repeat 0px 8px;
     padding: 0 0 6px 12px;

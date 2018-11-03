@@ -128,6 +128,13 @@ function magnet($model) {
 
     return $r;
 }
+
+function puntuacion($model) {
+    return '<p>Puntuación total: ' .
+        '<span class="puntos">'.$model->puntos . '</span>/10</p>' .
+        '<div class="rating" data-rating-max="10" 
+                             data-torrent="' . $model->id . '"></div>';
+}
 ?>
 
 <div class="torrents-view container">
@@ -157,7 +164,7 @@ function magnet($model) {
                     <?= resumen($model) ?>
                 </div>
 
-                <div class="row">
+                <div class="lista row">
                     <?= contenido($model) ?>
                 </div>
             </div>
@@ -188,6 +195,36 @@ function magnet($model) {
 
             <div class="col-sm-4">
                 <?= torrentCreacion($model) ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                        Sembrando XXXXX
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        Sanguijuelas XXXXX
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <?= puntuacion($model) ?>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        Reportar
+                    </div>
+                </div>
             </div>
         </div>
 
