@@ -67,7 +67,7 @@ class TorrentsController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['delete', 'update'],
+                        'actions' => ['delete', 'update', 'eliminar'],
                         'allow' => true,
                         'matchCallback' => function($rule, $action) {
                             $id = Torrents::findOne($_REQUEST['id'])->usuario_id;
@@ -320,6 +320,19 @@ class TorrentsController extends Controller
 
         return $this->redirect(['index']);
     }
+
+    /**
+     * Deletes an existing Torrents model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionEliminar($id)
+    {
+        $this->findModel($id)->delete();
+    }
+
 
     /**
      * Finds the Torrents model based on its primary key value.

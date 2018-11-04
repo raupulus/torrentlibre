@@ -44,7 +44,9 @@ if ($isAdmin) {
                     'method' => 'post',
                 ],
             ]);
-            return $btn1 . '<br /><br />' . $btn2;
+
+            //return $btn1 . '<br /><br />' . $btn2;
+            return $btn2;
         }
     ];
 
