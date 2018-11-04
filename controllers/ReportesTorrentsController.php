@@ -6,6 +6,7 @@ use app\helpers\Security;
 use Yii;
 use app\models\ReportesTorrents;
 use app\models\ReportesTorrentsSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -25,6 +26,26 @@ class ReportesTorrentsController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['delete'],
+                'rules' => [
+                    [
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'matchCallback' => function($rule, $action) {
+                            $isAdmin = Roles::isAdmin();
+
+                            if ($isAdmin) {
+                                return true;
+                            }
+
+                            return false;
+                        },
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];

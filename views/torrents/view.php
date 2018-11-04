@@ -137,6 +137,10 @@ function puntuacion($model) {
 }
 
 function reportar($model) {
+    if (Yii::$app->user->isGuest) {
+        return '';
+    }
+
     if ($model->estareportado) {
         return 'Ya has reportado este torrent';
     }

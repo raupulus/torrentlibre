@@ -43,6 +43,11 @@ class ReportesTorrentsSearch extends ReportesTorrents
     {
         $query = ReportesTorrents::find();
 
+        $query->leftJoin('torrents', 'torrents.id = torrent_id');
+        $query->leftJoin('usuarios_datos', 'usuarios_datos.id = reportes_torrents.usuario_id');
+
+        $query->orderBy('created_at', SORT_DESC);
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

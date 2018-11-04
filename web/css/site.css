@@ -142,6 +142,30 @@ a.desc:after {
     line-height: 18px;
 }
 
+/*******************************************
+**                GRIDVIEW                **
+********************************************/
+.grid-view {
+
+}
+
+.grid-view .summary {
+    font-size: 1.3em;
+    font-weight: bolder;
+    color: #bfca02;
+    text-shadow: 1px 1px 1px #000;
+}
+
+.grid-view table thead th {
+    font-size: 1.2em;
+    font-weight: bolder;
+    text-align: center;
+    color: #832561;
+}
+
+.grid-view table {
+    background-color: #dbebfa;
+}
 
 /*******************************************
 **           COLORES GENERALES            **
