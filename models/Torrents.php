@@ -244,6 +244,21 @@ class Torrents extends \yii\db\ActiveRecord
         return $this->hasMany(Usuarios::className(), ['id' => 'usuario_id'])->viaTable('reportes_torrents', ['torrent_id' => 'id']);
     }
 
+    public function getEstareportado()
+    {
+        $usuario = Yii::$app->user->id;
+        $model = ReportesTorrents::find()->where([
+            'torrent_id' => $this->id,
+            'usuario_id' => $usuario,
+        ])->one();
+
+        if (empty($model)) {
+            return false;
+        }
+
+        return true;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

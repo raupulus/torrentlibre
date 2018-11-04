@@ -100,6 +100,60 @@ $(document).ready(function() {
         window.location = '/torrents/view?id='+torrent;
     });
 
-    // Al cargar el documento se actualiza el valor
+    /**
+     * Muestra el formulario para reportar torrent.
+     */
+    function mostrarFormReportar() {
+        $('#box-reportes').toggle(1000);
+    }
 
+    // Añade evento para mostrar u ocultar formulario de reportes.
+    $('#btn-reportar').click(mostrarFormReportar);
+
+    /**
+     * Reporta el torrent actual.
+     */
+    function enviarReporte() {
+        $('.errorReporte').remove();  // Limpia errores anteriores.
+        var titulo = $('#reportar-titulo').val();
+        var descripcion = $('#reportar-descripcion').val();
+        var torrent = $('#box-reportes').attr('data-torrent');
+        var errores = [];
+
+        if (titulo == '') {
+            errores.push('El título no puede estar vacío');
+        }
+
+        if (descripcion == '') {
+            errores.push('La descripción no puede estar vacía');
+        }
+
+        if (errores.length == 0) {
+            $.ajax({
+                type: 'GET',
+                url: "/reportes-torrents/reportar",
+                async: true,
+                data: {
+                    'torrent' : torrent,
+                    'titulo': titulo,
+                    'descripcion' : descripcion,
+                },
+                success: function() {
+                    $('#box-reportes').hide();
+                    $('#btn-reportar').hide();
+                    $('#reportar-terminado').show();
+                },
+                timeout: 5000,
+            });
+        } else {
+            errores.forEach(function(ele) {
+                $('#box-reportes').append(
+                    '<div class="errorReporte">' + ele + '</div>'
+                );
+            });
+        }
+    }
+
+    // Evento al botón que envía el reporte.
+    $('#btn-enviar-reporte').click(enviarReporte);
 });

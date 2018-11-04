@@ -135,6 +135,26 @@ function puntuacion($model) {
         '<div class="rating" data-rating-max="10" 
                              data-torrent="' . $model->id . '"></div>';
 }
+
+function reportar($model) {
+    if ($model->estareportado) {
+        return 'Ya has reportado este torrent';
+    }
+
+    return '
+    <span id="reportar-terminado">El torrent ha sido reportado.</span>
+    <span id="btn-reportar" class="btn btn-link">Reportar Torrent</span>
+    <div id="box-reportes" data-torrent="'.$model->id.'">
+        Título: <input type="text" id="reportar-titulo" />
+        <br />
+        Motivo: <input type="text" id="reportar-descripcion" />
+        <br />
+        <div id="btn-enviar-reporte" class="btn btn-warning">Enviar Reporte</div>
+    </div>
+    ';
+}
+
+
 ?>
 
 <div class="torrents-view container">
@@ -222,7 +242,7 @@ function puntuacion($model) {
 
                 <div class="row">
                     <div class="col-sm-12">
-                        Reportar
+                        <?= reportar($model) ?>
                     </div>
                 </div>
             </div>

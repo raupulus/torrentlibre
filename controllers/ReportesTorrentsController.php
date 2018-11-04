@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\Security;
 use Yii;
 use app\models\ReportesTorrents;
 use app\models\ReportesTorrentsSearch;
@@ -44,56 +45,33 @@ class ReportesTorrentsController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single ReportesTorrents model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+    public function actionReportar($torrent, $titulo, $descripcion) {
+        $usuario = Yii::$app->user->id;
+        $model = ReportesTorrents::find()->where([
+            'torrent_id' => $torrent,
+            'usuario_id' => $usuario,
+        ])->one();
 
-    /**
-     * Creates a new ReportesTorrents model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new ReportesTorrents();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (empty($model)) {
+            $model = new ReportesTorrents([
+                'torrent_id' => $torrent,
+                'usuario_id' => $usuario,
+            ]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        $model->ip = Security::getIp();
+        $model->titulo = $titulo;
+        $model->resumen = $descripcion;
+
+        $model->save();
+
+        /*
+        Yii::$app->getResponse()
+            ->redirect(['/torrents/view?id='.$id])
+            ->send();
+        */
     }
 
-    /**
-     * Updates an existing ReportesTorrents model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
 
     /**
      * Deletes an existing ReportesTorrents model.
