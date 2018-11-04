@@ -163,7 +163,7 @@ a.desc:after {
     color: #832561;
 }
 
-.grid-view table {
+.grid-view table tr {
     background-color: #dbebfa;
 }
 

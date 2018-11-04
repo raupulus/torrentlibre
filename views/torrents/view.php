@@ -431,6 +431,7 @@ function reportar($model) {
             'updated_at:datetime',
         ],
     ]) ?>
+-->
 
     <?php if ($isAutor || $isAdmin): ?>
         <p>
@@ -464,4 +465,3 @@ function reportar($model) {
     ],
 ]); ?>
 
--->

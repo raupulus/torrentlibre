@@ -28,7 +28,8 @@ if ($isAdmin) {
         'label' => false,
         'value' => function($model) {
             $btn1 = Html::a('Eliminar Torrent', [
-                            '/torrent/delete', 'id' => $model->torrent_id], [
+                            '/torrent/delete', 'id' => $model->torrent_id
+            ], [
                 'class' => 'btn btn-warning btn-sm',
                 'data' => [
                     'confirm' => '¿Seguro que quieres eliminar este torrent?',
