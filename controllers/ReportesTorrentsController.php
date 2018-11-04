@@ -45,29 +45,31 @@ class ReportesTorrentsController extends Controller
         ]);
     }
 
-    public function actionReportar($id) {
+    public function actionReportar($torrent, $titulo, $descripcion) {
         $usuario = Yii::$app->user->id;
         $model = ReportesTorrents::find()->where([
-            'torrent_id' => $id,
+            'torrent_id' => $torrent,
             'usuario_id' => $usuario,
         ])->one();
 
         if (empty($model)) {
             $model = new ReportesTorrents([
-                'torrent_id' => $id,
+                'torrent_id' => $torrent,
                 'usuario_id' => $usuario,
             ]);
         }
 
         $model->ip = Security::getIp();
-        $model->titulo = 'Torrent Reportado';
-        $model->resumen = 'Torrent Reportado';
+        $model->titulo = $titulo;
+        $model->resumen = $descripcion;
 
         $model->save();
 
+        /*
         Yii::$app->getResponse()
             ->redirect(['/torrents/view?id='.$id])
             ->send();
+        */
     }
 
 

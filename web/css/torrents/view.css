@@ -83,11 +83,9 @@
 }
 
 
-
-
-/*
- NUEVOOOOO
- */
+/************************************************
+ *                 MAQUETACIÓN                  *
+ ************************************************/
 #torrents-view-box {
     padding: 10px 8px;
     background-color: #dbebfa;
@@ -110,4 +108,20 @@
     padding: 0 0 6px 12px;
     font-size: 15px;
     line-height: 18px;
+}
+
+/**
+ * Formulario para reportar torrent.
+ */
+#box-reportes {
+    display: none;
+}
+
+.errorReporte {
+    font-size: 0.8em;
+    color: #ff0000;
+}
+
+#reportar-terminado {
+    display: none;
 }
