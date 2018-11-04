@@ -3,6 +3,7 @@
 use app\helpers\Roles;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ReportesTorrentsSearch */
@@ -14,8 +15,28 @@ $this->params['breadcrumbs'][] = $this->title;
 $isAdmin = Roles::isAdmin();
 
 $columns = [
-    'torrent.titulo:text:Torrent',
-    'usuario.datos.nick:text:Reportador',
+    [
+        'attribute' => 'torrent.titulo',
+        'label' => 'Torrent',
+        'format' => 'raw',
+            'value' => function($model) {
+                return Html::a($model->torrent->titulo, [
+                    Url::to('/torrents/view'),
+                    'id' => $model->torrent_id
+                ]);
+            }
+    ],
+    [
+        'attribute' => 'usuario.datos.nick',
+        'label' => 'Reportador',
+        'format' => 'raw',
+        'value' => function($model) {
+            return Html::a($model->usuario->datos->nick, [
+                Url::to('/usuarios/view'),
+                'id' => $model->usuario_id
+            ]);
+        }
+    ],
     'ip',
     'titulo',
     'resumen',
@@ -28,7 +49,7 @@ if ($isAdmin) {
         'label' => false,
         'value' => function($model) {
             $btn1 = Html::a('Eliminar Torrent', [
-                            '/torrent/delete', 'id' => $model->torrent_id
+                            '/torrents/eliminar', 'id' => $model->torrent_id
             ], [
                 'class' => 'btn btn-warning btn-sm',
                 'data' => [
@@ -46,8 +67,7 @@ if ($isAdmin) {
                 ],
             ]);
 
-            //return $btn1 . '<br /><br />' . $btn2;
-            return $btn2;
+            return $btn1 . '<br /><br />' . $btn2;
         }
     ];
 

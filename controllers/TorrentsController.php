@@ -331,6 +331,8 @@ class TorrentsController extends Controller
     public function actionEliminar($id)
     {
         $this->findModel($id)->delete();
+
+        return $this->redirect(['/reportes-torrents/index']);
     }
 
 
