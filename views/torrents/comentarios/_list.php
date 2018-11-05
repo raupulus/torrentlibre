@@ -34,12 +34,15 @@ use yii2mod\editable\Editable;
                             'method' => 'post',
                         ],
                     ]) ?>
+                <?php endif; ?>
 
+                <?php if ($model->createdBy != yii::$app->user->id): ?>
                     <span class="btn-reportar-comentario glyphicon
                           glyphicon-bullhorn reportarComentario"
                           data-comment-content-id="<?= $model->id ?>">Reportar</span>
                     <span class="reportarComentario"></span>
                 <?php endif; ?>
+
                 <?php if (!Yii::$app->user->isGuest &&
                          ($model->level < $maxLevel || is_null($maxLevel))) : ?>
                     <?= Html::a("<span class='glyphicon glyphicon-share-alt'></span> Responder", '#', ['class' => 'comment-reply', 'data' => ['action' => 'reply', 'comment-id' => $model->id]]); ?>
@@ -74,6 +77,7 @@ use yii2mod\editable\Editable;
                     <br />
                     Motivo: <input type="text" class="reportar-descripcion" />
                     <br />
+                    <div class="box-reportes-comentarios"></div>
                     <div class="btn-enviar-reporte-comentario btn btn-warning">
                         Enviar Reporte
                     </div>

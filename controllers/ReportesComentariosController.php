@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\helpers\Access;
 use app\helpers\Security;
+use function var_dump;
 use Yii;
 use app\models\ReportesComentarios;
 use app\models\ReportesComentariosSearch;
@@ -65,13 +66,22 @@ class ReportesComentariosController extends Controller
      */
     public function actionReportar($id, $titulo, $resumen)
     {
-        $model = new ReportesComentarios([
-            'usuario_id' => Yii::$app->user->id,
+        $usuario = Yii::$app->user->id;
+        $model = ReportesComentarios::find()->where([
             'comentario_id' => $id,
-            'ip' => Security::getIp(),
-            'titulo' => $titulo,
-            'resumen' => $resumen,
-        ]);
+            'usuario_id' => $usuario,
+        ])->one();
+
+        if (empty($model)) {
+            $model = new ReportesComentarios([
+                'comentario_id' => $id,
+                'usuario_id' => $usuario,
+            ]);
+        }
+
+        $model->ip = Security::getIp();
+        $model->titulo = $titulo;
+        $model->resumen = $resumen;
 
         $model->save();
     }

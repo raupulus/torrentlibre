@@ -162,7 +162,7 @@ $(document).ready(function() {
      ************************************************/
 
     /**
-     * Muestra el formulario para reportar comentarios.
+     * Muestra u Oculta el formulario para reportar comentarios.
      */
     function mostrarFormReporteComentario(id) {
         $('#comment-' + id + ' .box-reportes-comentarios').toggle();
@@ -171,18 +171,38 @@ $(document).ready(function() {
     /**
      * Valida y envía los campos para reportar formulario.
      */
-    function reportarComentario(id, titulo, resumen) {
+    function reportarComentario(id, titulo, resumen, box) {
+        $('.errorReporteComentarios').remove();  // Limpia errores anteriores.
+        var errores = [];
 
-        $.ajax({
-            type: 'POST',
-            url: "/reportar-comentarios/reportar",
-            data:{
-                'id': id,
-                'titulo': titulo,
-                'resumen': resumen,
-            },
-            timeout: 5000,
-        });
+        if (titulo == '') {
+            errores.push('El título no puede estar vacío');
+        }
+
+        if (resumen == '') {
+            errores.push('La descripción no puede estar vacía');
+        }
+
+        if (errores.length == 0) {
+            $.ajax({
+                type: 'GET',
+                url: "/reportes-comentarios/reportar",
+                data: {
+                    'id': id,
+                    'titulo': titulo,
+                    'resumen': resumen,
+                },
+                timeout: 5000,
+            });
+            mostrarFormReporteComentario(id);
+        } else {
+            errores.forEach(function(ele) {
+                box.find('.box-reportes-comentarios').append(
+                    '<div class="errorReporteComentarios">' + ele + '</div>'
+                );
+            });
+        }
+
     }
 
     function prepararBotonSubmit(id) {
@@ -192,25 +212,13 @@ $(document).ready(function() {
         btnSubmit.click(function() {
             var titulo = box.find('.reportar-titulo').val();
             var resumen = box.find('.reportar-descripcion').val();
-
-            console.log(id, titulo, resumen);
-            reportarComentario(id, titulo, resumen);
-            mostrarFormReporteComentario(id);
-        })
-
-
+            reportarComentario(id, titulo, resumen, box);
+        });
     }
 
     $('.btn-reportar-comentario').click(function() {
         var id = $(this).attr('data-comment-content-id');
-        var titulo = $(this).attr('data-comment-content-id');
-        var resumen = $(this).attr('data-comment-content-id');
-
         mostrarFormReporteComentario(id);
         prepararBotonSubmit(id);
     });
-
-
-
-
 });
