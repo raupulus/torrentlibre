@@ -13,6 +13,8 @@ use yii2mod\moderation\enums\Status;
  */
 class Comentarios extends \yii2mod\comments\models\CommentModel
 {
+    public $privacy;
+
     /**
      * {@inheritdoc}
      */
@@ -27,6 +29,14 @@ class Comentarios extends \yii2mod\comments\models\CommentModel
             ['level', 'default', 'value' => 1],
             ['parentId', 'validateParentID'],
             [['entityId', 'parentId', 'status', 'level'], 'integer'],
+            [['privacy'], 'boolean'],
+            [
+                ['privacy'],
+                'required',
+                'requiredValue' => 1,
+                'message' => 'Debes leer, entender y aceptar las políticas del sitio.'
+            ],
+
             ['content', function($model) {
                 $userId = Yii::$app->user->id;
                 $ultimoComentario = Comentarios::find()->where([
@@ -66,25 +76,7 @@ class Comentarios extends \yii2mod\comments\models\CommentModel
     public function attributes()
     {
         return array_merge(parent::attributes(), [
-
+            'privacy' => 'Privacidad',
         ]);
-    }
-
-    /**
-     * Acciones llevadas a cabo antes de insertar un comentario
-     * @param bool $insert Acción a realizar, si existe está insertando
-     * @return bool Devuelve un booleano, si se lleva a cabo es true.
-     */
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            if ($insert) {
-
-            }
-
-
-            return true;
-        }
-        return false;
     }
 }

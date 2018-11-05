@@ -32,6 +32,15 @@ use yii\widgets\ActiveForm;
                 'class' => 'pull-right',
                 'data' => ['action' => 'cancel-reply']
             ]); ?>
+
+            <?= $form->field($commentModel, 'privacy')->checkbox([
+                'label' => '',
+                'template' => '{input}{beginLabel}{labelTitle}{endLabel}{error}',
+            ])->label(
+                'Yo acepto las ' . Html::a('Políticas de Privacidad',
+                    ['site/politicaprivacidad']) . ' del sitio web.'
+            ) ?>
+
             <?= Html::submitButton('Comentar', [
                     'class' => 'btn btn-primary comment-submit'
             ]); ?>
