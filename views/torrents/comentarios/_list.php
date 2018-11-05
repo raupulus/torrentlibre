@@ -35,17 +35,27 @@ use yii2mod\editable\Editable;
                         ],
                     ]) ?>
                 <?php endif; ?>
-                <?php if (!Yii::$app->user->isGuest && ($model->level < $maxLevel || is_null($maxLevel))) : ?>
-                    <?php echo Html::a("<span class='glyphicon glyphicon-share-alt'></span> Responder", '#', ['class' => 'comment-reply', 'data' => ['action' => 'reply', 'comment-id' => $model->id]]); ?>
+
+                <?php if ($model->createdBy != yii::$app->user->id): ?>
+                    <span class="btn-reportar-comentario glyphicon
+                          glyphicon-bullhorn reportarComentario"
+                          data-comment-content-id="<?= $model->id ?>">Reportar</span>
+                    <span class="reportarComentario"></span>
+                <?php endif; ?>
+
+                <?php if (!Yii::$app->user->isGuest &&
+                         ($model->level < $maxLevel || is_null($maxLevel))) : ?>
+                    <?= Html::a("<span class='glyphicon glyphicon-share-alt'></span> Responder", '#', ['class' => 'comment-reply', 'data' => ['action' => 'reply', 'comment-id' => $model->id]]); ?>
                 <?php endif; ?>
             </div>
             <div class="comment-author-name">
-                <span><?php echo $model->getAuthorName(); ?></span>
-                <?php echo Html::a($model->getPostedDate(), $model->getAnchorUrl(), ['class' => 'comment-date']); ?>
+                <span><?= $model->getAuthorName(); ?></span>
+                <?= Html::a($model->getPostedDate(), $model->getAnchorUrl(),
+                    ['class' => 'comment-date']); ?>
             </div>
             <div class="comment-body">
-                <?php if (Roles::isAdmin() || ($model->createdBy ==
-                        yii::$app->user->id)): ?>
+                <?php if (Roles::isAdmin() ||
+                         ($model->createdBy == yii::$app->user->id)): ?>
                     <?= Editable::widget([
                         'model' => $model,
                         'attribute' => 'content',
@@ -57,6 +67,21 @@ use yii2mod\editable\Editable;
                 <?php else: ?>
                     <?= $model->getContent(); ?>
                 <?php endif; ?>
+            </div>
+
+            <div class="box-reportes-comentarios">
+                <h4>Reportar comentario</h4>
+
+                <div>
+                    Título: <input type="text" class="reportar-titulo" />
+                    <br />
+                    Motivo: <input type="text" class="reportar-descripcion" />
+                    <br />
+                    <div class="box-reportes-comentarios"></div>
+                    <div class="btn-enviar-reporte-comentario btn btn-warning">
+                        Enviar Reporte
+                    </div>
+                </div>
             </div>
         </div>
     </div>

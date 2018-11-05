@@ -37,13 +37,14 @@ $columns = [
             ]);
         }
     ],
-    'ip',
     'titulo',
     'resumen',
     'created_at:datetime:Fecha',
 ];
 
 if ($isAdmin) {
+    array_push($columns, 'ip');
+
     $res = [
         'format' => 'raw',
         'label' => false,

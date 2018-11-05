@@ -82,6 +82,18 @@
     width: 80px;
 }
 
+.reportarComentario:hover {
+    cursor: pointer;
+}
+
+.box-reportes-comentarios {
+    display: none;
+}
+.errorReporteComentarios {
+    font-size: 0.8em;
+    font-weight: bolder;
+    color: #ff0000;
+}
 
 /************************************************
  *                 MAQUETACIÓN                  *

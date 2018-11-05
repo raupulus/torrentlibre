@@ -156,4 +156,81 @@ $(document).ready(function() {
 
     // Evento al botón que envía el reporte.
     $('#btn-enviar-reporte').click(enviarReporte);
+
+    /************************************************
+     **           Reportar Comentarios             **
+     ************************************************/
+
+    /**
+     * Muestra u Oculta el formulario para reportar comentarios.
+     *
+     * @param id Recibe el id del comentario.
+     */
+    function mostrarFormReporteComentario(id) {
+        $('#comment-' + id + ' .box-reportes-comentarios').toggle();
+    }
+
+    /**
+     * Valida y envía los campos para reportar formulario.
+     *
+     * @param id El identificador del comentario.
+     * @param titulo Título del reporte.
+     * @param resumen Resumen del reporte.
+     * @param box Objeto que representa el comentario actual.
+     */
+    function reportarComentario(id, titulo, resumen, box) {
+        $('.errorReporteComentarios').remove();  // Limpia errores anteriores.
+        var errores = [];
+
+        if (titulo == '') {
+            errores.push('El título no puede estar vacío');
+        }
+
+        if (resumen == '') {
+            errores.push('La descripción no puede estar vacía');
+        }
+
+        if (errores.length == 0) {
+            $.ajax({
+                type: 'GET',
+                url: "/reportes-comentarios/reportar",
+                data: {
+                    'id': id,
+                    'titulo': titulo,
+                    'resumen': resumen,
+                },
+                timeout: 5000,
+            });
+            mostrarFormReporteComentario(id);
+        } else {
+            errores.forEach(function(ele) {
+                box.find('.box-reportes-comentarios').append(
+                    '<div class="errorReporteComentarios">' + ele + '</div>'
+                );
+            });
+        }
+    }
+
+    /**
+     * Prepara el botón para reportar comentario en el momento que se pulsa
+     * sobre el desplegable "Reportar"
+     * @param id Recibe el id del comentario.
+     */
+    function prepararBotonSubmit(id) {
+        var box = $('#comment-' + id + ' .box-reportes-comentarios');
+        var btnSubmit = box.find('.btn-enviar-reporte-comentario');
+
+        btnSubmit.click(function() {
+            var titulo = box.find('.reportar-titulo').val();
+            var resumen = box.find('.reportar-descripcion').val();
+            reportarComentario(id, titulo, resumen, box);
+        });
+    }
+
+    // Asigna evento al botón "Responder" para desplegar formulario de Reportes.
+    $('.btn-reportar-comentario').click(function() {
+        var id = $(this).attr('data-comment-content-id');
+        mostrarFormReporteComentario(id);
+        prepararBotonSubmit(id);
+    });
 });

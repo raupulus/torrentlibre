@@ -16,7 +16,7 @@ use \yii\helpers\Html;
 ?>
 <footer id="boxfooter" class="row">
     <section id="boxcontact" class="col-md-12">
-        <a href="'/site/contact'"
+        <a href="/site/contact"
            title="'Contactar"
            class="">Contactar</a>
 
