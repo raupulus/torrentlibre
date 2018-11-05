@@ -82,6 +82,14 @@
     width: 80px;
 }
 
+.reportarComentario:hover {
+    cursor: pointer;
+}
+
+.box-reportes-comentarios {
+    display: none;
+}
+
 
 /************************************************
  *                 MAQUETACIÓN                  *

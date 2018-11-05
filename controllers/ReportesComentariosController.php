@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\helpers\Access;
+use app\helpers\Security;
 use Yii;
 use app\models\ReportesComentarios;
 use app\models\ReportesComentariosSearch;
@@ -59,20 +61,19 @@ class ReportesComentariosController extends Controller
 
     /**
      * Creates a new ReportesComentarios model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionReportar($id, $titulo, $resumen)
     {
-        $model = new ReportesComentarios();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
+        $model = new ReportesComentarios([
+            'usuario_id' => Yii::$app->user->id,
+            'comentario_id' => $id,
+            'ip' => Security::getIp(),
+            'titulo' => $titulo,
+            'resumen' => $resumen,
         ]);
+
+        $model->save();
     }
 
     /**

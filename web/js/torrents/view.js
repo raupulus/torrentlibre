@@ -156,4 +156,61 @@ $(document).ready(function() {
 
     // Evento al botón que envía el reporte.
     $('#btn-enviar-reporte').click(enviarReporte);
+
+    /************************************************
+     **           Reportar Comentarios             **
+     ************************************************/
+
+    /**
+     * Muestra el formulario para reportar comentarios.
+     */
+    function mostrarFormReporteComentario(id) {
+        $('#comment-' + id + ' .box-reportes-comentarios').toggle();
+    }
+
+    /**
+     * Valida y envía los campos para reportar formulario.
+     */
+    function reportarComentario(id, titulo, resumen) {
+
+        $.ajax({
+            type: 'POST',
+            url: "/reportar-comentarios/reportar",
+            data:{
+                'id': id,
+                'titulo': titulo,
+                'resumen': resumen,
+            },
+            timeout: 5000,
+        });
+    }
+
+    function prepararBotonSubmit(id) {
+        var box = $('#comment-' + id + ' .box-reportes-comentarios');
+        var btnSubmit = box.find('.btn-enviar-reporte-comentario');
+
+        btnSubmit.click(function() {
+            var titulo = box.find('.reportar-titulo').val();
+            var resumen = box.find('.reportar-descripcion').val();
+
+            console.log(id, titulo, resumen);
+            reportarComentario(id, titulo, resumen);
+            mostrarFormReporteComentario(id);
+        })
+
+
+    }
+
+    $('.btn-reportar-comentario').click(function() {
+        var id = $(this).attr('data-comment-content-id');
+        var titulo = $(this).attr('data-comment-content-id');
+        var resumen = $(this).attr('data-comment-content-id');
+
+        mostrarFormReporteComentario(id);
+        prepararBotonSubmit(id);
+    });
+
+
+
+
 });
