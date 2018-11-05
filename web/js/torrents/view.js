@@ -163,6 +163,8 @@ $(document).ready(function() {
 
     /**
      * Muestra u Oculta el formulario para reportar comentarios.
+     *
+     * @param id Recibe el id del comentario.
      */
     function mostrarFormReporteComentario(id) {
         $('#comment-' + id + ' .box-reportes-comentarios').toggle();
@@ -170,6 +172,11 @@ $(document).ready(function() {
 
     /**
      * Valida y envía los campos para reportar formulario.
+     *
+     * @param id El identificador del comentario.
+     * @param titulo Título del reporte.
+     * @param resumen Resumen del reporte.
+     * @param box Objeto que representa el comentario actual.
      */
     function reportarComentario(id, titulo, resumen, box) {
         $('.errorReporteComentarios').remove();  // Limpia errores anteriores.
@@ -202,9 +209,13 @@ $(document).ready(function() {
                 );
             });
         }
-
     }
 
+    /**
+     * Prepara el botón para reportar comentario en el momento que se pulsa
+     * sobre el desplegable "Reportar"
+     * @param id Recibe el id del comentario.
+     */
     function prepararBotonSubmit(id) {
         var box = $('#comment-' + id + ' .box-reportes-comentarios');
         var btnSubmit = box.find('.btn-enviar-reporte-comentario');
@@ -216,6 +227,7 @@ $(document).ready(function() {
         });
     }
 
+    // Asigna evento al botón "Responder" para desplegar formulario de Reportes.
     $('.btn-reportar-comentario').click(function() {
         var id = $(this).attr('data-comment-content-id');
         mostrarFormReporteComentario(id);

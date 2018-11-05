@@ -8,6 +8,7 @@ use function var_dump;
 use Yii;
 use app\models\ReportesComentarios;
 use app\models\ReportesComentariosSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -29,6 +30,31 @@ class ReportesComentariosController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'delete'],
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'matchCallback' => function($rule, $action) {
+                            $isAdmin = Roles::isAdmin();
+
+                            if ($isAdmin) {
+                                return true;
+                            }
+
+                            return false;
+                        },
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -44,19 +70,6 @@ class ReportesComentariosController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single ReportesComentarios model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
         ]);
     }
 
@@ -84,26 +97,6 @@ class ReportesComentariosController extends Controller
         $model->resumen = $resumen;
 
         $model->save();
-    }
-
-    /**
-     * Updates an existing ReportesComentarios model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**

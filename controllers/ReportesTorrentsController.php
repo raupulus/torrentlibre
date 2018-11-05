@@ -30,8 +30,13 @@ class ReportesTorrentsController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['delete'],
+                'only' => ['index', 'delete'],
                 'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                     [
                         'actions' => ['delete'],
                         'allow' => true,
