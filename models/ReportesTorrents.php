@@ -56,13 +56,13 @@ class ReportesTorrents extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'usuario_id' => 'Usuario ID',
-            'torrent_id' => 'Torrent ID',
+            'usuario_id' => 'Usuario',
+            'torrent_id' => 'Torrent',
             'ip' => 'Ip',
             'titulo' => 'Titulo',
             'resumen' => 'Resumen',
             'comunicado' => 'Comunicado',
-            'created_at' => 'Created At',
+            'created_at' => 'Fecha',
         ];
     }
 

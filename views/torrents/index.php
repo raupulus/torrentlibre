@@ -138,7 +138,7 @@ $isGuest = Yii::$app->user->isGuest;
                 'format' => 'raw',
                 'contentOptions' => ['class' => 'tabla-nick'],
                 'value' => function($model) {
-                    return Html::a($model->usuario->datos->nombre, [
+                    return Html::a($model->usuario->datos->nick, [
                         Url::to('usuarios/view'),
                         'id' => $model->usuario->datos_id
                     ]);
