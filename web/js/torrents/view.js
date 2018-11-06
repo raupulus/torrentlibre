@@ -88,14 +88,14 @@ $(document).ready(function() {
     }
 
     // Llamada al plugin de votación "star-rating"
-    $('.rating').starRating({
+    $('.torrentRating').starRating({
         minus: true // step minus button
     });
 
     // Al pulsar un valor se actualiza en la DB.
-    $('.rating').click(function() {
-        var puntuacion = $('.rating').attr('data-val');
-        var torrent = $('.rating').attr('data-torrent');
+    $('.torrentRating').click(function() {
+        var puntuacion = $('.torrentRating').attr('data-val');
+        var torrent = $('.torrentRating').attr('data-torrent');
         modificarPuntuacion(puntuacion, torrent);
         window.location = '/torrents/view?id='+torrent;
     });
@@ -233,4 +233,36 @@ $(document).ready(function() {
         mostrarFormReporteComentario(id);
         prepararBotonSubmit(id);
     });
+
+    /************************************************
+     **             Votar Comentarios              **
+     ************************************************/
+    function modificarPuntuacionComentario(puntuacion, comentario) {
+        $.ajax({
+            type: 'GET',
+            url: "/puntuacion-comentarios/modificar",
+            async: false,
+            data: {
+                'puntuacion': puntuacion,
+                'comentario' : comentario,
+            },
+            timeout:5000,
+        });
+    }
+
+    // Llamada al plugin de votación "star-rating"
+    $('.comentarioRating').starRating({
+        minus: true // step minus button
+    });
+
+    // Al pulsar un valor se actualiza en la DB.
+    $('.comentarioRating').click(function() {
+        var torrent = $('.torrentRating').attr('data-torrent');
+        var puntuacion = $('.comentarioRating').attr('data-val');
+        console.log('p: '+puntuacion);
+        var comentario = $('.comentarioRating').attr('data-comentario');
+        modificarPuntuacionComentario(puntuacion, comentario);
+        window.location = '/torrents/view?id='+torrent;
+    });
+
 });

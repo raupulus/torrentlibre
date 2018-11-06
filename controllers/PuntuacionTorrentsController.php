@@ -42,7 +42,7 @@ class PuntuacionTorrentsController extends Controller
     }
 
     /**
-     * Puntua un torrent recibiendo una puntuación y el torrent a reportar.
+     * Puntua un torrent recibiendo una puntuación y el torrent a valorar.
      * @param $puntuacion Puntos del 1-10.
      * @param $torrent Torrent sobre el que se puntúa.
      */

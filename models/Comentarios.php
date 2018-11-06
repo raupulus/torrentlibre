@@ -13,6 +13,9 @@ use yii2mod\moderation\enums\Status;
  */
 class Comentarios extends \yii2mod\comments\models\CommentModel
 {
+    /**
+     * @var Atributo para check de políticas de privacidad.
+     */
     public $privacy;
 
     /**
@@ -78,5 +81,26 @@ class Comentarios extends \yii2mod\comments\models\CommentModel
         return array_merge(parent::attributes(), [
             'privacy' => 'Privacidad',
         ]);
+    }
+
+    /**
+     * Devuelve la puntuación media para el comentario actual.
+     * @return float|int
+     */
+    public function getPuntos()
+    {
+        $p = PuntuacionComentarios::find()
+            ->select('puntuacion')
+            ->where(['comentario_id' => $this->id])
+            ->column();
+
+        $total = array_sum($p);
+        $votos = count($p);
+
+        if ($votos == 0) {
+            return 0;
+        }
+
+        return $total / $votos;
     }
 }
