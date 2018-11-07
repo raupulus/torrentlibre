@@ -6,6 +6,7 @@ use app\helpers\Access;
 use app\helpers\Roles;
 use app\models\Comment;
 use app\models\Preferencias;
+use app\models\Torrents;
 use app\models\UsuariosDatos;
 use function var_dump;
 use Yii;
