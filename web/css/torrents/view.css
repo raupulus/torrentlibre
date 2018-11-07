@@ -95,6 +95,14 @@
     color: #ff0000;
 }
 
+.box-votar-comentario {
+    text-align: right;
+    font-weight: bolder;
+}
+
+.box-votar-comentario .comentarioRating ul {
+}
+
 /************************************************
  *                 MAQUETACIÓN                  *
  ************************************************/

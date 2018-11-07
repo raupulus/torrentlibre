@@ -8,6 +8,7 @@ use app\helpers\Imageresize;
 use app\helpers\Magnet2torrent;
 use app\helpers\Roles;
 use app\helpers\Security;
+use app\models\Comentarios;
 use app\models\Comment;
 use app\models\Descargas;
 use function array_combine;
@@ -95,7 +96,7 @@ class TorrentsController extends Controller
         return [
             'edit-page' => [
                 'class' => EditableAction::className(),
-                'modelClass' => Comment::className(),
+                'modelClass' => Comentarios::className(),
                 'forceCreate' => false
             ],
         ];

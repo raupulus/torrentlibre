@@ -83,6 +83,13 @@ use yii2mod\editable\Editable;
                     </div>
                 </div>
             </div>
+
+            <div class="box-votar-comentario">
+                <p>Puntuación total:
+                    <span class="puntos"><?=$model->puntos?></span>/10</p>
+                <div class="comentarioRating rating" data-rating-max="10"
+                      data-comentario="<?=$model->id?>"></div>
+            </div>
         </div>
     </div>
 </li>

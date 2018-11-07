@@ -51,8 +51,8 @@ class PuntuacionComentarios extends \yii\db\ActiveRecord
             'id' => 'ID',
             'usuario_id' => 'Usuario ID',
             'comentario_id' => 'Comentario ID',
-            'puntuacion' => 'Puntuacion',
-            'created_at' => 'Created At',
+            'puntuacion' => 'Puntuación',
+            'created_at' => 'Fecha',
         ];
     }
 

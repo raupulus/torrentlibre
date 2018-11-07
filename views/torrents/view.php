@@ -132,7 +132,7 @@ function magnet($model) {
 function puntuacion($model) {
     return '<p>Puntuación total: ' .
         '<span class="puntos">'.$model->puntos . '</span>/10</p>' .
-        '<div class="rating" data-rating-max="10" 
+        '<div class="torrentRating rating" data-rating-max="10" 
                              data-torrent="' . $model->id . '"></div>';
 }
 

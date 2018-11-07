@@ -30,69 +30,29 @@ class PuntuacionComentariosController extends Controller
     }
 
     /**
-     * Lists all PuntuacionComentarios models.
-     * @return mixed
+     * Puntua un comentario recibiendo una puntuación y el
+     * comentario al que se valora.
+     *
+     * @param $puntuacion Puntos del 1-10.
+     * @param $comentario Comentario sobre el que se puntúa.
      */
-    public function actionIndex()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => PuntuacionComentarios::find(),
-        ]);
+    public function actionModificar($puntuacion, $comentario) {
+        $usuario = Yii::$app->user->id;
+        $model = PuntuacionComentarios::find()->where([
+            'comentario_id' => $comentario,
+            'usuario_id' => $usuario,
+        ])->one();
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single PuntuacionComentarios model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new PuntuacionComentarios model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new PuntuacionComentarios();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (empty($model)) {
+            $model = new PuntuacionComentarios([
+                'comentario_id' => $comentario,
+                'usuario_id' => $usuario,
+            ]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
+        $model->puntuacion = $puntuacion;
 
-    /**
-     * Updates an existing PuntuacionComentarios model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        $model->save();
     }
 
     /**
