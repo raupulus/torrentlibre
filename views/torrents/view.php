@@ -25,7 +25,7 @@ function imagen($model) {
     $img = $model->imagen;
 
     if ($model->imagen == '') {
-        $img = Yii::$app->request->baseUrl .
+        $img = Yii::$app->request->baseUrl . '/' .
             Yii::getAlias('@r_imgTorrent').'/default.png';
     }
 
