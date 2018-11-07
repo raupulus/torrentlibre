@@ -58,6 +58,12 @@ $this->title = Yii::getAlias('@sitename');
                 'tipo' => 'ultimos',
                 //'tipo' => 'votados',
             ]) ?>
+
+            <h3>Comentarios mejor valorados</h3>
+            <?= \app\widgets\Comentarios_widget::widget([
+                'cantidad' => 5,
+                'tipo' => 'votados',
+            ]) ?>
         </div>
     </div>
 </div>

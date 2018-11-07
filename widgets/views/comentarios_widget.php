@@ -6,20 +6,38 @@
  * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
 **/
 
-//var_dump($model);
+use app\assets\ComentariosWidgetAsset;
 
+ComentariosWidgetAsset::register($this);
 ?>
 
-<div id="box-comentario-widget" class="col-sm-12 row container">
+<div class="box-comentario-widget col-sm-12 row container">
     <?php foreach ($model as $comentario): ?>
-    <div class="comentario-widget row">
+        <?php
+            $usuario_id = $comentario['updatedBy'];
+            $torrent_id = $comentario['entityId'];
+        ?>
+    <div class="comentario-widget row center-block">
         <div class="col-sm-12">
-            El usuario <?= $comentario['nick'] ?> comentó:
+            El usuario
+            <a href="/usuarios/view?id=<?= $usuario_id ?>">
+                <?= $comentario['nick'] ?>
+            </a>
+            comentó:
         </div>
 
         <div class="col-sm-12">
-            <?= $comentario['content'] ?>
+            <a href="/torrents/view?id=<?= $torrent_id ?>">
+                <?= $comentario['content'] ?>
+            </a>
         </div>
     </div>
     <?php endforeach; ?>
+
+    <div class="row">
+        <!--
+        <?= var_dump($model); ?>
+        -->
+    </div>
 </div>
+

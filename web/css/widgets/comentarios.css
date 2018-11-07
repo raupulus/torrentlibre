@@ -1,0 +1,25 @@
+.box-comentario-widget {
+    margin: 0;
+    padding: 0;
+}
+
+.comentario-widget {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 8px;
+    padding: 5px 3px;
+    font-size: 0.9em;
+    font-weight: bolder;
+    color: #1a4580;
+    background-color: #dbebfa;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #000;
+}
+
+.comentario-widget a {
+    text-decoration: none;
+    color: #832561;
+}
+.comentario-widget a:hover {
+    color: #bfca02;
+}

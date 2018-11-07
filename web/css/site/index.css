@@ -17,7 +17,7 @@
 */
 
 .site-index {
-    background-color: #007fdb;
+
 }
 
 /**
@@ -72,5 +72,5 @@
  * Aside.
  */
 #index-box-aside {
-    background-color: #fbed50;
+    padding: 0;
 }
