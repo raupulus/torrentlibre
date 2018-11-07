@@ -114,7 +114,8 @@ class Access
 
     public static function registrarAcceso() {
         $tablaAccesos = new Accesos([
-            'usuario_id' => Yii::$app->user->id
+            'usuario_id' => Yii::$app->user->id,
+            'ip' => Security::getIp(),
         ]);
         return $tablaAccesos->save();
     }

@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\helpers\Access;
+use app\helpers\Security;
 use Yii;
 use app\models\Accesos;
 use yii\data\ActiveDataProvider;
@@ -45,69 +47,19 @@ class AccesosController extends Controller
     }
 
     /**
-     * Displays a single Accesos model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * Crea un nuevo registro del acceso identificando con el "id" del usuario.
+     * @return bool
      */
-    public function actionView($id)
+    static public function actionCreate()
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+        $model = new Accesos([
+            'usuario_id' => Yii::$app->user->id,
+            'ip' => Security::getIp(),
         ]);
+
+        return $model->save();
     }
 
-    /**
-     * Creates a new Accesos model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Accesos();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing Accesos model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Accesos model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
 
     /**
      * Finds the Accesos model based on its primary key value.

@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\helpers\Access;
+use app\models\Accesos;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
