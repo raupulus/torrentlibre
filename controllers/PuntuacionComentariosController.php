@@ -44,7 +44,7 @@ class PuntuacionComentariosController extends Controller
         ])->one();
 
         if (empty($model)) {
-            $model = new PuntuacionTorrents([
+            $model = new PuntuacionComentarios([
                 'comentario_id' => $comentario,
                 'usuario_id' => $usuario,
             ]);
