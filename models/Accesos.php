@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int $usuario_id
+ * @property string $ip
  * @property string $registered_at
  *
  * @property Usuarios $usuario
@@ -33,6 +34,7 @@ class Accesos extends \yii\db\ActiveRecord
             [['usuario_id'], 'default', 'value' => null],
             [['usuario_id'], 'integer'],
             [['registered_at'], 'safe'],
+            [['ip'], 'string', 'max' => 15],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
         ];
     }
@@ -44,6 +46,7 @@ class Accesos extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'ip' => 'Ip',
             'usuario_id' => 'Usuario ID',
             'registered_at' => 'Registered At',
         ];

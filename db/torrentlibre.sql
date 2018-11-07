@@ -445,9 +445,10 @@ CREATE INDEX idx_puntuacion_comentarios_comentario_id
 ---------------------------------------------------
 DROP TABLE IF EXISTS accesos CASCADE;
 CREATE TABLE accesos (
-      id            BIGSERIAL    PRIMARY KEY
-    , usuario_id    BIGINT       NOT NULL REFERENCES "usuarios" (id)
-    , registered_at TIMESTAMP(0) DEFAULT LOCALTIMESTAMP
+    id            BIGSERIAL    PRIMARY KEY
+  , ip            VARCHAR(15)  -- IP DE ACCESO
+  , usuario_id    BIGINT       NOT NULL REFERENCES "usuarios" (id)
+  , registered_at TIMESTAMP(0) DEFAULT LOCALTIMESTAMP
 );
 
 DROP TABLE IF EXISTS accesoserror CASCADE;
