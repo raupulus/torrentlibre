@@ -60,6 +60,7 @@ $isAutor = Access::isAutor($model->id);
                     }
                 ],
                 'datos.nick',
+                'n_torrents',
                 [
                     'attribute' => 'datos.biografia',
                     'visible' => (!empty($model->datos->biografia)),

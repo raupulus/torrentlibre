@@ -201,4 +201,18 @@ class Usuarios extends \yii\db\ActiveRecord
             'usuario_id' => $this->id,
         ]) ? true : false;
     }
+
+    /**
+     * Devuelve el número de torrents para este usuario.
+     *
+     * @return int|string
+     */
+    public function getN_torrents()
+    {
+        $usuario = Yii::$app->user->id;
+
+        return Torrents::find()->where([
+            'usuario_id' => $this->id,
+        ])->count();
+    }
 }
