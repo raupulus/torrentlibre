@@ -5,6 +5,9 @@
  */
 
 $(document).ready(function() {
+    /************************************************
+     **                   MAGNET                   **
+     ************************************************/
     var defaultTrackers = [
         "http://tracker.tfile.me/announce",
         "udp://tracker.openbittorrent.com:80/announce",
@@ -49,6 +52,10 @@ $(document).ready(function() {
     // Asigno evento para copiar al pulsar el icono de magnet
     $('#copymagnet').click(copyMagnetToClipboard);
 
+    /************************************************
+     **               Botón Descargar              **
+     ************************************************/
+
     /**
      * Esta función refresca las descargas al pulsar el botón "Descargar"
      */
@@ -73,7 +80,15 @@ $(document).ready(function() {
     // Añado evento al pulsar sobre el botón descargas para actualizar valor.
     $('#btn-torrent-download').click(recargarDescargas);
 
+    /************************************************
+     **               Votar Torrent                **
+     ************************************************/
 
+    /**
+     * Modifica la puntuación para un torrent.
+     * @param puntuacion Recibe puntuación del 1-10.
+     * @param torrent Recibe el "id" del torrent que se puntúa.
+     */
     function modificarPuntuacion(puntuacion, torrent) {
         $.ajax({
             type: 'GET',
@@ -99,6 +114,10 @@ $(document).ready(function() {
         modificarPuntuacion(puntuacion, torrent);
         window.location = '/torrents/view?id='+torrent;
     });
+
+    /************************************************
+     **             Reportar Torrent               **
+     ************************************************/
 
     /**
      * Muestra el formulario para reportar torrent.
@@ -237,6 +256,11 @@ $(document).ready(function() {
     /************************************************
      **             Votar Comentarios              **
      ************************************************/
+    /**
+     * Modifica la puntuación para un comentario.
+     * @param puntuacion Recibe puntuación del 1-10.
+     * @param comentario Recibe el "id" del comentario que se puntúa.
+     */
     function modificarPuntuacionComentario(puntuacion, comentario) {
         $.ajax({
             type: 'GET',
@@ -258,9 +282,8 @@ $(document).ready(function() {
     // Al pulsar un valor se actualiza en la DB.
     $('.comentarioRating').click(function() {
         var torrent = $('.torrentRating').attr('data-torrent');
-        var puntuacion = $('.comentarioRating').attr('data-val');
-        console.log('p: '+puntuacion);
-        var comentario = $('.comentarioRating').attr('data-comentario');
+        var puntuacion = $(this).attr('data-val');
+        var comentario = $(this).attr('data-comentario');
         modificarPuntuacionComentario(puntuacion, comentario);
         window.location = '/torrents/view?id='+torrent;
     });
