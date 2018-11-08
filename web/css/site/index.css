@@ -74,3 +74,17 @@
 #index-box-aside {
     padding: 0;
 }
+
+/************************************************
+**         WIDGET Usuariosconectados           **
+*************************************************/
+
+/**
+ * Total de usuarios conectados, estilos para widget "Usuariosconectados".
+ */
+.cantidad-usuarios {
+    padding: 5px 8px;
+    color: #bfca02;
+    font-size: small;
+    font-weight: bolder;
+}
