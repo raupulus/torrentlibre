@@ -52,7 +52,18 @@ $this->title = Yii::getAlias('@sitename');
         </div>
 
         <div id="index-box-aside" class="col-sm-3">
-            ASIDE
+            <h3>Últimos Comentarios</h3>
+            <?= \app\widgets\Comentarios_widget::widget([
+                'cantidad' => 5,
+                'tipo' => 'ultimos',
+                //'tipo' => 'votados',
+            ]) ?>
+
+            <h3>Comentarios mejor valorados</h3>
+            <?= \app\widgets\Comentarios_widget::widget([
+                'cantidad' => 5,
+                'tipo' => 'votados',
+            ]) ?>
         </div>
     </div>
 </div>
