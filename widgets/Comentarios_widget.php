@@ -8,15 +8,7 @@
 
 namespace app\widgets;
 
-use app\models\Comentarios;
-use app\models\PuntuacionComentarios;
-use app\models\Usuarios;
-use app\models\UsuariosDatos;
-use function var_dump;
-use Yii;
-use yii\db\ActiveRecord;
 use yii\db\Query;
-use yii\db\QueryBuilder;
 
 /**
  * Class Comentarios_widget
@@ -59,6 +51,10 @@ class Comentarios_widget extends \yii\bootstrap\Widget
         $this->model = $this->obtenerComentarios();
     }
 
+    /**
+     * Obtiene todos los comentarios unidos a los usuarios a los que pertenecen.
+     * @return array
+     */
     private function obtenerComentarios()
     {
         $query = new Query();

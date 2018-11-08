@@ -8,6 +8,8 @@
 
 use app\assets\SiteIndexAsset;
 use app\helpers\Amazons3;
+use app\models\Accesos;
+use app\models\UsuariosDatos;
 
 /**
  * @author    Raúl Caro Pastorino
@@ -52,6 +54,8 @@ $this->title = Yii::getAlias('@sitename');
         </div>
 
         <div id="index-box-aside" class="col-sm-3">
+            <?= \app\widgets\Usuariosconectados::widget() ?>
+
             <h3>Últimos Comentarios</h3>
             <?= \app\widgets\Comentarios_widget::widget([
                 'cantidad' => 5,
