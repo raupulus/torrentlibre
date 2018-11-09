@@ -106,17 +106,21 @@ use juliardi\captcha\Captcha;
         <?php endif ?>
 
         <div class="row">
-            <p>
-                Puede leer las políticas y condiciones de uso para el sitio web en
-                los siguientes enlaces:
-            </p>
+            <div class="col-sm-12 lista-flecha">
+                <p>
+                    Puede leer las políticas y condiciones de uso para el sitio
+                    web en los siguientes enlaces:
+                </p>
 
-            <ul>
-                <li><?= Html::a('Aviso Legal', ['site/avisolegal']) ?></li>
-                <li><?= Html::a('Política de Privacidad',
-                        ['site/politicaprivacidad']) ?></li>
-                <li><?= Html::a('Política de Cookies', ['site/politicacookies']) ?></li>
-            </ul>
+                <ul>
+                    <li><?= Html::a('Aviso Legal', ['site/avisolegal']) ?></li>
+                    <li><?= Html::a('Política de Privacidad',
+                            ['site/politicaprivacidad']) ?></li>
+                    <li>
+                        <?= Html::a('Política de Cookies', ['site/politicacookies']) ?>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -136,7 +140,6 @@ use juliardi\captcha\Captcha;
                 ]); ?>
         </div>
     </div>
-
 
     <div class="form-group">
         <div class="btn-confirmar-box">

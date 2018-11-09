@@ -39,9 +39,15 @@ $avatares = [
                 <span aria-hidden="true">&times;</span>
             </button>
 
-            <button class="btn-aceptar btn btn-success" data-dismiss="modal">
-                Aceptar
-            </button>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button"
+                            class="btn-aceptar btn btn-success center-block"
+                            data-dismiss="modal">
+                        Aceptar
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="modal-content">
             <?php require_once '_avataresAll.php'; ?>

@@ -26,3 +26,14 @@ h1 h2 h3 {
 body {
     background-image: url("/images/patron.png");
 }
+
+/**
+ * Las listas dentro de este contenedor se muestran con flechas.
+ */
+.lista-flecha ul li {
+    list-style-type: none;
+    background: url('/images/arrow.gif') no-repeat 0px 8px;
+    padding: 0 0 6px 12px;
+    font-size: 15px;
+    line-height: 18px;
+}
