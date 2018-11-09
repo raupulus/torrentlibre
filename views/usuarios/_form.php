@@ -16,9 +16,6 @@ use juliardi\captcha\Captcha;
 /* @var $model app\models\Usuarios */
 /* @var $form yii\widgets\ActiveForm */
 
- /* Importo array con avatares */
-require_once '_avatares.php';
-
 ?>
 
 <div class="nav-form-usuario">
@@ -62,14 +59,7 @@ require_once '_avatares.php';
         <h3><?= Yii::t('usuarios-create', 'datos-opcionales'); ?></h3>
         <h4><?= Yii::t('usuarios-create', 'seleccionar-avatar'); ?></h4>
         <div id="avatar-selector" class="row">
-            <?php  foreach($avatares as $av): ?>
-                <div class="col-xs-3 col">
-                    <img src="/images/user-avatar/<?= $av['nombre'] ?>"
-                         data-name="<?= $av['nombre'] ?>"
-                         alt="<?= $av['titulo'] ?>"
-                         title="<?= $av['titulo'] ?>" />
-                </div>
-            <?php endforeach ?>
+            <?php require_once '_avatares.php'; ?>
         </div>
 
         <?= $form->field($model, 'avatar')

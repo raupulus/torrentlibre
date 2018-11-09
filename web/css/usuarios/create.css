@@ -116,3 +116,32 @@
 #avatar-selector img:hover {
     border-color: #832561;
 }
+
+/*****************************************
+ *                MODAL                  *
+ *****************************************/
+.btn-modal {
+    margin-top: 18px;
+}
+
+.modal {
+    background-color: #fff;
+}
+
+.modal-header {
+    background-color: #004d73;
+    border-radius: 4px;
+    box-shadow: 3px 3px 5px #000;
+    border: none;
+}
+
+.modal .close {
+    font-weight: bolder;
+    font-size: 2em;
+    color: #fff;
+}
+
+.avatar-modal {
+    margin: 10px 0;
+}
+
