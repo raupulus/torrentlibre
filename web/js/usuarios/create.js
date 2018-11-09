@@ -67,10 +67,13 @@
          */
         function obtenerSecciones() {
             return $('.nav-form-usuario ul li').map(function() {
-                    return $(this).data('seccion');
+                return $(this).data('seccion');
             });
         }
 
+        /**
+         * Lleva a la próxima sección del formulario paginado.
+         */
         function seccionProxima() {
             var secciones = obtenerSecciones().toArray();
             var seccionActual = $('.seccionactual').data('seccion');
@@ -88,9 +91,12 @@
                 } else if (secciones[ele] == seccionActual) {
                     esperado = true;
                 }
-            };
+            }
         }
 
+        /**
+         * Lleva a la sección anterior del formulario paginado
+         */
         function seccionAnterior() {
             var secciones = obtenerSecciones().toArray();
             var seccionActual = $('.seccionactual').data('seccion');
@@ -127,8 +133,8 @@
          * Añade funcionalidades a las flechas de navegación.
          */
         (function () {
-            var anterior = $('#btn-form-usuarios-anterior').click(seccionAnterior);
-            var proximo = $('#btn-form-usuarios-siguiente').click(seccionProxima);
+            $('#btn-form-usuarios-anterior').click(seccionAnterior);
+            $('#btn-form-usuarios-siguiente').click(seccionProxima);
         })();
     });
 })(jQuery);

@@ -15,6 +15,10 @@ use juliardi\captcha\Captcha;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 /* @var $form yii\widgets\ActiveForm */
+
+ /* Importo array con avatares */
+require_once '_avatares.php';
+
 ?>
 
 <div class="nav-form-usuario">
@@ -38,13 +42,6 @@ use juliardi\captcha\Captcha;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?php // $form->field($model, 'id')->textInput() ?>
-
-    <?php // $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
-
-    <?php // $form->field($model, 'token')->textInput(['maxlength' => true]) ?>
-    <?php // $form->field($model, 'lastlogin_at')->textInput() ?>
-
     <div id="datos-basicos" class="form-dividido">
         <h3><?= Yii::t('usuarios-create', 'datos-basicos'); ?></h3>
 
@@ -65,30 +62,7 @@ use juliardi\captcha\Captcha;
         <h3><?= Yii::t('usuarios-create', 'datos-opcionales'); ?></h3>
         <h4><?= Yii::t('usuarios-create', 'seleccionar-avatar'); ?></h4>
         <div id="avatar-selector" class="row">
-            <?php
-            // TODO → Utilizar archivo externo en /data/avatar.php
-            //$avatares = include "../../data/avatar.php";
-
-            $avatares = [
-                [
-                    'nombre' => 'default.png',
-                    'titulo' => 'Imagen de Avatar por defecto'
-                ],
-                [
-                    'nombre' => 'hippy.png',
-                    'titulo' => 'Imagen de Avatar hippy'
-                ],
-                [
-                    'nombre' => 'rey.png',
-                    'titulo' => 'Imagen de Avatar rey'
-                ],
-                [
-                    'nombre' => 'rockero.png',
-                    'titulo' => 'Imagen de Avatar rockero'
-                ],
-            ];
-
-            foreach($avatares as $av): ?>
+            <?php  foreach($avatares as $av): ?>
                 <div class="col-xs-3 col">
                     <img src="/images/user-avatar/<?= $av['nombre'] ?>"
                          data-name="<?= $av['nombre'] ?>"
@@ -119,13 +93,6 @@ use juliardi\captcha\Captcha;
 
         <?= $form->field($model, 'googleplus')->textInput(['maxlength' => true]) ?>
     </div>
-
-    <!--
-    <div id="datos-preferencias" class="form-dividido">
-        <h3>Preferencias</h3>
-        <?php // $form->field($model, 'preferencias_id')->textInput() ?>
-    </div>
-    -->
 
     <div id="datos-finalizar" class="form-dividido">
         <?php if ($model->scenario === 'create'): ?>
