@@ -19,7 +19,6 @@ $isAdmin = Roles::isAdmin();
 $isGuest = Yii::$app->user->isGuest;
 
 $columns = [
-    //['class' => 'yii\grid\SerialColumn'],
     [
         'format' => 'raw',
         //'headerOptions' => ['class' => 'text-center']
@@ -64,13 +63,12 @@ $columns = [
                 return 'Demanda atendida por: <br />' . $model->atendedor->nick;
             }
 
-            return 'Esta demanda es tuya';
+            return '<p class="tudemanda">Es tuya</p>';
         }
     ],
 ];
 
 if ($isAdmin){
-    //array_push($columns, 'id'),
     array_push($columns, ['class' => 'yii\grid\ActionColumn']);
 }
 
@@ -96,7 +94,6 @@ if ($isAdmin){
         btn-success']) ?>
         </p>
     </div>
-
 
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -134,5 +131,4 @@ if ($isAdmin){
             'columns' => $columns,
         ]); ?>
     </div>
-
 </div>

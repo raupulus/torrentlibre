@@ -19,8 +19,4 @@ $(document).ready(() => {
             ['Demandas', '/images/leftbar/demandas.jpg', '/demandas/index'],
             ['Social', '/images/leftbar/redes.jpg', '/site/social'],
         ]);
-
-    /**
-     * Inicializo Plugins Extras
-     */
 });
