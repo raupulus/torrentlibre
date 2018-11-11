@@ -22,6 +22,7 @@ class UsuariosCreateAsset extends AssetBundle
     ];
     public $js = [
         'js/usuarios/create.js',
+        'js/usuarios/create-validaciones.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

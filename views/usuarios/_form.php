@@ -51,6 +51,7 @@ use juliardi\captcha\Captcha;
             'maxlength' => true]) ?>
 
         <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+        <div class="error-password"></div>
 
         <?= $form->field($model, 'password_repeat')->passwordInput(); ?>
     </div>

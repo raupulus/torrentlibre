@@ -16,10 +16,16 @@ function formValueClear() {
 
 /**
  * Pinta los errores existente en el elemento de la clase recibida.
- * @param clase La clase donde mostrar los errores.
+ * @param clase Nombre de la clase donde mostrar los errores.
+ * @param errores Array con los errores de validación a pintar.
  */
-function pintarErrores(clase) {
+function pintarErrores(clase, errores) {
+    var box = $('.'+clase);
+    box.empty();
 
+    errores.forEach((error) => {
+        box.append(error+'<br />');
+    });
 }
 
 /**
@@ -39,11 +45,26 @@ function validarWeb(web) {
 /**
  * Valida una contraseña recibida obligando a tener carácteres válidos.
  * @param password Contraseña a validar.
- * @returns {boolean}
+ * @returns Array Contiene los errores
  */
 function validarPassword(password) {
-    var patron = new RegExp("^[0-9a-zA-Z\,\._-]+$");
-    return patron.test(password);
+    var numeros = new RegExp("[0-9]+");
+    var caracteres = new RegExp("[a-zA-Z\,\._-]+");
+    var errores = [];
+
+    if (! numeros.test(password)) {
+        errores.push('La contraseña debe contener un número (0-9)');
+    }
+
+    if (! caracteres.test(password)) {
+        errores.push('La contraseña debe contener un carácter (a-zA-Z,._-)');
+    }
+
+    if (password.length <= 4) {
+        errores.push('La contraseña no puede ser menor de 5 carácteres');
+    }
+
+    return (errores.length === 0) ? true : errores;
 }
 
 /**
