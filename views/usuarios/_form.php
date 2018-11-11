@@ -51,7 +51,7 @@ use juliardi\captcha\Captcha;
             'maxlength' => true]) ?>
 
         <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-        <div class="error-password"></div>
+        <div class="error-password errores-custom"></div>
 
         <?= $form->field($model, 'password_repeat')->passwordInput(); ?>
     </div>
@@ -77,6 +77,7 @@ use juliardi\captcha\Captcha;
         <h3><?= Yii::t('usuarios-create', 'datos-sociales'); ?></h3>
 
         <?= $form->field($model, 'web')->textInput(['maxlength' => true]) ?>
+        <div class="error-web errores-custom"></div>
 
         <?= $form->field($model, 'twitter')->textInput(['maxlength' => true]) ?>
 

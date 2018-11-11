@@ -160,7 +160,7 @@
  *             VALIDACIONES              *
  *****************************************/
 
-.error-password {
+.errores-custom {
     font-size: 0.9em;
     color: #ff0000;
     font-weight: bolder;

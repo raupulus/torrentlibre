@@ -23,20 +23,28 @@ function pintarErrores(clase, errores) {
     var box = $('.'+clase);
     box.empty();
 
-    errores.forEach((error) => {
-        box.append(error+'<br />');
-    });
+    if($.isArray(errores)) {
+        errores.forEach((error) => {
+            box.append(error+'<br />');
+        });
+    }
 }
 
 /**
  * Valida una url.
  * @param web Cadena a comprobar.
- * @returns {boolean}
+ * @returns true|Array Contiene los errores
  */
 function validarWeb(web) {
-    if (web != '') {
-        var patron = new RegExp("^(http(s)?:\/\/)+([w]{3}[\.])+[a-z0-9]+[\.][a-z]{2,3}$");
-        return patron.test(web);
+    var patron = new RegExp(
+        "^(http(s)?:\/\/)+([w]{3}[\.])?[a-z0-9]+[\.][a-z]{2,4}$"
+    );
+
+    if ((web !== '') && (patron.test(web) === false)){
+        return [
+            'La url debe tener un formáto válido',
+            'Ejemplo de formato: http://fryntiz.es | https://www.fryntiz.es'
+        ];
     }
 
     return true;
@@ -45,7 +53,7 @@ function validarWeb(web) {
 /**
  * Valida una contraseña recibida obligando a tener carácteres válidos.
  * @param password Contraseña a validar.
- * @returns Array Contiene los errores
+ * @returns true|Array Contiene los errores
  */
 function validarPassword(password) {
     var numeros = new RegExp("[0-9]+");
@@ -73,7 +81,9 @@ function validarPassword(password) {
  * @returns {boolean}
  */
 function validarEmail(email) {
-    var patron = new RegExp("^(http(s)?:\/\/)?([w]{3}[\.])?[a-z0-9]+[\.][a-z]{2,3}$");
+    var patron = new RegExp(
+        "^(http(s)?:\/\/)?([w]{3}[\.])?[a-z0-9]+[\.][a-z]{2,3}$"
+    );
     return patron.test(email);
 }
 

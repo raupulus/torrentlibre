@@ -9,6 +9,9 @@
  */
 
 $(document).ready(() => {
+    /**
+     * Valido contraseña
+     */
     $('#usuariosdatos-password').focusout(() => {
         var valor = $('#usuariosdatos-password').val();
         var valida = validarPassword(valor);
@@ -21,4 +24,22 @@ $(document).ready(() => {
 
         pintarErrores('error-password', valida);
     });
+
+    /**
+     * Valido página web.
+     */
+    $('#usuariosdatos-web').focusout(() => {
+        var valor = $('#usuariosdatos-web').val();
+        var valida = validarWeb(valor);
+
+        if (valida !== true) {
+            $('.btn-confirmar').attr('disabled', 'true');
+        } else {
+            $('.btn-confirmar').removeAttr('disabled');
+        }
+
+        pintarErrores('error-web', valida);
+    });
+
+
 });
