@@ -40,6 +40,4 @@ $(document).ready(() => {
 
         pintarErrores('error-web', valida);
     });
-
-
 });

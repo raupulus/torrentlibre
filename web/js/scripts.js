@@ -18,5 +18,20 @@ $(document).ready(() => {
             ['Torrents', '/images/leftbar/torrents.jpg', '/torrents/index'],
             ['Demandas', '/images/leftbar/demandas.jpg', '/demandas/index'],
             ['Social', '/images/leftbar/redes.jpg', '/site/social'],
-        ]);
+        ]
+    );
+
+    /**
+     * Cookie con cantidad de páginas visitadas en esta sesión.
+     */
+    function registrarPaginaVisitada() {
+        // Si no existe cookie crearla y si existe sumo uno
+        var visitas = getCookie('visitas');
+        setCookie('visitas', ++visitas, null,'/');
+
+        // Agregar el valor a la caja de páginas visitadas.
+        $('#paginasVisitadas').text(++visitas);
+    }
+
+    registrarPaginaVisitada();
 });

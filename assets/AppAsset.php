@@ -27,6 +27,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/functions.js',
+        'js/cookies.js',
         'js/plugins/jquery.leftbar.js',
         'js/scripts.js',
     ];

@@ -37,6 +37,9 @@ $items =  [
         . Html::endForm()
         . '</li>'
     ),
+    (
+        '<li><i class="fa fa-eye" id="paginasVisitadas"></i></li>'
+    ),
 ];
 
 if ($isAdmin) {

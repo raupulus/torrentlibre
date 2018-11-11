@@ -41,3 +41,12 @@
         padding: 10px 15px;
     }
 }
+
+/**
+ * Páginas visitadas.
+ */
+#paginasVisitadas {
+    color: #bfca02;
+    font-size: 1.2em;
+    font-weight: bolder;
+}
