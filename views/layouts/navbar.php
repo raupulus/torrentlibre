@@ -40,12 +40,17 @@ $items =  [
 ];
 
 if ($isAdmin) {
-    array_push($items, ['label' => 'Adminstrar',
+    $tags = ['label' => 'Adminstrar',
         'items' => [
-            ['label' => 'Reportes Torrents', 'url' => ['/reportes-torrents/index']],
-            ['label' => 'Reportes Comentarios', 'url' => ['/reportes-torrents/index']],
+            ['label' => 'Reportes Torrents', 'url' => [
+                '/reportes-torrents/index'
+            ]],
+            ['label' => 'Reportes Comentarios', 'url' => [
+                '/reportes-comentarios/index'
+            ]],
         ],
-    ]);
+    ];
+    array_push($items, $tags);
 }
 
 

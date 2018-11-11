@@ -24,8 +24,8 @@
 
 /* Elementos seleccionados */
 .navbar-inverse .navbar-nav > li.active > a {
-    color: #bfca02 !important;
-    background-color: #832561 !important;
+    color: #bfca02;
+    background-color: #832561;
 }
 
 .nav li > form > button.logout {
