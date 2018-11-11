@@ -26,6 +26,5 @@ class UsuariosIndexAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'app\assets\AppAsset',
     ];
 }
