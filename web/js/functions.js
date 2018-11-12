@@ -113,3 +113,24 @@ function limpiarGoogleplus() {
     var googleplus = $(this).val();
     return googleplus;
 }
+
+/**
+ * Crea una nueva instancia de una ventana con los parámetros pasados
+ * @param  {String}   origen  Ruta al documento HTML para abrir
+ * @param  {String}   titulo  Nombre de la ventana
+ * @param  {Integer}  ancho   Ancho de la ventana
+ * @param  {Integer}  alto    Altura de la ventana
+ * @param  {Integer}  top     Separación respecto la parte superior
+ * @param  {Integer}  left    Separación respecto la parte izquierda
+ * @return {window}           Devuelve la nueva ventana
+ */
+function abrirVentana(origen, titulo, ancho, alto, top, left) {
+    return window.open(
+        origen,
+        titulo,
+        'width='+ancho+
+        ',height='+alto+
+        ',top='+top+
+        ',left='+left+
+        ',menubar=yes,resizable=yes,location=yes,scrollbars=yes,status=yes,toolbar=yes');
+}
