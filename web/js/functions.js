@@ -110,6 +110,6 @@ function limpiarFacebook() {
  * @returns String
  */
 function limpiarGoogleplus() {
-    var facebook = $(this).val();
-    return facebook;
+    var googleplus = $(this).val();
+    return googleplus;
 }

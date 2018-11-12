@@ -26,8 +26,16 @@
 #index-box-title {
     margin: auto;
     width: 100%;
-    background-color: #bfca02;
+    text-align: center;
+    text-shadow: 3px 3px 3px #000;
 }
+
+#index-box-title h2 {
+    font-size: 1.2em;
+    font-weight: bolder;
+    color: #bfca02;
+}
+
 
 /**
  * Slide.

@@ -7,9 +7,6 @@
  */
 
 use app\assets\SiteIndexAsset;
-use app\helpers\Amazons3;
-use app\models\Accesos;
-use app\models\UsuariosDatos;
 
 /**
  * @author    Raúl Caro Pastorino
@@ -28,7 +25,7 @@ $this->title = Yii::getAlias('@sitename');
 <div class="site-index container">
     <div id="index-box-title" class="row">
         <h1>Torrent Libre</h1>
-        <h2>Sitio temporal con el desarrollo</h2>
+        <h2>Descarga y comparte material libre y redistribuible.</h2>
     </div>
 
     <div id="index-box-slide" class="row">
