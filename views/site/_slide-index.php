@@ -26,7 +26,7 @@ $slideImg = [
 <?= \aki\imageslider\ImageSlider::widget([
     'baseUrl' => Yii::getAlias('@web/images'),
     'nextPerv' => true,
-    'indicators' => true,
+    'indicators' => false,
     'classes' => 'img-rounded',
     'images' => $slideImg,
 ]); ?>
