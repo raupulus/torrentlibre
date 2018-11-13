@@ -1,31 +1,32 @@
 <?php
-$items = [
+$slideImg = [
     [
-        'url' => '#',
-        'src' => 'images/slide/slide1.jpg',
-        'options' => [
-            'class' => 'index-slide-img',
-            'title' => 'Máquinas Virtuales',
-        ]
+        'active' => true,
+        'src' => 'slide/slide1.jpg',
+        'title' => 'Torrent Libre',
     ],
     [
-        'url' => '#',
-        'src' => 'images/slide/slide2.jpg',
-        'options' => [
-            'class' => 'index-slide-img',
-            'title' => 'Libros',
-        ]
+        'src' => 'slide/slide2.jpg',
+        'title' => 'Máquinas Virtuales',
     ],
     [
-        'url' => '#',
-        'src' => 'images/slide/slide3.jpg',
-        'options' => [
-            'class' => 'index-slide-img',
-            'title' => 'Subir Torrent',
-        ]
+        'src' => 'slide/slide3.jpg',
+        'title' => 'Libros',
+    ],
+    [
+        'src' => 'slide/slide4.jpg',
+        'title' => 'Subir Torrent',
+    ],
+    [
+        'src' => 'slide/slide5.jpg',
+        'title' => 'Buscar Torrent',
     ],
 ];?>
 
-<?= dosamigos\gallery\Gallery::widget(['items' => $items]); ?>
-    Probando carrusel de imágenes!
-
+<?= \aki\imageslider\ImageSlider::widget([
+    'baseUrl' => Yii::getAlias('@web/images'),
+    'nextPerv' => true,
+    'indicators' => true,
+    'classes' => 'img-rounded',
+    'images' => $slideImg,
+]); ?>

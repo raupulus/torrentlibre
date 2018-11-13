@@ -31,6 +31,7 @@ $config = [
         '@maxErrorsLogin' => $params['maxErrorsLogin'],
         '@downloads' => $params['downloads'],
         '@uploadImages' => $params['uploadImages'],
+        '@adminEmail' => $params['adminEmail'],
     ],
     'language' => $params['language_default'],
     'name' => $params['sitename'],

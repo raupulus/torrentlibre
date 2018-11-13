@@ -36,20 +36,6 @@
     color: #bfca02;
 }
 
-
-/**
- * Slide.
- */
-#index-box-slide {
-    margin: auto;
-    width: 100%;
-    height: 200px;
-    background: #832561;
-}
-#index-slide {
-
-}
-
 /**
  * Caja para contenido.
  */
@@ -95,4 +81,16 @@
     color: #bfca02;
     font-size: small;
     font-weight: bolder;
+}
+
+/************************************************
+**                   SLIDE                     **
+*************************************************/
+#index-box-slide {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+.index-slide-img {
+
 }
