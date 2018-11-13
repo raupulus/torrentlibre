@@ -29,11 +29,7 @@ $this->title = Yii::getAlias('@sitename');
     </div>
 
     <div id="index-box-slide" class="row">
-        SLIDE
-        <img id="index-slide"
-             src="/images/slides/slide1.jpg"
-             alt=""
-             title="" />
+        <?php require_once '_slide-index.php' ?>
     </div>
 
     <div id="index-box-all" class="row">
