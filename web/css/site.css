@@ -85,8 +85,9 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
-
 /* align the logout "link" (button in form) of the navbar */
+/*
+
 .nav li > form > button.logout {
     padding: 15px;
     border: none;
@@ -109,7 +110,7 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
-
+*/
 
 /*******************************************
 **              DETAILVIEW                **

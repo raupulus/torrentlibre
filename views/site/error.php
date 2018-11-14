@@ -17,11 +17,10 @@ $this->title = $name;
         <?= nl2br(Html::encode($message)) ?>
     </div>
 
-    <p>
-        The above error occurred while the Web server was processing your request.
+    <p style="background-color: #fff; padding: 10px 5px">
+        Ha ocurrido un error buscando la página que has solicitado.
+        <br />
+        Si crees que hay algún problema en el sitio web contáctanos para
+        solucionarlo.
     </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
-
 </div>

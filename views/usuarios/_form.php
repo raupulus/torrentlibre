@@ -15,6 +15,7 @@ use juliardi\captcha\Captcha;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="nav-form-usuario">
@@ -38,13 +39,6 @@ use juliardi\captcha\Captcha;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?php // $form->field($model, 'id')->textInput() ?>
-
-    <?php // $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
-
-    <?php // $form->field($model, 'token')->textInput(['maxlength' => true]) ?>
-    <?php // $form->field($model, 'lastlogin_at')->textInput() ?>
-
     <div id="datos-basicos" class="form-dividido">
         <h3><?= Yii::t('usuarios-create', 'datos-basicos'); ?></h3>
 
@@ -57,6 +51,7 @@ use juliardi\captcha\Captcha;
             'maxlength' => true]) ?>
 
         <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+        <div class="error-password errores-custom"></div>
 
         <?= $form->field($model, 'password_repeat')->passwordInput(); ?>
     </div>
@@ -65,37 +60,7 @@ use juliardi\captcha\Captcha;
         <h3><?= Yii::t('usuarios-create', 'datos-opcionales'); ?></h3>
         <h4><?= Yii::t('usuarios-create', 'seleccionar-avatar'); ?></h4>
         <div id="avatar-selector" class="row">
-            <?php
-            // TODO → Utilizar archivo externo en /data/avatar.php
-            //$avatares = include "../../data/avatar.php";
-
-            $avatares = [
-                [
-                    'nombre' => 'default.png',
-                    'titulo' => 'Imagen de Avatar por defecto'
-                ],
-                [
-                    'nombre' => 'hippy.png',
-                    'titulo' => 'Imagen de Avatar hippy'
-                ],
-                [
-                    'nombre' => 'rey.png',
-                    'titulo' => 'Imagen de Avatar rey'
-                ],
-                [
-                    'nombre' => 'rockero.png',
-                    'titulo' => 'Imagen de Avatar rockero'
-                ],
-            ];
-
-            foreach($avatares as $av): ?>
-                <div class="col-xs-3 col">
-                    <img src="/images/user-avatar/<?= $av['nombre'] ?>"
-                         data-name="<?= $av['nombre'] ?>"
-                         alt="<?= $av['titulo'] ?>"
-                         title="<?= $av['titulo'] ?>" />
-                </div>
-            <?php endforeach ?>
+            <?php require_once '_avatares.php'; ?>
         </div>
 
         <?= $form->field($model, 'avatar')
@@ -112,6 +77,7 @@ use juliardi\captcha\Captcha;
         <h3><?= Yii::t('usuarios-create', 'datos-sociales'); ?></h3>
 
         <?= $form->field($model, 'web')->textInput(['maxlength' => true]) ?>
+        <div class="error-web errores-custom"></div>
 
         <?= $form->field($model, 'twitter')->textInput(['maxlength' => true]) ?>
 
@@ -119,13 +85,6 @@ use juliardi\captcha\Captcha;
 
         <?= $form->field($model, 'googleplus')->textInput(['maxlength' => true]) ?>
     </div>
-
-    <!--
-    <div id="datos-preferencias" class="form-dividido">
-        <h3>Preferencias</h3>
-        <?php // $form->field($model, 'preferencias_id')->textInput() ?>
-    </div>
-    -->
 
     <div id="datos-finalizar" class="form-dividido">
         <?php if ($model->scenario === 'create'): ?>
@@ -149,17 +108,21 @@ use juliardi\captcha\Captcha;
         <?php endif ?>
 
         <div class="row">
-            <p>
-                Puede leer las políticas y condiciones de uso para el sitio web en
-                los siguientes enlaces:
-            </p>
+            <div class="col-sm-12 lista-flecha">
+                <p>
+                    Puede leer las políticas y condiciones de uso para el sitio
+                    web en los siguientes enlaces:
+                </p>
 
-            <ul>
-                <li><?= Html::a('Aviso Legal', ['site/avisolegal']) ?></li>
-                <li><?= Html::a('Política de Privacidad',
-                        ['site/politicaprivacidad']) ?></li>
-                <li><?= Html::a('Política de Cookies', ['site/politicacookies']) ?></li>
-            </ul>
+                <ul>
+                    <li><?= Html::a('Aviso Legal', ['site/avisolegal']) ?></li>
+                    <li><?= Html::a('Política de Privacidad',
+                            ['site/politicaprivacidad']) ?></li>
+                    <li>
+                        <?= Html::a('Política de Cookies', ['site/politicacookies']) ?>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -179,7 +142,6 @@ use juliardi\captcha\Captcha;
                 ]); ?>
         </div>
     </div>
-
 
     <div class="form-group">
         <div class="btn-confirmar-box">

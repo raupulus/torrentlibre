@@ -8,7 +8,6 @@
  **/
 
 use app\assets\UsuariosCreateAsset;
-use app\models\Usuarios;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */

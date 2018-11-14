@@ -12,9 +12,6 @@ use yii\web\AssetBundle;
 
 /**
  * Main application asset bundle.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
  */
 class AppAsset extends AssetBundle
 {
@@ -26,10 +23,11 @@ class AppAsset extends AssetBundle
         'css/breadcrumb.css',
         'css/footer.css',
         'css/navbar.css',
-        'css/plugins/jquery.leftbar.js'
+        'css/plugins/jquery.leftbar.css'
     ];
     public $js = [
         'js/functions.js',
+        'js/cookies.js',
         'js/plugins/jquery.leftbar.js',
         'js/scripts.js',
     ];

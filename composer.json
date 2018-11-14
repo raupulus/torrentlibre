@@ -1,100 +1,103 @@
 {
-    "name": "TorrentLibre",
-    "description": "Web para compartir material con licencia libre",
-    "keywords": ["torrentlibre", "fryntiz"],
-    "homepage": "https://torrentlibre.laguialinux.es/",
-    "type": "project",
-    "license": "GPL-v3",
-    "support": {
-        "issues": "https://github.com/fryntiz/torrentlibre/issues",
-        "wiki": "https://github.com/fryntiz/torrentlibre/wiki",
-        "source": "https://github.com/fryntiz/torrentlibre"
-    },
-    "minimum-stability": "stable",
-    "require": {
-        "php": "^7.0.0",
-        "ext-gd": "*",
-        "ext-intl": "*",
-        "yiisoft/yii2": "^2.0.10",
-        "yiisoft/yii2-bootstrap": "^2.0.0",
-        "yiisoft/yii2-swiftmailer": "^2.1.0",
-        "juliardi/yii2-captcha": "*",
-        "devristo/torrent": "dev-master",
-        "bhutanio/torrent-bencode": "dev-master",
-        "kop/yii2-scroll-pager": "dev-master",
-        "christeredvartsen/php-bittorrent": "^1.1",
-        "rudissaar/yii2-cookie-consent": "*",
-        "frostealth/yii2-aws-s3": "~2.0",
-        "yiisoft/yii2-imagine": "^2.1",
-        "yii2mod/yii2-comments": "*",
-	"FortAwesome/Font-Awesome": "*"
-    },
-    "require-dev": {
-        "yiisoft/yii2-debug": "^2.0.0",
-        "yiisoft/yii2-gii": "dev-master",
-        "yiisoft/yii2-faker": "~2.0.0",
-        "yiisoft/yii2-shell": "dev-master",
-        "yiisoft/yii2-apidoc": "dev-project",
-
-        "codeception/codeception": "^2.2.3",
-        "codeception/verify": "~1.0.0",
-        "codeception/specify": "~0.4.6",
-        "squizlabs/php_codesniffer": "^2.0",
-        "yiisoft/yii2-coding-standards": "^2.0",
-        "friendsofphp/php-cs-fixer": "^2.8",
-        "phpoffice/phpspreadsheet": "^1.1",
-        "symfony/dotenv": "^3.0"
-    },
-    "config": {
-        "process-timeout": 1800,
-        "fxp-asset": {
-            "enabled": false
-        }
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "yii\\composer\\Installer::postInstall"
-        ],
-        "post-create-project-cmd": [
-            "yii\\composer\\Installer::postCreateProject",
-            "[ -f setup.sh ] && ./setup.sh || true",
-            "yii\\composer\\Installer::postInstall"
-        ]
-    },
-    "extra": {
-        "yii\\composer\\Installer::postCreateProject": {
-            "setPermission": [
-                {
-                    "runtime": "0777",
-                    "web/assets": "0777",
-                    "web/css": "0775",
-                    "web/images": "0775",
-                    "web/js": "0775",
-                    "web/tmp": "0775",
-                    "web/uploads": "0775",
-                    "web/.htaccess": "0500",
-                    "yii": "0755"
-                }
-            ]
-        },
-        "yii\\composer\\Installer::postInstall": {
-            "generateCookieValidationKey": [
-                "config/web.php"
-            ]
-        }
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/ricpelo/yii2-apidoc"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/Devristo/torrent"
-        }
+  "name": "TorrentLibre",
+  "description": "Web para compartir material con licencia libre",
+  "keywords": [
+    "torrentlibre",
+    "fryntiz"
+  ],
+  "homepage": "https://torrentlibre.laguialinux.es/",
+  "type": "project",
+  "license": "GPL-v3",
+  "support": {
+    "issues": "https://github.com/fryntiz/torrentlibre/issues",
+    "wiki": "https://github.com/fryntiz/torrentlibre/wiki",
+    "source": "https://github.com/fryntiz/torrentlibre"
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "php": "^7.0.0",
+    "ext-gd": "*",
+    "ext-intl": "*",
+    "yiisoft/yii2": "^2.0.10",
+    "yiisoft/yii2-bootstrap": "^2.0.0",
+    "yiisoft/yii2-swiftmailer": "^2.1.0",
+    "juliardi/yii2-captcha": "*",
+    "devristo/torrent": "dev-master",
+    "bhutanio/torrent-bencode": "dev-master",
+    "kop/yii2-scroll-pager": "dev-master",
+    "christeredvartsen/php-bittorrent": "^1.1",
+    "rudissaar/yii2-cookie-consent": "*",
+    "frostealth/yii2-aws-s3": "~2.0",
+    "yiisoft/yii2-imagine": "^2.1",
+    "yii2mod/yii2-comments": "*",
+    "FortAwesome/Font-Awesome": "*",
+    "aki/yii2-image-slider": "*"
+  },
+  "require-dev": {
+    "yiisoft/yii2-debug": "^2.0.0",
+    "yiisoft/yii2-gii": "dev-master",
+    "yiisoft/yii2-faker": "~2.0.0",
+    "yiisoft/yii2-shell": "dev-master",
+    "yiisoft/yii2-apidoc": "dev-project",
+    "codeception/codeception": "^2.2.3",
+    "codeception/verify": "~1.0.0",
+    "codeception/specify": "~0.4.6",
+    "squizlabs/php_codesniffer": "^2.0",
+    "yiisoft/yii2-coding-standards": "^2.0",
+    "friendsofphp/php-cs-fixer": "^2.8",
+    "phpoffice/phpspreadsheet": "^1.1",
+    "symfony/dotenv": "^3.0"
+  },
+  "config": {
+    "process-timeout": 1800,
+    "fxp-asset": {
+      "enabled": false
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "yii\\composer\\Installer::postInstall"
+    ],
+    "post-create-project-cmd": [
+      "yii\\composer\\Installer::postCreateProject",
+      "[ -f setup.sh ] && ./setup.sh || true",
+      "yii\\composer\\Installer::postInstall"
     ]
+  },
+  "extra": {
+    "yii\\composer\\Installer::postCreateProject": {
+      "setPermission": [
+        {
+          "runtime": "0777",
+          "web/assets": "0777",
+          "web/css": "0775",
+          "web/images": "0775",
+          "web/js": "0775",
+          "web/tmp": "0775",
+          "web/uploads": "0775",
+          "web/.htaccess": "0500",
+          "yii": "0755"
+        }
+      ]
+    },
+    "yii\\composer\\Installer::postInstall": {
+      "generateCookieValidationKey": [
+        "config/web.php"
+      ]
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/ricpelo/yii2-apidoc"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/Devristo/torrent"
+    }
+  ]
 }

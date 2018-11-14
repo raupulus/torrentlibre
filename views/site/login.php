@@ -4,16 +4,19 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\LoginForm */
 
+use app\assets\SiteLoginAsset;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Login';
+SiteLoginAsset::register($this);
+
+$this->title = 'Acceder como usuario';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Introduce tus credenciales:</p>
+    <h3>Introduce tus credenciales:</h3>
 
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',

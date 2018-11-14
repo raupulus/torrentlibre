@@ -20,9 +20,9 @@
  *****************************************/
 .grid-view {
     margin: 25px 5px;
-    border: 8px solid gray;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px black;
+    border: 2px solid #bfca02;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #000;
     overflow-x: scroll;
     background-color: #dbebfa;
 }
@@ -36,30 +36,47 @@
 }
 
 .trSearch td {
-    background-color: white;
+    background-color: #fff;
 }
 
 .grid-view .tablaUsuariosIndex  tr {
-    border-top: 1px solid #000000;
+    border-top: 1px solid #000;
 }
 
 .grid-view .tablaUsuariosIndex  tr:nth-child(even) {
-    background-color: #ddd;
+    color: #bfca02;
+    background-color: #832561;
 }
 
 .grid-view .tablaUsuariosIndex  tr:nth-child(oden) {
-    background-color: #fff;
+    color: #00334e;
+    background-color: #dbebfa;
 }
 
 .grid-view .tablaUsuariosIndex tr td img {
     width: 80px;
 }
 
+.grid-view .tablaUsuariosIndex th {
+    font-size: 1.2em;
+    font-weight: bolder;
+    text-align: center;
+    color: #832561;
+}
+
 .grid-view .tablaUsuariosIndex th, .grid-view .tablaUsuariosIndex td {
+    font-weight: bolder;
     text-align: center;
     vertical-align: middle;
 }
 
+.grid-view .tablaUsuariosIndex a {
+    font-weight: bolder;
+}
+
+.grid-view .tablaUsuariosIndex tr:nth-child(even) a {
+    color: #dbebfa;
+}
 
 /*****************************************
  *                _SEARCH                *
@@ -91,12 +108,15 @@
 /* Iconos para redes sociales */
 .user-social img {
     display: block;
-    margin: 5px 10px;
-    width: 40px !important;
+    margin: 3px 6px;
+    width: 30px !important;
 }
 
 /* Botones de acción para administrar (bloquear/ver/modificar/eliminar */
 .btn-admin {
-    margin: 5px 10px;
-    width: 100px;
+    margin: 3px 4px;
+    width: 80px;
+    height: 26px;
+    font-size: 0.7em;
+    font-weight: bolder;
 }

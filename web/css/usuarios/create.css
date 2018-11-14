@@ -5,8 +5,6 @@
  * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
  */
 
-
-
 /*****************************************
  *     Menú de navegación formulario     *
  *****************************************/
@@ -68,12 +66,15 @@
 .btn-form {
     padding: 5px 3px;
     width: 150px;
+    border: 3px groove #bfca02;
     border-radius: 5px;
     font-weight: bolder;
+    box-shadow: 3px 3px 3px #000;
 }
 
 .btn-anterior-box {
     float: left;
+    margin-right: 20px;
 }
 
 .btn-siguiente-box {
@@ -100,12 +101,6 @@
     background-color: red;
 }
 
-/*.usuarios-form .btn-siguiente {
-    background-color: red;
-    margin-right: 0;
-    text-align: right;
-}*/
-
 #avatar-selector img {
     width: 100%;
     background-color: #004d73;
@@ -115,4 +110,58 @@
 
 #avatar-selector img:hover {
     border-color: #832561;
+}
+
+/*
+ * Captcha
+ */
+.form-group.field-usuariosdatos-captcha {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.form-group.field-usuariosdatos-captcha img {
+    margin: 20px 10px;
+    width: 200px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #000;
+}
+
+/*****************************************
+ *                MODAL                  *
+ *****************************************/
+.btn-modal {
+    margin-top: 18px;
+}
+
+.modal {
+    background-color: #fff;
+}
+
+.modal-header {
+    background-color: #004d73;
+    border-radius: 4px;
+    box-shadow: 3px 3px 5px #000;
+    border: none;
+}
+
+.modal .close {
+    font-weight: bolder;
+    font-size: 2em;
+    color: #fff;
+}
+
+.avatar-modal {
+    margin: 10px 0;
+}
+
+/*****************************************
+ *             VALIDACIONES              *
+ *****************************************/
+
+.errores-custom {
+    font-size: 0.9em;
+    color: #ff0000;
+    font-weight: bolder;
 }

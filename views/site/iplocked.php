@@ -5,6 +5,9 @@
  * Date: 21/10/18
  * Time: 17:22
  */
+
+use app\assets\IpLockedAsset;
+
 /**
  * @author    Raúl Caro Pastorino
  * @link      https://fryntiz.es
@@ -14,10 +17,12 @@
 
 /* @var $this yii\web\View */
 
+IpLockedAsset::register($this);
+
 $this->title = 'IP Bloqueada';
 
 ?>
-<div class="site-iplocked">
+<div id="site-iplocked">
     <h1>IP Bloqueada</h1>
     <h2>Sitio temporal con el desarrollo</h2>
 
@@ -27,6 +32,7 @@ $this->title = 'IP Bloqueada';
     </p>
 
     <p class="alert-warning">
-        Para cualquier consulta al respecto diríjase por favor a ????
+        Para cualquier consulta al respecto diríjase por favor a <?=
+        Yii::getAlias('@adminEmail') ?>
     </p>
 </div>

@@ -135,6 +135,9 @@ $isAutor = Access::isAutor($model->id);
         ?>
 
         <h3>Preferencias del usuario</h3>
+        <button id="btn-modificar-preferencias" class="btn btn-warning btn-xs">
+            Modificar preferencias
+        </button>
         <?= DetailView::widget([
             'model' => $model,
             'attributes' => [
