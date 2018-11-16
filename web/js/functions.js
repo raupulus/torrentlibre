@@ -114,6 +114,10 @@ function limpiarGoogleplus() {
     return googleplus;
 }
 
+/************************************
+                DOM
+ *************************************/
+
 /**
  * Crea una nueva instancia de una ventana con los parámetros pasados
  * @param  {String}   origen  Ruta al documento HTML para abrir
@@ -132,5 +136,29 @@ function abrirVentana(origen = '', titulo = 'New', ancho, alto, top, left) {
         ',height='+alto+
         ',top='+top+
         ',left='+left+
-        ',menubar=yes,resizable=yes,location=yes,scrollbars=yes,status=yes,toolbar=yes');
+        ',menubar=yes,resizable=yes,location=no,scrollbars=yes,status=no,toolbar=no');
+}
+
+/**
+ * Devuelve la ruta absoluta del dominio, por ejemplo https://fryntiz.es/home/
+ * @returns {string} Cadena con la ruta absoluta.
+ */
+function obtenerRutaAbsoluta() {
+    var loc = window.location;
+    var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+
+    return loc.href.substring(0, loc.href.length - (
+        (loc.pathname + loc.search + loc.hash).length - pathName.length)
+    );
+}
+
+/**
+ * Devuelve el dominio del servidor, por ejemplo https://fryntiz.es
+ * @returns {string} Cadena con el dominio.
+ */
+function obtenerDominio() {
+    var dominio = window.domain;
+    var protocolo = window.protocol;
+
+    return window.location.protocol + '//' + window.location.host;
 }
