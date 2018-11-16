@@ -140,6 +140,7 @@ $isAutor = Access::isAutor($model->id);
         </button>
         <?= DetailView::widget([
             'model' => $model,
+            'id' => 'tabla-preferencias',
             'attributes' => [
                 'datos.preferencias.tema.nombre',
                 'datos.preferencias.tema.descripcion',

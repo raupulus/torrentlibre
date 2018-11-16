@@ -8,8 +8,11 @@ $(document).ready(() => {
     /**
      * Muestra la ventana de preferencias y devuelve los valores capturados.
      */
-    function mostrarVentanaPreferencias() {
-        return [true, true, true]
+    function crearVentanaPreferencias() {
+        var origen = '';
+        var titulo = 'Preferencias de usuario';
+
+        return abrirVentana(origen, titulo, 300, 400);
     }
 
     /**
@@ -23,8 +26,15 @@ $(document).ready(() => {
      * Contiene la lógica para abrir la ventana con las preferencias.
      */
     function modificarPreferencias() {
+        var preferencias = document.getElementById('tabla-preferencias');
         var btn = $('#btn-modificar-preferencias');
-        mostrarVentanaPreferencias();
+        var ventana = crearVentanaPreferencias();
+
+        // Agrego nodo con la tabla en la nueva ventana.
+        ventana.document.body.appendChild(preferencias.cloneNode(true));
+        ventana.focus();
+
+
         actualizarPreferencias();
     }
 

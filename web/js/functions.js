@@ -124,7 +124,7 @@ function limpiarGoogleplus() {
  * @param  {Integer}  left    Separación respecto la parte izquierda
  * @return {window}           Devuelve la nueva ventana
  */
-function abrirVentana(origen, titulo, ancho, alto, top, left) {
+function abrirVentana(origen = '', titulo = 'New', ancho, alto, top, left) {
     return window.open(
         origen,
         titulo,
