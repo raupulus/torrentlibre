@@ -136,7 +136,7 @@ function abrirVentana(origen = '', titulo = 'New', ancho, alto, top, left) {
         ',height='+alto+
         ',top='+top+
         ',left='+left+
-        ',menubar=yes,resizable=yes,location=no,scrollbars=yes,status=no,toolbar=no');
+        ',menubar=no,resizable=yes,location=no,scrollbars=yes,status=no,toolbar=no');
 }
 
 /**
@@ -157,8 +157,5 @@ function obtenerRutaAbsoluta() {
  * @returns {string} Cadena con el dominio.
  */
 function obtenerDominio() {
-    var dominio = window.domain;
-    var protocolo = window.protocol;
-
     return window.location.protocol + '//' + window.location.host;
 }
