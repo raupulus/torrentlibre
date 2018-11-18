@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use function var_dump;
 use Yii;
 use app\models\Preferencias;
 use yii\data\ActiveDataProvider;
@@ -24,6 +25,7 @@ class PreferenciasController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'update' => ['POST'],
                 ],
             ],
         ];
@@ -82,17 +84,16 @@ class PreferenciasController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate()
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($_POST['id']);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        $model->promociones = $_POST['promociones'];
+        $model->noticias = $_POST['noticias'];
+        $model->resumen = $_POST['resumen'];
+        $model->tour = $_POST['tour'];
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $model->save();
     }
 
     /**

@@ -5,6 +5,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
  */
 
+/**
+ * Estos estilos solo se aplicarán a la ventana emergente para las preferencias.
+ */
+
+table {
+    background-color: #dbebfa;
+}
+
 /**********************************************
                 BOTONES ON/OFF
 ***********************************************/
@@ -161,10 +169,4 @@
 .btn-toggle.btn-lg.btn-xs:before,
 .btn-toggle.btn-lg.btn-xs:after {
     display: none;
-}
-
-/* Deshabilito botones */
-#tabla-preferencias .btn-no-interactive {
-    cursor: not-allowed;
-    pointer-events: none;
 }

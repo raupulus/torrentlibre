@@ -134,19 +134,91 @@ $isAutor = Access::isAutor($model->id);
         ])
         ?>
 
+    <?php function btnOnOff($bool, $name) {
+        $active = $bool ? 'active' : '';
+
+        return '
+        <div class="col-sm-5">
+            <button type="button" 
+                id="btn-onOff-'.$name.'"
+                class="btn btn-lg btn-toggle btn-no-interactive '.$active.'"
+                data-toggle="button"
+                aria-pressed="'.$bool.'"
+                data-activado="'.$bool.'" 
+                data-name="'.$name.'" 
+                autocomplete="off">
+                <div class="handle"></div>
+            </button>
+        </div>
+        ';
+    } ?>
+
         <h3>Preferencias del usuario</h3>
         <button id="btn-modificar-preferencias" class="btn btn-warning btn-xs">
             Modificar preferencias
         </button>
         <?= DetailView::widget([
             'model' => $model,
+            'id' => 'tabla-preferencias',
+            'options' => [
+                'class' => 'table table-striped table-bordered detail-view',
+                'data-id' => $model->datos->preferencias->id,
+            ],
             'attributes' => [
-                'datos.preferencias.tema.nombre',
-                'datos.preferencias.tema.descripcion',
-                'datos.preferencias.promociones:boolean',
-                'datos.preferencias.noticias:boolean',
-                'datos.preferencias.resumen:boolean',
-                'datos.preferencias.tour:boolean',
+                'datos.preferencias.tema.nombre:text:Nombre del Tema',
+                'datos.preferencias.tema.descripcion:text:Descripción del Tema',
+                [
+                    'attribute' => 'datos.preferencias.promociones',
+                    'format' => 'raw',
+                    'value' => btnOnOff(
+                        $model->datos->preferencias->promociones,
+                        'promociones'
+                    ),
+                ],
+                [
+                    'attribute' => 'datos.preferencias.noticias',
+                    'format' => 'raw',
+                    'value' => btnOnOff(
+                        $model->datos->preferencias->noticias,
+                        'noticias'
+                    ),
+                ],
+                [
+                    'attribute' => 'datos.preferencias.resumen',
+                    'format' => 'raw',
+                    'value' => btnOnOff(
+                        $model->datos->preferencias->resumen,
+                        'resumen'
+                    ),
+                ],
+                [
+                    'attribute' => 'datos.preferencias.tour',
+                    'format' => 'raw',
+                    'value' => btnOnOff(
+                        $model->datos->preferencias->tour,
+                        'tour'
+                    ),
+                ],
+                [
+                    'format' => 'raw',
+                    'label' => '',
+                    'value' => function($model) {
+                        return Html::button('Guardar Preferencias',
+                            [
+                                'id' => 'btn-guardar',
+                                'class' => 'btn btn-primary hidden',
+                                'data-cerrar' => '0',
+                            ]
+                        ) .
+                        Html::button('Cerrar',
+                            [
+                                'id' => 'btn-cerrar',
+                                'class' => 'btn btn-warning hidden',
+                                'data-cerrar' => '0',
+                            ]
+                        );
+                    }
+                ],
             ],
         ]) ?>
     <?php endif ?>
