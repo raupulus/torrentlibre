@@ -51,6 +51,9 @@ if ($isAdmin) {
             ['label' => 'Reportes Comentarios', 'url' => [
                 '/reportes-comentarios/index'
             ]],
+            ['label' => 'Estadísticas', 'url' => [
+                '/site/estadisticas'
+            ]],
         ],
     ];
     array_push($items, $tags);
