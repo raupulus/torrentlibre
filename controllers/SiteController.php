@@ -199,5 +199,9 @@ class SiteController extends Controller
     {
         return $this->render('redessociales');
     }
+    public function actionEstadisticas()
+    {
+        return $this->render('administrar/estadisticas');
+    }
 }
 
