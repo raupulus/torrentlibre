@@ -1,5 +1,6 @@
 <?php
 use app\assets\SiteEstadisticasAsset;
+use app\models\Torrents;
 
 /**
  * @author    Raúl Caro Pastorino
@@ -31,6 +32,37 @@ $this->title = 'Estadísticas';
     <div class="row">
         <div class="col-sm-6">
             <h3>Cantidad de torrents totales</h3>
+            <div id="contenedor"></div>
+            <?php
+            $torrentsTotales = Torrents::find()->all();
+
+            //nos creamos dos arrays para almacenar el tiempo y el valor numérico
+            $valoresArray;
+            $timeArray;
+            //en un bucle for obtenemos en cada iteración el valor númerico y
+            //el TIMESTAMP del tiempo y lo almacenamos en los arrays
+            for($i = 0 ;$i<count($torrentsTotales);$i++){
+                $valoresArray[$i]= $torrentsTotales[$i]['titulo'];
+                //OBTENEMOS EL TIMESTAMP
+                $time= $torrentsTotales[$i]['created_at'];
+                $date = new DateTime($time);
+                //ALMACENAMOS EL TIMESTAMP EN EL ARRAY
+                $timeArray[$i] = $date->getTimestamp()*1000;
+            }
+
+            ?>
+            <script>
+                var datos = function() {
+                    // generate an array of random data
+                    var data = [];
+                    <?php
+                    for($i = 0 ;$i < count($torrentsTotales);$i++){
+                    ?>
+                    data.push(["<?php echo $timeArray[$i];?>", "<?php echo $valoresArray[$i];?>"]);
+                    <?php } ?>
+                    return data;
+                }
+            </script>
         </div>
 
         <div class="col-sm-6">

@@ -22,6 +22,8 @@ class SiteEstadisticasAsset extends AssetBundle
     ];
     public $js = [
         'js/site/estadisticas.js',
+        'js/plugins/highstock.js',
+        'js/plugins/highstock-exporting.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
