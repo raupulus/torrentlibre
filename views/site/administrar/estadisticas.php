@@ -1,6 +1,8 @@
 <?php
 use app\assets\SiteEstadisticasAsset;
 use app\models\Torrents;
+use CpChart\Chart\Pie;
+use CpChart\Image;
 
 /**
  * @author    Raúl Caro Pastorino
@@ -10,6 +12,7 @@ use app\models\Torrents;
  **/
 
 SiteEstadisticasAsset::register($this);
+
 
 /* @var $this yii\web\View */
 
@@ -31,7 +34,7 @@ $this->title = 'Estadísticas';
 
     <div class="row">
         <div class="col-sm-6">
-            <h3>Cantidad de torrents totales</h3>
+            <h3>Categorías más subidas</h3>
             <div id="contenedor"></div>
             <?php
             $torrentsTotales = Torrents::find()->all();
@@ -63,10 +66,13 @@ $this->title = 'Estadísticas';
                     return data;
                 }
             </script>
+
+            <?php require_once '_torrentstotales.php'; ?>
         </div>
 
         <div class="col-sm-6">
             <h3>Cantidad de torrents de este mes</h3>
+            <?php require_once '_torrentsmensual.php'; ?>
         </div>
     </div>
 

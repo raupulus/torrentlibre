@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "21b87f984d8c1cf6547b4ea7d2beafee",
-    "content-hash": "da4ea509fda56f0ffa61cae9c354b7de",
+    "hash": "3d585433b03d432fd976847354365da5",
+    "content-hash": "33808c92798f48e365d050c835046320",
     "packages": [
         {
             "name": "aki/yii2-image-slider",
@@ -1699,6 +1699,71 @@
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
             "time": "2018-10-02 16:33:53"
+        },
+        {
+            "name": "szymach/c-pchart",
+            "version": "v3.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/szymach/c-pchart.git",
+                "reference": "a4b77475e09de1a37a4d0d9361112c26719739e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/szymach/c-pchart/zipball/a4b77475e09de1a37a4d0d9361112c26719739e6",
+                "reference": "a4b77475e09de1a37a4d0d9361112c26719739e6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2.3",
+                "phpunit/phpunit": "^4.8|6.1",
+                "squizlabs/php_codesniffer": "^2.8|3.0"
+            },
+            "type": "project",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev",
+                    "2.0": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CpChart\\": "src/"
+                },
+                "files": [
+                    "constants.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jean-Damien Pogolotti",
+                    "homepage": "http://www.pchart.net",
+                    "role": "Creator of the original pChart library"
+                },
+                {
+                    "name": "Piotr Szymaszek",
+                    "homepage": "https://github.com/szymach",
+                    "role": "Developer of the CpChart wrapper package"
+                }
+            ],
+            "description": "Port of \"pChart\" library into PHP 5",
+            "homepage": "https://github.com/szymach/c-pchart",
+            "keywords": [
+                "CpChart",
+                "c-pChart",
+                "charts",
+                "pchart",
+                "statistics"
+            ],
+            "time": "2018-01-28 01:07:52"
         },
         {
             "name": "webcreate/jquery-ias",
