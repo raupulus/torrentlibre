@@ -20,10 +20,12 @@ $query = Torrents::find()
 
 $categorias = [];
 $cantidades = [];
+$totalTorrents = 0;
 
 foreach ($query as $data) {
     array_push($categorias, $data['nombre']);
     array_push($cantidades, $data['cantidad']);
+    $totalTorrents += $data['cantidad'];
 }
 
 /* Create and populate the Data object */
@@ -36,7 +38,7 @@ $data->addPoints($categorias, "Etiquetas");
 $data->setAbscissa("Etiquetas");
 
 /* Create the Image object */
-$image = new Image(800, 400, $data);
+$image = new Image(500, 400, $data);
 
 /* Set the default font properties */
 $image->setFontProperties([
@@ -48,7 +50,7 @@ $image->setFontProperties([
 ]);
 
 /* Enable shadow computing */
-$image->setShadow(true, ["X" => 2, "Y" => 2, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 50]);
+$image->setShadow(true, ["X" => 5, "Y" => 5, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 50]);
 
 /* Create the pPie object */
 $pieChart = new Pie($image, $data);
@@ -62,4 +64,23 @@ $pieChart->drawPieLegend(80, 360, ["Mode" => LEGEND_HORIZONTAL, "Style" => LEGEN
 $image->render("tmp/torrentstotales.png");
 ?>
 
-<img id="torrentstotales" class="graficos" src="/tmp/torrentstotales.png" />
+<div class="row">
+    <div class="col-md-12">
+        <h4>
+            Total de torrents:
+            <span class="text-warning"><?= $totalTorrents ?></span>
+        </h4>
+        <img id="torrentstotales"
+             class="graficos"
+             src="/tmp/torrentstotales.png"
+             title="Gráfica de torrents subidos en total"
+             alt="Gráfica de torrents subidos en total" />
+    </div>
+
+    <?php foreach ($categorias as $idx => $categoria): ?>
+    <div class="col-md-12">
+        <?= $categoria ?>:
+        <span class="text-danger"><?= $cantidades[$idx] ?></span>
+    </div>
+    <?php endforeach; ?>
+</div>

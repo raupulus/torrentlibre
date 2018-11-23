@@ -13,64 +13,33 @@ use CpChart\Image;
 
 SiteEstadisticasAsset::register($this);
 
-
 /* @var $this yii\web\View */
 
 $this->title = 'Estadísticas';
 ?>
 
 <div id="site-estadisticas" class="container">
-    <div class="row">
+    <div id="box-download" class="row text-center">
         <div class="col-sm-12">
-            <button class="btn btn-success">
-                <i class="fa fa-file-pdf-o">Descargar en pdf
+            <button class="btn btn-sm btn-success">
+                <i class="fa fa-file-pdf-o text-danger"></i>
+                Descargar en pdf
             </button>
 
-            <button class="btn btn-success">
-                <i class="fa fa-file-excel-o"></i> Descargar en excel
+            <button class="btn btn-sm btn-success">
+                <i class="fa fa-file-excel-o text-warning"></i>
+                Descargar en excel
             </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 container">
             <h3>Categorías más subidas</h3>
-            <div id="contenedor"></div>
-            <?php
-            $torrentsTotales = Torrents::find()->all();
-
-            //nos creamos dos arrays para almacenar el tiempo y el valor numérico
-            $valoresArray;
-            $timeArray;
-            //en un bucle for obtenemos en cada iteración el valor númerico y
-            //el TIMESTAMP del tiempo y lo almacenamos en los arrays
-            for($i = 0 ;$i<count($torrentsTotales);$i++){
-                $valoresArray[$i]= $torrentsTotales[$i]['titulo'];
-                //OBTENEMOS EL TIMESTAMP
-                $time= $torrentsTotales[$i]['created_at'];
-                $date = new DateTime($time);
-                //ALMACENAMOS EL TIMESTAMP EN EL ARRAY
-                $timeArray[$i] = $date->getTimestamp()*1000;
-            }
-
-            ?>
-            <script>
-                var datos = function() {
-                    // generate an array of random data
-                    var data = [];
-                    <?php
-                    for($i = 0 ;$i < count($torrentsTotales);$i++){
-                    ?>
-                    data.push(["<?php echo $timeArray[$i];?>", "<?php echo $valoresArray[$i];?>"]);
-                    <?php } ?>
-                    return data;
-                }
-            </script>
-
             <?php require_once '_torrentstotales.php'; ?>
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-6 container">
             <h3>Cantidad de torrents de este mes</h3>
             <?php require_once '_torrentsmensual.php'; ?>
         </div>

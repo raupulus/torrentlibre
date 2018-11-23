@@ -15,6 +15,25 @@
 #333333     Gris oscuro
 #848a8c     Gris
 */
+#site-estadisticas {
+    background-color: #fff;
+}
+
+#site-estadisticas h3 {
+    color: #832561;
+    font-size: 1.4em;
+    font-weight: bolder;
+    text-shadow: 1px 1px 1px #000;
+}
+
+#box-download {
+    margin-top: 10px;
+}
+
+#box-download i {
+    font-size: 1.4em;
+    font-weight: bolder;
+}
 
 .graficos {
     width: 100%;
