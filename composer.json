@@ -32,7 +32,8 @@
     "yii2mod/yii2-comments": "*",
     "FortAwesome/Font-Awesome": "*",
     "aki/yii2-image-slider": "*",
-    "szymach/c-pchart": "^3.0"
+    "szymach/c-pchart": "^3.0",
+    "dompdf/dompdf": "^0.8.2"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "^2.0.0",

@@ -37,3 +37,13 @@ body {
     font-size: 15px;
     line-height: 18px;
 }
+
+/*****************************************************
+              Estilos para impresión.
+******************************************************/
+
+@media print {
+    .no-print {
+        display: none;
+    }
+}

@@ -59,17 +59,16 @@ if ($isAdmin) {
     array_push($items, $tags);
 }
 
-
-
 NavBar::begin([
     'brandLabel' => Yii::$app->name,
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
-        'class' => 'navbar-inverse navbar-fixed-top',
+        'class' => 'navbar-inverse navbar-fixed-top no-print',
     ],
 ]);
+
 echo Nav::widget([
-    'options' => ['class' => 'navbar-nav navbar-right'],
+    'options' => ['class' => 'navbar-nav navbar-right no-print'],
     'items' => $items,
 ]);
 NavBar::end();

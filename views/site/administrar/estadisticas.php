@@ -1,9 +1,6 @@
 <?php
 use app\assets\SiteEstadisticasAsset;
-use app\models\Torrents;
-use CpChart\Chart\Pie;
-use CpChart\Image;
-
+use Dompdf\Dompdf;
 /**
  * @author    Raúl Caro Pastorino
  * @link      https://fryntiz.es
@@ -19,17 +16,19 @@ $this->title = 'Estadísticas';
 ?>
 
 <div id="site-estadisticas" class="container">
-    <div id="box-download" class="row text-center">
+    <div id="box-download" class="row text-center no-print">
         <div class="col-sm-12">
-            <button class="btn btn-sm btn-success">
+            <button id="btn-print" class="btn btn-sm btn-success">
                 <i class="fa fa-file-pdf-o text-danger"></i>
                 Descargar en pdf
             </button>
 
+            <!--
             <button class="btn btn-sm btn-success">
                 <i class="fa fa-file-excel-o text-warning"></i>
                 Descargar en excel
             </button>
+            -->
         </div>
     </div>
 
