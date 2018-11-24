@@ -53,6 +53,17 @@ body {
     margin: 10px auto;
     width: 30px;
 }
+/*****************************************************
+        Estilos para Políticas de privacidad.
+******************************************************/
+.field-comentarios-privacy {
+    padding: 10px;
+    font-size: 1.2em;
+    font-weight: bolder;
+    background-color: #bfca02;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px #000;
+}
 
 /*****************************************************
               Estilos para impresión.
