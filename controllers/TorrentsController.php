@@ -283,23 +283,11 @@ class TorrentsController extends Controller
         // Array con toda la información del torrent.
         $info = Magnet2torrent::generateTorrentInfo($id);
 
-        // Creo el torrent con la información de $info
-        //$bcoder = new BEncode;
-        //$torrent = $bcoder->bencode($info);
-
         $torrent = new Encoder();
-
         $torrent = $torrent->encodeDictionary($info);
 
-
-        // Genero el archivo descargable
-        $datetime = new DateTime('now');
-        $datetime = $datetime->getTimestamp();
-        $randomstring = random_int(1, 10000);
-        $tmpName = $info['info']['root hash'].$datetime.$randomstring.'.torrent';
-
-        $ruta = Yii::getAlias('@tmp');
-        $rutaSave = 'uploads/'.$tmpName;
+        $torrentName = trim($info['info']['filename']).'.torrent';
+        $rutaSave = 'uploads/'.$torrentName;
 
         $file = fopen($rutaSave, 'w+');
         $x = fwrite($file, $torrent);

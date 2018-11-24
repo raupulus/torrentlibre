@@ -22,15 +22,15 @@
 }
 
 #copymagnet {
-    margin: 3px 8px;
-    padding: 5px;
-    width: 30px;
-    border-radius: 3px;
+    margin: 10px 7px;
+    padding: 3px;
+    color: #00334e;
+    font-weight: bolder;
 }
-
-#copymagnet:hover {
-    background-color: #000;
-    cursor: pointer;
+#copymagnet img {
+    margin: 3px 8px;
+    width: 20px;
+    border-radius: 3px;
 }
 
 #magnet {

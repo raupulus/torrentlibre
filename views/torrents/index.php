@@ -23,7 +23,8 @@ $isGuest = Yii::$app->user->isGuest;
 <div class="torrents-index">
     <?php if (Roles::canUpload()): ?>
         <p>
-            <?= Html::a('Añadir un torrent', ['create'],
+            <?= Html::a('<i class="fa fa-upload"></i>
+Añadir un torrent ', ['create'],
                 ['class' => 'btn btn-primary']) ?>
         </p>
     <?php endif ?>
@@ -45,7 +46,6 @@ $isGuest = Yii::$app->user->isGuest;
         'emptyCell' => 'N/D',
         'tableOptions' => [
             'class' => 'tablaTorrentsIndex',
-
         ],
         'pager' => [
             'class' => \kop\y2sp\ScrollPager::className(),
