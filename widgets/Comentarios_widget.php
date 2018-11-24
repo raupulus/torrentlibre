@@ -8,6 +8,7 @@
 
 namespace app\widgets;
 
+use app\models\Comentarios;
 use yii\db\Query;
 
 /**
@@ -57,14 +58,7 @@ class Comentarios_widget extends \yii\bootstrap\Widget
      */
     private function obtenerComentarios()
     {
-        $query = new Query();
-        $query->from('comment')
-            ->leftJoin(
-                'puntuacion_comentarios p',
-                'p.comentario_id = comment.id'
-            )
-            ->leftJoin('usuarios u', 'u.id = "createdBy"')
-            ->leftJoin('usuarios_datos ud', 'ud.id = u.datos_id');
+        $query = Comentarios::obtenerPuntuacion();
 
         if ($this->tipo == 'ultimos') {
             $query->orderBy('comment.created_at DESC');

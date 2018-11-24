@@ -14,7 +14,7 @@
 
 use \yii\helpers\Html;
 ?>
-<footer id="boxfooter" class="row">
+<footer id="boxfooter" class="row no-print">
     <section id="boxcontact" class="col-md-12">
         <a href="/site/contact"
            title="'Contactar"

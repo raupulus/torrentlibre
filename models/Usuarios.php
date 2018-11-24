@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use DateTime;
 use Yii;
 use juliardi\captcha\CaptchaValidator;
 use yii\helpers\Url;
@@ -214,5 +215,46 @@ class Usuarios extends \yii\db\ActiveRecord
         return Torrents::find()->where([
             'usuario_id' => $this->id,
         ])->count();
+    }
+
+    /**
+     * Obtiene los usuarios creados en total devolviendo el año en el que se
+     * han creado y la cantidad de usuarios para ese año.
+     * Será devuelto en un array.
+     *
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function creadosEntotal()
+    {
+        return Usuarios::find()
+            ->select(['EXTRACT(YEAR FROM created_at) as year, count(*) as cantidad'])
+            ->groupBy('year')
+            ->orderBy('year ASC')
+            ->asArray()
+            ->all();
+    }
+
+    /**
+     * Obtiene los usuarios creados este mismo mes y los devuelve como array
+     * por día de registro y cantidad para es cada día.
+     *
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function creadosEsteMes()
+    {
+        $date = new DateTime('now');
+        $year = $date->format('Y');
+        $mes = $date->format('m');
+        $date = $date->setDate($year, $mes, 1)
+                ->setTime(0, 0)
+                ->format('Y-m-d H:i:s');
+
+        return Usuarios::find()
+            ->select(['date(created_at) as date, count(*) as cantidad'])
+            ->where(['>=', 'created_at', $date])
+            ->groupBy('date')
+            ->orderBy('date ASC')
+            ->asArray()
+            ->all();
     }
 }

@@ -30,7 +30,7 @@
 }
 
 .grid-view .tablaTorrentsIndex tr td img {
-    width: 250px;
+    width: 50px;
 }
 
 .grid-view .tablaTorrentsIndex th, .grid-view .tablaTorrentsIndex td {
@@ -76,6 +76,7 @@
 }
 
 .grid-view .tablaTorrentsIndex .tabla-resumen {
+    text-align: left;
     width: 60%;
 }
 

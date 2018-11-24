@@ -59,4 +59,14 @@ class Accesos extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id']);
     }
+
+    public static function conectados30min()
+    {
+        $rango = new \DateTime('now');
+        $rango->modify('-30 min');
+
+        return Accesos::find()->where([
+            '>=', 'registered_at', $rango->format('Y-m-d H:i:s'),
+        ])->count('DISTINCT(usuario_id)');
+    }
 }

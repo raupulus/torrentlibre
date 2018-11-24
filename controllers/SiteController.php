@@ -88,7 +88,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if($model->login()) {
                 Access::registrarAcceso();
-                return $this->goBack();
+                return $this->goHome();
             } else {
                 Access::registrarErrorAcceso();
             }
@@ -198,6 +198,10 @@ class SiteController extends Controller
     public function actionSocial()
     {
         return $this->render('redessociales');
+    }
+    public function actionEstadisticas()
+    {
+        return $this->render('administrar/estadisticas');
     }
 }
 

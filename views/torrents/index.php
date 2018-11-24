@@ -23,7 +23,8 @@ $isGuest = Yii::$app->user->isGuest;
 <div class="torrents-index">
     <?php if (Roles::canUpload()): ?>
         <p>
-            <?= Html::a('Añadir un torrent', ['create'],
+            <?= Html::a('<i class="fa fa-upload"></i>
+Añadir un torrent ', ['create'],
                 ['class' => 'btn btn-primary']) ?>
         </p>
     <?php endif ?>
@@ -45,7 +46,6 @@ $isGuest = Yii::$app->user->isGuest;
         'emptyCell' => 'N/D',
         'tableOptions' => [
             'class' => 'tablaTorrentsIndex',
-
         ],
         'pager' => [
             'class' => \kop\y2sp\ScrollPager::className(),
@@ -54,7 +54,7 @@ $isGuest = Yii::$app->user->isGuest;
             'triggerOffset' => 1000,
             'negativeMargin' => 100,
             'delay'=>0,
-            'spinnerSrc'=> yii::getAlias('@r_img').'/load-torrent.gif',
+            'spinnerSrc'=> '/'.yii::getAlias('@r_img').'/load-torrent.gif',
             'paginationSelector' => '.grid-view .pagination',
             'enabledExtensions'=> [
                 \kop\y2sp\ScrollPager::EXTENSION_TRIGGER,

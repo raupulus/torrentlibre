@@ -3,6 +3,7 @@
 namespace app\models;
 
 use function array_sum;
+use DateTime;
 use function var_dump;
 use Yii;
 use yii\db\Expression;
@@ -281,5 +282,42 @@ class Torrents extends \yii\db\ActiveRecord
     public function getUsuario()
     {
         return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id']);
+    }
+
+    /**
+     * Obtiene todos los torrents subidos este mes.
+     *
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function subidasEsteMes()
+    {
+        $date = new DateTime('now');
+        $year = $date->format('Y');
+        $mes = $date->format('m');
+        $date = $date->setDate($year, $mes, 1)->setTime(0, 0)->format('Y-m-d H:i:s');
+
+        return Torrents::find()
+            ->select(['date(created_at) as date, count(*) as cantidad'])
+            ->where(['>=', 'created_at', $date])
+            ->groupBy('date')
+            ->orderBy('date DESC')
+            ->asArray()
+            ->all();
+    }
+
+    /**
+     * Obtiene la cantidad de torrents por cada categoría y los devuelve en
+     * un array.
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function cantidadTorrentsPorCategoria()
+    {
+        return Torrents::find()
+            ->select('categorias.nombre, count(*) as cantidad')
+            ->leftJoin('categorias', 'torrents.categoria_id = categorias.id')
+            ->groupBy('categorias.nombre')
+            ->orderBy('categorias.nombre ASC')
+            ->asArray()
+            ->all();
     }
 }
