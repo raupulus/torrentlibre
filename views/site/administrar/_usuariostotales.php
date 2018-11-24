@@ -1,10 +1,6 @@
 <?php
-use app\assets\SiteEstadisticasAsset;
-use app\models\Torrents;
 use app\models\Usuarios;
-use app\models\UsuariosDatos;
 use CpChart\Chart\Pie;
-use CpChart\Chart\Spring;
 use CpChart\Image;
 
 /**
@@ -30,7 +26,6 @@ foreach ($query as $data) {
     array_push($cantidades, $data['cantidad']);
     $totalUsuarios += $data['cantidad'];
 }
-
 
 /* Create and populate the Data object */
 $data = new \CpChart\Data();
@@ -91,23 +86,52 @@ $pieChart->drawPieLegend(600, 8, ["Style" => LEGEND_NOBORDER, "Mode" => LEGEND_H
 $image->render("tmp/usuariostotales.png");
 ?>
 
-<div class="row">
-    <div class="col-md-12">
-        <h4>
-            Total de Usuarios:
-            <span class="text-warning"><?= $totalUsuarios ?></span>
-        </h4>
-        <img id="usuariostotales"
-             class="graficos"
-             src="/tmp/usuariostotales.png"
-             title="Gráfica de usuarios creados por año"
-             alt="Gráfica de usuarios creados por año" />
+<div class="col-md-12 text-center container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Usuarios por Año</h3>
+        </div>
     </div>
 
-    <?php foreach ($years as $idx => $year): ?>
+    <table class="table table-responsive text-center">
+        <tr>
+            <th class="text-center bg-primary">Año</th>
+            <th class="text-center bg-primary">Cantidad de Usuarios</th>
+        </tr>
+        <?php foreach ($years as $idx => $year): ?>
+            <tr>
+                <td class="text-center ">
+                    <?= $year ?>
+                </td>
+
+                <td class="text-center">
+                            <span class="text-danger">
+                                <?= $cantidades[$idx] ?>
+                            </span>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
+
+<div class="col-sm-6 container">
+    <div class="row">
         <div class="col-md-12">
-            <?= $year ?>:
-            <span class="text-danger"><?= $cantidades[$idx] ?></span>
+            <h3>Cantidad de Usuarios totales</h3>
         </div>
-    <?php endforeach; ?>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>
+                Total de Usuarios:
+                <span class="text-warning"><?= $totalUsuarios ?></span>
+            </h4>
+            <img id="usuariostotales"
+                 class="graficos"
+                 src="/tmp/usuariostotales.png"
+                 title="Gráfica de usuarios creados por año"
+                 alt="Gráfica de usuarios creados por año" />
+        </div>
+    </div>
 </div>

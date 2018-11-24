@@ -46,14 +46,28 @@ $this->title = 'Estadísticas';
     </div>
 
     <div class="row">
-        <div class="col-sm-6 container">
-            <h3>Cantidad de Usuarios totales</h3>
-            <?php require_once '_usuariostotales.php'; ?>
-        </div>
+        <?php require_once '_usuariostotales.php'; ?>
 
         <div class="col-sm-6 container">
-            <h3>Cantidad de Usuarios nuevos este mes</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Cantidad de Usuarios nuevos este mes</h3>
+                </div>
+            </div>
+
             <?php require_once '_usuariosmensual.php'; ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h3>Cantidad de descargas</h3>
+                </div>
+            </div>
+
+            <?php require_once '_descargas.php'; ?>
         </div>
     </div>
 </div>

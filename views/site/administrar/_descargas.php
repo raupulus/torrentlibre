@@ -1,5 +1,5 @@
 <?php
-use app\models\Usuarios;
+use app\models\Descargas;
 use CpChart\Image;
 
 /**
@@ -17,23 +17,24 @@ $date = $date->setDate($year, $mes, 1)->setTime(0, 0)->format('Y-m-d H:i:s');
 /**
  * Obtengo usuarios creados este mes
  */
-$query = Usuarios::find()
-    ->select(['date(created_at) as date, count(*) as cantidad'])
-    ->where(['>=', 'created_at', $date])
+$query = Descargas::find()
+    ->select(['date(registered_at) as date, count(*) as cantidad'])
+    ->where(['>=', 'registered_at', $date])
     ->groupBy('date')
     ->orderBy('date ASC')
     ->asArray()
     ->all();
 
 $fechas = [];
-$n_usuarios = [];
-$totalUsuarios = 0;
+$n_descargas = [];
+$totalDescargas = 0;
+$totalDescargasMes = Descargas::find()->count();
 
 foreach ($query as $data) {
     $tmp = (new DateTime($data['date']))->format('d/m/Y');
     array_push($fechas, $tmp);
-    array_push($n_usuarios, $data['cantidad']);
-    $totalUsuarios += $data['cantidad'];
+    array_push($n_descargas, $data['cantidad']);
+    $totalDescargas += $data['cantidad'];
 }
 
 /* Create and populate the Data object */
@@ -42,11 +43,11 @@ $data = new \CpChart\Data();
 //$data->addPoints($n_usuarios, "Probe 1");
 //$data->addPoints($fechas, "Probe 2");
 
-$data->addPoints(0, "Usuarios");
-$data->addPoints(0, "Usuarios");
-$data->addPoints($n_usuarios, "Usuarios");
+$data->addPoints(0, "Descargas");
+$data->addPoints(0, "Descargas");
+$data->addPoints($n_descargas, "Descargas");
 
-$data->setAxisName(0, "Usuarios");
+$data->setAxisName(0, "Descargas");
 
 /* Create the Image object */
 $image = new Image(700, 230, $data);
@@ -95,31 +96,51 @@ $image->drawPlotChart();
 $image->drawLegend(580, 20, ["Style" => LEGEND_NOBORDER, "Mode" => LEGEND_HORIZONTAL]);
 
 /* Render the picture (choose the best way) */
-$image->render("tmp/usuariosmensual.png");
+$image->render("tmp/descargasmensual.png");
 ?>
+
 
 <div class="row">
     <div class="col-md-12">
         <h4>
-            Total de usuarios creados este mes:
-            <span class="text-warning"><?= $totalUsuarios ?></span>
+            Total de Descargas:
+            <span class="text-warning"><?= $totalDescargas ?></span>
         </h4>
-
-        <img id="usuariosmensual"
-             class="graficos"
-             src="/tmp/usuariosmensual.png"
-             title="Gráfica de usuarios creados este mes"
-             alt="Gráfica de usuarios creados este mes" />
     </div>
 
-    <!--
-    <?php foreach ($fechas as $idx => $fecha): ?>
-        <div class="col-md-12 text-center">
-            <?= (DateTime::createFromFormat('d/m/Y', $fecha))->format('d/m/Y'); ?>:
-            <span class="text-danger">
-                <?= $n_usuarios[$idx] ?>
-            </span>
-        </div>
-    <?php endforeach; ?>
-    -->
+    <div class="col-md-12">
+        <h4>
+            Total de Descargas este mes:
+            <span class="text-warning"><?= $totalDescargasMes ?></span>
+        </h4>
+
+        <img id="descargasmensual"
+             class="graficos"
+             src="/tmp/descargasmensual.png"
+             title="Gráfica de las descargas realizadas este mes"
+             alt="Gráfica de las descargas realizadas este mes" />
+    </div>
+
+    <div class="col-md-12 text-center">
+        <table class="table table-responsive text-center">
+            <tr>
+                <th class="text-center bg-primary">Día</th>
+                <th class="text-center bg-primary">Cantidad de Descargas</th>
+            </tr>
+        <?php foreach ($fechas as $idx => $fecha): ?>
+            <tr>
+                <td class="text-center ">
+                    <?= (DateTime::createFromFormat('d/m/Y', $fecha))
+                            ->format('d/m/Y'); ?>
+                </td>
+
+                <td class="text-center">
+                    <span class="text-danger">
+                        <?= $n_descargas[$idx] ?>
+                    </span>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </table>
+    </div>
 </div>

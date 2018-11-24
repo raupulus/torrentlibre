@@ -1,6 +1,5 @@
 <?php
 use app\models\Torrents;
-use CpChart\Chart\Pie;
 use CpChart\Image;
 use CpChart\Data;
 
@@ -72,7 +71,6 @@ $image->drawLegend(570, 215, ["Style" => LEGEND_NOBORDER, "Mode" => LEGEND_HORIZ
 $image->render("tmp/torrentsmensual.png");
 ?>
 
-
 <div class="row">
     <div class="col-md-12">
         <h4>
@@ -86,12 +84,27 @@ $image->render("tmp/torrentsmensual.png");
              alt="Gráfica de torrents subidos este mes" />
     </div>
 
-    <?php foreach ($fechas as $idx => $fecha): ?>
-        <div class="col-md-12 text-center">
-            <?= (DateTime::createFromFormat('d/m/Y', $fecha))->format('d/m/Y'); ?>:
-            <span class="text-danger">
-                <?= $n_torrents[$idx] ?>
-            </span>
-        </div>
-    <?php endforeach; ?>
+    <div class="col-md-12 text-center">
+        <table class="table table-responsive text-center">
+            <tr>
+                <th class="text-center bg-primary">Día</th>
+                <th class="text-center bg-primary">Cantidad de Torrents</th>
+            </tr>
+
+        <?php foreach ($fechas as $idx => $fecha): ?>
+            <tr>
+                <td class="text-center ">
+                    <?= (DateTime::createFromFormat('d/m/Y', $fecha))
+                        ->format('d/m/Y'); ?>
+                </td>
+
+                <td class="text-center">
+                    <span class="text-danger">
+                        <?= $n_torrents[$idx] ?>
+                    </span>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </table>
+    </div>
 </div>

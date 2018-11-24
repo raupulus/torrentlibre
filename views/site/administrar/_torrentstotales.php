@@ -38,7 +38,7 @@ $data->addPoints($categorias, "Etiquetas");
 $data->setAbscissa("Etiquetas");
 
 /* Create the Image object */
-$image = new Image(500, 400, $data);
+$image = new Image(500, 500, $data);
 
 /* Set the default font properties */
 $image->setFontProperties([
@@ -77,10 +77,26 @@ $image->render("tmp/torrentstotales.png");
              alt="Gráfica de torrents subidos en total" />
     </div>
 
-    <?php foreach ($categorias as $idx => $categoria): ?>
-    <div class="col-md-12">
-        <?= $categoria ?>:
-        <span class="text-danger"><?= $cantidades[$idx] ?></span>
+
+    <div class="col-md-12 text-center">
+        <table class="table table-responsive text-center">
+            <tr>
+                <th class="text-center bg-primary">Categoría</th>
+                <th class="text-center bg-primary">Cantidad de Torrents</th>
+            </tr>
+            <?php foreach ($categorias as $idx => $categoria): ?>
+                <tr>
+                    <td class="text-center ">
+                        <?= $categoria ?>
+                    </td>
+
+                    <td class="text-center">
+                        <span class="text-danger">
+                            <?= $cantidades[$idx] ?>
+                        </span>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
     </div>
-    <?php endforeach; ?>
 </div>

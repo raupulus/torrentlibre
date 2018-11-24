@@ -20,10 +20,12 @@
 }
 
 #site-estadisticas h3 {
+    padding: 5px;
     color: #832561;
     font-size: 1.4em;
     font-weight: bolder;
     text-shadow: 1px 1px 1px #000;
+    border-bottom: 1px solid #bfca02;
 }
 
 #box-download {
