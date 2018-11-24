@@ -365,14 +365,19 @@ class UsuariosDatos extends \yii\db\ActiveRecord implements IdentityInterface
         ]) ? true : false;
     }
 
-
-
-    // PARA COMENTARIOS
+    /**
+     * Devuelve la cadena con la ruta a la imagen del avatar para el usuario.
+     * @return string
+     */
     public function getAvatar()
     {
         return $this->getRutaImagen();
     }
 
+    /**
+     * Devuelve el nick del usuario;
+     * @return string
+     */
     public function getUsername()
     {
         return $this->nick;

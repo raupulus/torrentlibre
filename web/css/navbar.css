@@ -45,8 +45,12 @@
 /**
  * Páginas visitadas.
  */
+#text-paginas-visitadas {
+    font-size: 0.8em;
+    font-weight: bolder;
+}
 #paginasVisitadas {
+    font-size: 0.8em;
     color: #bfca02;
-    font-size: 1.2em;
     font-weight: bolder;
 }

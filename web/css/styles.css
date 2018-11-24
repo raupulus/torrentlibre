@@ -38,6 +38,22 @@ body {
     line-height: 18px;
 }
 
+.logout {
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+.logout:hover {
+    color: #ff0000 !important;
+}
+
+/**
+ * Avatar del usuario en modo icono.
+ */
+.icon-avatar {
+    margin: 10px auto;
+    width: 30px;
+}
+
 /*****************************************************
               Estilos para impresión.
 ******************************************************/
