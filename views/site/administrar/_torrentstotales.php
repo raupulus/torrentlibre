@@ -10,13 +10,7 @@ use CpChart\Image;
  * @license   https://www.gnu.org/licenses/gpl-3.0-standalone.html
  **/
 
-$query = Torrents::find()
-    ->select('categorias.nombre, count(*) as cantidad')
-    ->leftJoin('categorias', 'torrents.categoria_id = categorias.id')
-    ->groupBy('categorias.nombre')
-    ->orderBy('categorias.nombre ASC')
-    ->asArray()
-    ->all();
+$query = Torrents::cantidadTorrentsPorCategoria();
 
 $categorias = [];
 $cantidades = [];

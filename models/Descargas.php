@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use DateTime;
 use Yii;
 
 /**
@@ -58,5 +59,29 @@ class Descargas extends \yii\db\ActiveRecord
     public function getTorrentId()
     {
         return $this->hasOne(Torrents::className(), ['id' => 'torrent']);
+    }
+
+    /**
+     * Obtiene todas las descargas de este mes y devuelve el objeto
+     * ActiveRecord en un Array.
+     *
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function descargasMes()
+    {
+        $date = new DateTime('now');
+        $year = $date->format('Y');
+        $mes = $date->format('m');
+        $date = $date->setDate($year, $mes, 1)
+                ->setTime(0, 0)
+                ->format('Y-m-d H:i:s');
+
+        return Descargas::find()
+            ->select(['date(registered_at) as date, count(*) as cantidad'])
+            ->where(['>=', 'registered_at', $date])
+            ->groupBy('date')
+            ->orderBy('date ASC')
+            ->asArray()
+            ->all();
     }
 }

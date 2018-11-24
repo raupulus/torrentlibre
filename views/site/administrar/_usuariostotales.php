@@ -10,12 +10,7 @@ use CpChart\Image;
  * @license   https://www.gnu.org/licenses/gpl-3.0-standalone.html
  **/
 
-$query = Usuarios::find()
-    ->select(['EXTRACT(YEAR FROM created_at) as year, count(*) as cantidad'])
-    ->groupBy('year')
-    ->orderBy('year ASC')
-    ->asArray()
-    ->all();
+$query = Usuarios::creadosEntotal();
 
 $years = [];
 $cantidades = [];
