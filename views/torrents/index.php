@@ -54,7 +54,7 @@ $isGuest = Yii::$app->user->isGuest;
             'triggerOffset' => 1000,
             'negativeMargin' => 100,
             'delay'=>0,
-            'spinnerSrc'=> yii::getAlias('@r_img').'/load-torrent.gif',
+            'spinnerSrc'=> '/'.yii::getAlias('@r_img').'/load-torrent.gif',
             'paginationSelector' => '.grid-view .pagination',
             'enabledExtensions'=> [
                 \kop\y2sp\ScrollPager::EXTENSION_TRIGGER,
