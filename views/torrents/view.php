@@ -278,7 +278,7 @@ function reportar($model) {
         </div>
 
         <div class="row">
-            <div class="magnet col-sm-12">
+            <div class="magnet col-sm-12 text-center">
                 <?= magnet($model) ?>
             </div>
         </div>
