@@ -5,6 +5,7 @@ namespace app\models;
 use function date_diff;
 use DateTime;
 use Yii;
+use yii\db\Query;
 use yii2mod\moderation\enums\Status;
 
 /**
@@ -102,5 +103,24 @@ class Comentarios extends \yii2mod\comments\models\CommentModel
         }
 
         return $total / $votos;
+    }
+
+    /**
+     * Devuelve el objeto con todos los comentarios junto a su puntuación
+     *
+     * @return \yii\db\Query
+     */
+    public static function obtenerPuntuacion()
+    {
+        $query = new Query();
+        $query->from('comment')
+            ->leftJoin(
+                'puntuacion_comentarios p',
+                'p.comentario_id = comment.id'
+            )
+            ->leftJoin('usuarios u', 'u.id = "createdBy"')
+            ->leftJoin('usuarios_datos ud', 'ud.id = u.datos_id');
+
+        return $query;
     }
 }

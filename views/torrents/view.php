@@ -1,9 +1,9 @@
 <?php
 
 use app\helpers\Access;
+use app\helpers\Magnet2torrent;
 use app\helpers\Roles;
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 use app\assets\TorrentsViewAsset;
 use yii\helpers\Url;
 
@@ -104,13 +104,31 @@ function magnet($model) {
     $magnet = 'magnet:?xt=urn:btih:' . $model->hash;
     $magnet .= '&dn='.urlencode($model->titulo);
 
-    $r = 'Copiar al portapapeles ' . Html::img('/images/icons/magnet.png', [
-        'id' => 'copymagnet',
-        'alt' => 'Copy '.$model->titulo.' magnet to clipboard',
-        'title' => 'Copy '.$model->titulo.' magnet to clipboard',
-    ]);
+    $trackersArray = Magnet2torrent::trackers();
+    $trackers = '';
+    foreach ($trackersArray as $tracker) {
+        $trackers .= '&tr=' . urlencode(trim($tracker));
+    }
 
-    $r .= '<a id="magnet" href='.$magnet.'>Abrir magnet con tu programa de torrents</a>';
+    $r = '<span id="copymagnet" class="btn btn-warning">' .
+            Html::img('/images/icons/magnet.png', [
+                'alt' => 'Copy '.$model->titulo.' magnet to clipboard',
+                'title' => 'Copy '.$model->titulo.' magnet to clipboard',
+            ]) .
+
+            'Copiar al portapapeles' .
+        '</span>'
+    ;
+
+    $r .= Html::a('Abrir magnet con tu programa de torrents',
+        Url::to($magnet.$trackers),
+        [
+            'title' => 'Descargar Magnet',
+            'alt' => 'Descargar Magnet',
+            'id' => 'magnet',
+            'class' => 'btn btn-primary'
+        ]
+    );
 
     $r .= Html::a('Descargar Torrent',
         Url::to(['torrents/descargar',
@@ -157,8 +175,6 @@ function reportar($model) {
     </div>
     ';
 }
-
-
 ?>
 
 <div class="torrents-view container">
@@ -259,7 +275,7 @@ function reportar($model) {
         </div>
 
         <div class="row">
-            <div class="magnet col-sm-12">
+            <div class="magnet col-sm-12 text-center">
                 <?= magnet($model) ?>
             </div>
         </div>

@@ -30,6 +30,9 @@
         $.extend(conf, options);
         $('body').append('<div id="des_caja"></div>');
 
+        // Agrego clases al plugin.
+        $('#des_caja').addClass('no-print');
+
         // Por cada entrada añade un elemento al menú
         $(entradas).each(function() {
             var agregar = '' +

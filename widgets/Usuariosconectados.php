@@ -37,12 +37,7 @@ class Usuariosconectados extends \yii\bootstrap\Widget
         parent::init();
 
         $this->usuarios_totales = UsuariosDatos::find()->count();
-
-        $rango = new \DateTime('now');
-        $rango->modify('-30 min');
-        $this->usuarios_30min = Accesos::find()->where([
-            '>=', 'registered_at', $rango->format('Y-m-d H:i:s'),
-        ])->count('DISTINCT(usuario_id)');
+        $this->usuarios_30min = Accesos::conectados30min();
     }
 
     /**
