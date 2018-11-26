@@ -11,6 +11,10 @@ use \yii\helpers\Html;
 use \yii\helpers\Url;
 
 TorrentsWidgetAsset::register($this);
+
+if (empty($model)) {
+    return;
+}
 ?>
 
 <div class="box-torrent-widget col-sm-12 row container">
@@ -25,6 +29,7 @@ TorrentsWidgetAsset::register($this);
             <th>Tamaño</th>
             <th>Uploader</th>
         </tr>
+
         <?php foreach ($model as $torrent): ?>
             <?php
                 $id = $torrent['id'];

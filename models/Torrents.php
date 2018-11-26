@@ -342,7 +342,7 @@ class Torrents extends \yii\db\ActiveRecord
 
         if ($config['categoria'] !== 'todas') {
             $query->where([
-                'categoria' => $config['categoria'],
+                'c.nombre' => $config['categoria'],
             ]);
         }
 
