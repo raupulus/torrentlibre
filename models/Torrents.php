@@ -320,4 +320,35 @@ class Torrents extends \yii\db\ActiveRecord
             ->asArray()
             ->all();
     }
+
+    /**
+     * Devuelve el objeto con todos los torrents junto a su puntuación
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public static function obtenerPuntuacion($config)
+    {
+        $query = Torrents::find()
+            ->leftJoin(
+                'puntuacion_torrents p',
+                'p.torrent_id = torrents.id'
+            )
+            ->leftJoin('usuarios u', 'u.id = "createdBy"')
+            ->leftJoin('usuarios_datos ud', 'ud.id = u.datos_id')
+            ->leftJoin('categorias c', 'c.id = torrents.categoria_id');
+
+        if ($config['categoria'] !== 'todas') {
+            $query->where([
+                'categoria' => $config['categoria'],
+            ]);
+        }
+
+        if ($config['tipo'] == 'ultimos') {
+            $query->orderBy('p.created_at DESC');
+        } else if ($config['tipo'] == 'votados') {
+            $query->orderBy('p.puntuacion DESC');
+        }
+
+        return $query->limit($config['cantidad'])->all();
+    }
 }

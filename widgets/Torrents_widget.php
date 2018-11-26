@@ -9,6 +9,7 @@
 namespace app\widgets;
 
 use app\models\Comentarios;
+use app\models\Torrents;
 
 /**
  * Class Comentarios_widget
@@ -16,19 +17,23 @@ use app\models\Comentarios;
  *
  * @package app\widgets
  */
-class Comentarios_widget extends \yii\bootstrap\Widget
+class Torrents_widget extends \yii\bootstrap\Widget
 {
     /**
-     * @var Representa la cantidad de comentarios.
+     * @var Representa la cantidad de Torrents.
      */
     public $cantidad;
 
     /**
-     * @var Indica si contendrá los últimos comentarios o los más votados.
-     *      admite los valores 'ultimos' y 'votados'
+     * @var Indica si contendrá los últimos Torrents o los más votados.
+     *      Admite los valores 'ultimos' y 'votados'
      */
     public $tipo;
 
+    /**
+     * @var Contiene la categoría de los torrents a mostrar.
+     */
+    public $categoria;
     /**
      * @var Modelo con la consulta para los datos.
      */
@@ -48,22 +53,25 @@ class Comentarios_widget extends \yii\bootstrap\Widget
             $this->tipo = 'ultimos';
         }
 
-        $this->model = $this->obtenerComentarios();
+        if ($this->categoria === null) {
+            $this->categoria = 'todas';
+        }
+
+        $this->model = $this->obtenerTorrents([
+            'cantidad' => $this->cantidad,
+            'tipo' => $this->tipo,
+            'categoria' => $this->categoria,
+        ]);
     }
 
     /**
-     * Obtiene todos los comentarios unidos a los usuarios a los que pertenecen.
+     * Obtiene todos los Torrents unidos a los usuarios a los que pertenecen y
+     * sus puntuaciones.
      * @return array
      */
-    private function obtenerComentarios()
+    private function obtenerTorrents()
     {
-        $query = Comentarios::obtenerPuntuacion();
-
-        if ($this->tipo == 'ultimos') {
-            $query->orderBy('comment.created_at DESC');
-        } else if ($this->tipo == 'votados') {
-            $query->orderBy('p.puntuacion DESC');
-        }
+        $query = Torrents::obtenerPuntuacion();
 
         return $query->limit($this->cantidad)->all();
     }
@@ -73,7 +81,7 @@ class Comentarios_widget extends \yii\bootstrap\Widget
      */
     public function run()
     {
-        return $this->render('comentarios_widget', [
+        return $this->render('torrents_widget', [
             'model' => $this->model,
         ]);
     }
