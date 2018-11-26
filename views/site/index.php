@@ -7,6 +7,7 @@
  */
 
 use app\assets\SiteIndexAsset;
+use app\models\Categorias;
 
 /**
  * @author    Raúl Caro Pastorino
@@ -34,16 +35,27 @@ $this->title = Yii::getAlias('@sitename');
 
     <div id="index-box-all" class="row">
         <div id="index-box-content" class="col-sm-9 container">
-            <div id="index-content" class="top-left col-xs-11">
-                CONTENT
-            </div>
+            <?= \app\widgets\Torrents_widget::widget([
+                'cantidad' => 10,
+                'tipo' => 'ultimos',
+                'categoria' => 'todas',
+            ]) ?>
 
-            <div id="index-options" class="text-center col-xs-1">
-                <div class="index-option"><i class="fa fa-ambulance"></i></div>
-                <div class="index-option"><i class="fa fa-youtube"></i></div>
-                <div class="index-option"><i class="fa fa-backward"></i></div>
-                <div class="index-option"><i class="fa fa-bell-slash"></i></div>
-            </div>
+            <?= \app\widgets\Torrents_widget::widget([
+                'cantidad' => 5,
+                'tipo' => 'votados',
+                'categoria' => 'todas',
+            ]) ?>
+
+            <?php $categorias = Categorias::find()->all(); ?>
+
+            <?php foreach ($categorias as $categoria): ?>
+                <?= \app\widgets\Torrents_widget::widget([
+                    'cantidad' => 5,
+                    'tipo' => 'ultimos',
+                    'categoria' => $categoria->nombre,
+                ]) ?>
+            <?php endforeach; ?>
         </div>
 
         <div id="index-box-aside" class="col-sm-3">

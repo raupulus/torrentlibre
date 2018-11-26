@@ -42,24 +42,12 @@
 #index-box-all {
     margin: 0;
 }
-#index-box-content {
-    padding: 0;
-    background-color: #8c3900;
-}
 
 /**
- * Contenido principal.
+ * Contenido principal con novedades de torrents.
  */
 #index-content {
     margin: 0;
-    background-color: #00FFFF;
-}
-
-/**
- * Lateral con opciones.
- */
-#index-options {
-    background-color: #00CC00;
 }
 
 /**

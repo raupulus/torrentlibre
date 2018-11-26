@@ -1,0 +1,24 @@
+@charset "UTF-8";
+/**
+ * @author Raúl Caro Pastorino
+ * @copyright Copyright © 2018 Raúl Caro Pastorino
+ * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
+ */
+
+.box-torrent-widget {
+    margin: 6px 5px 5px 0;
+}
+
+.table-torrent-widget {
+    background-color: #fff;
+    box-shadow: 5px 5px 5px #000;
+}
+
+.table-torrent-widget th {
+    font-size: 1.1em;
+    font-weight: bolder;
+    color: #bfca02;
+    text-align: center;
+    background-color: #00334e;
+}
+

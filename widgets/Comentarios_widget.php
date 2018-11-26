@@ -9,7 +9,6 @@
 namespace app\widgets;
 
 use app\models\Comentarios;
-use yii\db\Query;
 
 /**
  * Class Comentarios_widget

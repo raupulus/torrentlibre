@@ -7,6 +7,7 @@ use DateTime;
 use function var_dump;
 use Yii;
 use yii\db\Expression;
+use yii\db\Query;
 
 /**
  * This is the model class for table "torrents".
@@ -319,5 +320,39 @@ class Torrents extends \yii\db\ActiveRecord
             ->orderBy('categorias.nombre ASC')
             ->asArray()
             ->all();
+    }
+
+    /**
+     * Devuelve el objeto con todos los torrents junto a su puntuación
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public static function obtenerPuntuacion($config)
+    {
+        $query = new Query();
+
+        $query->select('*, t.id as torrent_id')
+            ->from('torrents t')
+            ->leftJoin(
+                'puntuacion_torrents p',
+                'p.torrent_id = t.id'
+            )
+            ->leftJoin('usuarios u', 'u.id = t.usuario_id')
+            ->leftJoin('usuarios_datos ud', 'ud.id = u.datos_id')
+            ->leftJoin('categorias c', 'c.id = t.categoria_id');
+
+        if ($config['categoria'] !== 'todas') {
+            $query->where([
+                'c.nombre' => $config['categoria'],
+            ]);
+        }
+
+        if ($config['tipo'] == 'ultimos') {
+            $query->orderBy('p.created_at DESC');
+        } else if ($config['tipo'] == 'votados') {
+            $query->orderBy('p.puntuacion DESC');
+        }
+
+        return $query->limit($config['cantidad'])->all();
     }
 }
