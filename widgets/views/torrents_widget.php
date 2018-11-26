@@ -14,9 +14,11 @@ TorrentsWidgetAsset::register($this);
 ?>
 
 <div class="box-torrent-widget col-sm-12 row container">
-    <table class="table table-responsive table-bordered table-torrent-widget">
+    <h3><?= $titulo ?></h3>
+
+    <table class="table-torrent-widget table table-responsive table-bordered">
         <tr>
-            <th>↓</th>
+            <th><i class="fa fa-download"></i></th>
             <th>Archivo Torrent</th>
             <th>Categoría</th>
             <th>Subido</th>
@@ -28,15 +30,15 @@ TorrentsWidgetAsset::register($this);
                 $id = $torrent['id'];
                 $titulo = $torrent['titulo'];
                 $categoria = $torrent['nombre'];
-                $fecha = $torrent['created_at'];
-                $size = $torrent['size'];
+                $fecha = Yii::$app->formatter->asRelativeTime($torrent['created_at']);
+                $size = Yii::$app->formatter->asShortSize($torrent['size']);
                 $uploader = $torrent['nick'];
                 $uploaderId = $torrent['datos_id'];
             ?>
 
         <tr>
             <td>
-                <?= Html::a('Descargar Torrent', Url::to([
+                <?= Html::a('↓', Url::to([
                         'torrents/descargar',
                         'id' => $id,
                     ]),

@@ -34,10 +34,16 @@ class Torrents_widget extends \yii\bootstrap\Widget
      * @var Contiene la categoría de los torrents a mostrar.
      */
     public $categoria;
+
     /**
      * @var Modelo con la consulta para los datos.
      */
     public $model;
+
+    /**
+     * @var Titulo de la sección actual.
+     */
+    public $titulo;
 
     /**
      * {@inheritdoc}
@@ -49,29 +55,26 @@ class Torrents_widget extends \yii\bootstrap\Widget
             $this->cantidad = 5;
         }
 
-        if ($this->tipo === null) {
+        if ($this->tipo == 'ultimos') {
             $this->tipo = 'ultimos';
+            $this->titulo = 'Últimos Torrents';
+        } else if ($this->tipo == 'votados') {
+            $this->tipo = 'votados';
+            $this->titulo = 'Torrents Más Votados';
         }
 
-        if ($this->categoria === null) {
+        if ($this->categoria == 'todas') {
             $this->categoria = 'todas';
+        } else {
+            $this->titulo = 'Mostrando categoría: ' . $this->categoria;
         }
 
-        $this->model = $this->obtenerTorrents([
-            'cantidad' => $this->cantidad,
-            'tipo' => $this->tipo,
-            'categoria' => $this->categoria,
-        ]);
-    }
-
-    /**
-     * Obtiene todos los Torrents unidos a los usuarios a los que pertenecen y
-     * sus puntuaciones.
-     * @return array
-     */
-    private function obtenerTorrents()
-    {
-        return Torrents::obtenerPuntuacion([
+        /**
+         * Obtiene todos los Torrents unidos a los usuarios a los que pertenecen y
+         * sus puntuaciones.
+         * @return array
+         */
+        $this->model = Torrents::obtenerPuntuacion([
             'cantidad' => $this->cantidad,
             'tipo' => $this->tipo,
             'categoria' => $this->categoria,
@@ -85,6 +88,7 @@ class Torrents_widget extends \yii\bootstrap\Widget
     {
         return $this->render('torrents_widget', [
             'model' => $this->model,
+            'titulo' => $this->titulo,
         ]);
     }
 }
