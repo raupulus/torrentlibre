@@ -15,6 +15,7 @@ TorrentsWidgetAsset::register($this);
 if (empty($model)) {
     return;
 }
+
 ?>
 
 <div class="box-torrent-widget col-sm-12 row container">
@@ -32,7 +33,7 @@ if (empty($model)) {
 
         <?php foreach ($model as $torrent): ?>
             <?php
-                $id = $torrent['id'];
+                $id = $torrent['torrent_id'];
                 $titulo = $torrent['titulo'];
                 $categoria = $torrent['nombre'];
                 $fecha = Yii::$app->formatter->asRelativeTime($torrent['created_at']);
@@ -42,7 +43,7 @@ if (empty($model)) {
             ?>
 
         <tr>
-            <td>
+            <td class="text-center">
                 <?= Html::a('↓', Url::to([
                         'torrents/descargar',
                         'id' => $id,
@@ -60,19 +61,19 @@ if (empty($model)) {
                 <a href="/torrents/view?id=<?= $id ?>"><?= $titulo ?></a>
             </td>
 
-            <td>
+            <td class="text-center">
                 <?= $categoria ?>
             </td>
 
-            <td>
+            <td class="text-center">
                 <?= $fecha ?>
             </td>
 
-            <td>
+            <td class="text-center">
                 <?= $size ?>
             </td>
 
-            <td>
+            <td class="text-center">
                 <a href="/usuarios/view?id=<?= $uploaderId ?>">
                     <?= $uploader ?>
                 </a>

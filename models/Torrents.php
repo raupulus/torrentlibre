@@ -331,14 +331,15 @@ class Torrents extends \yii\db\ActiveRecord
     {
         $query = new Query();
 
-        $query->from('torrents')
+        $query->select('*, t.id as torrent_id')
+            ->from('torrents t')
             ->leftJoin(
                 'puntuacion_torrents p',
-                'p.torrent_id = torrents.id'
+                'p.torrent_id = t.id'
             )
-            ->leftJoin('usuarios u', 'u.id = torrents.usuario_id')
+            ->leftJoin('usuarios u', 'u.id = t.usuario_id')
             ->leftJoin('usuarios_datos ud', 'ud.id = u.datos_id')
-            ->leftJoin('categorias c', 'c.id = torrents.categoria_id');
+            ->leftJoin('categorias c', 'c.id = t.categoria_id');
 
         if ($config['categoria'] !== 'todas') {
             $query->where([
