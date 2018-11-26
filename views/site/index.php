@@ -39,6 +39,7 @@ $this->title = Yii::getAlias('@sitename');
                 <?= \app\widgets\Torrents_widget::widget([
                     'cantidad' => 5,
                     'tipo' => 'ultimos',
+                    'categoria' => 'todas',
                     //'tipo' => 'votados',
                 ]) ?>
             </div>

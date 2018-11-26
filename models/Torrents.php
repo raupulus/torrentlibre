@@ -7,6 +7,7 @@ use DateTime;
 use function var_dump;
 use Yii;
 use yii\db\Expression;
+use yii\db\Query;
 
 /**
  * This is the model class for table "torrents".
@@ -328,12 +329,14 @@ class Torrents extends \yii\db\ActiveRecord
      */
     public static function obtenerPuntuacion($config)
     {
-        $query = Torrents::find()
+        $query = new Query();
+
+        $query->from('torrents')
             ->leftJoin(
                 'puntuacion_torrents p',
                 'p.torrent_id = torrents.id'
             )
-            ->leftJoin('usuarios u', 'u.id = "createdBy"')
+            ->leftJoin('usuarios u', 'u.id = torrents.usuario_id')
             ->leftJoin('usuarios_datos ud', 'ud.id = u.datos_id')
             ->leftJoin('categorias c', 'c.id = torrents.categoria_id');
 
@@ -349,6 +352,6 @@ class Torrents extends \yii\db\ActiveRecord
             $query->orderBy('p.puntuacion DESC');
         }
 
-        return $query->limit($config['cantidad'])->asArray()->all();
+        return $query->limit($config['cantidad'])->all();
     }
 }

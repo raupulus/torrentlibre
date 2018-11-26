@@ -72,9 +72,9 @@ class Torrents_widget extends \yii\bootstrap\Widget
     private function obtenerTorrents()
     {
         return Torrents::obtenerPuntuacion([
-            'categoria' => $this->categoria,
-            'tipo' => $this->tipo,
             'cantidad' => $this->cantidad,
+            'tipo' => $this->tipo,
+            'categoria' => $this->categoria,
         ]);
     }
 
