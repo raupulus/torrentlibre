@@ -349,6 +349,6 @@ class Torrents extends \yii\db\ActiveRecord
             $query->orderBy('p.puntuacion DESC');
         }
 
-        return $query->limit($config['cantidad'])->all();
+        return $query->limit($config['cantidad'])->asArray()->all();
     }
 }

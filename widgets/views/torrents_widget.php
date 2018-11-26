@@ -7,8 +7,9 @@
 **/
 
 use app\assets\ComentariosWidgetAsset;
+use app\assets\TorrentsWidgetAsset;
 
-ComentariosWidgetAsset::register($this);
+TorrentsWidgetAsset::register($this);
 ?>
 
 <div class="box-torrent-widget col-sm-12 row container">

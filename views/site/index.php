@@ -35,7 +35,12 @@ $this->title = Yii::getAlias('@sitename');
     <div id="index-box-all" class="row">
         <div id="index-box-content" class="col-sm-9 container">
             <div id="index-content" class="top-left col-xs-11">
-                CONTENT
+                <h3>Últimos Torrents</h3>
+                <?= \app\widgets\Torrents_widget::widget([
+                    'cantidad' => 5,
+                    'tipo' => 'ultimos',
+                    //'tipo' => 'votados',
+                ]) ?>
             </div>
 
             <div id="index-options" class="text-center col-xs-1">
