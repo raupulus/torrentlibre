@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\Roles;
 use app\helpers\Security;
 use Yii;
 use app\models\ReportesTorrents;

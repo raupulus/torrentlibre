@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\helpers\Access;
+use app\helpers\Roles;
 use app\helpers\Security;
 use function var_dump;
 use Yii;
