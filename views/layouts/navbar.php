@@ -97,6 +97,7 @@ if ($isAdmin) {
 NavBar::begin([
     'brandLabel' => Yii::$app->name,
     'brandUrl' => Yii::$app->homeUrl,
+    'brandImage' => '/images/brand.png',
     'options' => [
         'class' => 'navbar-inverse navbar-fixed-top no-print',
     ],
