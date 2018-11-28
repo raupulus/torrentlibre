@@ -123,20 +123,39 @@ $(document).ready(() => {
         ventana.document.head.appendChild(hojaCss1);
         ventana.document.head.appendChild(hojaJs);
         ventana.document.head.appendChild(hojaJs1);
-        ventana.document.head.appendChild(hojaJs2);
+
+        // Cargo js de boostrap un segundo más tarde para evitar fallo aleatorio
+        setTimeout(() => {
+            ventana.document.head.appendChild(hojaJs2);
+        }, 1000);
+
         ventana.document.body.appendChild(preferencias.cloneNode(true));
 
-        var buttons = ventana.document.getElementsByTagName('button');
-        Array.prototype.slice.call(buttons).forEach((ele) => {
-            ele.classList.remove('btn-no-interactive');
-            ele.onclick = () => {
-                if (ele.dataset.activado == 0) {
-                    ele.dataset.activado = 1;
-                } else {
-                    ele.dataset.activado = 0;
-                }
+        // Habilito el botones de guardar a los 3 segundos de abrir
+        setTimeout(() => {
+            var buttons = ventana.document.getElementsByTagName('button');
+            Array.prototype.slice.call(buttons).forEach((ele) => {
+                ele.classList.remove('btn-no-interactive');
+                ele.onclick = () => {
+                    if (ele.dataset.activado == 0) {
+                        ele.dataset.activado = 1;
+                    } else {
+                        ele.dataset.activado = 0;
+                    }
+                };
+            });
+
+            ventana.document.getElementById('btn-guardar')
+                .removeAttribute('disabled');
+
+            ventana.document.getElementById('btn-guardar').onclick = function() {
+                ventana.document.getElementById('btn-guardar').dataset.cerrar = 1;
             };
-        });
+
+            ventana.document.getElementById('btn-cerrar').onclick = function() {
+                ventana.document.getElementById('btn-cerrar').dataset.cerrar = 1;
+            };
+        }, 3000);
 
         ventana.document.getElementById('btn-guardar').classList
             .remove('hidden');
@@ -144,17 +163,9 @@ $(document).ready(() => {
         ventana.document.getElementById('btn-cerrar').classList
             .remove('hidden');
 
-        ventana.document.getElementById('btn-guardar').onclick = function() {
-            ventana.document.getElementById('btn-guardar').dataset.cerrar = 1;
-        };
-
-        ventana.document.getElementById('btn-cerrar').onclick = function() {
-            ventana.document.getElementById('btn-cerrar').dataset.cerrar = 1;
-        };
-
         ventana.focus();
 
-        // Cada 2 segundos se comprueba si ha pulsado guardar
+        // Cada segundo se comprueba si ha pulsado guardar
         actualizarPreferencias(ventana);
     }
 

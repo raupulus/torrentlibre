@@ -208,6 +208,7 @@ $isAutor = Access::isAutor($model->id);
                                 'id' => 'btn-guardar',
                                 'class' => 'btn btn-primary hidden',
                                 'data-cerrar' => '0',
+                                'disabled' => true,
                             ]
                         ) .
                         Html::button('Cerrar',

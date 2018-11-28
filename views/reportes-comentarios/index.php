@@ -17,7 +17,7 @@ $isAdmin = Roles::isAdmin();
 $columns = [
     [
         'attribute' => 'comentario.content',
-        'label' => 'Torrent',
+        'label' => 'Comentario',
     ],
     'titulo:text:Motivo',
     'resumen',
@@ -42,12 +42,13 @@ if ($isAdmin) {
         'format' => 'raw',
         'label' => false,
         'value' => function($model) {
-            $btn1 = Html::a('Eliminar Torrent', [
-                '/comment/??????', 'id' => $model->comentario_id
+            $btn1 = Html::a('Eliminar Comentario', [
+                'torrents/eliminarcommentario',
+                'id' => $model->comentario_id,
             ], [
                 'class' => 'btn btn-warning btn-sm',
                 'data' => [
-                    'confirm' => '¿Seguro que quieres eliminar este torrent?',
+                    'confirm' => '¿Seguro que quieres eliminar este comentario?',
                     'method' => 'post',
                 ],
             ]);
@@ -76,7 +77,23 @@ if ($isAdmin) {
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => $columns,
+        'pager' => [
+            'class' => \kop\y2sp\ScrollPager::className(),
+            'container' => '#torrents-index-gridview tbody',
+            'item' => 'tr',
+            'triggerOffset' => 1000,
+            'negativeMargin' => 100,
+            'delay'=>0,
+            'spinnerSrc'=> '/'.yii::getAlias('@r_img').'/load-torrent.gif',
+            'paginationSelector' => '.grid-view .pagination',
+            'enabledExtensions'=> [
+                \kop\y2sp\ScrollPager::EXTENSION_TRIGGER,
+                \kop\y2sp\ScrollPager::EXTENSION_SPINNER,
+                \kop\y2sp\ScrollPager::EXTENSION_NONE_LEFT,
+                \kop\y2sp\ScrollPager::EXTENSION_PAGING
+            ],
+        ],
     ]); ?>
 </div>
