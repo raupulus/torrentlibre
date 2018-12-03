@@ -52,22 +52,80 @@ directorio **web** del proyecto.
 El despliegue en la nube se ha planteado utilizando heroku por lo que será 
 necesario disponer de cuenta en esta plataforma.
 
-Para la instalación de la aplicación en la nube usaremos Heroku, por lo que una cuénta en dicha plataforma será necesaria para continuar.
+Una vez dentro de heroku creamos una aplicación
 
-Con nuestra cuenta de Heroku, realizaremos los siguientes pasos:
+### Instalar cliente de heroku
+wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
 
-- Con nuestra cuenta de Heroku deberemos crear una aplicación. Además, necesitaremos el comando `heroku` para consola y poder así con la consola.
+### Loguear en el equipo con el cliente instalado
 
-- Añadir la extensión para postgres y cargar la base de datos.
+Desde el directorio del repositorio
 
-Comandos:
-```
+```bash
 heroku login
-heroku apps:create nombreAplicacion --region eu
-heroku addons:create heroku-postgresql
-heroku pg:psql < db/load.sql
-heroku pg:psql
-create extension pgcrypto;
-heroku config:set SMTP_PASS=clave
-git push -u heroku master
 ```
+
+### Vincular aplicación
+
+Hay dos opciones:
+- Crear aplicación desde consola
+- Crear aplicación desde la web y vincularla con un directorio
+
+Desde la web:
+- Elegir un nombre que será parte del dominio de la aplicación como por 
+ejemplo: https://miaplicación.heroku.com
+- Elegir región Europa
+- Añadir Recursos: En Resources, nos vamos a addons y añadimos la base de 
+datos llamada Heroku PostgreSQL y seleccionamos el plan.
+- Métodos de despliegue
+- En la pestaña deploy seleccionamos uno de los tres métodos. Por defecto al 
+crear desde la terminal se crea una rama remota heroku pero es más interesante
+utilizar el método GitHub.
+
+Desde este momento al conectar con GitHub cada vez que hagamos un push se
+puede desplegar automáticamente si debajo elegimos la rama y y pulsamos 
+sobre: Enable automatics deploy 
+
+Asociar aplicación con heroku, le decimos a Heroku cual es la aplicación que 
+tenemos.
+
+Listamos las aplicaciones:
+
+```bash
+heroku apps
+```
+
+Asignamos el remoto para la aplicación:
+
+```bash
+heroku git:remote --app nombreaplicación
+heroku psql
+```
+
+Conecta al psql con heroku y podemos ejecutar comandos o añadir extensiones:
+create extension pgcrypto;
+
+También podemos inyectar
+
+```bash
+heroku psql < db/nombredv.sql
+heroku config
+```
+
+También podemos inyectar la base de datos con:
+
+```bash
+make dbheroku
+```
+
+### Configurar YII
+
+Para que funcione tenemos que crear una variable de entorno llamada YII_ENV 
+y asignarle valor de producción:
+
+```bash
+heroku config:set YII_ENV=prod
+```
+
+Además se necesitar setear las variables establecidas en el archivo 
+.env.example configurando cada parámetro adecuado a nuestras necesidades.
