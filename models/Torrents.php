@@ -203,13 +203,20 @@ class Torrents extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * Devuelve la puntuación media de las votaciones para el torrent.
+     * @param string $id Recibe el id o se aplica al modelo actual.
+     *
+     * @return float|int Devuelve la puntuación media.
      */
-    public function getPuntos()
+    public function getPuntos($id = '')
     {
+        if (empty($id)) {
+            $id = $this->id;
+        }
+
         $p = PuntuacionTorrents::find()
             ->select('puntuacion')
-            ->where(['torrent_id' => $this->id])
+            ->where(['torrent_id' => $id])
             ->column();
 
         $total = array_sum($p);
@@ -220,6 +227,20 @@ class Torrents extends \yii\db\ActiveRecord
         }
 
         return $total / $votos;
+    }
+    
+    public function getMisPuntos()
+    {
+        $torrent = $this->id;
+        $usuario = Yii::$app->user->id;
+        
+        $puntuacion = PuntuacionTorrents::find()
+            ->select('puntuacion')
+            ->where(['torrent_id' => $torrent])
+            ->andWhere(['usuario_id' => $usuario])
+            ->scalar();
+
+        return $puntuacion;
     }
 
     /**

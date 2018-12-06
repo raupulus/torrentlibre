@@ -148,10 +148,17 @@ function magnet($model) {
 }
 
 function puntuacion($model) {
+    $puntosUsuarioActual = $model->misPuntos;
+
     return '<p>Puntuación total: ' .
-        '<span class="puntos">'.$model->puntos . '</span>/10</p>' .
+            '<span id="torrent-puntos" 
+                   data-mispuntos="'.$puntosUsuarioActual.'">' .
+                $model->puntos .
+            '</span>/10
+        </p>' .
+
         '<div class="torrentRating rating" data-rating-max="10" 
-                             data-torrent="' . $model->id . '"></div>';
+              data-torrent="' . $model->id . '"></div>';
 }
 
 function reportar($model) {
@@ -296,9 +303,6 @@ function reportar($model) {
         </p>
     <?php endif ?>
 </div>
-
-
-
 
 <?= \yii2mod\comments\widgets\Comment::widget([
     'model' => $model,

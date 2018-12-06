@@ -41,7 +41,7 @@ $(document).ready(function() {
                 timeout:5000,  // Tiempo a esperar antes de dar error
                 success: function(data) {
                     $('#torrents-veces-descargado').text(data);
-                },
+                }
             });
         }, 3000);
     }
@@ -61,13 +61,26 @@ $(document).ready(function() {
     function modificarPuntuacion(puntuacion, torrent) {
         $.ajax({
             type: 'GET',
+            dataType: 'json',
             url: "/puntuacion-torrents/modificar",
             async: false,
             data: {
                 'puntuacion': puntuacion,
-                'torrent' : torrent,
+                'torrent' : torrent
             },
-            timeout:5000,
+            success: function(data) {
+                // Caja con la media de puntuación.
+                var boxPuntos = $('#torrent-puntos');
+
+                // Puntuación media.
+                var media = data.media;
+
+                // Agrego la nueva media calculada.
+                boxPuntos.empty();
+                boxPuntos.html(media);
+
+                console.log('media: ' + media);
+            }
         });
     }
 
@@ -81,8 +94,24 @@ $(document).ready(function() {
         var puntuacion = $('.torrentRating').attr('data-val');
         var torrent = $('.torrentRating').attr('data-torrent');
         modificarPuntuacion(puntuacion, torrent);
-        window.location = '/torrents/view?id='+torrent;
     });
+
+    /**
+     * Comprueba los puntos que el usuario actual ha dado a el torrent actual
+     * y pintas tantas estrellas como puntuación.
+     */
+    function dibujarPuntuacionEstrellas() {
+        // Al iniciar se marcan las estrellas según haya votado.
+        var mispuntos = $('#torrent-puntos').data('mispuntos');
+        var boxTorrentRating = $('.torrentRating ul li');
+
+        boxTorrentRating.each(function(index, value) {
+            if (index +1 <= mispuntos) {
+                $(this).addClass('hover active');
+            }
+        });
+    }
+    dibujarPuntuacionEstrellas();
 
     /************************************************
      **             Reportar Torrent               **
@@ -239,7 +268,17 @@ $(document).ready(function() {
                 'puntuacion': puntuacion,
                 'comentario' : comentario,
             },
-            timeout:5000,
+            success: function(data) {
+                // Conseguir la caja donde almacenar puntos para este
+                // comentario.
+                //var boxPuntos = $('.torrent-puntos');
+
+                // Puntuación media.
+                var media = data['media'];
+
+                // La puntuación que el usuario actual le ha dado.
+                var puntosUsuario = data['puntuado'];
+            }
         });
     }
 
@@ -253,8 +292,9 @@ $(document).ready(function() {
         var torrent = $('.torrentRating').attr('data-torrent');
         var puntuacion = $(this).attr('data-val');
         var comentario = $(this).attr('data-comentario');
+
         modificarPuntuacionComentario(puntuacion, comentario);
-        window.location = '/torrents/view?id='+torrent;
+        //window.location = '/torrents/view?id='+torrent;
     });
 
 });

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Torrents;
 use Yii;
 use app\models\PuntuacionTorrents;
 use app\models\PuntuacionTorrentsSearch;
@@ -63,6 +64,16 @@ class PuntuacionTorrentsController extends Controller
         $model->puntuacion = $puntuacion;
 
         $model->save();
+
+        // Devolver en JSON: media y puntuado
+        $puntos = Torrents::findOne($torrent)->getPuntos();
+
+        $respuesta = [
+            'media' => $puntos,
+            'puntuado' => $puntuacion
+        ];
+
+        print_r(json_encode($respuesta));
     }
 
     /**
