@@ -105,6 +105,19 @@ class Comentarios extends \yii2mod\comments\models\CommentModel
         return $total / $votos;
     }
 
+    public function getMisPuntos()
+    {
+        $usuario = Yii::$app->user->id;
+
+        $puntuacion = PuntuacionComentarios::find()
+            ->select('puntuacion')
+            ->where(['comentario_id' => $this->id])
+            ->andWhere(['usuario_id' => $usuario])
+            ->scalar();
+
+        return $puntuacion ?: 0;
+    }
+
     /**
      * Devuelve el objeto con todos los comentarios junto a su puntuación
      *

@@ -78,8 +78,6 @@ $(document).ready(function() {
                 // Agrego la nueva media calculada.
                 boxPuntos.empty();
                 boxPuntos.html(media);
-
-                console.log('media: ' + media);
             }
         });
     }
@@ -97,7 +95,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Comprueba los puntos que el usuario actual ha dado a el torrent actual
+     * Comprueba los puntos que el usuario actual ha dado al torrent actual
      * y pintas tantas estrellas como puntuación.
      */
     function dibujarPuntuacionEstrellas() {
@@ -258,10 +256,12 @@ $(document).ready(function() {
      * Modifica la puntuación para un comentario.
      * @param puntuacion Recibe puntuación del 1-10.
      * @param comentario Recibe el "id" del comentario que se puntúa.
+     * @param boxPuntos  Recibe la caja sobre la que pintar la nueva puntuación.
      */
-    function modificarPuntuacionComentario(puntuacion, comentario) {
+    function modificarPuntuacionComentario(puntuacion, comentario, boxPuntos) {
         $.ajax({
             type: 'GET',
+            dataType: 'json',
             url: "/puntuacion-comentarios/modificar",
             async: false,
             data: {
@@ -269,15 +269,15 @@ $(document).ready(function() {
                 'comentario' : comentario,
             },
             success: function(data) {
-                // Conseguir la caja donde almacenar puntos para este
-                // comentario.
-                //var boxPuntos = $('.torrent-puntos');
-
                 // Puntuación media.
                 var media = data['media'];
 
                 // La puntuación que el usuario actual le ha dado.
                 var puntosUsuario = data['puntuado'];
+
+                // Agrego la nueva media calculada.
+                boxPuntos.empty();
+                boxPuntos.html(media);
             }
         });
     }
@@ -289,12 +289,30 @@ $(document).ready(function() {
 
     // Al pulsar un valor se actualiza en la DB.
     $('.comentarioRating').click(function() {
-        var torrent = $('.torrentRating').attr('data-torrent');
         var puntuacion = $(this).attr('data-val');
         var comentario = $(this).attr('data-comentario');
+        var boxPuntos = $(this).parent().find('.puntos');
 
-        modificarPuntuacionComentario(puntuacion, comentario);
-        //window.location = '/torrents/view?id='+torrent;
+        modificarPuntuacionComentario(puntuacion, comentario, boxPuntos);
     });
 
+    /**
+     * Comprueba los puntos que el usuario actual ha dado a cada comentario y
+     * pinta tantas estrellas como puntos tenga.
+     */
+    function dibujarPuntuacionComentariosEstrellas() {
+        var allBoxComentarios = $('.box-votar-comentario');
+
+        allBoxComentarios.each(function() {
+            var miPuntuacion = $(this).data('mispuntos');
+            var boxComentariosRating = $(this).find('ul li');
+
+            boxComentariosRating.each(function(index, value) {
+                if (index +1 <= miPuntuacion) {
+                    $(this).addClass('hover active');
+                }
+            });
+        });
+    }
+    dibujarPuntuacionComentariosEstrellas();
 });

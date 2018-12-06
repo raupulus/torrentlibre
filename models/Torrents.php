@@ -240,7 +240,7 @@ class Torrents extends \yii\db\ActiveRecord
             ->andWhere(['usuario_id' => $usuario])
             ->scalar();
 
-        return $puntuacion;
+        return $puntuacion ?: 0;
     }
 
     /**

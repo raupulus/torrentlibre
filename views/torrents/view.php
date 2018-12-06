@@ -173,10 +173,11 @@ function reportar($model) {
     return '
     <span id="reportar-terminado">El torrent ha sido reportado.</span>
     <span id="btn-reportar" class="btn btn-link">Reportar Torrent</span>
-    <div id="box-reportes" data-torrent="'.$model->id.'">
-        Título: <input type="text" id="reportar-titulo" />
+    <div id="box-reportes" data-torrent="'.$model->id.'" class="form-group">
+        Título: <input type="text" id="reportar-titulo" class="form-control" />
         <br />
-        Motivo: <input type="text" id="reportar-descripcion" />
+        Motivo: <input type="text" id="reportar-descripcion" 
+                       class="form-control" />
         <br />
         <div id="btn-enviar-reporte" class="btn btn-warning">Enviar Reporte</div>
     </div>
