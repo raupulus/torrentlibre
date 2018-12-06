@@ -48,11 +48,13 @@ use yii2mod\editable\Editable;
                     <?= Html::a("<span class='glyphicon glyphicon-share-alt'></span> Responder", '#', ['class' => 'comment-reply', 'data' => ['action' => 'reply', 'comment-id' => $model->id]]); ?>
                 <?php endif; ?>
             </div>
+
             <div class="comment-author-name">
                 <span><?= $model->getAuthorName(); ?></span>
                 <?= Html::a($model->getPostedDate(), $model->getAnchorUrl(),
                     ['class' => 'comment-date']); ?>
             </div>
+
             <div class="comment-body">
                 <?php if (Roles::isAdmin() ||
                          ($model->createdBy == yii::$app->user->id)): ?>
@@ -72,10 +74,14 @@ use yii2mod\editable\Editable;
             <div class="box-reportes-comentarios">
                 <h4>Reportar comentario</h4>
 
-                <div>
-                    Título: <input type="text" class="reportar-titulo" />
+                <div class="form-group">
+                    Título:
+                    <input type="text"
+                           class="reportar-titulo form-control" />
                     <br />
-                    Motivo: <input type="text" class="reportar-descripcion" />
+                    Motivo:
+                    <input type="text"
+                           class="reportar-descripcion form-control" />
                     <br />
                     <div class="box-reportes-comentarios"></div>
                     <div class="btn-enviar-reporte-comentario btn btn-warning">
@@ -84,7 +90,8 @@ use yii2mod\editable\Editable;
                 </div>
             </div>
 
-            <div class="box-votar-comentario">
+            <div class="box-votar-comentario"
+                 data-mispuntos="<?=$model->misPuntos?>">
                 <p>Puntuación total:
                     <span class="puntos"><?=$model->puntos?></span>/10</p>
                 <div class="comentarioRating rating" data-rating-max="10"

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Comentarios;
 use Yii;
 use app\models\PuntuacionComentarios;
 use yii\data\ActiveDataProvider;
@@ -51,8 +52,17 @@ class PuntuacionComentariosController extends Controller
         }
 
         $model->puntuacion = $puntuacion;
-
         $model->save();
+
+        // Devolver en JSON: media y puntuado
+        $puntos = Comentarios::findOne($comentario)->getPuntos();
+
+        $respuesta = [
+            'media' => $puntos,
+            'puntuado' => $puntuacion
+        ];
+
+        print_r(json_encode($respuesta));
     }
 
     /**

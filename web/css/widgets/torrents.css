@@ -22,3 +22,20 @@
     background-color: #00334e;
 }
 
+@media (max-width: 480px) {
+    .index-box-all {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    .box-torrent-widget {
+        margin: 0;
+        padding: 1px;
+        width: 100%;
+        left: 0;
+    }
+    .table-torrent-widget {
+        width: 400px !important;
+        margin: 0;
+    }
+}
