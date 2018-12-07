@@ -303,10 +303,16 @@ $(document).ready(function() {
     function dibujarPuntuacionComentariosEstrellas() {
         var allBoxComentarios = $('.box-votar-comentario');
 
+        /**
+         * Recorro cada comentario.
+         */
         allBoxComentarios.each(function() {
             var miPuntuacion = $(this).data('mispuntos');
             var boxComentariosRating = $(this).find('ul li');
 
+            /**
+             * Marco tantas estrellas como puntos.
+             */
             boxComentariosRating.each(function(index, value) {
                 if (index +1 <= miPuntuacion) {
                     $(this).addClass('hover active');
