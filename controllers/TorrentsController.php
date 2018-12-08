@@ -401,4 +401,17 @@ class TorrentsController extends Controller
 
         return false;
     }
+
+    /**
+     * Resuelve la ruta para obtener mediante ajax los seeders y leechers de
+     * un torrent concreto.
+     *
+     * @param $id Id del torrent.
+     *
+     * @return array Devuelve un array con los leechers y seeders.
+     */
+    public function actionCompartiendo($id)
+    {
+        return json_encode(Torrents::compartiendo($id));
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\helpers\Magnet2torrent;
+use app\helpers\Scraper;
 use function array_sum;
 use DateTime;
 use function var_dump;
@@ -375,5 +377,41 @@ class Torrents extends \yii\db\ActiveRecord
         }
 
         return $query->limit($config['cantidad'])->all();
+    }
+
+    /**
+     * Busca haciendo scrapping los seeders y leechers del torrent utilizando
+     * su hash para ello.
+     *
+     * @param $id Recibe el id del torrent.
+     * @return array Devuelve un array con los leechers y seeders.
+     */
+    public static function compartiendo($id) {
+        $model = Torrents::findOne($id);
+
+        $seeders = 0;
+        $leechers = 0;
+        $scraper = new Scraper();
+
+        $hash = [$model->hash];
+
+        // En el caso de que no existan trackers almacenados se consultan globales.
+        if (empty($model->trackers)) {
+            $trackers = Magnet2torrent::trackers();
+        } else {
+            $trackers = explode(',', $model->trackers);
+        }
+
+        $info = $scraper->scrape( $hash, $trackers );
+
+        if (count($info) > 0) {
+            $seeders = $info[$model->hash]['seeders'];
+            $leechers = $info[$model->hash]['leechers'];
+        }
+
+        return [
+            'seeders' => $seeders,
+            'leechers' => $leechers,
+        ];
     }
 }
