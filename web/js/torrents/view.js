@@ -303,10 +303,16 @@ $(document).ready(function() {
     function dibujarPuntuacionComentariosEstrellas() {
         var allBoxComentarios = $('.box-votar-comentario');
 
+        /**
+         * Recorro cada comentario.
+         */
         allBoxComentarios.each(function() {
             var miPuntuacion = $(this).data('mispuntos');
             var boxComentariosRating = $(this).find('ul li');
 
+            /**
+             * Marco tantas estrellas como puntos.
+             */
             boxComentariosRating.each(function(index, value) {
                 if (index +1 <= miPuntuacion) {
                     $(this).addClass('hover active');
@@ -315,4 +321,39 @@ $(document).ready(function() {
         });
     }
     dibujarPuntuacionComentariosEstrellas();
+
+
+    /************************************************
+     **       ACTUALIZAR SEEDERS Y LEECHERS        **
+     ************************************************/
+    /**
+     * Obtiene los leechers y seeders del torrent actual y lo pinta en su
+     * caja correspondiente.
+     */
+    function getCompartiendo() {
+        var torrentId = $('#btn-torrent-download').data('torrent_id');
+        var boxSeeders = $('#seeders');
+        var boxLeechers = $('#leechers');
+
+        $.ajax({
+            dataType: 'json',
+            type: 'GET',
+            url: '/torrents/compartiendo',
+            data: {'id': torrentId}
+        })
+         .done(function(datos) {
+             var seeders = datos.seeders;
+             var leechers = datos.leechers;
+
+             boxSeeders.html(
+                 'Hay ' + seeders + ' seeders (Sembrando)'
+             );
+
+             boxLeechers.html(
+                 'Hay ' + leechers + ' leechers (Sanguijuelas)'
+             );
+        });
+    }
+
+    getCompartiendo();
 });

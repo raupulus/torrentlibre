@@ -54,7 +54,6 @@ class PuntuacionComentariosController extends Controller
         $model->puntuacion = $puntuacion;
         $model->save();
 
-        // Devolver en JSON: media y puntuado
         $puntos = Comentarios::findOne($comentario)->getPuntos();
 
         $respuesta = [

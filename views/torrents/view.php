@@ -249,14 +249,14 @@ function reportar($model) {
         <div class="row">
             <div class="col-sm-6">
                 <div class="row">
-                    <div class="col-sm-12">
-                        Sembrando XXXXX
+                    <div id="seeders" class="col-sm-12">
+                        Cargando seeders...
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-12">
-                        Sanguijuelas XXXXX
+                    <div id="leechers" class="col-sm-12">
+                        Cargando leechers...
                     </div>
                 </div>
             </div>

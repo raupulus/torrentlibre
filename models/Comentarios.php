@@ -105,6 +105,10 @@ class Comentarios extends \yii2mod\comments\models\CommentModel
         return $total / $votos;
     }
 
+    /**
+     * Devuelve la puntuación del comentario actual para el usuario logueado.
+     * @return int
+     */
     public function getMisPuntos()
     {
         $usuario = Yii::$app->user->id;
