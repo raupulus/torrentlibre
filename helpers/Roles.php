@@ -164,7 +164,7 @@ class Roles
 
         if ($role == 'tmp') {
             Yii::$app->session->setFlash('info',
-                'No puedes subir torrents hasta verificar tu email' );
+                'No puedes subir torrents hasta ser aprovado' );
             return false;
         }
 

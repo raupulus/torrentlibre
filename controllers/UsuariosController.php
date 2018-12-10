@@ -39,7 +39,7 @@ class UsuariosController extends Controller
 
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'view', 'delete', 'update'],
+                'only' => ['index', 'view', 'delete', 'update', 'aprobar'],
                 'rules' => [
                     [
                         'actions' => ['index', 'view'],
@@ -55,6 +55,21 @@ class UsuariosController extends Controller
                             $isAutor = Access::isAutor($_REQUEST['id']);
 
                             if ($isAdmin || $isAutor) {
+                                return true;
+                            }
+
+                            return false;
+                        },
+                        'roles' => ['@'],
+                    ],
+
+                    [
+                        'actions' => ['aprobar'],
+                        'allow' => true,
+                        'matchCallback' => function($rule, $action) {
+                            $isAdmin = Roles::isAdmin();
+
+                            if ($isAdmin) {
                                 return true;
                             }
 
@@ -196,5 +211,22 @@ class UsuariosController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Aprueba a un determinado usuario en la plataforma subiéndole
+     * manualmente el rango.
+     * @param $id El id del usuario al que subir el rango.
+     *
+     * @return \yii\web\Response
+     */
+    public function actionAprobar($id)
+    {
+        $model = Usuarios::findOne($id);
+
+        $model->rol_id = 6;
+        $model->save();
+
+        return $this->redirect(['index']);
     }
 }

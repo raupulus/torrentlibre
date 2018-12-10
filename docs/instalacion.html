@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="language" content="en" />
+        <link href="./assets/5a6faaf8/css/bootstrap.css" rel="stylesheet">
+<link href="./assets/c58c79d3/solarized_light.css" rel="stylesheet">
+<link href="./assets/c823a4b0/style.css" rel="stylesheet">
+<script src="./assets/587d911d/jquery.js"></script>
+<script src="./assets/5a6faaf8/js/bootstrap.js"></script>
+<script src="./assets/4a1af36c/jssearch.js"></script>    <title>Guía del proyecto</title>
+</head>
+<body>
+
+<div class="wrap">
+    <nav id="w34" class="navbar-inverse navbar-fixed-top navbar"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w34-collapse"><span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span></button><a class="navbar-brand" href="./index.html">Guía del proyecto</a></div><div id="w34-collapse" class="collapse navbar-collapse"><ul id="w35" class="navbar-nav nav"><li><a href="./api/index.html">Class reference</a></li>
+<li><a href="./README.html">Guide</a></li></ul><div class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <input id="searchbox" type="text" class="form-control" placeholder="Search">
+  </div>
+</div>
+</div></nav>
+    <div id="search-resultbox" style="display: none;" class="modal-content">
+        <ul id="search-results">
+        </ul>
+    </div>
+
+    
+<div class="row">
+    <div class="col-md-2">
+                <div id="navigation" class="list-group"><a class="list-group-item" href="#navigation-24" data-toggle="collapse" data-parent="#navigation">Descripción general <b class="caret"></b></a><div id="navigation-24" class="submenu panel-collapse collapse"><a class="list-group-item" href="./descripcion.html#funcionalidad-principal-de-la-aplicacion">Funcionalidad principal de la aplicación</a>
+<a class="list-group-item" href="./descripcion.html#objetivos-generales">Objetivos generales</a>
+<a class="list-group-item" href="./descripcion.html#url-del-repositorio">URL del repositorio</a>
+<a class="list-group-item" href="./descripcion.html#url-de-la-documentacion">URL de la documentación</a></div>
+<a class="list-group-item" href="#navigation-25" data-toggle="collapse" data-parent="#navigation">Instrucciones de instalación y despliegue <b class="caret"></b></a><div id="navigation-25" class="submenu panel-collapse collapse"><a class="list-group-item" href="./instalacion.html#en-local">En local</a>
+<a class="list-group-item" href="./instalacion.html#en-la-nube">En la nube</a></div>
+<a class="list-group-item" href="#navigation-26" data-toggle="collapse" data-parent="#navigation">Catálogo de requisitos <b class="caret"></b></a><div id="navigation-26" class="submenu panel-collapse collapse"><a class="list-group-item" href="./requisitos.html#cuadro-resumen">Cuadro resumen</a></div>
+<a class="list-group-item" href="#navigation-27" data-toggle="collapse" data-parent="#navigation">Manual de usuario <b class="caret"></b></a><div id="navigation-27" class="submenu panel-collapse collapse"><a class="list-group-item" href="./manual.html">Manual de usuario</a></div>
+<a class="list-group-item" href="#navigation-28" data-toggle="collapse" data-parent="#navigation">Decisiones adoptadas <b class="caret"></b></a><div id="navigation-28" class="submenu panel-collapse collapse"><a class="list-group-item" href="./decisiones.html">Decisiones adoptadas</a></div>
+<a class="list-group-item" href="#navigation-29" data-toggle="collapse" data-parent="#navigation">Dificultades encontradas <b class="caret"></b></a><div id="navigation-29" class="submenu panel-collapse collapse"><a class="list-group-item" href="./dificultades.html">Dificultades encontradas</a></div>
+<a class="list-group-item" href="#navigation-30" data-toggle="collapse" data-parent="#navigation">Diagramas <b class="caret"></b></a><div id="navigation-30" class="submenu panel-collapse collapse"><a class="list-group-item" href="./diagramas.html#diagramas-de-clases">Diagramas de clases</a>
+<a class="list-group-item" href="./diagramas.html#diagramas-de-estructura-logica-de-datos">Diagramas de estructura lógica de datos</a></div>
+<a class="list-group-item" href="#navigation-31" data-toggle="collapse" data-parent="#navigation">Glosario de términos <b class="caret"></b></a><div id="navigation-31" class="submenu panel-collapse collapse"><a class="list-group-item" href="./glosario.html">Glosario de términos</a></div>
+<a class="list-group-item" href="#navigation-32" data-toggle="collapse" data-parent="#navigation">Conclusiones <b class="caret"></b></a><div id="navigation-32" class="submenu panel-collapse collapse"><a class="list-group-item" href="./conclusiones.html">Conclusiones</a></div>
+<a class="list-group-item" href="#navigation-33" data-toggle="collapse" data-parent="#navigation">Anexos <b class="caret"></b></a><div id="navigation-33" class="submenu panel-collapse collapse"><a class="list-group-item" href="./anexos.html">Anexos</a></div></div>    </div>
+    <div class="col-md-9 guide-content" role="main">
+        <h1>Instrucciones de instalación y despliegue <span id="instrucciones-de-instalacion-y-despliegue"></span><a href="#instrucciones-de-instalacion-y-despliegue" class="hashlink">&para;</a></h1>
+<div class="toc"><ol><li><a href="#en-local">En local</a></li>
+<li><a href="#configurar-host-virtual-apache-con-nombre-de-dominio">Configurar host virtual apache con nombre de dominio</a></li>
+<li><a href="#en-la-nube">En la nube</a></li></ol></div>
+<h2>En local <span id="en-local"></span><a href="#en-local" class="hashlink">&para;</a></h2><h3>Requisitos <span id="requisitos"></span><a href="#requisitos" class="hashlink">&para;</a></h3><ul>
+<li>Versión de php 7.1 o superior</li>
+<li>Servidor Apache2</li>
+<li>Composer</li>
+<li>PostgreSQL 9.6</li>
+<li>Sistema Operativo GNU/Linux</li>
+</ul>
+<h3>Obtener código <span id="obtener-codigo"></span><a href="#obtener-codigo" class="hashlink">&para;</a></h3><p>Para desplegar en local primero obtenemos el código fuente desde github
+hacia nuestro sitio virtual apache previamente configurado.</p>
+<h3>Instalar dependencias de composer. <span id="instalar-dependencias-de-composer"></span><a href="#instalar-dependencias-de-composer" class="hashlink">&para;</a></h3><pre><code class="hljs bash language-bash">composer install
+</code></pre>
+<h3>Desplegar base de datos. <span id="desplegar-base-de-datos"></span><a href="#desplegar-base-de-datos" class="hashlink">&para;</a></h3><p>Para generar la base de datos o recrearla de forma limpia:</p>
+<pre><code class="hljs bash language-bash">make dbfull
+</code></pre>
+<p>Para solo reinsertar tablas en la bd existente:
+<code>`</code>bash
+make db
+<code>`</code></p>
+<h3>Variables de la aplicación <span id="variables-de-la-aplicacion"></span><a href="#variables-de-la-aplicacion" class="hashlink">&para;</a></h3><p>Configurar/setear las variables de la aplicación como por ejemplo el
+almacenamiento de amazon, correo, nombre etc etc.</p>
+<p>Se puede tomar como ejemplo el archivo .env.example localizado en la raíz del
+proyecto.</p>
+<h2>Configurar host virtual apache con nombre de dominio <span id="configurar-host-virtual-apache-con-nombre-de-dominio"></span><a href="#configurar-host-virtual-apache-con-nombre-de-dominio" class="hashlink">&para;</a></h2><p>Configurar el servidor apache con un nombre de dominio resolviendo al
+directorio <strong>web</strong> del proyecto.</p>
+<h2>En la nube <span id="en-la-nube"></span><a href="#en-la-nube" class="hashlink">&para;</a></h2><p>El despliegue en la nube se ha planteado utilizando heroku por lo que será 
+necesario disponer de cuenta en esta plataforma.</p>
+<p>Una vez dentro de heroku creamos una aplicación</p>
+<h3>Instalar cliente de heroku <span id="instalar-cliente-de-heroku"></span><a href="#instalar-cliente-de-heroku" class="hashlink">&para;</a></h3><p>wget -qO- <a href="https://cli-assets.heroku.com/install-ubuntu.sh">https://cli-assets.heroku.com/install-ubuntu.sh</a> | sh</p>
+<h3>Loguear en el equipo con el cliente instalado <span id="loguear-en-el-equipo-con-el-cliente-instalado"></span><a href="#loguear-en-el-equipo-con-el-cliente-instalado" class="hashlink">&para;</a></h3><p>Desde el directorio del repositorio</p>
+<pre><code class="hljs bash language-bash">heroku login
+</code></pre>
+<h3>Vincular aplicación <span id="vincular-aplicacion"></span><a href="#vincular-aplicacion" class="hashlink">&para;</a></h3><p>Hay dos opciones:</p>
+<ul>
+<li>Crear aplicación desde consola</li>
+<li>Crear aplicación desde la web y vincularla con un directorio</li>
+</ul>
+<p>Desde la web:</p>
+<ul>
+<li>Elegir un nombre que será parte del dominio de la aplicación como por 
+ejemplo: <a href="https://miaplicación.heroku.com">https://miaplicación.heroku.com</a></li>
+<li>Elegir región Europa</li>
+<li>Añadir Recursos: En Resources, nos vamos a addons y añadimos la base de 
+datos llamada Heroku PostgreSQL y seleccionamos el plan.</li>
+<li>Métodos de despliegue</li>
+<li>En la pestaña deploy seleccionamos uno de los tres métodos. Por defecto al 
+crear desde la terminal se crea una rama remota heroku pero es más interesante
+utilizar el método GitHub.</li>
+</ul>
+<p>Desde este momento al conectar con GitHub cada vez que hagamos un push se
+puede desplegar automáticamente si debajo elegimos la rama y y pulsamos 
+sobre: Enable automatics deploy </p>
+<p>Asociar aplicación con heroku, le decimos a Heroku cual es la aplicación que 
+tenemos.</p>
+<p>Listamos las aplicaciones:</p>
+<pre><code class="hljs bash language-bash">heroku apps
+</code></pre>
+<p>Asignamos el remoto para la aplicación:</p>
+<pre><code class="hljs bash language-bash">heroku git:remote --app nombreaplicación
+heroku psql
+</code></pre>
+<p>Conecta al psql con heroku y podemos ejecutar comandos o añadir extensiones:
+create extension pgcrypto;</p>
+<p>También podemos inyectar</p>
+<pre><code class="hljs bash language-bash">heroku psql &lt; db/nombredv.sql
+heroku config
+</code></pre>
+<p>También podemos inyectar la base de datos con:</p>
+<pre><code class="hljs bash language-bash">make dbheroku
+</code></pre>
+<h3>Configurar YII <span id="configurar-yii"></span><a href="#configurar-yii" class="hashlink">&para;</a></h3><p>Para que funcione tenemos que crear una variable de entorno llamada YII_ENV 
+y asignarle valor de producción:</p>
+<pre><code class="hljs bash language-bash">heroku config:<span class="hljs-built_in">set</span> YII_ENV=prod
+</code></pre>
+<p>Además se necesitar setear las variables establecidas en el archivo 
+.env.example configurando cada parámetro adecuado a nuestras necesidades.</p>
+        <div class="toplink"><a href="#" class="h1" title="go to top"><span class="glyphicon glyphicon-arrow-up"></a></div>
+    </div>
+</div>
+
+
+</div>
+
+<footer class="footer">
+        <p class="pull-right"><small>Page generated on Mon, 10 Dec 2018 17:40:01 +0000</small></p>
+    Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
+
+<script>jQuery(function ($) {
+    var shiftWindow = function () { scrollBy(0, -50) };
+    if (location.hash) setTimeout(shiftWindow, 1);
+    window.addEventListener("hashchange", shiftWindow);
+var element = document.createElement("script");
+element.src = "./jssearch.index.js";
+document.body.appendChild(element);
+
+var searchBox = $('#searchbox');
+
+// search when typing in search field
+searchBox.on("keyup", function(event) {
+    var query = $(this).val();
+
+    if (query == '' || event.which == 27) {
+        $('#search-resultbox').hide();
+        return;
+    } else if (event.which == 13) {
+        var selectedLink = $('#search-resultbox a.selected');
+        if (selectedLink.length != 0) {
+            document.location = selectedLink.attr('href');
+            return;
+        }
+    } else if (event.which == 38 || event.which == 40) {
+        $('#search-resultbox').show();
+
+        var selected = $('#search-resultbox a.selected');
+        if (selected.length == 0) {
+            $('#search-results').find('a').first().addClass('selected');
+        } else {
+            var next;
+            if (event.which == 40) {
+                next = selected.parent().next().find('a').first();
+            } else {
+                next = selected.parent().prev().find('a').first();
+            }
+            if (next.length != 0) {
+                var resultbox = $('#search-results');
+                var position = next.position();
+
+//              TODO scrolling is buggy and jumps around
+//                resultbox.scrollTop(Math.floor(position.top));
+//                console.log(position.top);
+
+                selected.removeClass('selected');
+                next.addClass('selected');
+            }
+        }
+
+        return;
+    }
+    $('#search-resultbox').show();
+    $('#search-results').html('<li><span class="no-results">No results</span></li>');
+
+    var result = jssearch.search(query);
+
+    if (result.length > 0) {
+        var i = 0;
+        var resHtml = '';
+
+        for (var key in result) {
+            if (i++ > 20) {
+                break;
+            }
+            resHtml = resHtml +
+            '<li><a href="' + result[key].file.u.substr(3) +'"><span class="title">' + result[key].file.t + '</span>' +
+            '<span class="description">' + result[key].file.d + '</span></a></li>';
+        }
+        $('#search-results').html(resHtml);
+    }
+});
+
+// hide the search results on ESC
+$(document).on("keyup", function(event) { if (event.which == 27) { $('#search-resultbox').hide(); } });
+// hide search results on click to document
+$(document).bind('click', function (e) { $('#search-resultbox').hide(); });
+// except the following:
+searchBox.bind('click', function(e) { e.stopPropagation(); });
+$('#search-resultbox').bind('click', function(e) { e.stopPropagation(); });
+
+});</script></body>
+</html>
