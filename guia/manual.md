@@ -109,16 +109,58 @@ usuarios y ver todas las que han sido atendidas pulsando **Demandas en Curso**
 
 ## Descargar Torrents
 
+Para descargar un torrent tenemos 3 opciones:
+- Copiar al portapapeles → Copia el enlace para poder pegarlo en cualquier 
+parte como texto.
+- Abrir magnet con tu programa de torrent → El navegador abrirá el torrent con
+el cliente que tengas predefinido o te preguntará que aplicación utilizar.
+- Descargar torrent → Descarga el archivo .torrent.
+
+![Portada](images/man14.png)
+
 ## Reportar torrent
+
+Si encontramos un torrent con el contenido duplicado, ofensivo, ilegal o fuera
+de contexto incumpliendo las normas de la plataforma podemos reportarlos a 
+través del botón "Reportar Torrent"
+
+![Portada](images/man15.png)
 
 ## Puntuar Torrent
 
-## Añadir comentario
+Los torrents se pueden valorar mediante el selector con un conjunto de
+estrellas siendo del 1-10 la puntuación posible (cada estrella vale 1 punto)
 
-## Reportar comentario
-
-## Puntuar comentario
+![Portada](images/man16.png)
 
 ## Subir torrent
 
+En la sección de torrents tenemos la opción de subir el nuestro y colaborar
+con la comunidad open source.
+
+Para comenzar pulsamos sobre el botón de **Añadir un torrent**
+
+![Portada](images/man17.png)
+
+En la pantalla que se nos abrirá introducimos los datos correspondientes al
+torrent que estamos subiendo y pulsamos sobre **Guardar**
+
+![Portada](images/man18.png)
+
+
 ## Limitaciones al subir torrents basado en rangos
+
+La subida de torrents está limitada para prevenir el spam y uso no autorizado.
+Tras crear una cuenta no es posible subir un torrent hasta haber sido validado
+por un administrador o editor.
+
+Una vez aprobado para subir torrents se dispondrá de una cantidad limitada de
+subidas que aumentará con el tiempo según la cantidad de torrents que tengamos
+subidos siendo la siguiente relación:
+
+|  Rango  | Publicaciones diarias |
+| :-----: | :-------------------: |
+| novato  |          1            |
+| geekv1  |          2            |
+| geekv2  |          3            |
+| geekv3  |         20            |

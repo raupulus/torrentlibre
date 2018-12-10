@@ -14,3 +14,4 @@ torrents.
 - Magnet → Es un enlace que contiene la información necesaria para indicarle
 a un programa de descargas de torrents el archivo que debe descargar y los
 trackers dónde se encuentran sus partes.
+- Cliente torrent → Programa que se utiliza para compartir/descargar torrents.
