@@ -20,7 +20,7 @@ $columns = [
         'label' => 'Torrent',
         'format' => 'raw',
             'value' => function($model) {
-                return Html::a($model->torrent->titulo, [
+                return Html::a(Html::encode($model->torrent->titulo), [
                     Url::to('/torrents/view'),
                     'id' => $model->torrent_id
                 ]);
@@ -31,7 +31,7 @@ $columns = [
         'label' => 'Reportador',
         'format' => 'raw',
         'value' => function($model) {
-            return Html::a($model->usuario->datos->nick, [
+            return Html::a(Html::encode($model->usuario->datos->nick), [
                 Url::to('/usuarios/view'),
                 'id' => $model->usuario_id
             ]);

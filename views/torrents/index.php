@@ -73,7 +73,7 @@ Añadir un torrent ', ['create'],
                 'contentOptions' => ['class' => 'tabla-titulo'],
                 //'headerOptions' => ['class' => 'titulo2'],
                 'value' => function($model) {
-                    return Html::a($model->titulo, [
+                    return Html::a(Html::encode($model->titulo), [
                         Url::to('torrents/view'),
                         'id' => $model->id
                     ]);
@@ -120,37 +120,17 @@ Añadir un torrent ', ['create'],
                 'attribute' => 'categoria.nombre',
                 'contentOptions' => ['class' => 'tabla-categoria'],
             ],
-            /*
-            [
-                'attribute' => 'usuario',
-                'format' => 'raw',
-                'contentOptions' => ['class' => 'tabla-nick'],
-                'value' => function($model) {
-                    return Html::a($model->usuario->datos->id0, [
-                        Url::to('usuarios/view'),
-                        'id' => $model->id
-                    ]);
-                }
-            ],
-            */
             [
                 'attribute' => 'usuario.datos.nick',
                 'format' => 'raw',
                 'contentOptions' => ['class' => 'tabla-nick'],
                 'value' => function($model) {
-                    return Html::a($model->usuario->datos->nick, [
+                    return Html::a(Html::encode($model->usuario->datos->nick), [
                         Url::to('usuarios/view'),
                         'id' => $model->usuario->datos_id
                     ]);
                 }
             ],
-            /*
-            [
-                'attribute' => 'n_descargas',
-                'contentOptions' => ['class' => 'tabla-n_descargas'],
-            ],
-            */
-
             [
                 'label' => 'Ficha del Torrent',
                 'format' => 'raw',
@@ -175,20 +155,7 @@ Añadir un torrent ', ['create'],
                         '</small>';
                 }
             ],
-
-            //'descripcion',
-            //'imagen',
-            //'hash',
-            //'n_piezas',
-            //'size_piezas',
-            //'archivos',
-            //'password',
-            //'torrentcreate_at:date',
-            //'updated_at:date',
-
-            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
     </div>
-
 </div>

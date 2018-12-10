@@ -1,9 +1,7 @@
 <?php
 
 use app\helpers\Roles;
-use yii\data\ArrayDataProvider;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii2mod\editable\Editable;
 
 /* @var $this \yii\web\View */
@@ -50,8 +48,9 @@ use yii2mod\editable\Editable;
             </div>
 
             <div class="comment-author-name">
-                <span><?= $model->getAuthorName(); ?></span>
-                <?= Html::a($model->getPostedDate(), $model->getAnchorUrl(),
+                <span><?= Html::encode($model->getAuthorName()); ?></span>
+                <?= Html::a(Html::encode($model->getPostedDate()),
+                    Html::encode($model->getAnchorUrl()),
                     ['class' => 'comment-date']); ?>
             </div>
 

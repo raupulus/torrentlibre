@@ -15,7 +15,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
-$this->title = $model->datos->nick;
+$this->title = Html::encode($model->datos->nick);
 $this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -70,7 +70,8 @@ $isAutor = Access::isAutor($model->id);
                     'visible' => (!empty($model->datos->web)),
                     'format' => 'raw',
                     'value' => function($model) {
-                        return Html::a($model->datos->web, $model->datos->web,
+                        return Html::a(Html::encode($model->datos->web),
+                            Html::encode($model->datos->web),
                         [
                             'class' => 'btn'
                         ]);
@@ -82,7 +83,7 @@ $isAutor = Access::isAutor($model->id);
                     'format' => 'raw',
                     'value' => function($model) {
                         $link = 'https://twitter.com/' .
-                                $model->datos->twitter;
+                            Html::encode($model->datos->twitter);
                         return Html::a($link, $link,[
                             'class' => 'btn'
                         ]);
@@ -94,7 +95,7 @@ $isAutor = Access::isAutor($model->id);
                     'format' => 'raw',
                     'value' => function($model) {
                         $link = 'https://facebook.com/' .
-                                 $model->datos->facebook;
+                            Html::encode($model->datos->facebook);
 
                         return Html::a($link, $link,[
                             'class' => 'btn'
@@ -107,7 +108,7 @@ $isAutor = Access::isAutor($model->id);
                     'format' => 'raw',
                     'value' => function($model) {
                         $link = 'https://plus.google.com/' .
-                                 $model->datos->googleplus;
+                            Html::encode($model->datos->googleplus);
 
                         return Html::a($link, $link,[
                             'class' => 'btn'

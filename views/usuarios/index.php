@@ -30,13 +30,13 @@ $redesSociales = [
     'label' => '',
     'format' => 'raw',
     'value' => function($model) {
-        $web = $model->datos->web;
+        $web = Html::encode($model->datos->web);
         $facebook = 'https://facebook.com/' .
-            $model->datos->facebook;
+            Html::encode($model->datos->facebook);
         $twitter = 'https://twitter.com/' .
-            $model->datos->twitter;
+            Html::encode($model->datos->twitter);
         $gplus = 'https://plus.google.com/' .
-            $model->datos->googleplus;
+            Html::encode($model->datos->googleplus);
         $dir_iconos = yii::getAlias('@r_iconos');
 
         $imgs = '<a href="'.$facebook.'" class="user-social">';
@@ -70,7 +70,7 @@ $columns = [
         'label' => 'Nick',
         'format' => 'raw',
         'value' => function($model) {
-            return Html::a($model->datos->nick, [
+            return Html::a(Html::encode($model->datos->nick), [
                 Url::to('usuarios/view'),
                 'id' => $model->id
             ]);
@@ -81,7 +81,8 @@ $columns = [
         'attribute' => 'datos.web',
         'format' => 'raw',
         'value' => function($model) {
-            return Html::a($model->datos->web, $model->datos->web,
+            return Html::a(Html::encode($model->datos->web),
+                Html::encode($model->datos->web),
                 [
                     'class' => 'btn'
                 ]);
@@ -96,7 +97,7 @@ $columnsAdmin = [
         'label' => 'Nombre',
         'format' => 'raw',
         'value' => function($model) {
-            return Html::a($model->datos->nombre, [
+            return Html::a(Html::encode($model->datos->nombre), [
                 Url::to('usuarios/view'),
                 'id' => $model->id
             ]);

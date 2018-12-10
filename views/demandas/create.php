@@ -10,7 +10,7 @@ DemandasCreateAsset::register($this);
 
 $this->title = 'Nueva Demanda';
 $this->params['breadcrumbs'][] = ['label' => 'Demandas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = Html::encode($this->title);
 ?>
 <div class="demandas-create">
 

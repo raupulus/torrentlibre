@@ -13,7 +13,7 @@ use yii\helpers\Url;
 // Registro assets para esta vista
 TorrentsViewAsset::register($this);
 
-$this->title = $model->titulo;
+$this->title = Html::encode($model->titulo);
 $this->params['breadcrumbs'][] = ['label' => 'Torrents', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -45,14 +45,16 @@ function size($model) {
 }
 
 function uploader($model) {
-    return 'Uploader:<br />' . Html::a($model->usuario->datos->nick, [
-        Url::to('usuarios/view'),
-        'id' => $model->usuario->datos_id
-    ]);
+    return 'Uploader:<br />' . Html::a(
+        Html::encode($model->usuario->datos->nick), [
+            Url::to('usuarios/view'),
+            'id' => $model->usuario->datos_id
+        ]
+    );
 }
 
 function resumen($model) {
-    return $model->resumen;
+    return Html::encode($model->resumen);
 }
 
 function descargas($model) {
@@ -97,12 +99,12 @@ function torrentCreacion($model) {
 }
 
 function descripcion($model) {
-    return $model->descripcion;
+    return Html::encode($model->descripcion);
 }
 
 function magnet($model) {
     $magnet = 'magnet:?xt=urn:btih:' . $model->hash;
-    $magnet .= '&dn='.urlencode($model->titulo);
+    $magnet .= '&dn='.urlencode(Html::encode($model->titulo));
 
     $trackersArray = Magnet2torrent::trackers();
     $trackers = '';
@@ -112,8 +114,10 @@ function magnet($model) {
 
     $r = '<span id="copymagnet" class="btn btn-warning">' .
             Html::img('/images/icons/magnet.png', [
-                'alt' => 'Copy '.$model->titulo.' magnet to clipboard',
-                'title' => 'Copy '.$model->titulo.' magnet to clipboard',
+                'alt' => 'Copy ' . Html::encode($model->titulo) .
+                    ' magnet to clipboard',
+                'title' => 'Copy ' . Html::encode($model->titulo) .
+                    ' magnet to clipboard',
             ]) .
 
             'Copiar al portapapeles' .
@@ -135,8 +139,8 @@ function magnet($model) {
             'id' => $model->id,
         ]),
         [
-            'title' => 'Descargar '.$model->titulo,
-            'alt' => 'Descargar '.$model->titulo,
+            'title' => 'Descargar '.Html::encode($model->titulo),
+            'alt' => 'Descargar '.Html::encode($model->titulo),
             'id' => 'btn-torrent-download',
             'class' => 'btn btn-success col-sm-12',
             'data-torrent_id' => $model->id,

@@ -9,7 +9,6 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="torrents-search container">
-
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
@@ -25,36 +24,9 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
-
-    <?php // echo $form->field($model, 'resumen') ?>
-
-    <?php // echo $form->field($model, 'descripcion') ?>
-
-    <?php // echo $form->field($model, 'imagen') ?>
-
-    <?php // echo $form->field($model, 'hash') ?>
-
-    <?php // echo $form->field($model, 'size') ?>
-
-    <?php // echo $form->field($model, 'n_piezas') ?>
-
-    <?php // echo $form->field($model, 'size_piezas') ?>
-
-    <?php // echo $form->field($model, 'archivos') ?>
-
-    <?php // echo $form->field($model, 'password') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'torrentcreate_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
-
     <div class="row text-center">
         <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
-        <?php // Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>
