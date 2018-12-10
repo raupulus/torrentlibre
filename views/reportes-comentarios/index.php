@@ -97,3 +97,13 @@ if ($isAdmin) {
         ],
     ]); ?>
 </div>
+
+<style>
+    .table {
+        border: 0;
+    }
+    .ias-noneleft {
+        color: #bfca02;
+        font-weight: bolder;
+    }
+</style>

@@ -21,13 +21,9 @@ $this->params['breadcrumbs'][] = 'Modificar Usuario';
 
 // Registro assets para esta vista
 UsuariosCreateAsset::register($this);
-
-echo $model->SCENARIO;
-
 ?>
 
 <div class="usuarios-update">
-
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [

@@ -5,6 +5,7 @@ $slideImg = [
         'src' => 'slide/slide1.jpg',
         'title' => 'Torrent Libre',
     ],
+    /*
     [
         'src' => 'slide/slide2.jpg',
         'title' => 'Máquinas Virtuales',
@@ -21,6 +22,7 @@ $slideImg = [
         'src' => 'slide/slide5.jpg',
         'title' => 'Buscar Torrent',
     ],
+    */
 ];?>
 
 <?= \aki\imageslider\ImageSlider::widget([

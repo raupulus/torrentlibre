@@ -124,7 +124,6 @@ $isAutor = Access::isAutor($model->id);
         <?= DetailView::widget([
             'model' => $model,
             'attributes' => [
-                'id',
                 'datos.nombre',
                 'rol.tipo',
                 'datos.email:email',

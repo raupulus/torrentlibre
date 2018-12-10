@@ -4,9 +4,12 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\ContactForm */
 
+use app\assets\SiteContactAsset;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
+
+SiteContactAsset::register($this);
 
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;

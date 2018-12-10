@@ -83,7 +83,7 @@ if ($isAdmin) {
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => $columns,
     ]); ?>
 </div>

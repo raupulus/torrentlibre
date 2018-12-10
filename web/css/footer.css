@@ -25,19 +25,27 @@
     background-color: #333;
 }
 
+#boxfooter a {
+    font-size: 1.2em;
+    font-weight: bolder;
+    color: #00FFFF;
+}
+
 #boxfooter section {
 
 }
 
 #boxfooter hr {
-    height: 3px;
+    height: 1px;
     background-color: #007bff;
+    text-shadow: 1px 1px 3px #000;
 }
 
 #boxcontact {
     margin: 5px 0;
-    font-size: 1.4em;
-    text-shadow: 2px 2px 2px #000;
+    font-size: 1.5em;
+    font-weight: bolder;
+    text-shadow: 2px 2px 3px #000;
 }
 
 #footer-sitename {
