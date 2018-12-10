@@ -13,7 +13,7 @@ use yii\grid\GridView;
 DemandasIndexAsset::register($this);
 
 $this->title = 'Demandas';
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = Html::encode($this->title);
 
 $isAdmin = Roles::isAdmin();
 $isGuest = Yii::$app->user->isGuest;

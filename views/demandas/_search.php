@@ -36,11 +36,11 @@ use yii\widgets\ActiveForm;
 
     <div class="row text-center">
         <button id="btn-search_activas" class="btn btn-warning btn-sm">
-            Demandas Activas
+            Solicitudes Activas
         </button>
 
         <button id="btn-search_encurso" class="btn btn-warning btn-sm">
-            Demandas en Curso
+            Solicitudes Asistidas
         </button>
     </div>
 

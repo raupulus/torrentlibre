@@ -26,7 +26,7 @@ $columns = [
         'label' => 'Reportador',
         'format' => 'raw',
         'value' => function($model) {
-            return Html::a($model->usuario->datos->nick, [
+            return Html::a(Html::encode($model->usuario->datos->nick), [
                 Url::to('/usuarios/view'),
                 'id' => $model->usuario_id
             ]);
@@ -97,3 +97,13 @@ if ($isAdmin) {
         ],
     ]); ?>
 </div>
+
+<style>
+    .table {
+        border: 0;
+    }
+    .ias-noneleft {
+        color: #bfca02;
+        font-weight: bolder;
+    }
+</style>

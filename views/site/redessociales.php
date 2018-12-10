@@ -33,10 +33,30 @@ $this->title = 'Redes Sociales';
         </p>
 
         <ul id="lista-redes-sociales">
-            <li><a href="#"><i class="fa fa-telegram"></i>https://????</a></li>
-            <li><a href="#"><i class="fa fa-twitter"></i>https://????</a></li>
-            <li><a href="#"><i class="fa fa-google-plus"></i>https://????</a></li>
-            <li><a href="#"><i class="fa fa-facebook"></i>https://????</a></li>
+            <li>
+                <a href="https://t.me/torrentlibre">
+                    <i class="fa fa-telegram"></i>
+                    https://t.me/torrentlibre
+                </a>
+            </li>
+            <li>
+                <a href="https://twitter.com/torrentlibre">
+                    <i class="fa fa-twitter"></i>
+                    https://twitter.com/torrentlibre
+                </a>
+            </li>
+            <li>
+                <a href="mailto:webtorrentlibre@gmail.com">
+                    <i class="fa fa-mail-reply"></i>
+                    webtorrentlibre@gmail.com
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/fryntiz/torrentlibre">
+                    <i class="fa fa-github"></i>
+                    https://github.com/fryntiz/torrentlibre
+                </a>
+            </li>
         </ul>
     </div>
 </div>

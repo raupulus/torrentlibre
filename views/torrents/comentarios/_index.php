@@ -1,7 +1,5 @@
 <?php
 
-use yii\data\ArrayDataProvider;
-use yii\data\Sort;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
@@ -15,32 +13,8 @@ use yii\widgets\Pjax;
 /* @var $commentDataProvider \yii\data\ArrayDataProvider */
 /* @var $listViewConfig array */
 /* @var $commentWrapperId string */
-
-/*
-$commentModel = new ArrayDataProvider([ 'allModels' => $commentModel, 'pagination' =>
-    [ 'pageSize' => 1, ], 'sort' => [ 'attributes' => [
-    'createdAt' => [
-        'desc' => ['createdAt' => SORT_DESC],
-        'default' => SORT_DESC,
-    ]
-], ],
-]);
-
-$sort = new Sort([
-    'attributes' => [
-        'createdAt' => [
-            'asc' => ['createdAt' => SORT_ASC],
-            'default' => SORT_ASC,
-        ]
-    ],
-]);
-
-$commentDataProvider->sort->attributes['createdAt'] = [
-    'default' => SORT_ASC
-];
-*/
-
 ?>
+
 <div class="comment-wrapper" id="<?= $commentWrapperId; ?>">
     <?php Pjax::begin([
         'enablePushState' => false,

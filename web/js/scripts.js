@@ -15,9 +15,11 @@ $(document).ready(() => {
             letras_borde: '#832561',       // Color del borde para de letras
         },
         [
+            ['Inicio', '/images/leftbar/home.jpg', '/site/index'],
             ['Torrents', '/images/leftbar/torrents.jpg', '/torrents/index'],
             ['Demandas', '/images/leftbar/demandas.jpg', '/demandas/index'],
             ['Social', '/images/leftbar/redes.jpg', '/site/social'],
+            ['Agregar', '/images/leftbar/agregar.jpg', '/torrents/create'],
         ]
     );
 

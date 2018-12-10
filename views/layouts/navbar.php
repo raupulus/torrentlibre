@@ -32,7 +32,7 @@ if ($isGuest) {
 }
 
 if (! $isGuest) {
-    $nick = Yii::$app->user->identity->nick;
+    $nick = Html::encode(Yii::$app->user->identity->nick);
     $id = Yii::$app->user->identity->id;
 
     if (strlen($nick) >= 20) {
@@ -65,7 +65,7 @@ if (! $isGuest) {
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
                     \Yii::t('main', 'logout').' (' .
-                    Yii::$app->user->identity->nick . ')',
+                    Html::encode(Yii::$app->user->identity->nick) . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
