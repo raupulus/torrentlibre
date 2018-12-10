@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="language" content="en" />
+        <link href="./assets/5a6faaf8/css/bootstrap.css" rel="stylesheet">
+<link href="./assets/c58c79d3/solarized_light.css" rel="stylesheet">
+<link href="./assets/c823a4b0/style.css" rel="stylesheet">
+<script src="./assets/587d911d/jquery.js"></script>
+<script src="./assets/5a6faaf8/js/bootstrap.js"></script>
+<script src="./assets/4a1af36c/jssearch.js"></script>    <title>Manual de usuario - Manual de usuario - Guía del proyecto</title>
+</head>
+<body>
+
+<div class="wrap">
+    <nav id="w130" class="navbar-inverse navbar-fixed-top navbar"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w130-collapse"><span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span></button><a class="navbar-brand" href="./index.html">Guía del proyecto</a></div><div id="w130-collapse" class="collapse navbar-collapse"><ul id="w131" class="navbar-nav nav"><li><a href="./api/index.html">Class reference</a></li>
+<li><a href="./README.html">Guide</a></li></ul><div class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <input id="searchbox" type="text" class="form-control" placeholder="Search">
+  </div>
+</div>
+</div></nav>
+    <div id="search-resultbox" style="display: none;" class="modal-content">
+        <ul id="search-results">
+        </ul>
+    </div>
+
+    
+<div class="row">
+    <div class="col-md-2">
+                <div id="navigation" class="list-group"><a class="list-group-item" href="#navigation-120" data-toggle="collapse" data-parent="#navigation">Descripción general <b class="caret"></b></a><div id="navigation-120" class="submenu panel-collapse collapse"><a class="list-group-item" href="./descripcion.html#funcionalidad-principal-de-la-aplicacion">Funcionalidad principal de la aplicación</a>
+<a class="list-group-item" href="./descripcion.html#objetivos-generales">Objetivos generales</a>
+<a class="list-group-item" href="./descripcion.html#url-del-repositorio">URL del repositorio</a>
+<a class="list-group-item" href="./descripcion.html#url-de-la-documentacion">URL de la documentación</a></div>
+<a class="list-group-item" href="#navigation-121" data-toggle="collapse" data-parent="#navigation">Instrucciones de instalación y despliegue <b class="caret"></b></a><div id="navigation-121" class="submenu panel-collapse collapse"><a class="list-group-item" href="./instalacion.html#en-local">En local</a>
+<a class="list-group-item" href="./instalacion.html#en-la-nube">En la nube</a></div>
+<a class="list-group-item" href="#navigation-122" data-toggle="collapse" data-parent="#navigation">Catálogo de requisitos <b class="caret"></b></a><div id="navigation-122" class="submenu panel-collapse collapse"><a class="list-group-item" href="./requisitos.html#cuadro-resumen">Cuadro resumen</a></div>
+<a class="list-group-item active" href="#navigation-123" data-toggle="collapse" data-parent="#navigation">Manual de usuario <b class="caret"></b></a><div id="navigation-123" class="submenu panel-collapse collapse in"><a class="list-group-item active" href="./manual.html">Manual de usuario</a></div>
+<a class="list-group-item" href="#navigation-124" data-toggle="collapse" data-parent="#navigation">Decisiones adoptadas <b class="caret"></b></a><div id="navigation-124" class="submenu panel-collapse collapse"><a class="list-group-item" href="./decisiones.html">Decisiones adoptadas</a></div>
+<a class="list-group-item" href="#navigation-125" data-toggle="collapse" data-parent="#navigation">Dificultades encontradas <b class="caret"></b></a><div id="navigation-125" class="submenu panel-collapse collapse"><a class="list-group-item" href="./dificultades.html">Dificultades encontradas</a></div>
+<a class="list-group-item" href="#navigation-126" data-toggle="collapse" data-parent="#navigation">Diagramas <b class="caret"></b></a><div id="navigation-126" class="submenu panel-collapse collapse"><a class="list-group-item" href="./diagramas.html#diagramas-de-clases">Diagramas de clases</a>
+<a class="list-group-item" href="./diagramas.html#diagramas-de-estructura-logica-de-datos">Diagramas de estructura lógica de datos</a></div>
+<a class="list-group-item" href="#navigation-127" data-toggle="collapse" data-parent="#navigation">Glosario de términos <b class="caret"></b></a><div id="navigation-127" class="submenu panel-collapse collapse"><a class="list-group-item" href="./glosario.html">Glosario de términos</a></div>
+<a class="list-group-item" href="#navigation-128" data-toggle="collapse" data-parent="#navigation">Conclusiones <b class="caret"></b></a><div id="navigation-128" class="submenu panel-collapse collapse"><a class="list-group-item" href="./conclusiones.html">Conclusiones</a></div>
+<a class="list-group-item" href="#navigation-129" data-toggle="collapse" data-parent="#navigation">Anexos <b class="caret"></b></a><div id="navigation-129" class="submenu panel-collapse collapse"><a class="list-group-item" href="./anexos.html">Anexos</a></div></div>    </div>
+    <div class="col-md-9 guide-content" role="main">
+        <h1>Manual de usuario <span id="manual-de-usuario"></span><a href="#manual-de-usuario" class="hashlink">&para;</a></h1>
+<div class="toc"><ol><li><a href="#portada">Portada</a></li>
+<li><a href="#torrents">Torrents</a></li>
+<li><a href="#solicitar-incluir-material">Solicitar incluir material</a></li>
+<li><a href="#crear-cuenta-de-usuario">Crear cuenta de usuario</a></li>
+<li><a href="#nuestro-usuario">Nuestro usuario</a></li>
+<li><a href="#descargar-torrents">Descargar Torrents</a></li>
+<li><a href="#reportar-torrent">Reportar torrent</a></li>
+<li><a href="#puntuar-torrent">Puntuar Torrent</a></li>
+<li><a href="#subir-torrent">Subir torrent</a></li>
+<li><a href="#limitaciones-al-subir-torrents-basado-en-rangos">Limitaciones al subir torrents basado en rangos</a></li></ol></div>
+<p>Esta aplicación está disponible sin necesitar tener cuenta para navegar y/o
+descargar el material compartido.</p>
+<h2>Portada <span id="portada"></span><a href="#portada" class="hashlink">&para;</a></h2><p>Al acceder a la página principal encontramos un resumen de las últimas subidas,
+últimos comentarios, torrents mejor puntuados, y comentarios mejor puntuados.</p>
+<p><img src="images/man1.png" alt="Portada" /></p>
+<p><img src="images/man2.png" alt="Portada" /></p>
+<h2>Torrents <span id="torrents"></span><a href="#torrents" class="hashlink">&para;</a></h2><p>En la sección torrents encontramos todos los torrents ordenados por últimas
+subidas.</p>
+<p>Se dispone de un buscador en el que podemos filtrar por nombre, descripción y
+categoría.</p>
+<p><img src="images/man3.png" alt="Portada" /></p>
+<h2>Solicitar incluir material <span id="solicitar-incluir-material"></span><a href="#solicitar-incluir-material" class="hashlink">&para;</a></h2><p>Es posible solicitar que se añada nuevo material.</p>
+<p>Para ver lo que otros usuarios han solicitado entramos en la sección
+<strong>solicitudes</strong></p>
+<p><img src="images/man4.png" alt="Portada" /></p>
+<p>Podemos ver lo que otros usuarios han solicitado/demandado pero es necesario
+entrar en la aplicación para responder a esa solicitud.</p>
+<p>En el botón "<strong>Yo lo subo</strong>" indicamos que nos hacemos cargo de una solicitud.</p>
+<p>En la siguiente sección vemos como crear cuenta en la aplicación.</p>
+<h2>Crear cuenta de usuario <span id="crear-cuenta-de-usuario"></span><a href="#crear-cuenta-de-usuario" class="hashlink">&para;</a></h2><p>Cuando pulsemos sobre alguna acción que requiera tener cuenta o pulsemos sobre
+el botón <strong>Entrar</strong> nos redirigirá a la ventana de login y/o crear cuenta.</p>
+<p>Si es la primera vez que accedemos necesitamos crear la cuenta pulsando sobre
+<strong>Crear Cuenta</strong></p>
+<p><img src="images/man5.png" alt="Portada" /></p>
+<p>La creación de cuentas requiere pocos campos obligatorios y ninguno personal ya
+que en esta aplicación el material es el protagonista y no se requieren datos
+personales de usuario más que unas credenciales básicas.</p>
+<p><img src="images/man6.png" alt="Portada" /></p>
+<p>Los campos requeridos son:</p>
+<ul>
+<li>nick</li>
+<li>email</li>
+<li>contraseña</li>
+<li>captcha</li>
+</ul>
+<p>Podemos rellenar los datos opcionales y sociales en caso solo de interesarnos.</p>
+<p><img src="images/man7.png" alt="Portada" /></p>
+<p>En el apartado de datos sociales opcionalmente podemos elegir un avatar que 
+nos represente o simplemente parezca curioso (de no hacerlo se tomará el que
+existe por defecto)</p>
+<p><img src="images/man8.png" alt="Portada" /></p>
+<p>Si queremos compartir nuestras redes sociales disponemos de un apartado dónde
+puedes introducir:</p>
+<ul>
+<li>tu web</li>
+<li>twitter</li>
+<li>facebook</li>
+<li>google plus</li>
+</ul>
+<p><img src="images/man9.png" alt="Portada" /></p>
+<p>Finalmente nos quedará introducir el captcha demostrando que no somos un bot y
+aceptar las políticas del sitio tras haberlas leído detenidamente.</p>
+<p><img src="images/man10.png" alt="Portada" /></p>
+<p>Una vez hemos pulsado <strong>Crear Cuenta</strong> seremos redirigidos a nuestro espacio
+de usuario recién creado.</p>
+<h2>Nuestro usuario <span id="nuestro-usuario"></span><a href="#nuestro-usuario" class="hashlink">&para;</a></h2><p>El usuario es una representación de nosotros identificándonos mínimamente.</p>
+<p>Desde nuestro perfil podemos observar la cantidad de descargas que hemos 
+realizado, nuestro avatar, biografía, redes etc etc</p>
+<p><img src="images/man11.png" alt="Portada" /></p>
+<p>Para el público solo será visible la siguiente parte:</p>
+<p><img src="images/man12.png" alt="Portada" /></p>
+<p>De forma que el email y preferencias quedarán ocultos al resto de usuarios.</p>
+<p>Ahora en el apartado de <strong>Solicitudes</strong> podemos atender demandas de otros
+usuarios y ver todas las que han sido atendidas pulsando <strong>Demandas en Curso</strong></p>
+<p><img src="images/man13.png" alt="Portada" /></p>
+<h2>Descargar Torrents <span id="descargar-torrents"></span><a href="#descargar-torrents" class="hashlink">&para;</a></h2><p>Para descargar un torrent tenemos 3 opciones:</p>
+<ul>
+<li>Copiar al portapapeles → Copia el enlace para poder pegarlo en cualquier 
+parte como texto.</li>
+<li>Abrir magnet con tu programa de torrent → El navegador abrirá el torrent con
+el cliente que tengas predefinido o te preguntará que aplicación utilizar.</li>
+<li>Descargar torrent → Descarga el archivo .torrent.</li>
+</ul>
+<p><img src="images/man14.png" alt="Portada" /></p>
+<h2>Reportar torrent <span id="reportar-torrent"></span><a href="#reportar-torrent" class="hashlink">&para;</a></h2><p>Si encontramos un torrent con el contenido duplicado, ofensivo, ilegal o fuera
+de contexto incumpliendo las normas de la plataforma podemos reportarlos a 
+través del botón "Reportar Torrent"</p>
+<p><img src="images/man15.png" alt="Portada" /></p>
+<h2>Puntuar Torrent <span id="puntuar-torrent"></span><a href="#puntuar-torrent" class="hashlink">&para;</a></h2><p>Los torrents se pueden valorar mediante el selector con un conjunto de
+estrellas siendo del 1-10 la puntuación posible (cada estrella vale 1 punto)</p>
+<p><img src="images/man16.png" alt="Portada" /></p>
+<h2>Subir torrent <span id="subir-torrent"></span><a href="#subir-torrent" class="hashlink">&para;</a></h2><p>En la sección de torrents tenemos la opción de subir el nuestro y colaborar
+con la comunidad open source.</p>
+<p>Para comenzar pulsamos sobre el botón de <strong>Añadir un torrent</strong></p>
+<p><img src="images/man17.png" alt="Portada" /></p>
+<p>En la pantalla que se nos abrirá introducimos los datos correspondientes al
+torrent que estamos subiendo y pulsamos sobre <strong>Guardar</strong></p>
+<p><img src="images/man18.png" alt="Portada" /></p>
+<h2>Limitaciones al subir torrents basado en rangos <span id="limitaciones-al-subir-torrents-basado-en-rangos"></span><a href="#limitaciones-al-subir-torrents-basado-en-rangos" class="hashlink">&para;</a></h2><p>La subida de torrents está limitada para prevenir el spam y uso no autorizado.
+Tras crear una cuenta no es posible subir un torrent hasta haber sido validado
+por un administrador o editor.</p>
+<p>Una vez aprobado para subir torrents se dispondrá de una cantidad limitada de
+subidas que aumentará con el tiempo según la cantidad de torrents que tengamos
+subidos siendo la siguiente relación:</p>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="center">Rango  </th><th align="center">Publicaciones diarias</th></tr>
+</thead>
+<tbody>
+<tr><td align="center">novato  </td><td align="center">         1</td></tr>
+<tr><td align="center">geekv1  </td><td align="center">         2</td></tr>
+<tr><td align="center">geekv2  </td><td align="center">         3</td></tr>
+<tr><td align="center">geekv3  </td><td align="center">        20</td></tr>
+</tbody>
+</table>
+        <div class="toplink"><a href="#" class="h1" title="go to top"><span class="glyphicon glyphicon-arrow-up"></a></div>
+    </div>
+</div>
+
+
+</div>
+
+<footer class="footer">
+        <p class="pull-right"><small>Page generated on Mon, 10 Dec 2018 17:40:01 +0000</small></p>
+    Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
+
+<script>jQuery(function ($) {
+    var shiftWindow = function () { scrollBy(0, -50) };
+    if (location.hash) setTimeout(shiftWindow, 1);
+    window.addEventListener("hashchange", shiftWindow);
+var element = document.createElement("script");
+element.src = "./jssearch.index.js";
+document.body.appendChild(element);
+
+var searchBox = $('#searchbox');
+
+// search when typing in search field
+searchBox.on("keyup", function(event) {
+    var query = $(this).val();
+
+    if (query == '' || event.which == 27) {
+        $('#search-resultbox').hide();
+        return;
+    } else if (event.which == 13) {
+        var selectedLink = $('#search-resultbox a.selected');
+        if (selectedLink.length != 0) {
+            document.location = selectedLink.attr('href');
+            return;
+        }
+    } else if (event.which == 38 || event.which == 40) {
+        $('#search-resultbox').show();
+
+        var selected = $('#search-resultbox a.selected');
+        if (selected.length == 0) {
+            $('#search-results').find('a').first().addClass('selected');
+        } else {
+            var next;
+            if (event.which == 40) {
+                next = selected.parent().next().find('a').first();
+            } else {
+                next = selected.parent().prev().find('a').first();
+            }
+            if (next.length != 0) {
+                var resultbox = $('#search-results');
+                var position = next.position();
+
+//              TODO scrolling is buggy and jumps around
+//                resultbox.scrollTop(Math.floor(position.top));
+//                console.log(position.top);
+
+                selected.removeClass('selected');
+                next.addClass('selected');
+            }
+        }
+
+        return;
+    }
+    $('#search-resultbox').show();
+    $('#search-results').html('<li><span class="no-results">No results</span></li>');
+
+    var result = jssearch.search(query);
+
+    if (result.length > 0) {
+        var i = 0;
+        var resHtml = '';
+
+        for (var key in result) {
+            if (i++ > 20) {
+                break;
+            }
+            resHtml = resHtml +
+            '<li><a href="' + result[key].file.u.substr(3) +'"><span class="title">' + result[key].file.t + '</span>' +
+            '<span class="description">' + result[key].file.d + '</span></a></li>';
+        }
+        $('#search-results').html(resHtml);
+    }
+});
+
+// hide the search results on ESC
+$(document).on("keyup", function(event) { if (event.which == 27) { $('#search-resultbox').hide(); } });
+// hide search results on click to document
+$(document).bind('click', function (e) { $('#search-resultbox').hide(); });
+// except the following:
+searchBox.bind('click', function(e) { e.stopPropagation(); });
+$('#search-resultbox').bind('click', function(e) { e.stopPropagation(); });
+
+});</script></body>
+</html>

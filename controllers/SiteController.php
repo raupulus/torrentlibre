@@ -88,7 +88,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if($model->login()) {
                 Access::registrarAcceso();
-                return $this->goHome();
+                return $this->goBack();
             } else {
                 Access::registrarErrorAcceso();
             }

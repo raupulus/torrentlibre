@@ -140,6 +140,19 @@ $columnsAdmin = [
                     'class' => 'btn btn-success btn-admin',
                 ]
             );
+            if ($model->rol->tipo == 'tmp') {
+                $buttons .=  Html::a('Aprobar', [
+                    Url::to('usuarios/aprobar'),
+                    'id' => $model->id
+                ],
+                    [
+                        'class' => 'btn btn-warning btn-admin',
+                        'data' => [
+                            'method' => 'post',
+                        ],
+                    ]
+                );
+            }
             $buttons .=  Html::a('Modificar', [
                 Url::to('usuarios/update'),
                 'id' => $model->id,
